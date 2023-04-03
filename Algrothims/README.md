@@ -10,8 +10,13 @@
 		- Tree Diameter in O(n)
 		- Tree Center in O(n)
 		- Tree isophrisim
+	- Strong Connected Component
+		- Tarjan algrothim
+		- kosaraju algrothim
 - Math
 	- Find nCr
 		- $O(n^2)$ besskal tringal using DP
 		- $O(n logn)$ Binary Exponential + Fermat little Therom
 		
+- DP
+	- Find Longest Path in DAG

@@ -15,7 +15,7 @@
 		- kosaraju algrothim
 - Math
 	- Find nCr
-		- $O(n^2)$ besskal tringal using DP
+		- [$O(n^2)$ besskal tringal using DP](nCr_DP.cpp)
 		- $O(n logn)$ Binary Exponential + Fermat little Therom
 		
 - DP

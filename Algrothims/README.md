@@ -1,6 +1,6 @@
 # Contents:
-- [Graphs](## _Graph_)
-- [Math](## _Math_)
+- [Graphs](##_Graph_)
+- [Math](##_Math_)
 - [DP](##_DP_)
 ***
 ## _Graph_

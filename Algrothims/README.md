@@ -2,7 +2,7 @@
 - Graph
 	- Shortest Paths
 		- [Dijsktra](dijkstra.cpp)
-		- BFS
+		- [BFS](BFS.cpp)
 		- 0-1 BFS
 		- Deil's Algrothim
 		- Floyed

@@ -1,5 +1,9 @@
-# Contents
-- Graph
+# Contents:
+- [Graphs](## _Graph_)
+- [Math](## _Math_)
+- [DP](##_DP_)
+***
+## _Graph_
 	- Shortest Paths
 		- [Dijsktra](dijkstra.cpp)
 		- [BFS](BFS.cpp)
@@ -14,10 +18,10 @@
 	- Strong Connected Component
 		- Tarjan algrothim
 		- kosaraju algrothim
-- Math
+## _Math_
 	- Find nCr
 		- [O(n^2) besskal tringal using DP](nCr_DP.cpp)
 		- $O(n logn)$ Binary Exponential + Fermat little Therom
 		
-- DP
+##_DP_
 	- Find Longest Path in DAG

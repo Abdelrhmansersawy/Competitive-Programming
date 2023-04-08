@@ -12,7 +12,7 @@
 	- Tree Center in O(n)
 	- Tree isophrisim
 - Strong Connected Component
-	- Tarjan algrothim
+	- [Tarjan algrothim](tarjan.cpp)
 	- kosaraju algrothim
 ## _Math_
 - Find nCr

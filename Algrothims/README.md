@@ -14,7 +14,7 @@
 - Strong Connected Component
 	- [Tarjan algrothim](tarjan.cpp) O(n + m)
 	- kosaraju algrothim
-	- [SCC using Floyed](SCC_Floyed.cpp)
+	- [SCC using Floyed](SCC_Floyed.cpp) O($n^3$)
 ## _Math_
 - Find nCr
 	- [O(n^2) besskal tringal using DP](nCr_DP.cpp)

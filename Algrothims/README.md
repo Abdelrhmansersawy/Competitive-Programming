@@ -22,4 +22,4 @@
 
 ## _DP_
 - Find Longest Path in DAG
-- [Find Derangment of permutation in $O(n)$](derangement.cpp)
+- [Find Derangment of permutation in](derangement.cpp) $O(n)$

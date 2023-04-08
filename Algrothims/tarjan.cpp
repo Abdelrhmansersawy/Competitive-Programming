@@ -22,7 +22,7 @@ void tarjan(int u){
   inStack[u] = true;
   st.push(u);
   for(auto &v : adj[u]){
-    if(!~dfn[v]){
+    if(dfn[v] == -1){
       tarjan(v);
       lowLink[u] = min(lowLink[u] , lowLink[v]);
     }else if(inStack[v]){
@@ -53,8 +53,9 @@ void SCC(int n){
   dfn.clear(); dfn.resize(n , -1);
   comp.clear(); comp.resize(n);
   lowLink.clear(); lowLink.resize(n); 
+  inStack.clear(); inStack.resize(n);
   for(int i = 0 ; i < n ; i++)
-    if(!~dfn[i]) tarjan(i);
+    if(dfn[i] == -1) tarjan(i);
   genDag();
 }
 int main(){
@@ -65,7 +66,6 @@ int main(){
     int u , v; cin >> u >> v;
     --u; --v;
     adj[u].emplace_back(v);
-    adj[v].emplace_back(u);
   }
   SCC(n);
 }

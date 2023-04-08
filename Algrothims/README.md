@@ -17,7 +17,7 @@
 	- [SCC using Floyed](SCC_Floyed.cpp) $O(n^3)$
 ## _Math_
 - Find nCr
-	- [$O(n^2)$ besskal tringal using DP](nCr_DP.cpp)
+	- [O(n^2) besskal tringal using DP](nCr_DP.cpp)
 	- $O(nlogn)$ Binary Exponential + Fermat little Therom
 
 ## _DP_

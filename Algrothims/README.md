@@ -22,7 +22,6 @@
 	- [Matrix Exponential](Matrix_Exponential.cpp)
 
 ## _DP_
-- Find Longest Path in DAG
 - [Find Derangment of permutation in](derangement.cpp) $O(n)$
 ## _General_
 - [Create Random Number](random.cpp)

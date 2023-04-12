@@ -30,11 +30,11 @@
 ***
 ## _Applications of DFS:_
 
-#### 1. Connected Component
-- undirected Graph:
+### 1. Connected Component
+#### undirected Graph:
 	![anim](https://user-images.githubusercontent.com/65075626/231601724-6581ce32-3917-465d-b80d-bf8e362f2a24.gif)
 	![8dbe5d89e58b67f3d8e4d8e0e8eb3358ba921b28](https://user-images.githubusercontent.com/65075626/231601734-a5cb3b12-01ec-4b39-8ae1-a3dcad00fc7e.png)
-- using DFS
+##### using DFS
 ``` c++
 const int N = 1e5;  // largest number of node in graph
 vector<int> adj[N] , vis(N);
@@ -62,7 +62,7 @@ int main(){
    }
 }
 ```
-- directed Graph:
+#### directed Graph:
 	- use some advanced algrothims you will know it soon but if you are intereseted  search in one of these keywords
 		`Strong Connect Component`
 		`Tarjan algrothim`

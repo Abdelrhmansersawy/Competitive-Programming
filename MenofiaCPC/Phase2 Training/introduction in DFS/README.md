@@ -4,7 +4,7 @@
 ## _DFS_ :
  - is an algorithm for traversing or searching tree or graph data structures.
  - can be writted in recursive or iterative (most used is recursive)
-![[ezgif.com-resize (2).gif]]
+![img1](ezgif.com-resize (2).gif)
 
 ![[new_dfs.gif]]
  ~~~ c++

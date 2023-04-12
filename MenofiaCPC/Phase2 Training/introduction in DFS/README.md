@@ -4,9 +4,9 @@
 ## _DFS_ :
  - is an algorithm for traversing or searching tree or graph data structures.
  - can be writted in recursive or iterative (most used is recursive)
-![img1](MenofiaCPC/Phase2 Training/introduction in DFS/ezgif.com-resize (2).gif)
+![ezgif com-resize (2)](https://user-images.githubusercontent.com/65075626/231601722-86c404af-15f9-4a86-9bdc-3cd4fb55fcb5.gif)
 
-![[new_dfs.gif]]
+![new_dfs](https://user-images.githubusercontent.com/65075626/231601711-953953b8-f10e-4a50-b42d-c710d3397c05.gif)
  ~~~ c++
  // Recursive Code of DFS
  const int N = 1e5; // largest number of nodes
@@ -26,15 +26,17 @@
 - is an algorithm for traversing or searching tree or graph data structures.
 - one of most it's application is getting shortest path from one node to other node
 - written in iterative way _studing code soon_ 
-![[ezgif.com-resize (3).gif]]
+![ezgif com-resize (3)](https://user-images.githubusercontent.com/65075626/231601717-ad1a68a9-c926-4e23-83bf-572240a14c01.gif)
 ***
 ## _Applications of DFS:_
 
 #### 1. Connected Component
 - undirected Graph:
 	- using DFS
-	 ![[anim.gif]]
+	![anim](https://user-images.githubusercontent.com/65075626/231601724-6581ce32-3917-465d-b80d-bf8e362f2a24.gif)
 	![[8dbe5d89e58b67f3d8e4d8e0e8eb3358ba921b28.png]]
+	![8dbe5d89e58b67f3d8e4d8e0e8eb3358ba921b28](https://user-images.githubusercontent.com/65075626/231601734-a5cb3b12-01ec-4b39-8ae1-a3dcad00fc7e.png)
+
 ``` c++
 const int N = 1e5;  // largest number of node in graph
 vector<int> adj[N] , vis(N);

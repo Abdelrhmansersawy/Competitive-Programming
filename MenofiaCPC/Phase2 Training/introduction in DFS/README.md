@@ -34,7 +34,6 @@
 - undirected Graph:
 	- using DFS
 	![anim](https://user-images.githubusercontent.com/65075626/231601724-6581ce32-3917-465d-b80d-bf8e362f2a24.gif)
-	![[8dbe5d89e58b67f3d8e4d8e0e8eb3358ba921b28.png]]
 	![8dbe5d89e58b67f3d8e4d8e0e8eb3358ba921b28](https://user-images.githubusercontent.com/65075626/231601734-a5cb3b12-01ec-4b39-8ae1-a3dcad00fc7e.png)
 
 ``` c++

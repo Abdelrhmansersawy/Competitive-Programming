@@ -93,3 +93,5 @@ int main(){
    cout << (cycle ? 1 : 0);
 }
 ```
+#### directed Graph:
+![dfs](https://user-images.githubusercontent.com/65075626/231611124-237affcb-0e66-42f3-a5d5-f868b81d0836.gif)

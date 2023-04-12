@@ -63,7 +63,7 @@ int main(){
 ```
 - directed Graph:
 	- use some advanced algrothims you will know it soon but if you are intereseted  search in one of these keywords
-		`Strong Connect Component
+		`Strong Connect Component`
 		`Tarjan algrothim`
 		`kosaraju algrothim`
 ***

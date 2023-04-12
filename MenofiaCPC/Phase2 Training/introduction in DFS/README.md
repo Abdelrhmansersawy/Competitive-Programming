@@ -68,4 +68,8 @@ int main(){
 		`Tarjan algrothim`
 		`kosaraju algrothim`
 ***
+### 2. Detect Cycle
+#### undirected Graph:
+![1_VHzWi2uzMN1TYv8mUmYqnA](https://user-images.githubusercontent.com/65075626/231610533-f4227d5c-1d16-4cfb-98c0-74715b790199.gif)
+
 

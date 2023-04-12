@@ -71,6 +71,7 @@ int main(){
 ### 2. Detect Cycle
 #### undirected Graph:
 ![1_VHzWi2uzMN1TYv8mUmYqnA](https://user-images.githubusercontent.com/65075626/231610533-f4227d5c-1d16-4cfb-98c0-74715b790199.gif)
+- code : run normal dfs if you go to node that already visited , it 's cylce.
 ``` c++
 const int N = 1e5;  // largest number of node in graph
 vector<int> adj[N] , vis(N);

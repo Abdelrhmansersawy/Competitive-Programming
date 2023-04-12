@@ -1,3 +1,4 @@
 # Competitive_Programming
-All my algrothims I use in Competitive Programming
+Table Contest
 - [Algrothims](Algrothims)
+- [MenofiaCPC Community)(MenofiaCPC)

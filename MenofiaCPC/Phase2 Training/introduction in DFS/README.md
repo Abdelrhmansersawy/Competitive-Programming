@@ -5,7 +5,6 @@
  - is an algorithm for traversing or searching tree or graph data structures.
  - can be writted in recursive or iterative (most used is recursive)
 ![ezgif com-resize (2)](https://user-images.githubusercontent.com/65075626/231601722-86c404af-15f9-4a86-9bdc-3cd4fb55fcb5.gif)
-
 ![new_dfs](https://user-images.githubusercontent.com/65075626/231601711-953953b8-f10e-4a50-b42d-c710d3397c05.gif)
  ~~~ c++
  // Recursive Code of DFS

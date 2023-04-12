@@ -71,5 +71,24 @@ int main(){
 ### 2. Detect Cycle
 #### undirected Graph:
 ![1_VHzWi2uzMN1TYv8mUmYqnA](https://user-images.githubusercontent.com/65075626/231610533-f4227d5c-1d16-4cfb-98c0-74715b790199.gif)
-
-
+``` c++
+const int N = 1e5;  // largest number of node in graph
+vector<int> adj[N] , vis(N);
+bool cycle;
+void dfs(int u){
+   vis[u] =  true;
+   for(auto &v : adj[u]){
+	if(vis[v] == false) dfs(v)
+	else{
+            // detect Cycle
+	    cycle = true;
+	}
+   }
+}
+int main(){
+   for(int i = 0 ; i < n ; i++){
+      if(vis[i] == false) dfs(i);
+   }
+   cout << (cycle ? 1 : 0);
+}
+```

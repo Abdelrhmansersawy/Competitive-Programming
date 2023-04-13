@@ -124,3 +124,7 @@ int main(){
    cout << (cycle ? 1 : 0);
 }
 ```
+***
+### 3. Bipartite Graph
+
+![tumblr_nmi642nElc1unvfcho1_400](https://user-images.githubusercontent.com/65075626/231614867-79ce4e4a-8369-40be-985d-063a99ff363a.gif)

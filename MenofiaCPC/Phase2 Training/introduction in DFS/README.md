@@ -5,7 +5,7 @@
 ## _Graph Traversal_
 - DFS (Depth First Search)
 - BFS (Breath First Search)
-## _DFS_ :
+## _DFS_ 
  - is an algorithm for traversing or searching tree or graph data structures.
  - can be writted in recursive or iterative (most used is recursive)
 
@@ -26,7 +26,7 @@
  }
  ~~~
 ***
-## _BFS_ :
+## _BFS_
 - is an algorithm for traversing or searching tree or graph data structures.
 - one of most it's application is getting shortest path from one node to other node
 - written in iterative way _studing code soon_ 

@@ -95,3 +95,24 @@ int main(){
 ```
 #### directed Graph:
 ![dfs](https://user-images.githubusercontent.com/65075626/231611124-237affcb-0e66-42f3-a5d5-f868b81d0836.gif)
+- code : you will use three color (white : node not visited , Gray : node visited + in stack , Black : node visited + not in stack) , run normal dfs  
+  first color node with gray then go to it's neighbours if you find node colored with gray after finish it's neighbours color node with black
+``` c++
+const int N = 1e5;  // largest number of node in graph
+vector<int> adj[N] , vis(N);
+bool cycle;
+void dfs(int u){
+   vis[u] =  1; // Gray
+   for(auto &v : adj[u]){
+	if(vis[v] == 0) dfs(v)
+	else if(vis[v] == 1) cycle = 1;
+   }
+   vis[u] = 2; // Black
+}
+int main(){
+   for(int i = 0 ; i < n ; i++){
+      if(vis[i] == false) dfs(i);
+   }
+   cout << (cycle ? 1 : 0);
+}
+```

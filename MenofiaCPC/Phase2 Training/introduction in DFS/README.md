@@ -146,3 +146,10 @@ int main(){
    if(can == false) cout << "You can't make graph bipartite";
 }
 ```
+### 4. Topolgical Sorting :
+#### What 's mean by DAG ?
+ directed acyclic graph (DAG) is a directed graph with no directed cycles.
+ ![Directed_acyclic_graph svg](https://user-images.githubusercontent.com/65075626/231617659-4aed372e-9455-48c2-b334-625a870be8bb.png)
+#### Topolgical Sorting :is a linear ordering of vertices such that for every directed edge u v, vertex u comes before v in the ordering.
+- Note: Topological Sorting for a graph is not possible if the graph is not a DAG.
+ ![algo](https://user-images.githubusercontent.com/65075626/231617727-6682681e-d122-46dd-bae8-dc0346bce41e.gif)

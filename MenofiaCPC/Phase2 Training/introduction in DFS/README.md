@@ -157,3 +157,28 @@ int main(){
 #### Topolgical Sorting :is a linear ordering of vertices such that for every directed edge u v, vertex u comes before v in the ordering.
 - Note: Topological Sorting for a graph is not possible if the graph is not a DAG.
  ![algo](https://user-images.githubusercontent.com/65075626/231617727-6682681e-d122-46dd-bae8-dc0346bce41e.gif)
+##### Coding using DFS
+``` c++
+const int N = 1e5;  // largest number of node in graph
+vector<int> adj[N];
+int n , m , i , topo[N] , vis[N];
+void dfs(int u){
+   vis[u] = 0;
+   for(auto &v : adj[u]){
+	if(vis[v] == 0) dfs(v);
+   }
+   topo[i--] = u;
+}
+int main(){
+   cin >> n >> m;
+   for(int i = 0 ; i < m ; i++){
+   	int u , v; cin >> u >> v;
+	--u; --v; cin >> u >> v;
+	adj[u].emplace_back(v);
+   }
+   i = n - 1; // make pointer point to that last of array
+   for(int j = 0 ; j < n ; j++)
+   	if(vis[j] == 0) dfs(j);
+   // output one of possible Topolgical sorting
+   for(int j = 0 ; j < n ; j++) cout << topo[j] << " ";
+}

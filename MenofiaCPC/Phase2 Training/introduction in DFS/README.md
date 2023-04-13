@@ -1,11 +1,11 @@
 # Content of Table
-- [DFS](##_DFS_)
+- [DFS](## DFS)
 - [BFS](##_BFS_)
 ***
 ## _Graph Traversal_
 - DFS (Depth First Search)
 - BFS (Breath First Search)
-## _DFS_ 
+## DFS 
  - is an algorithm for traversing or searching tree or graph data structures.
  - can be writted in recursive or iterative (most used is recursive)
 

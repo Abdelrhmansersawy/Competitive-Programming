@@ -4,7 +4,7 @@
 - [Applications of DFS](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#applications-of-dfs)
 	- [connected component](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#1-connected-component)
 	- [detect cycle](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#2-detect-cycle)
-
+	- [Bipartite graph](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#3-bipartite-graph-)
 ***
 ## _Graph Traversal_
 - DFS (Depth First Search)

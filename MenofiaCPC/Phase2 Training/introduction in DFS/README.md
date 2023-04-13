@@ -1,6 +1,6 @@
 # Content of Table
-- [DFS](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#dfs))
-- [BFS](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#bfs))
+- [DFS](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#dfs)
+- [BFS](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#bfs)
 - [Applications of DFS](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#applications-of-dfs)
 	- [connected component](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#1-connected-component)
 	- [detect cycle](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#2-detect-cycle)

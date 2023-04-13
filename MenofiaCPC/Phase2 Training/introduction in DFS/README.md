@@ -85,11 +85,11 @@ int main(){
 const int N = 1e5;  // largest number of node in graph
 vector<int> adj[N] , vis(N);
 bool cycle;
-void dfs(int u){
+void dfs(int u, int par){
    vis[u] =  true;
    for(auto &v : adj[u]){
 	if(vis[v] == false) dfs(v)
-	else{
+	else if(v != par) {
             // detect Cycle
 	    cycle = true;
 	}
@@ -97,7 +97,7 @@ void dfs(int u){
 }
 int main(){
    for(int i = 0 ; i < n ; i++){
-      if(vis[i] == false) dfs(i);
+      if(vis[i] == false) dfs(i,-1);
    }
    cout << (cycle ? 1 : 0);
 }

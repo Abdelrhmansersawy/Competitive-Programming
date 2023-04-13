@@ -178,7 +178,7 @@ int main(){
    }
    i = n - 1; // make pointer point to that last of array
    for(int j = 0 ; j < n ; j++)
-   	if(vis[j] == 0) dfs(j);
+   	if(vis[j] == 1) dfs(j);
    // output one of possible Topolgical sorting
    for(int j = 0 ; j < n ; j++) cout << topo[j] << " ";
 }

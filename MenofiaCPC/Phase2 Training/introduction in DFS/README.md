@@ -147,7 +147,7 @@ int main(){
    if(can == false) cout << "You can't make graph bipartite";
    else{
         cout << "Color of every Node is";
-   	for(int i = 0 ; i < n ; i++) cout << c[i] << " ";
+   	for(int i = 0 ; i < n ; i++) cout << color[i] << " ";
    }
 }
 ```

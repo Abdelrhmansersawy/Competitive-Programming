@@ -1,6 +1,6 @@
 # Content of Table
 - [DFS](## _DFS_)
-- [BFS](## _BFS_)
+- [BFS](## _BFS_ :)
 ***
 ## _Graph Traversal_
 - DFS (Depth First Search)

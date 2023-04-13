@@ -5,6 +5,7 @@
 	- [connected component](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#1-connected-component)
 	- [detect cycle](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#2-detect-cycle)
 	- [Bipartite graph](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#3-bipartite-graph-)
+	- [Topolgical Sorting](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS#4-topolgical-sorting-)
 ***
 ## _Graph Traversal_
 - DFS (Depth First Search)
@@ -163,7 +164,7 @@ const int N = 1e5;  // largest number of node in graph
 vector<int> adj[N];
 int n , m , i , topo[N] , vis[N];
 void dfs(int u){
-   vis[u] = 0;
+   vis[u] = 1;
    for(auto &v : adj[u]){
 	if(vis[v] == 0) dfs(v);
    }
@@ -182,3 +183,4 @@ int main(){
    // output one of possible Topolgical sorting
    for(int j = 0 ; j < n ; j++) cout << topo[j] << " ";
 }
+##### Coding using Queue

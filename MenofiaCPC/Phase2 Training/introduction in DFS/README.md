@@ -1,5 +1,5 @@
 # Content of Table
-- [DFS](## DFS)
+- [DFS](##DFS)
 - [BFS](##_BFS_)
 ***
 ## _Graph Traversal_

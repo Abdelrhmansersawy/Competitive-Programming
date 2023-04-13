@@ -125,6 +125,24 @@ int main(){
 }
 ```
 ***
-### 3. Bipartite Graph
-
+### 3. Bipartite Graph :
+is a graph whose vertices can be divided into two disjoint and independent sets and , that is every edge connects a vertex in to one in.
 ![tumblr_nmi642nElc1unvfcho1_400](https://user-images.githubusercontent.com/65075626/231614867-79ce4e4a-8369-40be-985d-063a99ff363a.gif)
+``` c++
+const int N = 1e5;  // largest number of node in graph
+vector<int> adj[N] , color(N , -1); // -1 refer to node isn't colored yet
+bool can = true;
+void dfs(int u , int c){
+   color[u] = c;
+   for(auto &v : adj[u]){
+	if(color[v] == -1) dfs(v , 1 - c); // toggle for color
+	else if(color[u] == color[v]) can = false; // you can make this graph bipartite
+   }
+}
+int main(){
+   for(int i = 0 ; i < n ; i++){
+      if(color[i] == -1) dfs(i);
+   }
+   if(can == false) cout << "You can't make graph bipartite";
+}
+```

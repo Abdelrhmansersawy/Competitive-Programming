@@ -136,7 +136,7 @@ void dfs(int u , int c){
    color[u] = c;
    for(auto &v : adj[u]){
 	if(color[v] == -1) dfs(v , 1 - c); // toggle for color
-	else if(color[u] == color[v]) can = false; // you can make this graph bipartite
+	else if(color[u] == color[v]) can = false; // you can't make this graph bipartite
    }
 }
 int main(){
@@ -144,6 +144,10 @@ int main(){
       if(color[i] == -1) dfs(i);
    }
    if(can == false) cout << "You can't make graph bipartite";
+   else{
+        cout << "Color of every Node is";
+   	for(int i = 0 ; i < n ; i++) cout << c[i] << " ";
+   }
 }
 ```
 ### 4. Topolgical Sorting :

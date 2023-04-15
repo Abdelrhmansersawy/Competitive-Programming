@@ -1,3 +1,6 @@
+/*
+  Simply Centroid is a node if we delete it. It makes some subtrees where every subtree size must be less than sz/2 { sz is the size of the current tree T.}
+*/
 vector<int> adj[N] , centriod, sz(N);
 int n;
 void dfs(int u , int par){

@@ -10,7 +10,7 @@
 - Tree
 	- Tree Diameter in $O(n)$
 	- Tree Center in $O(n)$
-	- Tree centriod in $O(n)$
+	- [Tree centroid](centroid.cpp) in $O(n)$
 	- Tree isophrisim
 - Strong Connected Component
 	- [Tarjan algrothim](tarjan.cpp) $O(n+m)$

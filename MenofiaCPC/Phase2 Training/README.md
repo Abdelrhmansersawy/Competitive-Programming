@@ -1,3 +1,3 @@
-<p align="center">
-# Phase2 Training
-</p>
+<h1 align="center">
+Phase2 Training
+</h1>

@@ -7,7 +7,7 @@ Phase2 Training
 
 ***
 ## Table of contents
-- [Sheetlinks , recordes]()
+- [DataSheet]()
 - [Session 1 (Introduction to Graph)]()
 - [Session 2 (Practise)]()
 - [Session 3 (DFS and it's Application]()

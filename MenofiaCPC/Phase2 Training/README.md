@@ -7,7 +7,7 @@ Phase2 Training
 
 ***
 ## Table of contents
-- [DataSheet](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#datasheet)
+- [Traing DataSheet](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#datasheet)
 - [Session 1 (Introduction to Graph)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-1)
 - [Session 2 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-2)
 - [Session 3 (DFS and it's Application)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-3)
@@ -25,6 +25,8 @@ Introduction to graph we discuss basics knowledge you should know about graph li
 - connected component
 - How to approach problem with graph
 #### [record](https://drive.google.com/file/d/1GRwTBxJaFLe6sAAUqzihl81jhw4wtDex/view?usp=sharing)
+#### [Sheet](https://vjudge.net/contest/550199)
+
 ***
 ### Session 2
 Discuss some important basics graph problem in sheet.
@@ -42,6 +44,8 @@ Real starting of graph , we discuss basics algorithms in traversal graph and som
  - topological sorting
 #### [Presentation](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS)
 #### [record](https://drive.google.com/file/d/1Y77wY0fa96td2NS6BeEoZcOy4HX2s3en/view?usp=sharing)
+#### [Sheet](https://vjudge.net/contest/553632)
+
 ***
 ### Session 4
 Discuss some important problem in sheet

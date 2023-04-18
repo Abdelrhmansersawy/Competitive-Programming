@@ -10,7 +10,7 @@ Phase2 Training
 - [DataSheet](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#datasheet)
 - [Session 1 (Introduction to Graph)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-1)
 - [Session 2 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-2)
-- [Session 3 (DFS and it's Application](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-3)
+- [Session 3 (DFS and it's Application)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-3)
 - [Session 4 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-4)
 ***
 ### DataSheet
@@ -28,8 +28,8 @@ Introduction to graph we discuss basics knowledge you should know about graph li
 ***
 ### Session 2
 Discuss some important basics graph problem in sheet.
-- [record](https://drive.google.com/file/d/10wmLp0ebMyJNXNqZ5AQJOgPJYJyG3fmh/view?usp=sharing)
-- [Sheet](https://vjudge.net/contest/550199)
+#### [record](https://drive.google.com/file/d/10wmLp0ebMyJNXNqZ5AQJOgPJYJyG3fmh/view?usp=sharing)
+#### [Sheet](https://vjudge.net/contest/550199)
 ***
 ### Session 3
 Real starting of graph , we discuss basics algorithms in traversal graph and some application

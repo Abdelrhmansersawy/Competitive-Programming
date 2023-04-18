@@ -7,11 +7,11 @@ Phase2 Training
 
 ***
 ## Table of contents
-- [DataSheet]()
-- [Session 1 (Introduction to Graph)]()
-- [Session 2 (Practise)]()
-- [Session 3 (DFS and it's Application]()
-- [Session 4 (Practise)]()
+- [DataSheet](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#datasheet)
+- [Session 1 (Introduction to Graph)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-1)
+- [Session 2 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-2)
+- [Session 3 (DFS and it's Application](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-3)
+- [Session 4 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-4)
 ***
 ### DataSheet
 - [Training Group](https://vjudge.net/group/phase-2)

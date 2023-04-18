@@ -14,20 +14,37 @@ Phase2 Training
 - [Session 4 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-4)
 ***
 ### DataSheet
+Training Group Link , all sessions records
 - [Training Group](https://vjudge.net/group/phase-2)
 - [Records](https://drive.google.com/drive/folders/1k6XrFa9HEShwP5vA8CoZfV-WNJJX7viE)
 ***
 ### Session 1
-- [record](https://drive.google.com/file/d/1GRwTBxJaFLe6sAAUqzihl81jhw4wtDex/view?usp=sharing)
+Introduction to graph we discuss basics knowledge you should know about graph like
+- how to represent Graph
+- degree (directed Graph , indirected Graph)
+- connected component
+- How to approach problem with graph
+#### [record](https://drive.google.com/file/d/1GRwTBxJaFLe6sAAUqzihl81jhw4wtDex/view?usp=sharing)
 ***
 ### Session 2
+Discuss some important basics graph problem in sheet.
 - [record](https://drive.google.com/file/d/10wmLp0ebMyJNXNqZ5AQJOgPJYJyG3fmh/view?usp=sharing)
 - [Sheet](https://vjudge.net/contest/550199)
 ***
 ### Session 3
-- [record](https://drive.google.com/file/d/1Y77wY0fa96td2NS6BeEoZcOy4HX2s3en/view?usp=sharing)
+Real starting of graph , we discuss basics algorithms in traversal graph and some application
+- DFS , go deep in coding
+- BFS , just that idea
+- some DFS applications
+ - detect connected component
+ - detect cycle
+ - bipartite graph
+ - topological sorting
+#### [Presentation](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training/introduction%20in%20DFS)
+#### [record](https://drive.google.com/file/d/1Y77wY0fa96td2NS6BeEoZcOy4HX2s3en/view?usp=sharing)
 ***
 ### Session 4
-- [record](https://drive.google.com/file/d/19ZDjs4hD1NtNYRPuq7pYUJqDal7s4M3P/view?usp=sharing)
-- [Sheet](https://vjudge.net/contest/553632)
+Discuss some important problem in sheet
+#### [record](https://drive.google.com/file/d/19ZDjs4hD1NtNYRPuq7pYUJqDal7s4M3P/view?usp=sharing)
+#### [Sheet](https://vjudge.net/contest/553632)
 ***

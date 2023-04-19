@@ -18,7 +18,7 @@
 - [SCC using Floyed](SCC_Floyed.cpp) $O(n^3)$
 ***
 ## _Math_
-- [Find nCr = ncr = n! / ( r! * (n-r)! )][nCr.cpp] $O(nlogn)$
+- [Find $nCr = \frac{n!}{( r! * (n-r)! )}$][nCr.cpp] $O(nlogn)$
 - [Find nCr besskal tringal using DP](nCr_DP.cpp) $O(n^2)$
 - [Matrix Exponential](Matrix_Exponential.cpp)
 - [Euclidean algrothim](gcd.cpp)

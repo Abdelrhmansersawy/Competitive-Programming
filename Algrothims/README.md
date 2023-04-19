@@ -16,7 +16,7 @@
 - [Tarjan algrothim](tarjan.cpp) $O(n+m)$
 - kosaraju algrothim
 - [SCC using Floyed](SCC_Floyed.cpp) $O(n^3)$
-
+***
 ## _Math_
 - Find nCr
 - [besskal tringal using DP](nCr_DP.cpp) $O(n^2)$

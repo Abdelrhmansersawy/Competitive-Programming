@@ -22,7 +22,7 @@
 - [besskal tringal using DP](nCr_DP.cpp) $O(n^2)$
 - $O(nlogn)$ Binary Exponential + Fermat little Therom
 - [Matrix Exponential](Matrix_Exponential.cpp)
-- [Euclidean algrothim] (gcd.cpp)
+- [Euclidean algrothim](gcd.cpp)
 - [Optimize Euclidean algrothim](binary_gcd.cpp)
 ***
 ## _DP_

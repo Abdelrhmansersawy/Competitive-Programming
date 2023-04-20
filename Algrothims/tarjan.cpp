@@ -12,9 +12,10 @@ ios::sync_with_stdio(0); cin.tie(NULL); cout.tie(0);
     freopen("error.txt", "w", stderr);
   #endif
 }
+const int N = 1e5;
 //\\//\\//\\/\\//\\//\\//\\//\\//\\//
 vector<vector<int>> adj , dag , comps;
-vector<int> comp , inStack , lowLink , dfn;
+int comp[N] , inStack[N] , lowLink[N] , dfn[N] , deg[N];
 stack<int> st;
 int ndfn;
 void tarjan(int u){
@@ -44,16 +45,20 @@ void genDag(){
   dag.resize(comps.size());
   for(int u = 0 ; u < adj.size() ; u++){
     for(auto &v :adj[u]){
-      if(comp[u] != comp[v]) 
+      if(comp[u] != comp[v]){
         dag[comp[u]].emplace_back(comp[v]);
+        deg[comp[v]]++;
+      }
     }
   }
 }
 void SCC(int n){
-  dfn.clear(); dfn.resize(n , -1);
-  comp.clear(); comp.resize(n);
-  lowLink.clear(); lowLink.resize(n); 
-  inStack.clear(); inStack.resize(n);
+  ndfn = 0;
+  comps.clear();
+  rep(i , 0 , n){
+  	dfn[i] = -1;
+  	lowLink[i] = inStack[i] = deg[i] = 0;
+  }
   for(int i = 0 ; i < n ; i++)
     if(dfn[i] == -1) tarjan(i);
   genDag();

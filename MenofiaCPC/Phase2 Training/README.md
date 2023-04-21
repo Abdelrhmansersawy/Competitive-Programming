@@ -59,5 +59,5 @@ Discuss some important problem in sheet
 - [Problem](https://codeforces.com/problemset/problem/1760/G)  [Solution](https://ideone.com/0L9wVj)
 - [Problem](https://codeforces.com/problemset/problem/219/D) [Solution](https://ideone.com/vchyg8)
 - [Problem](https://codeforces.com/problemset/problem/1702/G1) [Solution](https://ideone.com/npt1hj)
-#### record - not uploaded yet
+#### [record](https://drive.google.com/file/d/1jVZsIDkMDwLlq_x-yb4nI9-Y2Fcy9V4F/view?usp=share_link)
 #### [Sheet](https://vjudge.net/contest/553632)

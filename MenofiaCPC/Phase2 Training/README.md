@@ -52,3 +52,11 @@ Discuss some important problem in sheet
 #### [record](https://drive.google.com/file/d/19ZDjs4hD1NtNYRPuq7pYUJqDal7s4M3P/view?usp=sharing)
 #### [Sheet](https://vjudge.net/contest/553632)
 ***
+### Session 5
+Discuss some important problem in sheet
+- [Problem](https://codeforces.com/problemset/problem/1294/F)  [Solution](https://ideone.com/Aw1wgD)
+- [Problem](https://codeforces.com/problemset/problem/1760/G)  [Solution](https://ideone.com/0L9wVj)
+- [Problem](https://codeforces.com/problemset/problem/219/D) [Solution](https://ideone.com/vchyg8)
+- [Problem](https://codeforces.com/problemset/problem/1702/G1) [Solution](https://ideone.com/npt1hj)
+#### record - not uploaded yet
+#### [Sheet](https://vjudge.net/contest/553632)

@@ -12,6 +12,7 @@ Phase2 Training
 - [Session 2 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-2)
 - [Session 3 (DFS and it's Application)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-3)
 - [Session 4 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-4)
+- [Session 5 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-5)
 ***
 ### DataSheet
 Training Group Link , all sessions records

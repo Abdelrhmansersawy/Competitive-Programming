@@ -1,12 +1,12 @@
 
 ## _Graph_
 ### Shortest Paths
-#### [Dijsktra](dijkstra.cpp)
-#### [BFS](BFS.cpp)
-#### 0-1 BFS
-#### Deil's Algrothim
-#### Floyed
-#### Bellman Ford
+- [Dijsktra](dijkstra.cpp)
+- [BFS](BFS.cpp)
+- 0-1 BFS
+- Deil's Algrothim
+- Floyed
+- Bellman Ford
 ### Tree
 - Tree Diameter in $O(n)$
 - [Tree Center](tree_center.cpp) in $O(n)$

@@ -24,6 +24,7 @@
 - [Euclidean algrothim](gcd.cpp)
 - [Optimize Euclidean algrothim](binary_gcd.cpp)
 - [Extended Euclidean algrothim](extended_euclidean.cpp)
+- [Fraction Number](fraction.cpp)
 ***
 ## _DP_
 - [Find Derangment of permutation in](derangement.cpp) $O(n)$

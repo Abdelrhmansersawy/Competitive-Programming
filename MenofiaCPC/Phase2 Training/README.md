@@ -70,7 +70,7 @@ Disucss BFS algrohtim and how to code it , solve some problem on BFS
 #### [sheet](https://vjudge.net/contest/556806)
 ***
 ### Session 7
-more Practise in tree problem
+more Practise in tree
 - [problem](https://codeforces.com/contest/1003/problem/E) [solution](https://codeforces.com/contest/1003/submission/205158971)
 - [problem](https://atcoder.jp/contests/abc148/tasks/abc148_f) [solution](https://atcoder.jp/contests/abc148/submissions/41258316)
 #### [record](https://drive.google.com/file/d/1tT97EC-6TgW1u3rBIlBt-qiSLcU5shM4/view)

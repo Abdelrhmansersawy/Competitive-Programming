@@ -61,3 +61,15 @@ Discuss some important problem in sheet
 - [Problem](https://codeforces.com/problemset/problem/1702/G1) [Solution](https://ideone.com/npt1hj)
 #### [record](https://drive.google.com/file/d/1jVZsIDkMDwLlq_x-yb4nI9-Y2Fcy9V4F/view?usp=share_link)
 #### [Sheet](https://vjudge.net/contest/553632)
+***
+### Session 6
+Disucss BFS algrohtim and how to code it , solve some problem on BFS
+#### [record](https://drive.google.com/file/d/1b90IA_mtFjbAeKaTP4aaUDMi8xeD1NdZ/view)
+#### [sheet](https://vjudge.net/contest/556806)
+***
+### Session 7
+more Practise in tree problem
+[problem](https://codeforces.com/contest/1003/problem/E) [solution](https://codeforces.com/contest/1003/submission/205158971)
+[problem](https://atcoder.jp/contests/abc148/tasks/abc148_f) [solution](https://atcoder.jp/contests/abc148/submissions/41258316)
+#### [record](https://drive.google.com/file/d/1tT97EC-6TgW1u3rBIlBt-qiSLcU5shM4/view)
+#### [sheet](https://vjudge.net/contest/556252)

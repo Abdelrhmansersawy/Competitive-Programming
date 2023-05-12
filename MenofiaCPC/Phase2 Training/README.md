@@ -78,7 +78,7 @@ more Practise in tree
 #### [sheet](https://vjudge.net/contest/556252)
 ***
 ### Session 8
-more Practise in tree
+Practise on BFS
 - [problem : K(Double Dots)](https://ideone.com/J3oqCk)
 - [problem : L - Valid BFS?](https://ideone.com/J3oqCk)
 - [problem : P - Number of Shortest paths](https://ideone.com/4hiLZd)

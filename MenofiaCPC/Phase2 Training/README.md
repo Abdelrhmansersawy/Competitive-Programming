@@ -15,6 +15,7 @@ Phase2 Training
 - [Session 5 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-5)
 - [Session 6 (BFS)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-6)
 - [Sessoin 7 (Practise on tree)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-7)
+- [Sessoin 8 (Practise on BFS)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-8)
 ***
 ### DataSheet
 Training Group Link , all sessions records
@@ -74,4 +75,13 @@ more Practise in tree
 - [problem](https://codeforces.com/contest/1003/problem/E) [solution](https://codeforces.com/contest/1003/submission/205158971)
 - [problem](https://atcoder.jp/contests/abc148/tasks/abc148_f) [solution](https://atcoder.jp/contests/abc148/submissions/41258316)
 #### [record](https://drive.google.com/file/d/1tT97EC-6TgW1u3rBIlBt-qiSLcU5shM4/view)
+#### [sheet](https://vjudge.net/contest/556252)
+***
+### Session 8
+more Practise in tree
+- [problem : K(Double Dots)](https://ideone.com/J3oqCk)
+- [problem : L - Valid BFS?](https://ideone.com/J3oqCk)
+- [problem : P - Number of Shortest paths](https://ideone.com/4hiLZd)
+- [problem : N - Shortest Cycle](https://ideone.com/a3a5dW)
+#### [record](https://drive.google.com/file/d/1jtkIM3Lo6rjhVv1j_DNzkYAt7BZ7RYZz/view)
 #### [sheet](https://vjudge.net/contest/556252)

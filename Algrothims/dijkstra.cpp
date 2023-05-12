@@ -21,12 +21,11 @@ int main(){
   Start--;
   priority_queue<pair<ll,int>> q; // {dis , u}
   vector<ll> dis(n , 1e15);
-  vector<bool> vis(n);
   q.push({0 , Start});
   dis[Start] = 0;
   while(q.size()){
-    int u = q.top().s; q.pop();
-    if(vis[u]) continue;
+    auto [d , u] = q.top().s; q.pop();
+    if(-d != dis[u]) continue;
     vis[u] = true;
     for(auto &[v , w] : adj[u]){
       if(dis[v] > dis[u] + w){ // relaxing 

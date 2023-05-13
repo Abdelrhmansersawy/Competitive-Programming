@@ -33,3 +33,4 @@
 ## _General_
 - [Create Random Number](random.cpp)
 - [Multiply two large numbers](manual_multiply.cpp)
+- [Find LIS using patient sorting](patient_sort.cpp) $O(nlogn)$

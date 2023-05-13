@@ -8,6 +8,7 @@
 - Floyed
 - Bellman Ford
 ### Tree
+- [Minimum spanning tree (MST)](MST.cpp)
 - Tree Diameter in $O(n)$
 - [Tree Center](tree_center.cpp) in $O(n)$
 - [Tree centroid](centroid.cpp) in $O(n)$

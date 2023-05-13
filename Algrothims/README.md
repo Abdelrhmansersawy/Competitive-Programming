@@ -30,6 +30,8 @@
 ## _DP_
 - [Find Derangment of permutation in](derangement.cpp) $O(n)$
 ***
+## _Advanced Data Structure_
+- [Disjoint Set Union (DSU)](DSU.cpp)
 ## _General_
 - [Create Random Number](random.cpp)
 - [Multiply two large numbers](manual_multiply.cpp)

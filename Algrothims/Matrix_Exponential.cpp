@@ -1,15 +1,15 @@
+int n;
 struct Matrix {
-    ll a[2][2];
-    Matrix operator *(Matrix other){
-        Matrix prod{{{0 ,0} , {0 , 0}}};
-        for (int i = 0; i < 2; ++i)
+    vector<vector<ll>> a = vector<vector<ll>> (n , vector<ll>(n , 0));
+    Matrix operator *(Matrix& other){
+        Matrix prod;
+        for (int i = 0; i < n; ++i)
         {
-            for (int j = 0; j < 2; ++j)
+            for (int j = 0; j < n; ++j)
             {
-                for (int k = 0; k < 2; ++k)
+                for (int k = 0; k < n; ++k)
                 {
-                    prod.a[i][k] += a[i][j] * other.a[j][k];
-                    prod.a[i][k] %= mod;
+                    prod.a[i][k] = ( prod.a[i][k] + a[i][j] * other.a[j][k] ) % mod;
                 }
             }
         }
@@ -18,8 +18,10 @@ struct Matrix {
 };
 Matrix matrix_exp(Matrix a , ll k){
     Matrix prod;
-    prod.a[0][1] = prod.a[1][0] = 0;
-    prod.a[0][0] = prod.a[1][1] = 1; 
+    for (int i = 0; i < n; ++i)
+    {
+        prod.a[i][i] = 1;
+    }
     while(k){
         if(k % 2) prod = prod * a;
         k /= 2;

@@ -8,7 +8,7 @@ typedef long long ll;
 #define s second
 #define FAST ios::sync_with_stdio(0); cin.tie(NULL); cout.tie(0);
 #define rep(x , st , ed) for(int x = st ; x < ed ; x++)
-const ll N = 1e5, M = 100 , mod = 1e9 + 7 , OO = 2 * 1e9 , OOLL = 1 * 1e18;
+const ll N = 2e5 + 9, M = 100 , mod = 1e9 + 7 , OO = 2 * 1e9 , OOLL = 1 * 1e18;
 #ifndef ONLINE_JUDGE
 #include "debug.h"
 #else
@@ -16,20 +16,19 @@ const ll N = 1e5, M = 100 , mod = 1e9 + 7 , OO = 2 * 1e9 , OOLL = 1 * 1e18;
 #endif
 //\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//
 void sol(){
- // Coding Here...
- }
+    
+}
 int main(){
-    FAST;
+    FAST
     #ifndef ONLINE_JUDGE
-      judge();
+      Sersawy();
     #endif
-    int q = 1;
-    // cin >> q;
+    int q = 1; // cin >> q;
     while (q--){  
         sol();
-     //   cout << '\n';
+     // cout << '\n';
     }
-    #ifndef ONLINE_JUDGE
+    #ifndef ONLINE_JUDGE 
       end_clock();
     #endif
 }

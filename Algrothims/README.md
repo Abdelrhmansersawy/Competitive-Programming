@@ -39,7 +39,7 @@ Competitive Programming Algrothims
 |Graph DS|
 |--|
 |[Disjoint Set Union (DSU)](DSU.cpp)|
-|[Ordered Set]|(ordered_set.cpp)|
+|[Ordered Set](ordered_set.cpp)||
 ***
 ## _General_
 |algo|

@@ -24,6 +24,5 @@ struct ordered__set{
 	void insert( ll val ){ se.insert( val ); }
     ll operator[](int idx) { return *se.find_by_order( idx ) ;}
 	int size( ){ return se.size(); }
-	void clr(  ){ se.clear() ; }
- 
+	void clr(  ){ se.clear() ; } 
 }

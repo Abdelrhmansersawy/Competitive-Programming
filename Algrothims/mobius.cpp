@@ -1,3 +1,8 @@
+/*
+ mobius Function (m)
+ if i has a squared factor : m(i) = 0 
+ else m(i) = (-1)^r , r : number of distinct prime the i has 
+*/
 const int N = 1e5;
 int mobius[N] , sieve[N];
 void gen_mobius(){

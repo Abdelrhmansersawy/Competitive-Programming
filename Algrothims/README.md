@@ -27,7 +27,7 @@ Competitive Programming Algrothims
 |--|--|--|
 |[Find nCr](nCr.cpp) $nCr = \frac{n!}{( r! * (n-r)! )}$ $O(nlogn)$|[Matrix Exponential](Matrix_Exponential.cpp)|[Fraction Number](fraction.cpp)|
 |[Find nCr besskal tringal using DP](nCr_DP.cpp) $O(n^2)$|[Euclidean algrothim](gcd.cpp)|[generate n digits after decimal point](generate_n_digits_after_point.cpp)|
-| | [Optimize Euclidean algrothim](binary_gcd.cpp)| |
+|[mobius Function](mobius.cpp) | [Optimize Euclidean algrothim](binary_gcd.cpp)| |
 | | [Extended Euclidean algrothim](extended_euclidean.cpp) | |
 ***
 ## _DP_

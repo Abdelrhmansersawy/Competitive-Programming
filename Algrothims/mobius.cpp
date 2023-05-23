@@ -8,9 +8,9 @@ int mobius[N] , sieve[N];
 void gen_mobius(){
   for(int i = 1; i < N; i++) {mobius[i] = sieve[i] = 1;}
   sieve[1] = 0;
-  for(int i = 2; i < N; i++){
+  for(long long i = 2; i < N; i++){
     if(sieve[i]){
-      for(int j = i; j < N; j += i){
+      for(long long j = i; j < N; j += i){
         sieve[j] = 0;
         mobius[j] = (j % (i * i) == 0) ? 0 : -mobius[j];
       }

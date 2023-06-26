@@ -18,7 +18,7 @@ Competitive Programming Algrothims
 |[Dijsktra](dijkstra.cpp)|[Minimum spanning tree (MST)](MST.cpp)|[Tarjan algrothim](tarjan.cpp) $O(n+m)$|
 |[BFS](BFS.cpp)|Tree Diameter in $O(n)$|kosaraju algrothim|
 |0-1 BFS|[Tree Center](tree_center.cpp) in $O(n)$|[SCC using Floyed](SCC_Floyed.cpp) $O(n^3)$|
-|Deil's Algrothim|[Tree centroid](centroid.cpp) in $O(n)$||
+|Deil's Algrothim|[Tree centroid](centroid.cpp) in $O(n)$|[Bridges](bridge.cpp)|
 |Floyed|[Tree isophrisim](isophrisim.cpp)||
 |Bellman Ford|||
 ***

@@ -1,7 +1,41 @@
-## About
+<h1 align = "center"> Level 1 </h1>
+
+## Overview
+### About:
 This repo will provide different resources (**Videos, Blogs, Books, sheets**) for **PH1** topics and an **order** to study these topics.
+### Duration:
+- 9 &rarr; 11 Weeks.
+### What you should know about: 
+- [Simulation & Complete search]()
+- [Greedy algorthims]()
+- [Adhoc problems]()
+- [STL & searching and sorting]()
+- [Static range query (prefix sum)]()
+- [Basics of Number Theory & Combination]()
+- [Bitwise operators]()
+- [Binary search]()
+- [Two pointers]()
+### Expected Targets
+``(_) refers to this thing not necessary to do it.``
+#### Problems level:
+- Codeforces Div2 AB (C) 
+- Codeforces Div3 ABC (D)
+- Atcoder Beginner Contest ABC (D)
+- Codechef Div2 AB (C)
+#### Rating:
+- Stable pupil on Codeforces (Specialist)
+- Div3 user on Codechef (Div2 user)
+- Brown on Atcoder (Green)
+
+### Timeline:
+To use this plan:
+<br> 
+For trainees: try to master each point in at most (5-7) days (learning + finishing the sheet)
 ***
-## Complete Search
+## Simulation & Complete Search 
+### What you should know about 
+
+### Resources
 |Videos|Blogs|Books|sheet|
 |------|-----|-----|----|
 |[Recursion (Basics to Advanced)](https://www.youtube.com/playlist?list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9) | [Compete Search with recursion](https://usaco.guide/bronze/complete-rec?lang=cpp)| [ch6 Complete Search](https://darrenyao.com/usacobook/cpp.pdf#page=27) |  [Basic Complete Search](https://usaco.guide/bronze/intro-complete?lang=cpp) |

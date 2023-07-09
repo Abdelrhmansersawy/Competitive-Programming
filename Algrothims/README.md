@@ -36,10 +36,11 @@ Competitive Programming Algrothims
 |[Find Derangment of permutation in](derangement.cpp) $O(n)$|
 ***
 ## _Advanced Data Structure_
-|Graph DS|
+|DS|
 |--|
 |[Disjoint Set Union (DSU)](DSU.cpp)|
-|[Ordered Set](ordered_set.cpp)||
+|[Ordered Set](ordered_set.cpp)|
+|[Sparse table](sparse_table.cpp)|
 ***
 ## _General_
 |algo|

@@ -7,8 +7,8 @@ For coaches: each point of the content takes a week (1 session for teaching + 1 
 
 For trainees: try to master each point in at most 1 week (learning + finishing the sheet)
 ## Roadmap
-- [STL I (vector, pair, struct, stack, queue, deque)](https://github.com/Abdelrhmansersawy/Competitive_Programming/edit/main/MenofiaCPC/Phase%201%20Training%20%202023/README.md#stl-part1)
-- [STL II (set, map, Priority_queue, Sorting)](https://github.com/Abdelrhmansersawy/Competitive_Programming/edit/main/MenofiaCPC/Phase%201%20Training%20%202023/README.md#stl-part1)
+- [STL I (vector, pair, struct, stack, queue, deque)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase%201%20Training%20%202023/README.md#stl-i)
+- [STL II (set, map, Priority_queue, Sorting)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase%201%20Training%20%202023/README.md#stl-ii)
 ***
 ## STL I
 ### Material

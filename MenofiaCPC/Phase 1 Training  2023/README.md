@@ -23,7 +23,7 @@ For trainees: try to master each point in at most 1 week (learning + finishing t
 [sheet](https://vjudge.net/contest/569386)
 
 ***
-## STL Part2
+## STL II
 ### Material
 |video|Blogs|Templates|
 |----|-----|---|

@@ -1,22 +1,34 @@
-const int N = 1e5;
-vector<int> pre(N);
-auto bfs = [&](int s) {
-    int d[N];
-    memset(d, -1, sizeof(d));
-    queue<int> q;
-    q.push(s), d[s] = 0;
-    while (!q.empty()) {
-        int v = q.front(); q.pop();
-        for (int u : adj[v]) if (d[u] == -1) {
-            q.push(u), d[u] = d[v] + 1, pre[u] = v;
-        }
+/*
+    Finding Tree Center and Tree diameter in Time O(n).
+    Algo : 
+        1- Starting BFS from any node.
+        2- Find the farthest node (Start) from it.
+        3- Starting BFS from (Start).
+        5- Find the farthest node (End) from (Start)
+        6- The path from (Start) and (End) is one possible diameter for the tree.
+*/
+int n; cin >> n;   
+    for(int i = 0; i < n - 1; ++i){
+    	int u , v; cin >> u >> v;
+    	--u; --v;
+    	adj[u].emplace_back(v);
+    	adj[v].emplace_back(u);
     }
-    return max_element(d, d + n ) - d;
-};
-int s = bfs(1), t = bfs(s);
-vector<int> V;
-for (int i = t; ; i = pre[i]) {
-    V.push_back(i);
-    if (i == s) break;
-}
-int center = V[V.size() / 2];
+    auto bfs = [&](int st){
+    	vector<int> dis(n , -1);
+    	queue<int> q;
+    	q.push(st); dis[st] = 0;
+   		while(q.size()){
+   			int u = q.front(); q.pop();
+   			for(auto &v : adj[u]) if(dis[v] == -1){
+   				dis[v] = dis[u] + 1; pre[v] = u;
+   				q.push(v);
+   			}
+   		}
+   		return max_element(dis.begin() , dis.end()) - dis.begin();
+    };
+    int Start = bfs(0) , End = bfs(Start);
+    vector<int> v;
+    for(int i = End; i != Start; i = pre[i])
+    	v.emplace_back(i);
+    int center = v[v.size() / 2];

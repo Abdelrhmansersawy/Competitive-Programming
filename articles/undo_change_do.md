@@ -32,22 +32,20 @@ for(int i = 0; i < n; i++){
 }
 ```
 و أنت دلوقتي عايز تحسب قيمة ال beauty لو عملت flip ل $s_i$ و تحسبها في $O(1)$
+
 هنحسب القيمة ده علي 3 خطوات.
-تعالي الأول نعرف 2 اراي هنستخدمها و احنا بنجرب جميع الاحتمالات
 
-pre[2] =  number of $0 , 1$ before index $i$.
-
-suff[2] =  number of $0 , 1$ after index $i$.
 ### 1 - تعمل undo 
-يعني أية (تشوف القيمة ال $s_i$ في ال beauty و تطرحها من beauty.
+يعني أية (تشوف القيمة ال $s_i$ بتساهم فيها في ال beauty و تطرحها من beauty) كأنك حذفت ال $s_i$ من ال string.
 في مسألة هنا هيكون بالشكل ده: المقدار ده هيساوي:
 
 (Number of indices $j$ such that $i <= j <= n$ and $s[j] = s[i]$) $+$ (Number of indices $j$ such that $1<= j < i$ and $s[j] = s[i]$)
 
 ### 2 - تعمل change 
 تعمل flip ل $s_i$.
+
 ### 3 - تعمل do 
-تشوف بعد لما عملت flip ل $s_i$ تشوف ده هيغير مبقدار أد اية في قيمة ال beauty و تزود المقدار ده علي beauty.
+تشوف بعد لما عملت flip ل $s_i$ تشوف ده هيغير مبقدار أد اية في قيمة ال beauty و تزود المقدار ده علي beauty (كأنك بعد لما حذفت في مرحلة ال undo ترجع تضيفه ثانية بس بعد لما غيرت القيمة).
 في مسألة هنا هيكون بالشكل ده: المقدار ده هيساوي:
 
 
@@ -85,6 +83,6 @@ cout << max_beauty;
 ```
 ***
 ## Exercises problems:
-[Binary Inversions](https://codeforces.com/problemset/problem/1760/E) [My Solution](https://codeforces.com/contest/1760/submission/217262410)
+[Problem](https://codeforces.com/problemset/problem/1760/E) [My Solution](https://codeforces.com/contest/1760/submission/217262410)
 
-[Stacked Pearls](https://codeforces.com/gym/104426/problem/E) [My Solution](https://ideone.com/o2ftwO)
+[Problem](https://codeforces.com/gym/104426/problem/E) [My Solution](https://ideone.com/o2ftwO)

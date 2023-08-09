@@ -6,7 +6,6 @@
 #include <algorithm>
 #include <vector>
 #include <string>
-
 /**
  * @brief there is some functions help to generate random things
  * such as integer, strings, trees, ... and also shuffling.
@@ -30,6 +29,16 @@ template <typename T>
 T pick_random_and_remove(std::vector<T> &);
 
 std::vector<std::pair<int, int>> random_tree(int, int, int);
+
+std::vector<int> random_permutation(int);
+
+std::string random_binary_string(int);
+
+bool random_flag();
+
+char random_vowel(bool);
+
+std::vector<std::vector<long long>> random_matrix(int, int, long long, long long);
 
 #include "random_generator_lib.cpp"
 

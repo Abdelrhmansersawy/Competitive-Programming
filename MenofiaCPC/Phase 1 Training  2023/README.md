@@ -9,6 +9,7 @@ For trainees: try to master each point in at most 1 week (learning + finishing t
 ## Roadmap
 - [STL I (vector, pair, struct, stack, queue, deque)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase%201%20Training%20%202023/README.md#stl-i)
 - [STL II (set, map, Priority_queue, Sorting)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase%201%20Training%20%202023/README.md#stl-ii)
+- [Prefix sum & Partial Sum]()
 ***
 ## STL I
 ### Material
@@ -36,3 +37,13 @@ For trainees: try to master each point in at most 1 week (learning + finishing t
 
 <!--- [pratice session]() -->
 <!--- [sheet]() -->
+## Prefix sum & Partial Sum
+|video|Blogs|
+|----|----|
+|[prefix sum(Mostafa saad)](https://www.youtube.com/watch?v=hqOqr6vFPp8&t=1s&ab_channel=ArabicCompetitiveProgramming)|[USACO](https://usaco.guide/silver/prefix-sums?lang=cpp)|
+|[prefix sum(Muhammed Afifi)](https://www.youtube.com/watch?v=fQwD4-FxQBU&t=5s&ab_channel=MuhammedAfifi)|[More on Prefix Sums](https://usaco.guide/silver/more-prefix-sums?lang=cpp)|
+|[Partial sum(Muhammed Afifi)](https://www.youtube.com/watch?v=vF78qRAAyx4&t=3s&ab_channel=MuhammedAfifi)|[CF Blog](https://codeforces.com/blog/entry/87384)|
+|[Errichto](https://www.youtube.com/watch?v=PhgtNY_-CiY&t=12s&ab_channel=ErrichtoAlgorithms)|--|
+|[Assiut session](https://www.youtube.com/watch?v=CcBg1yWXTXY&ab_channel=ICPCAssiutCommunity)|--|
+
+[sheet](https://vjudge.net/contest/577566)

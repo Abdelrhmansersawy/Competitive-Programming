@@ -8,39 +8,43 @@ Phase2 Training
 ***
 ## Table of contents
 - [Traing DataSheet](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#datasheet)
-- [Session 1 (Introduction to Graph)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-1)
-- [Session 2 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-2)
-- [Session 3 (DFS and it's Application)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-3)
-- [Session 4 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-4)
-- [Session 5 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-5)
-- [Session 6 (BFS)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-6)
-- [Sessoin 7 (Practise on tree)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-7)
-- [Sessoin 8 (Practise on BFS)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-8)
+- Basics of Graph
+   - [Session 1 (Introduction to Graph)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-1)
+   - [Session 2 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-2)
+   - [Session 3 (DFS and it's Application)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-3)
+   - [Session 4 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-4)
+   - [Session 5 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-5)
+   - [Session 6 (BFS)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-6)
+   - [Sessoin 7 (Practise on tree)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-7)
+   - [Sessoin 8 (Practise on BFS)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-8)
+- Dynamic Programming
+   - week1 ( DP Basics , styles ( 0/1 , Knapsack , LIS , LCS ) )
 ***
-### DataSheet
-Training Group Link , all sessions records
+## DataSheet
+Training Group Link , all session records
 - [Training Group](https://vjudge.net/group/phase-2)
 - [Records](https://drive.google.com/drive/folders/1k6XrFa9HEShwP5vA8CoZfV-WNJJX7viE)
 ***
+## Basics of Graph
 ### Session 1
-Introduction to graph we discuss basics knowledge you should know about graph like
-- how to represent Graph
-- degree (directed Graph , indirected Graph)
+Introduction to graph We discuss basics knowledge you should know about graphs like
+- How to represent Graph
+- degree (directed Graph, directed Graph)
 - connected component
-- How to approach problem with graph
+- How to approach the problem with a graph
 #### [record](https://drive.google.com/file/d/1GRwTBxJaFLe6sAAUqzihl81jhw4wtDex/view?usp=sharing)
 #### [Sheet](https://vjudge.net/contest/550199)
 
 ***
 ### Session 2
-Discuss some important basics graph problem in sheet.
+Discuss some important basic graph problems in the sheet.
 #### [record](https://drive.google.com/file/d/10wmLp0ebMyJNXNqZ5AQJOgPJYJyG3fmh/view?usp=sharing)
 #### [Sheet](https://vjudge.net/contest/550199)
 ***
 ### Session 3
-Real starting of graph , we discuss basics algorithms in traversal graph and some application
-- DFS , go deep in coding
-- BFS , just that idea
+At real starting of graph, we discuss basic algorithms in traversal graphs and some application
+- DFS, go deep in coding
+- BFS, just that idea
 - some DFS applications
  - detect connected component
  - detect cycle
@@ -52,12 +56,12 @@ Real starting of graph , we discuss basics algorithms in traversal graph and som
 
 ***
 ### Session 4
-Discuss some important problem in sheet
+Discuss some important problems in sheet
 #### [record](https://drive.google.com/file/d/19ZDjs4hD1NtNYRPuq7pYUJqDal7s4M3P/view?usp=sharing)
 #### [Sheet](https://vjudge.net/contest/553632)
 ***
 ### Session 5
-Discuss some important problem in sheet
+Discuss some important problems in sheet
 - [Problem](https://codeforces.com/problemset/problem/1294/F)  [Solution](https://ideone.com/Aw1wgD)
 - [Problem](https://codeforces.com/problemset/problem/1760/G)  [Solution](https://ideone.com/0L9wVj)
 - [Problem](https://codeforces.com/problemset/problem/219/D) [Solution](https://ideone.com/vchyg8)
@@ -85,3 +89,14 @@ Practise on BFS
 - [problem : N - Shortest Cycle](https://ideone.com/a3a5dW)
 #### [record](https://drive.google.com/file/d/1jtkIM3Lo6rjhVv1j_DNzkYAt7BZ7RYZz/view)
 #### [sheet](https://vjudge.net/contest/556252)
+***
+## Dynamic Programming
+### Week1 (DP Basics , styles ( 0/1 , Knapsack , LIS , LCS )
+#### Resources
+|video|blogs|
+|-----|-----|
+| [intro to DP #1](https://www.youtube.com/watch?v=gFdP6X4CyKU&list=PLPt2dINI2MIattDutu7IOAMlUuLeN8k2p&index=1&ab_channel=ArabicCompetitiveProgramming)|[Introduction to DP](https://usaco.guide/gold/intro-dp?lang=cpp)|
+|[intro to DP #2](https://www.youtube.com/watch?v=1j3srLj-C5Q&list=PLPt2dINI2MIattDutu7IOAMlUuLeN8k2p&index=2&ab_channel=ArabicCompetitiveProgramming)|[Knapsack Problem](https://usaco.guide/gold/knapsack?lang=cpp)|
+|[Knapsack , LIS , LCS in Arabic](https://www.youtube.com/watch?v=vAqaki1BhS0&list=PLPt2dINI2MIattDutu7IOAMlUuLeN8k2p&index=3&ab_channel=ArabicCompetitiveProgramming)|--|
+|[Fibonacci, iteration vs recursion](https://www.youtube.com/watch?v=YBSt1jYwVfU&list=RDCMUCBr_Fu6q9iHYQCh13jmpbrg&start_radio=1&ab_channel=ErrichtoAlgorithms)|--|
+#### [sheet](https://vjudge.net/contest/577458)

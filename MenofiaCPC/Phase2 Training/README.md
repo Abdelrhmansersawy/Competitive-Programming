@@ -8,7 +8,7 @@ Phase2 Training
 ***
 ## Table of contents
 - [Traing DataSheet](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#datasheet)
-- Basics of Graph
+- [Basics of Graph](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#basics-of-graph)
    - [Session 1 (Introduction to Graph)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-1)
    - [Session 2 (Practise)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-2)
    - [Session 3 (DFS and it's Application)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-3)
@@ -17,8 +17,8 @@ Phase2 Training
    - [Session 6 (BFS)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-6)
    - [Sessoin 7 (Practise on tree)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-7)
    - [Sessoin 8 (Practise on BFS)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-8)
-- Dynamic Programming
-   - week1 ( DP Basics , styles ( 0/1 , Knapsack , LIS , LCS ) )
+- [Dynamic Programming](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#dynamic-programming)
+   - [week1 ( DP Basics , styles ( 0/1 , Knapsack , LIS , LCS ) )](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#week1-dp-basics--styles--01--knapsack--lis--lcs-)
 ***
 ## DataSheet
 Training Group Link , all session records
@@ -100,3 +100,4 @@ Practise on BFS
 |[Knapsack , LIS , LCS in Arabic](https://www.youtube.com/watch?v=vAqaki1BhS0&list=PLPt2dINI2MIattDutu7IOAMlUuLeN8k2p&index=3&ab_channel=ArabicCompetitiveProgramming)|--|
 |[Fibonacci, iteration vs recursion](https://www.youtube.com/watch?v=YBSt1jYwVfU&list=RDCMUCBr_Fu6q9iHYQCh13jmpbrg&start_radio=1&ab_channel=ErrichtoAlgorithms)|--|
 #### [sheet](https://vjudge.net/contest/577458)
+***

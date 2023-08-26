@@ -18,6 +18,7 @@ Phase2 Training
    - [Sessoin 7 (Practise on tree)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-7)
    - [Sessoin 8 (Practise on BFS)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-8)
 - [Dynamic Programming](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#dynamic-programming)
+   - [Prerequired]() 
    - [week1 ( DP Basics , styles ( 0/1 , Knapsack , LIS , LCS ) )](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#week1-dp-basics--styles--01--knapsack--lis--lcs-)
 ***
 ## DataSheet
@@ -91,6 +92,16 @@ Practise on BFS
 #### [sheet](https://vjudge.net/contest/556252)
 ***
 ## Dynamic Programming
+### Prerequired
+- Good understanding of recursive
+- Good experience of measuring the time complexity of a recursive code
+
+|video|Problems|
+|---|---|
+|[Reucrsion in Arabic](https://www.youtube.com/watch?v=hyk46UmJPS4&t=1984s&ab_channel=ArabicCompetitiveProgramming)|[very base(Sheet #7 (Recursion))](https://codeforces.com/group/MWSDmqGsZm/contests)|
+|[Measuring Algorithms Perfromance #1](https://www.youtube.com/watch?v=EQzmtn4PzYQ&ab_channel=ArabicCompetitiveProgramming)|[recursion & backtracing](https://codeforces.com/group/gA8A93jony/contests)|
+|[Measuring Algorithms Perfromance #1](https://www.youtube.com/watch?v=ZNYQrKpR42g&ab_channel=ArabicCompetitiveProgramming)|--|
+|[Recursive in English](https://www.youtube.com/watch?v=yVdKa8dnKiE&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&ab_channel=takeUforward)|--|
 ### Week1 (DP Basics , styles ( 0/1 , Knapsack , LIS , LCS )
 #### Resources
 |video|blogs|

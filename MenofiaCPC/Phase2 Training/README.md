@@ -18,7 +18,7 @@ Phase2 Training
    - [Sessoin 7 (Practise on tree)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-7)
    - [Sessoin 8 (Practise on BFS)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#session-8)
 - [Dynamic Programming](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#dynamic-programming)
-   - [Prerequired]() 
+   - [Prerequired](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase2%20Training#prerequired) 
    - [week1 ( DP Basics , styles ( 0/1 , Knapsack , LIS , LCS ) )](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase2%20Training/README.md#week1-dp-basics--styles--01--knapsack--lis--lcs-)
 ***
 ## DataSheet
@@ -102,6 +102,7 @@ Practise on BFS
 |[Measuring Algorithms Perfromance #1](https://www.youtube.com/watch?v=EQzmtn4PzYQ&ab_channel=ArabicCompetitiveProgramming)|[recursion & backtracing](https://codeforces.com/group/gA8A93jony/contests)|
 |[Measuring Algorithms Perfromance #1](https://www.youtube.com/watch?v=ZNYQrKpR42g&ab_channel=ArabicCompetitiveProgramming)|--|
 |[Recursive in English](https://www.youtube.com/watch?v=yVdKa8dnKiE&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&ab_channel=takeUforward)|--|
+***
 ### Week1 (DP Basics , styles ( 0/1 , Knapsack , LIS , LCS )
 #### Resources
 |video|blogs|

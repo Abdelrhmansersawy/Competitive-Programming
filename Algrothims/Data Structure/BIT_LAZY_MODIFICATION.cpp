@@ -5,7 +5,7 @@
 */
 const int inf = 1e9 + 9;
 map<int,int> tree; // LAZY MODIFICATION
-struct BIT2D {
+struct BIT {
     void add(int x, int val) {
     	for(; x < inf; x += (x & -x))  tree[x] += val;
     }

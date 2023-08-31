@@ -37,8 +37,9 @@ For trainees: try to master each point in at most 1 week (learning + finishing t
 
 <!--- [pratice session]() -->
 <!--- [sheet]() -->
+***
 ## Prefix sum & Partial Sum
-|video|Blogs|
+|videos|Blogs|
 |----|----|
 |[prefix sum(Mostafa saad)](https://www.youtube.com/watch?v=hqOqr6vFPp8&t=1s&ab_channel=ArabicCompetitiveProgramming)|[USACO](https://usaco.guide/silver/prefix-sums?lang=cpp)|
 |[prefix sum(Muhammed Afifi)](https://www.youtube.com/watch?v=fQwD4-FxQBU&t=5s&ab_channel=MuhammedAfifi)|[More on Prefix Sums](https://usaco.guide/silver/more-prefix-sums?lang=cpp)|
@@ -47,3 +48,10 @@ For trainees: try to master each point in at most 1 week (learning + finishing t
 |[Assiut session](https://www.youtube.com/watch?v=CcBg1yWXTXY&ab_channel=ICPCAssiutCommunity)|--|
 
 [sheet](https://vjudge.net/contest/577566)
+***
+## Binary search
+|vidoes|Blogs|
+|---|---|
+|[Binary search (Mostafa saad)](https://www.youtube.com/watch?v=2G7RzlxTNPo&pp=ygUabW9zdGFmYSBzYWFkIGJpbmFyeSBzZWFyY2g%3D&ab_channel=ArabicCompetitiveProgramming)|[USACO](https://usaco.guide/silver/binary-search?lang=cpp)|
+|[Binary search (Afifi)](https://www.youtube.com/watch?v=MTF8a-NYA4I&ab_channel=MuhammedAfifi)|[CF edu](https://codeforces.com/edu/course/2/lesson/6)|
+|[Binary search (Errichto)](https://www.youtube.com/watch?v=GU7DpgHINWQ&ab_channel=ErrichtoAlgorithms)|--|

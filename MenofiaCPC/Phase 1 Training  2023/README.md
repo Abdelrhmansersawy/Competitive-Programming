@@ -10,6 +10,7 @@ For trainees: try to master each point in at most 1 week (learning + finishing t
 - [STL I (vector, pair, struct, stack, queue, deque)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase%201%20Training%20%202023/README.md#stl-i)
 - [STL II (set, map, Priority_queue, Sorting)](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase%201%20Training%20%202023/README.md#stl-ii)
 - [Prefix sum & Partial Sum](https://github.com/Abdelrhmansersawy/Competitive_Programming/tree/main/MenofiaCPC/Phase%201%20Training%20%202023#prefix-sum--partial-sum)
+- [Binary Search](https://github.com/Abdelrhmansersawy/Competitive_Programming/blob/main/MenofiaCPC/Phase%201%20Training%20%202023/README.md#binary-search)
 ***
 ## STL I
 ### Material

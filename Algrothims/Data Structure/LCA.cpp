@@ -1,44 +1,47 @@
-const int N = 2e5 + 1;
-int n, l;
+const int N = 1e5 + 10 , LOG = 20;
 vector<int> adj[N];
-int timer;
-vector<int> tin, tout;
-vector<vector<int>> up;
-void dfs(int v, int p)
-{
-    tin[v] = ++timer;
-    up[v][0] = p;
-    for (int i = 1; i <= l; ++i)
-        up[v][i] = up[up[v][i-1]][i-1];
-
-    for (auto &u : adj[v]) {
-        if (u != p)
-            dfs(u, v);
+struct lca{
+    int n;
+    vector<int> depth , parent[LOG];
+    void init(int n , int root = 0){
+        this->n = n;
+        depth.resize(n);
+        for(int i = 0; i < LOG; ++i) parent[i].resize(n);
+        dfs(root , root , 0);
     }
-    tout[v] = ++timer;
-}
-
-bool is_ancestor(int u, int v){
-    return tin[u] <= tin[v] && tout[u] >= tout[v];
-}
-int lca(int u, int v)
-{
-    if (is_ancestor(u, v))
+    void dfs(int u, int p, int d) {
+        depth[u] = d;
+        parent[0][u] = p;
+        for (int i = 1; i < LOG; ++i) {
+            parent[i][u] = parent[i - 1][parent[i - 1][u]];
+        }
+        for (int v : adj[u]) {
+            if (v == p) continue;
+            dfs(v, u, d + 1);
+        }
+    }
+    int kth_ancestor(int u, int k) {
+        for (int i = 0; i < LOG; ++i) {
+            if ((1 << i) & k) {
+                u = parent[i][u];
+            }
+        }
         return u;
-    if (is_ancestor(v, u))
-        return v;
-    for (int i = l; i >= 0; --i) {
-        if (!is_ancestor(up[u][i], v))
-            u = up[u][i];
     }
-    return up[u][0];
-}
+    int LCA(int u, int v) {
+        if (depth[u] > depth[v]) swap(u, v);
+        int k = depth[v] - depth[u];
+        v = kth_ancestor(v, depth[v] - depth[u]);
+        if (u == v) return u;
 
-void preprocess(int root) {
-    tin.resize(n);
-    tout.resize(n);
-    timer = 0;
-    l = ceil(log2(n));
-    up.assign(n, vector<int>(l + 1));
-    dfs(root, root);
-}
+        for (int i = LOG - 1; ~i; --i) {
+            if (parent[i][u] != parent[i][v]) {
+                u = parent[i][u];
+                v = parent[i][v];
+            }
+        }
+        assert(parent[0][u] == parent[0][v]); 
+        return parent[0][u];
+    }
+};
+

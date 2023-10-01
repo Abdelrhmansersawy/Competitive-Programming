@@ -29,6 +29,8 @@ int n; cin >> n;
     };
     int Start = bfs(0) , End = bfs(Start);
     vector<int> v;
-    for(int i = End; i != Start; i = pre[i])
+    for(int i = End;; i = pre[i]){
     	v.emplace_back(i);
+        if(i == Start) break; 
+    }
     int center = v[v.size() / 2];

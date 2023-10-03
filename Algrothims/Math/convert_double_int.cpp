@@ -1,4 +1,4 @@
-int EPS = 10000;
+int EPS = 10000 , Precision = 4;
 long long read(){
     // 1.2345 --> 12345
     string s;cin >> s;

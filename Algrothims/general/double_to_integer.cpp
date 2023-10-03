@@ -1,5 +1,5 @@
-ll in(int precision)
-{
+int EPS = 10000;
+long long read(){
     // 1.2345 --> 12345
     string s;
     cin >> s;
@@ -7,6 +7,6 @@ ll in(int precision)
     if(x==-1) return stoll(s+"0000");
     string one=s.substr(0,x);
     string two=s.substr(x+1);
-    while(two.size()< precision) two+="0";
+    while(two.size()< EPS) two+="0";
     return stoll(one+two);
 }

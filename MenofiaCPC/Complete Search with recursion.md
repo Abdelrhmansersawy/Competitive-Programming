@@ -15,10 +15,10 @@
 	- Standard Problems
 		- 8 Queens $O(n! * 2^{n})$.
 		- Generate all possible paths in the grid $O(2^{n+m})$.
-		- Flood Fill (From $O(2^{n+m})$ to $O(n * m)$).
+		- Flood Fill (From $O(2^{n+m})$ to $O(n * m)$ ).
 	- Tips  (!very Important)
 		- Filtering versus Generating.
-			- Try to solve **8 Queen** problem in $O(n! *n)$.
+			- Try to solve **8 Queen** problem in $O(n! *n)$
 		- Prune Infeasible Search Space Early.
 		- Utilize Symmetries.
 ***

@@ -30,6 +30,6 @@
 | [Backtracking (Eng. Ahmed Ali)](https://www.youtube.com/watch?v=bj2Qdu08XYw) | [Subset](https://usaco.guide/bronze/complete-rec#subsets) | [Generating subsets](https://usaco.guide/CPH.pdf#page=57) |
 | [recursion & Backtracking (Mr algortthims)](https://www.youtube.com/playlist?list=PLR5x_RGTMNNXHdQp1EorhZq-t3TOWCNis) | [Permutations](https://usaco.guide/bronze/complete-rec#permutations) | [Generating permutations](https://usaco.guide/CPH.pdf#page=59) |
 | [Backtracking (Abdul Bari)](https://www.youtube.com/watch?v=DKCbsiDBN6c) | [Backtracking](https://usaco.guide/bronze/complete-rec#backtracking) | [Backtracking](https://usaco.guide/CPH.pdf#page=60) |
-| --  | [(!options) how next_permtation() works](https://marknelson.us/posts/2002/03/01/next-permutation.html) |  |
+| --  | [(!options) how next_permtation() works](https://marknelson.us/posts/2002/03/01/next-permutation.html) | -- |
 
 [Sheet Link](https://vjudge.net/contest/606331#overview)

@@ -27,6 +27,6 @@ public:
         add(st, val, -val * (st - 1));
         add(en + 1, -val, val * en);
     }
-    void addIndex(int i, ll val){ addRange(i,i,val); }
+    void add(int i, ll val){ addRange(i,i,val); }
     ll getIndex(int i){ return get(i) - get(i - 1); }
 };

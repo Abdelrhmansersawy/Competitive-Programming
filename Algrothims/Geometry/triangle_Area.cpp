@@ -5,8 +5,7 @@ double triangleArea2sidesAngle(double a, double b, double t) {
         return fabs(a * b * sin(t) / 2);
 }
 
-double triangleArea2anglesSide(double t1, double t2,
-                double s) {
+double triangleArea2anglesSide(double t1, double t2, double s) {
         return fabs(s * s * sin(t1) * sin(t2) / (2 * sin(t1 + t2)));
 }
 

@@ -22,7 +22,7 @@ public:
         memset(m, 0, n * sizeof(m[0]));
         memset(c, 0, n * sizeof(m[0]));
     }
-    void addRange(int st, int en, long long val) {
+    void add(int st, int en, long long val) {
         if(st > en) return;
         add(st, val, -val * (st - 1));
         add(en + 1, -val, val * en);

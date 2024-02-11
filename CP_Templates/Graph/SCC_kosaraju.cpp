@@ -1,3 +1,10 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define rep(i , st , ed) for(int i = st; i < ed; i++)
+#define f first
+#define s second
+#define all(v) v.begin() , v.end()
 const int N = 2e5 + 9;
 vector<int> adj[N], adj_rev[N];
 bool used[N];
@@ -18,6 +25,11 @@ void dfs2(int v) {
 }
 
 int main() {
+    #ifndef ONLINE_JUDGE
+    freopen("in.txt", "r", stdin);
+    freopen("out.txt", "w", stdout);
+    freopen("error.txt", "w", stderr);
+    #endif
     int n,m; cin >> n >> m;
     for (int i = 0; i < m; ++i) {
         int a, b;

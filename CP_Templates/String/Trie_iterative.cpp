@@ -1,5 +1,5 @@
 const int N = 1e6 + 9;
-int nxt[N][27] , cntNode, isEnd[N], frq[N], n;
+int nxt[N][26] , cntNode, isEnd[N], frq[N], n;
 int get(char ch){ return  ch - 'a'; }
 void add(string &s){
     int node = 0;

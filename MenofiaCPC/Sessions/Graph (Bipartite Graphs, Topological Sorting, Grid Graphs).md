@@ -1,23 +1,34 @@
-> Q Success in nothing more than a few straightforward disciplines put into daily practice.
+> Success in nothing more than a few straightforward disciplines put into daily practice.
 > \- Jim Rohn
-<h1 style="text-align:center;"><font color="#ffb703" > Bipartite Graph </font> </h1>
+# Bipartite Graph 
 
-**Standard Problem**
->Given $2 N$ player and asked you if we can divide it into **two  teams**  but there is $M$ restriction.
+## Standard Problem
+Given $2 N$ player and asked you if we can divide it into **two  teams**  but there is $M$ restriction.
+
 Each restriction contains two player $(a,b)$ where a player $a$ can't be in the **same** team of player $b$ .
+
 **Constraints**
 $2 \leq N \leq 10^5, 0 \leq M \leq 2 * 10^5$
+
 **Test Cases**
 N: 4, M: 3
+
 1 3
+
 2 3
+
 4 1
+
 Answer: Yes
+
 **Explanation**
+
 {1, 2} ,  {3,4} -> Valid division
+
 {1,4} , {2, 3} -> Invalid division
 
-<font color = "#00b4d8">Complete search O(2^n):</font>
+## Complete search O(2^n):
+
 ```c++
 const int N = 2e5 + 9;
 int n,m;
@@ -54,7 +65,7 @@ int main(){
   solve(0);
 }
 ```
-<font color = "#00b4d8">Check if graph is Bipartite or not</font>
+## Check if graph is Bipartite or not
 ```c++
 const int N = 2e5 + 9;
 vector<int> adj[N];
@@ -91,8 +102,10 @@ int main(){
 }
 ```
 ***
-<h1 style="text-align:center;"><font color="#ffb703" > Topological Sorting </font> </h1>
+# Topological Sorting
+
 1. DFS using Pointer
+
 ```c++
 const int N = 2e5 + 9;
 int topo[N] , vis[N],n,m , p;
@@ -118,7 +131,9 @@ int main(){
     for(int i = 0; i < n; ++i) cout << topo[i] + 1<< " ";
 }
 ```
+
 2. DFS using vector
+
 ```c++
 const int N = 2e5 + 9;
 int vis[N],n,m , p;
@@ -146,7 +161,9 @@ int main(){
     for(int i = 0; i < n; ++i) cout << topo[i] + 1<< " ";
 }
 ```
+
 3. Khan's algorthim
+
 ```c++
 const int N = 2e5 + 9;
 int n,m , inDeg[N];
@@ -176,7 +193,9 @@ int main(){
     for(int i = 0; i < n; ++i) cout << topo[i] + 1 << " ";
 }
 ```
-4. Khan's algorthim v2
+
+4. Khan's algorthim (v2)
+
 ```c++
 const int N = 2e5 + 9;
 int n,m , inDeg[N];
@@ -211,8 +230,9 @@ int main(){
     for(int i = 0; i < n; ++i) cout << topo[i] + 1 << " ";
 }
 ```
+
 ***
-<h1 style="text-align:center;"><font color="#ffb703" > Grid Graph </font> </h1>
+# Grid Graph
 - Instead of representing a graph using adjacent list, we will use from directions (up, down, left, right) as neighbour of vertice.
   ## <font color = "#00b4d8">Basic DFS in grid</font>
 ```c++

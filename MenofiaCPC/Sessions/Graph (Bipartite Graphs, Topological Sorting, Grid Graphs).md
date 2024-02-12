@@ -3,7 +3,7 @@
 # Bipartite Graph 
 
 ## Standard Problem
-Given $2 N$ player and asked you if we can divide it into **two  teams**  but there is $M$ restriction.
+Given $2 N$ player and asked you if we can divide it into **two  teams**  but there are $M$ restrictions.
 
 Each restriction contains two player $(a,b)$ where a player $a$ can't be in the **same** team of player $b$ .
 
@@ -11,6 +11,7 @@ Each restriction contains two player $(a,b)$ where a player $a$ can't be in the 
 $2 \leq N \leq 10^5, 0 \leq M \leq 2 * 10^5$
 
 **Test Cases**
+
 N: 4, M: 3
 
 1 3

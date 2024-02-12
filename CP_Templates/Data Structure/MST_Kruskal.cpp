@@ -8,6 +8,7 @@ struct DSU
   int get(int a){return par[a] = (par[a] == a) ? a : get(par[a]);}
   void Union(int a, int b){
     a = get(a); b = get(b);
+    if(a == b) return; // In the same Group
     if(size[a] > size[b]) swap(a , b);
     size[b] += size[a];
     par[a] = b;

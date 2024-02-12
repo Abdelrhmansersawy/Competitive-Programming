@@ -32,7 +32,7 @@ int main() {
     #endif
     int n,m; cin >> n >> m;
     for (int i = 0; i < m; ++i) {
-        int a, b;
+        int a, b; cin >> a >> b;
         --a; --b;
         adj[a].push_back(b);
         adj_rev[b].push_back(a);

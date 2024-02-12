@@ -31,6 +31,37 @@ This template is made for competitive programming using `C++` language.
 
 - [My template C++](/CP_Templates/Snippet/CP.sublime-snippet)&nbsp;<a href='/CP_Templates/Snippet/CP.sublime-snippet'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [My template C++ with test Cases](/CP_Templates/Snippet/TEST_CASE.sublime-snippet)&nbsp;<a href='/CP_Templates/Snippet/TEST_CASE.sublime-snippet'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Read & write from file](/CP_Templates/Snippet/FILE.sublime-snippet)&nbsp;<a href='/CP_Templates/Snippet/FILE.sublime-snippet'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [My C++17 Compiler setting](/CP_Templates/Snippet/c++17.sublime-build)&nbsp;<a href='/CP_Templates/Snippet/c++17.sublime-build'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 <br><br><br>
 
+### Graph
+
+---
+
+- [Breath First Seach (BFS)](/CP_Templates/Graph/BFS.cpp)&nbsp;<a href='/CP_Templates/Graph/BFS.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Dijkstra](/CP_Templates/Graph/dijkstra.cpp)&nbsp;<a href='/CP_Templates/Graph/dijkstra.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [0-1 BFS](/CP_Templates/Graph/01_BFS.cpp)&nbsp;<a href='/CP_Templates/Graph/01_BFS.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Bellman Ford](/CP_Templates/Graph/bellman_ford.cpp)&nbsp;<a href='/CP_Templates/Graph/bellman_ford.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Floyd](/CP_Templates/Graph/floyd.cpp)&nbsp;<a href='/CP_Templates/Graph/floyd.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Kth shortest path](/CP_Templates/Graph/kth_shortest_path.cpp)&nbsp;<a href='/CP_Templates/Graph/kth_shortest_path.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Strong Connected Component (SCC) using Tarjan](/CP_Templates/Graph/SCC_tarjan.cpp)&nbsp;<a href='/CP_Templates/Graph/SCC_tarjan.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Strong Connected Component (SCC) using Kosaraju](/CP_Templates/Graph/SCC_kosaraju.cpp)&nbsp;<a href='/CP_Templates/Graph/SCC_kosaraju.cpp)'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Strong Connected Component (SCC) using Floyed](/CP_Templates/Graph/SCC_Floyed.cpp)&nbsp;<a href='/CP_Templates/Graph/SCC_Floyed.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+<br><br><br>
+
+### Data Structures
+
+---
+
+- [Fenwick Tree](/CP_Templates/Data Structure/BIT/BIT.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Fenwick Tree 2D](/CP_Templates/Data Structure/BIT/BIT2D.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT2D.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Fenwick Tree Lazy_Modification (using map)](/CP_Templates/Data Structure/BIT/BIT_LAZY_MODIFICATION.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT_LAZY_MODIFICATION.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Fenwick Tree 2D](/CP_Templates/Data Structure/BIT/BIT2D.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT2D.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Fenwick Tree Ranges](/CP_Templates/Data Structure/BIT/BIT_Ranges.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT_Ranges.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+
+
+<br><br><br>
+
+<br><br><br>

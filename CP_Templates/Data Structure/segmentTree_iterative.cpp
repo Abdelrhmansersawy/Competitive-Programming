@@ -13,22 +13,28 @@ typedef long long ll;
 const int N = 2e5 + 9;
 int seg[4 * N];
 void update(int k, int x) {
-    k += N; seg[k] = x; k >>= 1;
+    k += N;
+    seg[k] = x; // update node with value 
+    k >>= 1;
     while (k > 0) {
         seg[k] = max(seg[2*k], seg[2*k+1]);
         k >>= 1;
     }
+}
+int merge(int a, int b){
+   // write code here
+    return 0; // return value
 }
 int query(int a, int b) {
     a += N, b += N;
     int s = 0;
     while (a <= b) {
         if (a & 1) {
-            s = max(s, seg[a]);
+            s = merge(s, seg[a]);
             a++;
         }
         if (~b & 1) {
-            s = max(s, seg[b]);
+            s = merge(s, seg[b]);
             b--;
         }
         a >>= 1, b >>= 1;

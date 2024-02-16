@@ -58,8 +58,35 @@ This template is made for competitive programming using `C++` language.
 - [Fenwick Tree](/CP_Templates/Data%20Structure/BIT/BIT.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Fenwick Tree 2D](/CP_Templates/Data%20Structure/BIT/BIT2D.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT2D.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Fenwick Tree Lazy_Modification (using map)](/CP_Templates/Data%20Structure/BIT/BIT_LAZY_MODIFICATION.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT_LAZY_MODIFICATION.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-- [Fenwick Tree 2D](/CP_Templates/Data%20Structure/BIT/BIT2D.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT2D.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Fenwick Tree Ranges](/CP_Templates/Data%20Structure/BIT/BIT_Ranges.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT_Ranges.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Sparse Table](/CP_Templates/Data%20Structure/sparse_table.cpp)&nbsp;<a href='/CP_Templates/Data Structure/sparse_table.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Segment Tree (Iterative)](/CP_Templates/Data%20Structure/segmentTree_iterative.cpp)&nbsp;<a href='/CP_Templates/Data Structure/segmentTree_iterative.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Ordered set](/CP_Templates/Data%20Structure/ordered_set.cpp)&nbsp;<a href='/CP_Templates/Data Structure/ordered_set.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Disjoint Union Set (DSU)](/CP_Templates/Data%20Structure/DSU.cpp)&nbsp;<a href='/CP_Templates/Data Structure/DSU.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Small-to-Large Trick (DSU on Tree)](/CP_Templates/Data%20Structure/DSU_on_tree.cpp)&nbsp;<a href='/CP_Templates/Data Structure/DSU_on_tree.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Lowest Common Ancestor (LCA)](/CP_Templates/Data%20Structure/LCA.cpp)&nbsp;<a href='/CP_Templates/Data Structure/LCA.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Minimum Spanning Tree (MST) using Kruskal](/CP_Templates/Data%20Structure/MST_Kruskal.cpp)&nbsp;<a href='/CP_Templates/Data Structure/MST_Kruskal.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Minimum Spanning Tree (MST) using Prim's](/CP_Templates/Data%20Structure/MST_Prim's.cpp)&nbsp;<a href="/CP_Templates/Data Structure/MST_Prim's.cpp"><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Lowest Common Ancestor on DSU](/CP_Templates/Data%20Structure/LCA_in_DSU.cpp)&nbsp;<a href='/CP_Templates/Data Structure/LCA_in_DSU.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Mo's algorthim](/CP_Templates/Data%20Structure/MO-Algorithm.cpp)&nbsp;<a href='/CP_Templates/Data Structure/MO-Algorithm.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Treap](/CP_Templates/Data%20Structure/Treap.cpp)&nbsp;<a href='/CP_Templates/Data Structure/Treap.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Treap Builtin](/CP_Templates/Data%20Structure/Treap%20Builtin.cpp)&nbsp;<a href='/CP_Templates/Data Structure/Treap Builtin.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Treap Implicit](/CP_Templates/Data%20Structure/Treap%20Implicit.cpp)&nbsp;<a href='/CP_Templates/Data Structure/Treap Implicit.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+
+
+<br><br><br>
+
+### Tree
+
+---
+- [Tree Diameter](/CP_Templates/Trees/tree_diameter_dfs.cpp)&nbsp;<a href='/CP_Templates/Trees/tree_diameter_dfs.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Tree Center using Bfs](/CP_Templates/Trees/Tree_center_using_bfs.cpp)&nbsp;<a href='/CP_Templates/Trees/Tree_center_using_bfs.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Tree Center using Kuhn's algorthims](/CP_Templates/Trees/tree_center.cpp)&nbsp;<a href='/CP_Templates/Trees/tree_center.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Find Tree Centriod node](/CP_Templates/Trees/centroid.cpp)&nbsp;<a href='/CP_Templates/Trees/centroid.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Tree Isophrisim](/CP_Templates/Trees/isophrisim.cpp)&nbsp;<a href='/CP_Templates/Trees/isophrisim.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Tree Bridges](/CP_Templates/Trees/bridgestree.cpp)&nbsp;<a href='/CP_Templates/Trees/bridgestree.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Tree Flatten](/CP_Templates/Trees/Tree_flatten.cpp)&nbsp;<a href='/CP_Templates/Trees/Tree_flatten.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [HLD](/CP_Templates/Trees/HLD.cpp)&nbsp;<a href='/CP_Templates/Trees/HLD.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 
 <br><br><br>

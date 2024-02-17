@@ -91,4 +91,29 @@ This template is made for competitive programming using `C++` language.
 
 <br><br><br>
 
+### Dynamic Programming
+
+---
+- [Knapsack with Bitset O(n sqrt(n))](/CP_Templates/DP/knapsack_with_bitset.cpp)&nbsp;<a href='/CP_Templates/DP/knapsack_with_bitset.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Optimized Knapsack O(n sqrt(n))](/CP_Templates/DP/optimized_knapsack.cpp)&nbsp;<a href='/CP_Templates/DP/optimized_knapsack.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+
+
 <br><br><br>
+### Math
+
+---
+
+#### Number Theory
+- [Greatest Common Divisors (GCD) O(log n)](/CP_Templates/Math/Number%20theory/gcd.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/gcd.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Greatest Common Divisors (GCD) with negative numbers O(log n)](/CP_Templates/Math/Number%20theory/gcd_negative_integer.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/gcd_negative_integer.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Binary GCD Optimized gcd](/CP_Templates/Math/Number%20theory/binary_gcd.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/binary_gcd.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+
+
+
+#### Combinatorics
+
+#### Game Theory
+
+#### Geometry
+
+#### General

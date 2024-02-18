@@ -87,14 +87,68 @@ This template is made for competitive programming using `C++` language.
 #### Number Theory
 - [Greatest Common Divisors (GCD) O(log n)](/CP_Templates/Math/Number%20theory/gcd.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/gcd.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Greatest Common Divisors (GCD) with negative numbers O(log n)](/CP_Templates/Math/Number%20theory/gcd_negative_integer.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/gcd_negative_integer.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-- [Binary GCD Optimized gcd](/CP_Templates/Math/Number%20theory/binary_gcd.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/binary_gcd.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-
-
+- [Binary GCD (Optimized gcd)](/CP_Templates/Math/Number%20theory/binary_gcd.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/binary_gcd.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Extended_Euclidean algrothim](/CP_Templates/Math/Number%20theory/extended_euclidean.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/extended_euclidean.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Linear Diophantine Equation](/CP_Templates/Math/Number%20theory/Linear_Diophantine_Equation.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/Linear_Diophantine_Equation.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Euler Phi](/CP_Templates/Math/Number%20theory/Euler%20Phi.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/Euler%20Phi.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Modular Multiplicative Inverse](/CP_Templates/Math/Number%20theory/modularMultiplicativeInverse.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/modularMultiplicativeInverse.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Optimized_Sieve_LPF works if N up 1e7](/CP_Templates/Math/Number%20theory/optimized_sieve_LPF.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/optimized_sieve_LPF.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Discreate log](/CP_Templates/Math/Number%20theory/discrete_log.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/discrete_log.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Mobius](/CP_Templates/Math/Number%20theory/mobius.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/mobius.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Chinese Remainder Theorem (CRT)-Offline](/CP_Templates/Math/Number%20theory/CRT-Offline.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/CRT-Offline.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Chinese Remainder Theorem (CRT)-Online](/CP_Templates/Math/Number%20theory/CRT-Online.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/CRT-Online.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Chinese Remainder Theorem (CRT)-Online Non CoPrime Moduli](/CP_Templates/Math/Number%20theory/CRT-Online.cpp)&nbsp;<a href='/CP_Templates/Math/Number%20theory/CRT-Online.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 #### Combinatorics
+- [Mint](/CP_Templates/Math/Counting/Mint.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/Mint.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Combination (Preproccessing)](/CP_Templates/Math/Counting/nCr.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/nCr.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Combination (Pascal Triangle)](/CP_Templates/Math/Counting/nCr_DP.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/nCr_DP.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Stirling Number](/CP_Templates/Math/Counting/stirling.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/stirling.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Matrix Exponential](/CP_Templates/Math/Counting/Matrix_Exponential.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/Matrix_Exponential.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Derangement](/CP_Templates/Math/Counting/derangement.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/derangement.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Josephus Theorem](/CP_Templates/Math/Counting/JosephusTheorem.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/JosephusTheorem.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Burnside Lemma](/CP_Templates/Math/Counting/BurnsideLemma.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/BurnsideLemma.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 #### Game Theory
+- [Nim 1](/CP_Templates/Math/Game%20Theory/Nim%201.cpp)&nbsp;<a href='/CP_Templates/Math/Game%20Theory/Nim%201.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Misere Nim](/CP_Templates/Math/Game%20Theory/Misere%20Nim.cpp)&nbsp;<a href='/CP_Templates/Math/Game%20Theory/Misere%20Nim.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Matrix Nim](/CP_Templates/Math/Game%20Theory/Matrix%20Nim.cpp)&nbsp;<a href='/CP_Templates/Math/Game%20Theory/Matrix%20Nim.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Staircase Nim](/CP_Templates/Math/Game%20Theory/Staircase%20Nim.cpp)&nbsp;<a href='/CP_Templates/Math/Game%20Theory/Staircase%20Nim.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Grundy Number 1](/CP_Templates/Math/Game%20Theory/Grundy%2001.cpp)&nbsp;<a href='/CP_Templates/Math/Game%20Theory/Grundy%2001.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Grundy Number 2](/CP_Templates/Math/Game%20Theory/Grundy%2002.cpp)&nbsp;<a href='/CP_Templates/Math/Game%20Theory/Grundy%2002.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Grundy knights move in Matrix](/CP_Templates/Math/Game%20Theory/Grundy_Knights_Move_In_Matrix.cpp)&nbsp;<a href='/CP_Templates/Math/Game%20Theory/Grundy_Knights_Move_In_Matrix.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Grundy String Game](/CP_Templates/Math/Game%20Theory/Grundy%20String%20Game.cpp)&nbsp;<a href='/CP_Templates/Math/Game%20Theory/Grundy%20String%20Game.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 #### Geometry
+- [Convex Hull using Graham Scan](/CP_Templates/Math/Geometry/convex_hull.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/convex_hull.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Picks Theorms](/CP_Templates/Math/Geometry/picks.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/picks.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Geometry Library](/CP_Templates/Math/Geometry/Geometry.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/Geometry.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Triangle Areas](/CP_Templates/Math/Geometry/Triangle.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/Triangle.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 #### General
+- [Floor & ceil handling negative integers](/CP_Templates/Math/General/floor_ceil.cpp)&nbsp;<a href='/CP_Templates/Math/General/floor_ceil.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Fraction](/CP_Templates/Math/General/fraction.cpp)&nbsp;<a href='/CP_Templates/Math/General/fraction.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Read Double with precision](/CP_Templates/Math/General/convert_double_int.cpp)&nbsp;<a href='/CP_Templates/Math/General/convert_double_int.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Generate n digits after decimal point](/CP_Templates/Math/General/generate_n_digits_after_point.cpp)&nbsp;<a href='/CP_Templates/Math/General/generate_n_digits_after_point.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Manual_multiply large numbers](/CP_Templates/Math/General/manual_multiply.cpp)&nbsp;<a href='/CP_Templates/Math/General/manual_multiply.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Random](/CP_Templates/Math/General/random.cpp)&nbsp;<a href='/CP_Templates/Math/General/random.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+
+<br><br><br>
+### Masking
+
+---
+
+<br><br><br>
+### String
+
+---
+
+<br><br><br>
+### Searcing
+
+---
+
+<br><br><br>
+### Solutions for standard problems.
+
+---

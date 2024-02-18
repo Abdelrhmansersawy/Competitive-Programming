@@ -1,6 +1,6 @@
 ## Hi 👋
 
-I'm **Abdelrhman Sersawy**. I'm obsseded into **competitive programming**, you know? I love diving into advanced data structures and algorithms, and I get a kick out of sharing that knowledge with others.
+I'm **Abdelrhman Sersawy**. I'm obsessed into **competitive programming**, you know? I love diving into advanced data structures and algorithms, and I get a kick out of sharing that knowledge with others.
 <br><br>
 ## 🏆 Some of my achievement in the competitive programming world
 - Qualified to the **Africa & Arab Collegiate Programming Championship** (ACPC) 2023.

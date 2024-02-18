@@ -77,7 +77,7 @@ This template is made for competitive programming using `C++` language.
 ---
 - [Knapsack with Bitset O(n sqrt(n))](/CP_Templates/DP/knapsack_with_bitset.cpp)&nbsp;<a href='/CP_Templates/DP/knapsack_with_bitset.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Optimized Knapsack O(n sqrt(n))](/CP_Templates/DP/optimized_knapsack.cpp)&nbsp;<a href='/CP_Templates/DP/optimized_knapsack.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-
+- [Finding the largest zero submatrix](/CP_Templates/DP/largest_zero_submatrix.cpp)&nbsp;<a href='/CP_Templates/DP/largest_zero_submatrix.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 <br><br><br>
 ### Math
@@ -150,5 +150,6 @@ This template is made for competitive programming using `C++` language.
 
 <br><br><br>
 ### Solutions for standard problems.
-
+#### Hard Implementations
+- [Coloring matrix_with largest area](/CP_Templates/Standard%20Problems/Implementation/coloring_matrix_with_largest_area.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Implementation/coloring_matrix_with_largest_area.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 ---

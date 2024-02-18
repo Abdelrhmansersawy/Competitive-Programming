@@ -25,8 +25,8 @@ I'm **Abdelrhman Sersawy**. I'm obsessed into **competitive programming**, you k
 
 
 <br><br>
-## [My Competitive Programming Tempalates](CP_Templates)
-Templates for algorithms and data structures that I utilized during contests.
+## [My Competitive Programming Templates](CP_Templates)
+Templates for algorithms and data structures that I utilize during contests.
 
 ## [My Stree test Template](stress%20test)
  A stress testing template in the Bash scripting language to uncover counterexamples that may cause my solution to fail when subjected to randomized test cases.

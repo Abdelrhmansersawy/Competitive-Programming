@@ -25,7 +25,7 @@ I'm **Abdelrhman Sersawy**. I'm obsessed into **competitive programming**, you k
 
 
 <br><br>
-## [My Competitive Programming Templates](CP_Templates)
+## [My Competitive Programming Templates](CP_Templates/README.md)
 Templates for algorithms and data structures that I utilize during contests.
 
 ## [My Stree test Template](stress%20test)

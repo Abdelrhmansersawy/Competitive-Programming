@@ -1,4 +1,5 @@
 /*
+        Problem Link:- https://codeforces.com/gym/104874/problem/K
 	Given a matrix n x m, each cell (i, j) can be
 	1. g(i,j) = '.' -> empty cell
 	2. g(i , j) = 'A' king , "There is exactly one letter 'A'"

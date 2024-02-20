@@ -165,5 +165,5 @@ This template is made for competitive programming using `C++` language.
 #### Number Theory
 - [Count no.of subsequence with gcd 1](/CP_Templates/Standard%20Problems/Number_Theory/count_subsequece_gcd_equal_1.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Number_Theory/count_subsequece_gcd_equal_1.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 #### Geometry
-- [Count no.of lattice point in circle](/CP_Templates/Standard%20Problems/Number_Theory/count_points_in_circle.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Number_Theory/count_points_in_circle.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Count no.of lattice point in circle](/CP_Templates/Standard%20Problems/Geometry/count_points_in_circle.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Geometry/count_points_in_circle.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 

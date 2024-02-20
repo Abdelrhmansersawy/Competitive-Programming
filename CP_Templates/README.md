@@ -137,19 +137,33 @@ This template is made for competitive programming using `C++` language.
 ### Masking
 
 ---
+- [Generating all possible submasks O(3^n)](/CP_Templates/Math/Masking/gen_all_possible_submasking.cpp)&nbsp;<a href='/CP_Templates/Math/Masking/gen_all_possible_submasking.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Generating all submasking_of k ones of length n O(nCk)](/CP_Templates/Masking/Generating_all_submasking_of_k_ones.cpp)&nbsp;<a href='/CP_Templates/Masking/Generating_all_submasking_of_k_ones.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 <br><br><br>
 ### String
 
 ---
+- [KMP string pattern matching O(n + m)](/CP_Templates/String/kMP.cpp)&nbsp;<a href='/CP_Templates/String/kMP.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Double Hashing](/CP_Templates/String/double_hashing.cpp)&nbsp;<a href='/CP_Templates/String/double_hashing.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 <br><br><br>
-### Searcing
+### Searcing & Sorting
 
 ---
-
+- [Counting_Sort O(max(a_1 , a_2 ,.. , n))](/CP_Templates/Searching/counting_sort.cpp)&nbsp;<a href='/CP_Templates/Searching/counting_sort.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Merge sorting O(n log n)](/CP_Templates/Searching/merge_sort.cpp)&nbsp;<a href='/CP_Templates/Searching/merge_sort.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Find LIS using patient_sort O(n log n)](/CP_Templates/Searching/patient_sort.cpp)&nbsp;<a href='/CP_Templates/Searching/patient_sort.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Ternary search in Double](/CP_Templates/Searching/double_ternary_search.cpp)&nbsp;<a href='/CP_Templates/Searching/double_ternary_search.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 <br><br><br>
+
 ### Solutions for standard problems.
+
+---
 #### Hard Implementations
 - [Coloring matrix_with largest area](/CP_Templates/Standard%20Problems/Implementation/coloring_matrix_with_largest_area.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Implementation/coloring_matrix_with_largest_area.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
----
+#### Number Theory
+- [Count no.of subsequence with gcd 1](/CP_Templates/Standard%20Problems/Number_Theory/count_subsequece_gcd_equal_1.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Number_Theory/count_subsequece_gcd_equal_1.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+#### Geometry
+- [Count no.of lattice point in circle](/CP_Templates/Standard%20Problems/Number_Theory/count_points_in_circle.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Number_Theory/count_points_in_circle.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+

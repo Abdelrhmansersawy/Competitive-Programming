@@ -30,6 +30,9 @@ This template is made for competitive programming using `C++` language.
 - [Strong Connected Component (SCC) using Tarjan](/CP_Templates/Graph/SCC_tarjan.cpp)&nbsp;<a href='/CP_Templates/Graph/SCC_tarjan.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Strong Connected Component (SCC) using Kosaraju](/CP_Templates/Graph/SCC_kosaraju.cpp)&nbsp;<a href='/CP_Templates/Graph/SCC_kosaraju.cpp)'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Strong Connected Component (SCC) using Floyed](/CP_Templates/Graph/SCC_Floyed.cpp)&nbsp;<a href='/CP_Templates/Graph/SCC_Floyed.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Euler path in undirected path](/CP_Templates/Graph/euler_path_undirected.cpp)&nbsp;<a href='/CP_Templates/Graph/euler_path_undirected.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Euler path in directed path](/CP_Templates/Graph/euler_path_directed.cpp)&nbsp;<a href='/CP_Templates/Graph/euler_path_directed.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+
 <br><br><br>
 
 ### Data Structures

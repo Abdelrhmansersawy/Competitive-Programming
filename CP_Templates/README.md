@@ -68,6 +68,7 @@ This template is made for competitive programming using `C++` language.
 - [Tree Bridges](/CP_Templates/Trees/bridgestree.cpp)&nbsp;<a href='/CP_Templates/Trees/bridgestree.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Tree Flatten](/CP_Templates/Trees/Tree_flatten.cpp)&nbsp;<a href='/CP_Templates/Trees/Tree_flatten.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [HLD](/CP_Templates/Trees/HLD.cpp)&nbsp;<a href='/CP_Templates/Trees/HLD.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Centroid Decomposition](/CP_Templates/Trees/CentroidDecomposition.cpp)&nbsp;<a href='/CP_Templates/Trees/CentroidDecomposition.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 
 <br><br><br>

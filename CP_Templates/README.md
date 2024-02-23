@@ -105,8 +105,10 @@ This template is made for competitive programming using `C++` language.
 
 #### Combinatorics
 - [Mint](/CP_Templates/Math/Counting/Mint.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/Mint.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-- [Combination (Preproccessing)](/CP_Templates/Math/Counting/nCr.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/nCr.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Combination (Preproccessing O(n log mod)](/CP_Templates/Math/Counting/nCr.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/nCr.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Combination (Preproccessing O(n))](/CP_Templates/Math/Counting/ncr_O(n).cpp)&nbsp;<a href='/CP_Templates/Math/Counting/ncr_O(n).cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Combination (Pascal Triangle)](/CP_Templates/Math/Counting/nCr_DP.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/nCr_DP.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Stars & bars](/CP_Templates/Math/Counting/startbars.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/startbars.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Stirling Number](/CP_Templates/Math/Counting/stirling.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/stirling.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Matrix Exponential](/CP_Templates/Math/Counting/Matrix_Exponential.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/Matrix_Exponential.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Derangement](/CP_Templates/Math/Counting/derangement.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/derangement.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>

@@ -1,19 +1,19 @@
-const int N = 5e6 + 9;
-ll fac[N], inv[N];
-void preprocess() {
-    for (int i = 0; i < N; i++) {
-        if (i < 2) {
-            fac[i] = inv[i] = 1;
-        } else {
-            fac[i] = 1ll * i * fac[i - 1] % mod;
-            inv[i] = mod - 1ll * mod / i * inv[mod % i] % mod;
-        }
-    }
-    for (int i = 2; i < N; i++) {
-        inv[i] = 1ll * inv[i] * inv[i - 1] % mod;
+const int N = 5e6 + 100;
+const int mod = 1e9 + 7;
+ll fact[N];
+ll inv[N]; //mod inverse for i
+ll invfact[N]; //mod inverse for i!
+void init()() {
+    fact[0] = inv[1] = fact[1] = invfact[0] = invfact[1] = 1;
+    for (long long i = 2; i < N; i++) {
+        fact[i] = (fact[i - 1] * i) % mod;
+        inv[i] = mod - (inv[mod % i] * (mod / i) % mod);
+        invfact[i] = (inv[i] * invfact[i - 1]) % mod;
     }
 }
-ll ncr(ll n, ll r) {
+ 
+ll nCr(int n, int r) {
     if(r > n || n < 0 || r < 0) return 0; // manual handling
-    return 1ll * fac[n] * (1ll * inv[r] * inv[n - r] % mod) % mod;
+    return (((fact[n] * invfact[r]) % mod) * invfact[n - r]) %
+           mod;
 }

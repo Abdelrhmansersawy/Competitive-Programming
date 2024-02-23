@@ -13,3 +13,7 @@ void preprocess() {
         inv[i] = 1ll * inv[i] * inv[i - 1] % mod;
     }
 }
+ll ncr(ll n, ll r) {
+    if(r > n || n < 0 || r < 0) return 0; // manual handling
+    return 1ll * fac[n] * (1ll * inv[r] * inv[n - r] % mod) % mod;
+}

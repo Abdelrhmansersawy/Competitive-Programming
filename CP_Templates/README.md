@@ -56,6 +56,7 @@ This template is made for competitive programming using `C++` language.
 - [Treap](/CP_Templates/Data%20Structure/Treap.cpp)&nbsp;<a href='/CP_Templates/Data Structure/Treap.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Treap Builtin](/CP_Templates/Data%20Structure/Treap%20Builtin.cpp)&nbsp;<a href='/CP_Templates/Data Structure/Treap Builtin.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Treap Implicit](/CP_Templates/Data%20Structure/Treap%20Implicit.cpp)&nbsp;<a href='/CP_Templates/Data Structure/Treap Implicit.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Get (next, prv) (max, min) using monotomic stack](/CP_Templates/Data%20Structure/NxtorPrv_MinorMax.cpp)&nbsp;<a href='/CP_Templates/Data Structure/NxtorPrv_MinorMax.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 
 <br><br><br>

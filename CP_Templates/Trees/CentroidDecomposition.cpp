@@ -1,21 +1,18 @@
 const int N = 1e5 + 9;
 vector<int> adj[N];
 struct CentroidDecomposition{
-	vector<int> removal , sz , ans;
-	vector<vector<pair<int,int>>> ansestors;
+	vector<int> removal , sz;
 	CentroidDecomposition(int n){
 		removal.assign(n , 0);
 		sz.assign(n , 0);
-		ansestors.assign(n , vector<pair<int,int>>());
-		ans.assign(n , (int)1e9);
 		build(0, -1);
 	}
 	void build(int u , int p){
 		int n = dfs(u , p);
 		int centriod = getCentriod(u , p , n);
 		removal[centriod] = true;
-		for(auto &v : adj[centriod]) if(!removal[v])
-			getDis(v , centriod);
+		// depend on the problem
+		
 		for(auto &v : adj[centriod]) if(!removal[v]) 
 			build(v , centriod);
 	}
@@ -32,9 +29,5 @@ struct CentroidDecomposition{
 		}
 		return u;
 	}
-	void getDis(int u , int centriod , int p = -1 , int d = 1){
-		for(auto &v : adj[u]) if(v != p && !removal[v])
-			getDis(v , centriod , u , d + 1);
-		ansestors[u].emplace_back(centriod , d);
-	}
+
 };

@@ -14,3 +14,4 @@ array<int, K> gethash(string &s) {
 	}
 	return ans;
 }
+// probability of collision = 1 / 10^{9 * 6} = 1 / 10^{54}

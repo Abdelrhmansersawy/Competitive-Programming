@@ -157,6 +157,7 @@ This template is made for competitive programming using `C++` language.
 - [Double Hashing](/CP_Templates/String/double_hashing.cpp)&nbsp;<a href='/CP_Templates/String/double_hashing.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Trie iterative](/CP_Templates/String/Trie_iterative.cpp)&nbsp;<a href='/CP_Templates/String/Trie_iterative.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Binary Trie iterative](/CP_Templates/String/Binary_Trie_iterative.cpp)&nbsp;<a href='/CP_Templates/String/Binary_Trie_iterative.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Custom unordered_map](/CP_Templates/String/custom_unorderd_map.cpp)&nbsp;<a href='/CP_Templates/String/custom_unorderd_map.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 <br><br><br>
 ### Searcing & Sorting

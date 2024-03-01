@@ -1,55 +1,45 @@
-/// MO's Algorithm
-/// Take all the query in qList array and sort them
-/// Call MO to solve
-/// res[i] contains the result of i'th query
-/// Update add and remv function accordingly
-
-const int blockSize = 555;
-
-struct qry {
-    int l, r, id;
+const int blockSize = 555 , N = 2e5 + 9;
+struct Query {
+    int l, r, idx;
+    Query(int l , int r , int idx):l(l) , r(r) , idx(idx){};
+    bool operator<(Query other) const
+    {
+        return make_pair(l / blockSize, r) <
+               make_pair(other.l / blockSize, other.r);
+    }
 };
-
-int ans, Q;
-/// ans = answer for current range, Q = number of query
-int res[Size]; /// res[x] = the answer of x'th query
-qry qList[200000 + 10];
-
-bool cmp(qry a, qry b) {
-    if (a.l / blockSize == b.l / blockSize) return a.r < b.r;
-    return a.l / blockSize < b.l / blockSize;
-}
-
+vector<Query> Qlist;
 void add(int p) {
-    /// Add p'th element, update answer based on the effect
 }
 
 void remv(int p) {
-    /// Remove p'th element, update answer based on the effect
+
 }
+void calc_answer(int idx){
 
+}
 void MO(){
-    sort(qList+1, qList+Q+1, cmp);
-    int curL = 0, curR = 0;
-
-    for (int i = 1; i <= Q; i++) {
-        int L = qList[i].l, R = qList[i].r;
-        while (curL < L) {
-            if (curL != 0) remv(curL);
-            curL++;
+    sort(all(Qlist));
+    int cur_l = 0;
+    int cur_r = -1;
+    for (Query q : Qlist) {
+            while (cur_l > q.l) {
+                cur_l--;
+                add(cur_l);
+            }
+            while (cur_r < q.r) {
+                cur_r++;
+                add(cur_r);
+            }
+            while (cur_l < q.l) {
+                remv(cur_l);
+                cur_l++;
+            }
+            while (cur_r > q.r) {
+                remv(cur_r);
+                cur_r--;
+            }
+            // calculate ans of Query of q.idx
+            calc_answer(q.idx);
         }
-        while (curL > L) {
-            curL--;
-            add(curL);
-        }
-        while (curR < R) {
-            curR++;
-            add(curR);
-        }
-        while (curR > R) {
-            remv(curR);
-            curR--;
-        }
-        res[qList[i].id] = ans;
-    }
 }

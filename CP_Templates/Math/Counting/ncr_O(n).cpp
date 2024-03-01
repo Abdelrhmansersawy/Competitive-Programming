@@ -3,7 +3,7 @@ const int mod = 1e9 + 7;
 ll fact[N];
 ll inv[N]; //mod inverse for i
 ll invfact[N]; //mod inverse for i!
-void init()() {
+void init() {
     fact[0] = inv[1] = fact[1] = invfact[0] = invfact[1] = 1;
     for (long long i = 2; i < N; i++) {
         fact[i] = (fact[i - 1] * i) % mod;

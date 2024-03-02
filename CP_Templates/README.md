@@ -50,14 +50,12 @@ This template is made for competitive programming using `C++` language.
 - [2D prefix sum](/CP_Templates/Data%20Structure/2D_prefixsum.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/2D_prefixsum.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>	
 - [Sparse Table](/CP_Templates/Data%20Structure/sparse_table.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/sparse_table.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Sparse Table with get index and value](/CP_Templates/Data%20Structure/getIdxSparseTable.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/getIdxSparseTable.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Monotonic Queue](/CP_Templates/Data%20Structure/monotonicQueue.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/monotonicQueue.cpp
+'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [online range query with D&C in O(1) (Benq template)](/CP_Templates/Data%20Structure/onlineRangeQueryD&C_benq.cpp)&nbsp;<a href='/CP_Templates/Data Structure/onlineRangeQueryD&C_benq.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Segment Tree (Iterative)](/CP_Templates/Data%20Structure/segmentTree_iterative.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/segmentTree_iterative.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Segment tree Beat](/CP_Templates/Data%20Structure/segtreeBeat.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/segtreeBeat.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Segment tree Beat for mod](/CP_Templates/Data%20Structure/segtreeBeat_forMod.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/segtreeBeat_forMod.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-
-
-
-
 - [Ordered set](/CP_Templates/Data%20Structure/ordered_set.cpp)&nbsp;<a href='/CP_Templates/Data Structure/ordered_set.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Disjoint Union Set (DSU)](/CP_Templates/Data%20Structure/DSU.cpp)&nbsp;<a href='/CP_Templates/Data Structure/DSU.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Small-to-Large Trick (DSU on Tree)](/CP_Templates/Data%20Structure/DSU_on_tree.cpp)&nbsp;<a href='/CP_Templates/Data Structure/DSU_on_tree.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>

@@ -9,7 +9,7 @@ This template is made for competitive programming using `C++` language.
 ### Snippet
 
 ---
-
+- [Fast code](/CP_Templates/Snippet/fastCode.cpp)&nbsp;<a href='/CP_Templates/Snippet/fastCode.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [My template C++](/CP_Templates/Snippet/CP.sublime-snippet)&nbsp;<a href='/CP_Templates/Snippet/CP.sublime-snippet'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [My template C++ with test Cases](/CP_Templates/Snippet/TEST_CASE.sublime-snippet)&nbsp;<a href='/CP_Templates/Snippet/TEST_CASE.sublime-snippet'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Read & write from file](/CP_Templates/Snippet/FILE.sublime-snippet)&nbsp;<a href='/CP_Templates/Snippet/FILE.sublime-snippet'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>

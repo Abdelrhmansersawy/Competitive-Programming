@@ -195,7 +195,13 @@ This template is made for competitive programming using `C++` language.
 #### General
 - [Floor & ceil handling negative integers](/CP_Templates/Math/General/floor_ceil.cpp)&nbsp;<a href='/CP_Templates/Math/General/floor_ceil.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Fraction](/CP_Templates/Math/General/fraction.cpp)&nbsp;<a href='/CP_Templates/Math/General/fraction.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Int 128](/CP_Templates/Math/General/__int128.cpp)&nbsp;<a href='/CP_Templates/Math/General/__int128.cpp
+'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+
+
 - [Read Double with precision](/CP_Templates/Math/General/convert_double_int.cpp)&nbsp;<a href='/CP_Templates/Math/General/convert_double_int.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Compare two double with precision](/CP_Templates/Math/General/comp_double.cpp)&nbsp;<a href='/CP_Templates/Math/General/comp_double.cpp
+'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Generate n digits after decimal point](/CP_Templates/Math/General/generate_n_digits_after_point.cpp)&nbsp;<a href='/CP_Templates/Math/General/generate_n_digits_after_point.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Manual_multiply large numbers](/CP_Templates/Math/General/manual_multiply.cpp)&nbsp;<a href='/CP_Templates/Math/General/manual_multiply.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Random](/CP_Templates/Math/General/random.cpp)&nbsp;<a href='/CP_Templates/Math/General/random.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>

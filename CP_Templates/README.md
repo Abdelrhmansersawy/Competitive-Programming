@@ -58,6 +58,9 @@ This template is made for competitive programming using `C++` language.
 - [Segment Tree (Iterative)](/CP_Templates/Data%20Structure/segmentTree_iterative.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/segmentTree_iterative.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Segment tree Beat](/CP_Templates/Data%20Structure/segtreeBeat.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/segtreeBeat.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Segment tree Beat for mod](/CP_Templates/Data%20Structure/segtreeBeat_forMod.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/segtreeBeat_forMod.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Sparse SegmentTree.cpp](/CP_Templates/Data%20Structure/sparse_segmentTree.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/sparse_segmentTree.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+
+
 - [Ordered set](/CP_Templates/Data%20Structure/ordered_set.cpp)&nbsp;<a href='/CP_Templates/Data Structure/ordered_set.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Disjoint Union Set (DSU)](/CP_Templates/Data%20Structure/DSU.cpp)&nbsp;<a href='/CP_Templates/Data Structure/DSU.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Small-to-Large Trick (DSU on Tree)](/CP_Templates/Data%20Structure/DSU_on_tree.cpp)&nbsp;<a href='/CP_Templates/Data Structure/DSU_on_tree.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
@@ -193,6 +196,8 @@ This template is made for competitive programming using `C++` language.
 	- Polygon Centroid.
 	- Convex Polygon Intersect.
 	- Point inside Polygon.
+- [get closest pair](/CP_Templates/Math/Geometry/getClosestPair.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/getClosestPair.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+
 
 #### General
 - [Floor & ceil handling negative integers](/CP_Templates/Math/General/floor_ceil.cpp)&nbsp;<a href='/CP_Templates/Math/General/floor_ceil.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>

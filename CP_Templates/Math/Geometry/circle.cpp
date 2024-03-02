@@ -33,6 +33,28 @@ Point<> normalize(const Point<> p){ return ((p) / length(p)); }
 Point<> polar(const Point<> r, double t){
     return Point{r.x * cos(t)  - r.y * sin(t), r.x * sin(t) + r.y * cos(t)};
 }
+// Circle line Intersection
+int circleLineIntersection(const Point<> &p0, const Point<> &p1, const Point<> &cen, double rad, Point<> &r1, Point<> &r2) {
+        // handle degenerate case if p0 == p1
+        double a, b, c, t1, t2;
+        a = dot(p1 - p0, p1 - p0);
+        b = 2 * dot( p1 - p0, p0 - cen);
+        c = dot(p0 - cen, p0 - cen) - rad * rad;
+        double det = b * b - 4 * a * c;
+        int res;
+        if (fabs(det) < EPS)
+                det = 0, res = 1;
+        else if (det < 0)
+                res = 0;
+        else
+                res = 2;
+        det = sqrt(det);
+        t1 = (-b + det) / (2 * a);
+        t2 = (-b - det) / (2 * a);
+        r1 = p0 + (p1 - p0) * t1;
+        r2 = p0 + (p1 - p0) * t2;
+        return res;
+}
 
 // Circle Circle Intersection
 int circleCircleIntersection(const Point<> &c1, const double &r1, const Point<> &c2, const double &r2, Point<> &res1, Point<> &res2) {
@@ -72,6 +94,8 @@ bool circle3(const Point<> &p1, const Point<> &p2, const Point<> &p3,
         r = length(vec(cen,p1));
         return res;
 }
+
+
 
 // check Point according to circle  (in boundary, inside , outside)
 int circlePoint(const Point<>  &cen, const double &r, const Point<>  &p) {

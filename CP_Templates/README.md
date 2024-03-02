@@ -151,6 +151,19 @@ This template is made for competitive programming using `C++` language.
 - [Geometry Library](/CP_Templates/Math/Geometry/Geometry.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/Geometry.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Sweep Line](/CP_Templates/Math/Geometry/sweep_line.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/sweep_line.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Area of intersected reactangles](/CP_Templates/Math/Geometry/areaOfreactangles.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/areaOfreactangles.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Point](/CP_Templates/Math/Geometry/line.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/line.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+	- Basic Operation on Point (+,-,*,/).
+	- Dot & cross products.
+	- Distance between two points.
+	- Angle of vector from (0,0) -> (x,y).
+	- Unit vector.
+	- Find normal vector (normal()).
+	- rotate Point by 'a' radians ccw around the origin.
+	- Project point onto line through a and b (assuming a != b).
+	- Project point c onto line segment through a and b (assuming a != b).
+	- Find reflection around line;
+	- Given 3 points, find if they are CW or CCW or in line.
+	- Find the Slope between two points as fraction number.
 - [Line](/CP_Templates/Math/Geometry/line.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/line.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 	- Length of vector
 	- Check if there is intersection between two lines or not and return the intersection point.
@@ -165,6 +178,7 @@ This template is made for competitive programming using `C++` language.
 - [Circle](/CP_Templates/Math/Geometry/circle.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/circle.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 	- The intersection of line and circule.
 	- Form circle from 3 points.
+	- Circle line Intersection.
 	- Circle Circle Intersection.
 	- Check Point according to circle  (in boundary, inside , outside).
 - [Triangle Areas](/CP_Templates/Math/Geometry/Triangle.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/Triangle.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
@@ -174,6 +188,12 @@ This template is made for competitive programming using `C++` language.
 	- Area of Triangle by known 3 sides length.
 	- Area of Triangle by known 3 Point.
 	- Given a tringle with sides abc, find the angle opposite the side a by given the length of sides.
+- [Polygon](/CP_Templates/Math/Geometry/polygon.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/polygon.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+	- Polygon area.
+	- Polygon Centroid.
+	- Convex Polygon Intersect.
+	- Point inside Polygon.
+
 #### General
 - [Floor & ceil handling negative integers](/CP_Templates/Math/General/floor_ceil.cpp)&nbsp;<a href='/CP_Templates/Math/General/floor_ceil.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Fraction](/CP_Templates/Math/General/fraction.cpp)&nbsp;<a href='/CP_Templates/Math/General/fraction.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
@@ -223,4 +243,5 @@ This template is made for competitive programming using `C++` language.
 - [Count no.of subsequence with gcd 1](/CP_Templates/Standard%20Problems/Number_Theory/count_subsequece_gcd_equal_1.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Number_Theory/count_subsequece_gcd_equal_1.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 #### Geometry
 - [Count no.of lattice point in circle](/CP_Templates/Standard%20Problems/Geometry/count_points_in_circle.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Geometry/count_points_in_circle.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [check if a point inside a convex polygon or not in O(log n) by pre-proccessing O(n)](/CP_Templates/Standard%20Problems/Geometry/check_point_in_convex.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Geometry/check_point_in_convex.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 

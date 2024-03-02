@@ -66,15 +66,17 @@ double cross(const Point<> &a, const Point<> &b){
 double dot(const Point<> a, const Point<> b){ return a.x * b.x + a.y * b.y; }
 
 // Given 3 points, find if they are CW or CCW
-int CCW(const Point<> a, const Point<> b, const Point <> c){
-  	b -= a;
-	c -= a;
-	if(cross(b , c) > 0) return +1; // counter clockwise
-	if(cross(b,c) < 0) return -1; // clockwise
-	if(dot(b, c) < 0) return +2; // c--a--b on line
-	if(noem(b) < norm(c)) return -2; //a--b--c on line
-	return 0;
+ll norm(Point<> a){ return a.x * a.x + a.y * a.y; }
+int CCW(Point<> a,  Point<> b, Point <> c){
+    b = b -  a;
+    c = c - a;
+    if(cross(b , c) > 0) return +1; // counter clockwise
+    if(cross(b,c) < 0) return -1; // clockwise
+    if(dot(b, c) < 0) return +2; // c--a--b on line
+    if(norm(b) < norm(c)) return -2; //a--b--c on line
+    return 0;
 }
+
 
 // find the Slope between two points
 pair<int,int> slope(pair<int,int> u, pair<int,int> v)

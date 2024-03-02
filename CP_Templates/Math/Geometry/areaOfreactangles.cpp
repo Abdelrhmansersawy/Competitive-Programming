@@ -1,3 +1,7 @@
+/*
+Given n rectange calculate the area of total rectange (take in care that rectangle can intersect)
+
+*/
 #include <bits/stdc++.h>
 
 using namespace std;

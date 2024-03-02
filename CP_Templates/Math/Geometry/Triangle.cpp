@@ -23,3 +23,16 @@ double triangleArea3Points(const Point<> &a, const Point<> &b,
              const Point<> &c) {
         return fabs(cross(a,b) + cross(b,c) + cross(c,a)) / 2;
 }
+
+// Cosine Rule
+//get angle opposite to side a
+double cosRule(double a, double b, double c) {
+        // Handle denom = 0
+        double res = (b * b + c * c - a * a) / (2 * b * c);
+        if (res > 1)
+                res = 1;
+        if (res < -1)
+                res = -1;
+        return acos(res);
+}
+

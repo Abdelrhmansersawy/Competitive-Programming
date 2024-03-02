@@ -43,15 +43,21 @@ This template is made for competitive programming using `C++` language.
 
 ---
 
-- [Fenwick Tree](/CP_Templates/Data%20Structure/BIT/BIT.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-- [Fenwick Tree 2D](/CP_Templates/Data%20Structure/BIT/BIT2D.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT2D.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-- [Fenwick Tree Lazy_Modification (using map)](/CP_Templates/Data%20Structure/BIT/BIT_LAZY_MODIFICATION.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT_LAZY_MODIFICATION.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Fenwick Tree](/CP_Templates/Data%20Structure/BIT/BIT.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/BIT/BIT.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Fenwick Tree 2D](/CP_Templates/Data%20Structure/BIT/BIT2D.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/BIT/BIT2D.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Fenwick Tree Lazy_Modification (using map)](/CP_Templates/Data%20Structure/BIT/BIT_LAZY_MODIFICATION.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/BIT/BIT_LAZY_MODIFICATION.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Fenwick Tree Ranges](/CP_Templates/Data%20Structure/BIT/BIT_Ranges.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT_Ranges.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-- [2D prefix sum](/CP_Templates/Data%20Structure/2D_prefixsum.cpp)&nbsp;<a href='/CP_Templates/Data Structure/2D_prefixsum.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>	
-- [Sparse Table](/CP_Templates/Data%20Structure/sparse_table.cpp)&nbsp;<a href='/CP_Templates/Data Structure/sparse_table.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-- [Sparse Table with get index and value](/CP_Templates/Data%20Structure/getIdxSparseTable.cpp)&nbsp;<a href='/CP_Templates/Data Structure/getIdxSparseTable.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [2D prefix sum](/CP_Templates/Data%20Structure/2D_prefixsum.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/2D_prefixsum.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>	
+- [Sparse Table](/CP_Templates/Data%20Structure/sparse_table.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/sparse_table.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Sparse Table with get index and value](/CP_Templates/Data%20Structure/getIdxSparseTable.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/getIdxSparseTable.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [online range query with D&C in O(1) (Benq template)](/CP_Templates/Data%20Structure/onlineRangeQueryD&C_benq.cpp)&nbsp;<a href='/CP_Templates/Data Structure/onlineRangeQueryD&C_benq.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-- [Segment Tree (Iterative)](/CP_Templates/Data%20Structure/segmentTree_iterative.cpp)&nbsp;<a href='/CP_Templates/Data Structure/segmentTree_iterative.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Segment Tree (Iterative)](/CP_Templates/Data%20Structure/segmentTree_iterative.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/segmentTree_iterative.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Segment tree Beat](/CP_Templates/Data%20Structure/segtreeBeat.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/segtreeBeat.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Segment tree Beat for mod](/CP_Templates/Data%20Structure/segtreeBeat_forMod.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/segtreeBeat_forMod.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+
+
+
+
 - [Ordered set](/CP_Templates/Data%20Structure/ordered_set.cpp)&nbsp;<a href='/CP_Templates/Data Structure/ordered_set.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Disjoint Union Set (DSU)](/CP_Templates/Data%20Structure/DSU.cpp)&nbsp;<a href='/CP_Templates/Data Structure/DSU.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Small-to-Large Trick (DSU on Tree)](/CP_Templates/Data%20Structure/DSU_on_tree.cpp)&nbsp;<a href='/CP_Templates/Data Structure/DSU_on_tree.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
@@ -123,6 +129,11 @@ This template is made for competitive programming using `C++` language.
 - [Derangement](/CP_Templates/Math/Counting/derangement.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/derangement.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Josephus Theorem](/CP_Templates/Math/Counting/JosephusTheorem.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/JosephusTheorem.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Burnside Lemma](/CP_Templates/Math/Counting/BurnsideLemma.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/BurnsideLemma.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [FFT (Ahmed Elsayed)](/CP_Templates/Math/Counting/FFT.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/FFT.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [NTT with prime mod (Ahmed Elsayed)](/CP_Templates/Math/Counting/NTT_prime_mod.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/NTT_prime_mod.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [NTT with random mod (Ahmed Elsayed)](/CP_Templates/Math/Counting/NTT_random_mod.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/NTT_random_mod.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+
+
 
 #### Game Theory
 - [Nim 1](/CP_Templates/Math/Game%20Theory/Nim%201.cpp)&nbsp;<a href='/CP_Templates/Math/Game%20Theory/Nim%201.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
@@ -138,8 +149,31 @@ This template is made for competitive programming using `C++` language.
 - [Convex Hull using Graham Scan](/CP_Templates/Math/Geometry/convex_hull.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/convex_hull.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Picks Theorms](/CP_Templates/Math/Geometry/picks.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/picks.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Geometry Library](/CP_Templates/Math/Geometry/Geometry.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/Geometry.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Sweep Line](/CP_Templates/Math/Geometry/sweep_line.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/sweep_line.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Area of intersected reactangles](/CP_Templates/Math/Geometry/areaOfreactangles.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/areaOfreactangles.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Line](/CP_Templates/Math/Geometry/line.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/line.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+	- Length of vector
+	- Check if there is intersection between two lines or not and return the intersection point.
+	- Check if Point lies on Line.
+	- Check if Point lies on Ray.
+	- Check if Point lies on Segment.
+	- Find shortest distance between line and point.
+	- Find shortest distance between segment and point.
+	- Count the number of Lattice Point in segment.
+	- Check intersection between two segment, return the index section point.
+	- Create Line Point(x , y) & slope (d)
+- [Circle](/CP_Templates/Math/Geometry/circle.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/circle.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+	- The intersection of line and circule.
+	- Form circle from 3 points.
+	- Circle Circle Intersection.
+	- Check Point according to circle  (in boundary, inside , outside).
 - [Triangle Areas](/CP_Templates/Math/Geometry/Triangle.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/Triangle.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-
+	- Area of Triangle by known Base and height.
+	- Area of Triangle by known 2 sides length and angle between them.
+	- Area of Triangle by known 2 angles and 1 side length.
+	- Area of Triangle by known 3 sides length.
+	- Area of Triangle by known 3 Point.
+	- Given a tringle with sides abc, find the angle opposite the side a by given the length of sides.
 #### General
 - [Floor & ceil handling negative integers](/CP_Templates/Math/General/floor_ceil.cpp)&nbsp;<a href='/CP_Templates/Math/General/floor_ceil.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Fraction](/CP_Templates/Math/General/fraction.cpp)&nbsp;<a href='/CP_Templates/Math/General/fraction.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
@@ -165,6 +199,8 @@ This template is made for competitive programming using `C++` language.
 - [Trie iterative](/CP_Templates/String/Trie_iterative.cpp)&nbsp;<a href='/CP_Templates/String/Trie_iterative.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Binary Trie iterative](/CP_Templates/String/Binary_Trie_iterative.cpp)&nbsp;<a href='/CP_Templates/String/Binary_Trie_iterative.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Custom unordered_map](/CP_Templates/String/custom_unorderd_map.cpp)&nbsp;<a href='/CP_Templates/String/custom_unorderd_map.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Z alorthim](/CP_Templates/String/Z_algorithm.cpp)&nbsp;<a href='/CP_Templates/String/Z_algorithm.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+
 
 
 

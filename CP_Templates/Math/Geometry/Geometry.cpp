@@ -94,6 +94,7 @@ bool intersect(const Point<> &a, const Point<> &b,
     return 0;
 }
 
+// dot product
 double dot(const Point<> a, const Point<> b){ return a.x * b.x + a.y * b.y; }
 
 // Point On Line
@@ -225,7 +226,7 @@ bool circle3(const Point<> &p1, const Point<> &p2, const Point<> &p3,
         return res;
 }
 double lengthSqr(const Point<> a){ return a.x * a.x + a.y * a.y; }
-// Circle Point
+// check Point according to circle  (in boundary, inside , outside)
 int circlePoint(const Point<>  &cen, const double &r, const Point<>  &p) {
         double lensqr = lengthSqr(vec(cen,p));
         if (fabs(lensqr - r * r) < EPS)

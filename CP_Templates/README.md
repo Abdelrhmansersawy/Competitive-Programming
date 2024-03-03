@@ -219,9 +219,9 @@ This template is made for competitive programming using `C++` language.
 ---
 Generate_next_lexicographical_K-combination.cpp
 
-- [Generating all possible submasks O(3^n)](/CP_Templates/Math/Masking/gen_all_possible_submasking.cpp)&nbsp;<a href='/CP_Templates/Math/Masking/gen_all_possible_submasking.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-- [Generate next lexicographical_K-combination](/CP_Templates/Math/Masking/Generate_next_lexicographical_K-combination.cpp
-)&nbsp;<a href='/CP_Templates/Math/Masking/Generate_next_lexicographical_K-combination.cpp
+- [Generating all possible submasks O(3^n)](/CP_Templates/Masking/gen_all_possible_submasking.cpp)&nbsp;<a href='/CP_Templates/Masking/gen_all_possible_submasking.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Generate next lexicographical_K-combination](/CP_Templates/Masking/Generate_next_lexicographical_K-combination.cpp
+)&nbsp;<a href='/CP_Templates/Masking/Generate_next_lexicographical_K-combination.cpp
 '><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Generating all submasking_of k ones of length n O(nCk)](/CP_Templates/Masking/Generating_all_submasking_of_k_ones.cpp)&nbsp;<a href='/CP_Templates/Masking/Generating_all_submasking_of_k_ones.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 

@@ -33,8 +33,4 @@ A quick debugging template that I rarely use during contests.
 ## [Community Training](/MenofiaCPC)
 My contributions to the ICPC-MNF community.
 
----
 
-## What's next?
-- [ ] Reaching **Master** on codeforces ASA before the end of **2024** year.
-- [ ] Reaching **ICPC world finalist** ASA (~~I don't sure if I could make it this year or not~~). 

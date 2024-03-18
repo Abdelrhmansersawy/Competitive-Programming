@@ -2,10 +2,6 @@
 
 I'm **Abdelrhman Sersawy**. I'm obsessed into **competitive programming**, you know? I love diving into advanced data structures and algorithms, and I get a kick out of sharing that knowledge with others.
 <br><br>
-## 🏆 Some of my achievement in the competitive programming world
-- Ranked 22th in the **Africa & Arab Collegiate Programming Championship** (ACPC) 2023.
-- Reached a **Candidate Master** rating on Codeforces.
-- Ranked the 26th globally in **IEEE Xtreme 17.0** out of +17,000 participants.
 
 
 <h3 align="left"> 

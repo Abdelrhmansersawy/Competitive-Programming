@@ -1,62 +1,38 @@
-// you can't insert zeros and you can't insert negative make shift or compression
-
-struct Bit{
-    int N=1<<20;
-    vector<int>tree;
-    void init(){
-        tree.resize(this->N);
+const int N = 1e5 + 9;
+struct BIT{
+    vector<int> tree;
+    int n;
+    void init(int n){
+        this->n = n;
+        tree.assign(n , 0);
     }
-    void add(int pos,int value){
-        for(int i=pos+1;i<=N;i+=i&-i)tree[i-1]+=value;
+    void add(int pos , int val){
+        for(pos++; pos <= n ; pos += (pos & (-pos)))
+            tree[pos - 1] += val;
     }
-    int get(int pos) {
-        int sum = 0;
-        for (int i = pos + 1; i; i -= i & -i)sum += tree[i - 1];
-        return sum;
+    int sum(int pos){
+        int ret = 0;
+        for(pos++; pos ; pos -= (pos & (-pos)))
+            ret += tree[pos - 1];
+        return ret;
     }
-    int find(int t){
-        int st=0;
-        for(int sz=N>>1;sz;sz>>=1){
-            if(tree[st+sz-1]<t){
-                t-=tree[(st+=sz)-1];
-            }
-        }
-        return st;
-    }
+    int sum(int l , int r){ return sum(r) - sum(l - 1); }
+    int getidx(int i){ return sum(i , i); }
 };
 struct MultiSet{
-    Bit bit;
-    MultiSet(){
-        bit.init();
-        bit.add(0,-1);
-    }
-    void insert(int value){
-        bit.add(value,1);
-    }
-    void erase(int value){
-        bit.add(value,-1);
-    }
-    int count(int value){
-        return bit.get(value)-bit.get(value-1);
-    }
-    int size(){
-        return bit.get(bit.N-1)+1;
-    }
-    int at(int index){
-        return bit.find(index);//return the value which at index (index)
-    }
+    BIT B;
+    MultiSet(){ B.init(N); }
+    void insert(int val){ B.add(val,1); }
+    void erase(int val){ B.add(val,-1); }
+    int count(int val){ return B.sum(val - 1 , val); }
+    int size(){ return B.sum(N-1); }
     int order_of_key(int key){
-        int left = 0 , right = size()-1;
-        int res = right + 1;
-        while(left<=right){
-            int mid = left+(right-left)/2;
-            if(at(mid)>=key){
-                res = mid;
-                right = mid-1;
-            }else{
-                left = mid+1;
-            }
+        int l = 0 , r = N - 1, mid;
+        while(l < r){
+            mid = l + (r - l) / 2;
+            if(B.sum(mid) > key) r = mid;
+            else l = mid + 1;
         }
-        return res;
+        return l;
     }
-};
+}s;

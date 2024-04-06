@@ -237,7 +237,7 @@ Generate_next_lexicographical_K-combination.cpp
 - [Binary Trie iterative](/CP_Templates/String/Binary_Trie_iterative.cpp)&nbsp;<a href='/CP_Templates/String/Binary_Trie_iterative.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Custom unordered_map](/CP_Templates/String/custom_unorderd_map.cpp)&nbsp;<a href='/CP_Templates/String/custom_unorderd_map.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Z algorthims](/CP_Templates/String/Z_algorithm.cpp)&nbsp;<a href='/CP_Templates/String/Z_algorithm.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-
+- [Menacher algorthim](/CP_Templates/String/menacher.cpp)&nbsp;<a href='/CP_Templates/String/menacher.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 
 

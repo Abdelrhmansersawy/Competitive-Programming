@@ -198,7 +198,7 @@ This template is made for competitive programming using `C++` language.
 	- Convex Polygon Intersect.
 	- Point inside Polygon.
 - [get closest pair](/CP_Templates/Math/Geometry/getClosestPair.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/getClosestPair.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-
+- [minimum enclosing circle](/CP_Templates/Math/Geometry/minimum_enclosing_circle.cpp)&nbsp;<a href='/CP_Templates/Math/Geometry/minimum_enclosing_circle.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 #### General
 - [Floor & ceil handling negative integers](/CP_Templates/Math/General/floor_ceil.cpp)&nbsp;<a href='/CP_Templates/Math/General/floor_ceil.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>

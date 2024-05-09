@@ -1,45 +1,26 @@
-const int blockSize = 555 , N = 2e5 + 9;
-struct Query {
-    int l, r, idx;
-    Query(int l , int r , int idx):l(l) , r(r) , idx(idx){};
-    bool operator<(Query other) const
-    {
-        return make_pair(l / blockSize, r) <
-               make_pair(other.l / blockSize, other.r);
+const int N = 1e6 + 9, BLOCK_SIZE = 460;
+void add(int idx){ 
+
+}
+void remove(int idx){  
+
+}
+struct Query{
+    int l , r , id;
+    bool operator <(const Query &other) const{
+        int n1 = l / BLOCK_SIZE , n2 = other.l / BLOCK_SIZE;
+        if(n1 != n2) return n1 < n2;
+        return n1 % 2 ? r > other.r : r < other.r;
     }
 };
-vector<Query> Qlist;
-void add(int p) {
-}
-
-void remv(int p) {
-
-}
-void calc_answer(int idx){
-
-}
-void MO(){
-    sort(all(Qlist));
-    int cur_l = 0;
-    int cur_r = -1;
-    for (Query q : Qlist) {
-            while (cur_l > q.l) {
-                cur_l--;
-                add(cur_l);
-            }
-            while (cur_r < q.r) {
-                cur_r++;
-                add(cur_r);
-            }
-            while (cur_l < q.l) {
-                remv(cur_l);
-                cur_l++;
-            }
-            while (cur_r > q.r) {
-                remv(cur_r);
-                cur_r--;
-            }
-            // calculate ans of Query of q.idx
-            calc_answer(q.idx);
-        }
+void Mo(vector<Query> &query){
+    sort(all(query));
+    int mo_l = 0 , mo_r = -1;
+    for(auto &q : query){
+        while(mo_l < q.l) remove(mo_l++);
+        while(mo_l > q.l) add(--mo_l);
+        while(mo_r > q.r) remove(mo_r--);
+        while(mo_r < q.r) add(++mo_r);
+        // calculate answer of Query
+    }
 }

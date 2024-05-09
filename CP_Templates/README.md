@@ -47,6 +47,7 @@ This template is made for competitive programming using `C++` language.
 
 - [Fenwick Tree](/CP_Templates/Data%20Structure/BIT/BIT.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/BIT/BIT.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Fenwick Tree 2D](/CP_Templates/Data%20Structure/BIT/BIT2D.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/BIT/BIT2D.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Fenwick Tree 2D O(n log(n)^2)](/CP_Templates/Data%20Structure/BIT/BIT2D_nlogn2.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/BIT/BIT2D_nlogn2.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Fenwick Tree Lazy_Modification (using map)](/CP_Templates/Data%20Structure/BIT/BIT_LAZY_MODIFICATION.cpp)&nbsp;<a href='/CP_Templates/Data%20Structure/BIT/BIT_LAZY_MODIFICATION.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Fenwick Tree Ranges](/CP_Templates/Data%20Structure/BIT/BIT_Ranges.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/BIT_Ranges.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Ordered multiset fenwick](/CP_Templates/Data%20Structure/BIT/Multiset_fenwick.cpp)&nbsp;<a href='/CP_Templates/Data Structure/BIT/Multiset_fenwick.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>

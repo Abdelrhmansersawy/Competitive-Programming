@@ -15,7 +15,7 @@ This template is made for competitive programming using `C++` language.
 - [Read & write from file](/CP_Templates/Snippet/FILE.sublime-snippet)&nbsp;<a href='/CP_Templates/Snippet/FILE.sublime-snippet'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [My C++17 Compiler setting](/CP_Templates/Snippet/c++17.sublime-build)&nbsp;<a href='/CP_Templates/Snippet/c++17.sublime-build'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [GCC optimize](/CP_Templates/Snippet/gcc_optimize.cpp)&nbsp;<a href='/CP_Templates/Snippet/gcc_optimize.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-- [Clock](/CP_Templates/Snippet/gcc_optimize.cpp)&nbsp;<a href='/CP_Templates/Snippet/clock.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Clock](/CP_Templates/Snippet/clock.cpp)&nbsp;<a href='/CP_Templates/Snippet/clock.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
  
 <br><br><br>

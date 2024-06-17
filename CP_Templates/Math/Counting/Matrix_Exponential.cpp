@@ -1,4 +1,4 @@
-template<class T = int>
+template<class T = ll>
 struct Mat{
     vector<vector<T>>a;
     int r , c;
@@ -22,8 +22,8 @@ struct Mat{
         return prod;
     }
 };
-Mat bpw(Mat a , ll b){
-    Mat res(a.r , a.c);
+Mat<ll> bpw(Mat<ll> a , ll b){
+    Mat<ll> res(a.r , a.c);
     for(int i = 0; i < res.r ; i++) res.a[i][i] = 1;
     while( b > 0){
         if(b & 1) res = res * a;

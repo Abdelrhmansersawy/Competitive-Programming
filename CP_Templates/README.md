@@ -266,6 +266,9 @@ Generate_next_lexicographical_K-combination.cpp
 - [Coloring matrix_with largest area](/CP_Templates/Standard%20Problems/Implementation/coloring_matrix_with_largest_area.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Implementation/coloring_matrix_with_largest_area.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 #### Number Theory
 - [Count no.of subsequence with gcd 1](/CP_Templates/Standard%20Problems/Number_Theory/count_subsequece_gcd_equal_1.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Number_Theory/count_subsequece_gcd_equal_1.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [Count no.of subsequence with lcm equal M (M <= 1e16 or 1e18)](/CP_Templates/Standard%20Problems/Number_Theory/count_no_subsequec_with_lcm.cpp
+)&nbsp;<a href='/CP_Templates/Standard%20Problems/Number_Theory/count_no_subsequec_with_lcm.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a> 
+
 #### Geometry
 - [Count no.of lattice point in circle](/CP_Templates/Standard%20Problems/Geometry/count_points_in_circle.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Geometry/count_points_in_circle.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [check if a point inside a convex polygon or not in O(log n) by pre-proccessing O(n)](/CP_Templates/Standard%20Problems/Geometry/check_point_in_convex.cpp)&nbsp;<a href='/CP_Templates/Standard%20Problems/Geometry/check_point_in_convex.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>

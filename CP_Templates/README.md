@@ -261,7 +261,8 @@ Generate_next_lexicographical_K-combination.cpp
 - [Find LIS using patient_sort O(n log n)](/CP_Templates/Searching/patient_sort.cpp)&nbsp;<a href='/CP_Templates/Searching/patient_sort.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Ternary search in Double](/CP_Templates/Searching/double_ternary_search.cpp)&nbsp;<a href='/CP_Templates/Searching/double_ternary_search.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 <br><br><br>
-
+- [Min number of adjacent swaps to sort two Binary String](/CP_Templates/Searching/minNumberOfSwapsToSortTwoBinaryString.cpp)&nbsp;<a href='/CP_Templates/Searching/minNumberOfSwapsToSortTwoBinaryString.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+<br><br><br>
 ### Solutions for standard problems.
 
 ---

@@ -21,6 +21,6 @@ ll nCr(int n, int r) {
     for (int i = 0; i < r; ++i) {
         res = res * (n - i) % mod;
     }
-    res = res * inv_fact[r] % mod;
-    return result;
+    res = res * invfact[r] % mod;
+    return res;
 }

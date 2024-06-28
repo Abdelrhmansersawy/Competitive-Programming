@@ -133,6 +133,7 @@ This template is made for competitive programming using `C++` language.
 - [Combination (Preproccessing O(n))](/CP_Templates/Math/Counting/ncr_O(n).cpp)&nbsp;<a href='/CP_Templates/Math/Counting/ncr_O(n).cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Combination O(r) with (Preproccessing O(r))](/CP_Templates/Math/Counting/nCr_O(r).cpp)&nbsp;<a href='/CP_Templates/Math/Counting/nCr_O(r).cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Combination (Pascal Triangle)](/CP_Templates/Math/Counting/nCr_DP.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/nCr_DP.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [nCr mod 2](/CP_Templates/Math/Counting/nCr_mod2.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/nCr_mod2.cpp><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Stars & bars](/CP_Templates/Math/Counting/startbars.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/startbars.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [Lucas Theorm](/CP_Templates/Math/Counting/lucas.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/lucas.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 

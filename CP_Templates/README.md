@@ -146,7 +146,9 @@ This template is made for competitive programming using `C++` language.
 - [FFT (Ahmed Elsayed)](/CP_Templates/Math/Counting/FFT.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/FFT.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [NTT with prime mod (Ahmed Elsayed)](/CP_Templates/Math/Counting/NTT_prime_mod.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/NTT_prime_mod.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 - [NTT with random mod (Ahmed Elsayed)](/CP_Templates/Math/Counting/NTT_random_mod.cpp)&nbsp;<a href='/CP_Templates/Math/Counting/NTT_random_mod.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-
+- [convolution using NTT (kactl)](/CP_Templates/Math/Counting/convolution_using_NTT_kactl.cpp
+)&nbsp;<a href='/CP_Templates/Math/Counting/convolution_using_NTT_kactl.cpp
+'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 
 #### Game Theory

@@ -149,7 +149,11 @@ This template is made for competitive programming using `C++` language.
 - [convolution using NTT (kactl)](/CP_Templates/Math/Counting/convolution_using_NTT_kactl.cpp
 )&nbsp;<a href='/CP_Templates/Math/Counting/convolution_using_NTT_kactl.cpp
 '><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
-
+- [convolution using NTT (kactl)](/CP_Templates/Math/Counting/convolution_using_NTT_kactl.cpp
+)&nbsp;<a href='/CP_Templates/Math/Counting/convolution_using_NTT_kactl.cpp
+'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
+- [convolution ntt optimized.cpp](/CP_Templates/Math/Counting/convolution_using_NTT_kactl.cpp
+)&nbsp;<a href='/CP_Templates/Math/Counting/convolution_ntt_optimized.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>
 
 #### Game Theory
 - [Nim 1](/CP_Templates/Math/Game%20Theory/Nim%201.cpp)&nbsp;<a href='/CP_Templates/Math/Game%20Theory/Nim%201.cpp'><img src="https://img.icons8.com/color/48/000000/downloads.png" width="20px"/></a>

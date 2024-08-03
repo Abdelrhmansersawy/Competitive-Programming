@@ -1,5 +1,6 @@
 ## Permutation hashing
-Let $P =$ {$a,b,c$}
+Let $P={a,b,c}$
+
 $H(P) = (a \times x^3 + b \times x^2 + c \times x)$ , such that 
 - $x$ is a random number $\ge 27$
 ## Set hashing

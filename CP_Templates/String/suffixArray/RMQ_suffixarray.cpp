@@ -71,7 +71,7 @@ int compare(int i, int j, int l, vector<vector<int>> &c) {
 }
 int compare(int l1 , int r1 , int l2 , int r2 , string &s , vector<vector<int>> &c){
     /*
-        Compare two substring s1: [l1..r1] , s2:[l2..r2]
+        Compare two substring s1: [l1..r1] , s2:[l2..r2] in O(log(n))
     */
     int lcp = LCP(l1 , l2 , c);
     int len1 = r1 - l1 + 1;

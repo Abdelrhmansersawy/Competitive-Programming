@@ -1,3 +1,4 @@
+template<class T>
 struct Sparetable{
     vector<vector<T>> v;
     int n , LOG;

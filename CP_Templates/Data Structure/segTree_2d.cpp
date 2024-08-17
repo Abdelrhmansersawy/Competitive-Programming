@@ -1,25 +1,31 @@
+/*
+    2D segment Tree
+    - Memory allocation: O(4n x 4m)
+    - range [l..r] , r: inclusive 
+
+    Function description:
+    1. upd(r , c , val): update cell (r,c) with value val
+       Time complexity: O(log(n) x log(m))
+    2. qry(lx , rx , ly , ry): find (min,max,sum,produc) of rectangle [lx...rx] x [ly...ry]
+       Time complexity: O(log(n) x log(m))
+    3. init(n , m): initial the segment tree 
+    4. build(g): build the segment tree with grid[n][m]
+       Time complexity: O(n log(n) x m log(m))
+*/
 struct Node{
     int v;
-    Node(){ v = 0;} // Deafult constructor Node
+    Node(){ v = 0;} 
     Node(int x){ this->v = x; } 
     Node operator +(const Node &other) const{
         Node res;
-        res.v = v + other.v;
+        res.v = __gcd(v , other.v); // custom operator
         return res;
     }
 };
 struct segTree_2d{
+private: 
     vector<vector<Node>> t;
     int n , m;
-    void init(int n, int m , vector<vector<int>> &g){
-        this->n = n;
-        this->m = m;
-        int r = 1 , c = 1;
-        while(r < n) r *= 2;
-        while(c < m) c *= 2;
-        t = vector<vector<Node>>(2 * r , vector<Node>(2 * c));    
-        build(g);
-    }
     void build_y(int vx, int lx, vector<vector<int>> &g ,int rx, int vy, int ly, int ry) {
         if (ly == ry) {
             if (lx == rx){
@@ -86,6 +92,15 @@ struct segTree_2d{
                 upd_x(vx*2+1, mx+1, rx, x, y, nval);
         }
         upd_y(vx, lx, rx, 1, 0, m-1, x, y, nval);
+    }
+public: 
+    void init(int n, int m){
+        this->n = n;
+        this->m = m;
+        int r = 1 , c = 1;
+        while(r < n) r *= 2;
+        while(c < m) c *= 2;
+        t = vector<vector<Node>>(2 * r , vector<Node>(2 * c));    
     }
     void build(vector<vector<int>> &g){
         build_x(g , 1 , 0 , n - 1);

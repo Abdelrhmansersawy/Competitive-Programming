@@ -2,15 +2,16 @@
     2D segment Tree
     - Memory allocation: O(4n x 4m)
     - range [l..r] , r: inclusive 
-
+    - Base: 0-index
+    
     Function description:
-    1. upd(r , c , val): update cell (r,c) with value val
-       Time complexity: O(log(n) x log(m))
-    2. qry(lx , rx , ly , ry): find (min,max,sum,produc) of rectangle [lx...rx] x [ly...ry]
-       Time complexity: O(log(n) x log(m))
-    3. init(n , m): initial the segment tree 
-    4. build(g): build the segment tree with grid[n][m]
-       Time complexity: O(n log(n) x m log(m))
+        1. upd(r , c , val): update cell (r,c) with value val
+           Time complexity: O(log(n) x log(m))
+        2. qry(lx , rx , ly , ry): find (min,max,sum,produc) of rectangle [lx...rx] x [ly...ry]
+           Time complexity: O(log(n) x log(m))
+        3. init(n , m): initial the segment tree 
+        4. build(g): build the segment tree with grid[n][m]
+           Time complexity: O(n log(n) x m log(m))
 */
 struct Node{
     int v;

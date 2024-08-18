@@ -1,6 +1,6 @@
 /*
     2D segment sparse table
-    - Memory allocation: O(16n x mlog(m))
+    - Memory allocation: O(4n x mlog(m))
     - range [l..r] , r: inclusive 
     - Base: 0-index
     

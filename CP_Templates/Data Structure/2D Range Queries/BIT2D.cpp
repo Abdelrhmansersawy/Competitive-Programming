@@ -1,9 +1,16 @@
 /*
     --------------BIT2D-----------------
-    Use: 1 - add value to element in grid(
-         2 - sum of rectangle in grid 
-    Base: 0-index
-    Time complexity : add , sum >> O(log(n) * log(m))
+    - Memory allocation: O(n x m)
+    - range [l..r] , r: inclusive 
+    - Base: 0-index
+
+    Function description:
+    1. init(n , m): initial a BIT with 2D grid[n][m]
+       Time complexity: O(n x 4)
+    2. upd(x , y , val): add to a cell(x ,y) value "val"
+       Time complexity: O( log(n) x log(m) ) , here log is small constanst
+    2. qry(lx , rx , ly , ry): find (sum,xor) of rectangle [lx...rx] x [ly...ry]
+       Time complexity: O(log(n) x log(m))
 
 */
 template<class T = int>

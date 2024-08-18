@@ -19,11 +19,10 @@ struct sparse_2d {
     void build(int _n, int _m , vector<vector<T>> &a) {
         n = _n;
         m = _m;
-        LOG = 1;
-        while ((1 << LOG) < m) ++LOG;
+        LOG = 31 - __builtin_clz(m) + 1;
+ 
         N = 1;
-        while(N < n) N *= 2;
-        N *= 2;
+        while(N < n) N *= 2; // N must be power of 2
         tree = vector<vector<vector<T>>>(2 * N + 1, vector<vector<T>>(LOG, vector<T>(m + 1)));
  
         for (int x = 0; x < n; x++)

@@ -1,6 +1,6 @@
 /*
     2D sparse table
-    - Memory allocation: O(nlog(n) x 4log(m))
+    - Memory allocation: O(nlog(n) x mlog(m))
     - range [l..r] , r: inclusive 
     - Base: 0-index
     

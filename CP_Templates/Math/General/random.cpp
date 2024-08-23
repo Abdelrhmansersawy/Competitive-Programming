@@ -1,2 +1,5 @@
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-ll rnd(){return rng() % N;} // N -> Range of number
+mt19937 random_seed(time(0));
+long long rnd(long long l , long long r){
+    uniform_int_distribution<long long> dist(l, r);
+    return dist(random_seed);
+}

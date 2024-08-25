@@ -29,7 +29,7 @@ struct HullDynamic : public multiset<Line, less<>> {
         return (x->b - y->b) * (z->m - y->m) >= (y->b - z->b) * (y->m - x->m);
     }
  
-    void insert_line(ll m, ll b) {
+    void insert_line(ll m, ll b) { // log(n)
         m *= -1;
         b *= -1;
         auto y = insert({m, b});
@@ -44,7 +44,7 @@ struct HullDynamic : public multiset<Line, less<>> {
             erase(prev(y));
     }
  
-    ll query(ll x) {
+    ll query(ll x) { // log(n)
         if(size() == 0) return 5e18;
         auto l = *lower_bound(x);
         return -(l.m * x + l.b);

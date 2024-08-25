@@ -45,7 +45,7 @@ struct HullDynamic : public multiset<Line, less<>> {
     }
  
     ll query(ll x) { // log(n)
-        if(size() == 0) return 5e18;
+        if(size() == 0) return 5e18; // degerated case
         auto l = *lower_bound(x);
         return -(l.m * x + l.b);
     }

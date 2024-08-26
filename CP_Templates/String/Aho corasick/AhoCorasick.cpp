@@ -10,6 +10,7 @@ struct AhoCorasick{
     vector<Node> v;
     vector<int> backup; // backup indices of strings into end point vecter into trie.
     void insert(string &s , int id){
+        assert(s.size()); // Pattern mustn't be empty
         int node = 0;
         for(auto &c : s){
             int &m = v[node].nxt[c - first];

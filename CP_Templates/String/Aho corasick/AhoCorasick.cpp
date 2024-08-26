@@ -3,7 +3,7 @@ struct AhoCorasick{
     struct Node{
         int nxt[alpha];
         int suflink; // store no. nlong suffix node
-        int start = -1, end = -1; // end: reprsent index in backup od longest suffix pattern 
+        int start = -1, end = -1; // end: represent index in backup od longest suffix pattern 
         int nmatches = 0; // no. of matched string
         Node(int v){ memset(nxt , v , sizeof nxt); }
     };

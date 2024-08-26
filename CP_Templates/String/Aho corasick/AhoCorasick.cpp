@@ -18,13 +18,13 @@ struct AhoCorasick{
             else node = m;
         }
         if(v[node].end == -1) v[node].start = id;
-        backup.emplace_back(v[node].end); // I don't know what's used for?
+        backup.emplace_back(v[node].end); 
         v[node].end = id;
         v[node].nmatches++;
     }
     AhoCorasick(vector<string> &pat): v(1 , -1) {
         for(int i = 0; i < pat.size(); ++i) insert(pat[i] , i);
-        v[0].suflink = v.size(); // probability of error here
+        v[0].suflink = v.size(); // created dammy node where it's sufflink of root
         v.emplace_back(0);
 
         queue<int> q;

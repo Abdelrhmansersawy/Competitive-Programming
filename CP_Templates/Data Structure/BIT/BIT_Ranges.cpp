@@ -28,5 +28,6 @@ public:
         add(en + 1, -val, val * en);
     }
     void addIndex(int i, ll val){ addRange(i,i,val); }
-    ll getIndex(int i){ return get(i) - get(i - 1); }
+    ll qry(int l , int r){ return get(r) - get(l - 1); }
+    ll qry(int i){ return get(i) - get(i - 1); }
 };

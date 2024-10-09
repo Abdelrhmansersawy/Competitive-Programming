@@ -52,4 +52,7 @@ int k_th(int k){
     }
     return x;
 }
-
+int count(int x){
+     if(!check(x)) return false;
+     return pow(2 , n - sz); // where n is the total size of array and sz is the size of basis
+}

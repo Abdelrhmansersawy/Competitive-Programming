@@ -1,33 +1,26 @@
-/// Include My Code Template
-#include <bits/stdc++.h>
-using namespace std;
-
 /**
     In misere nim who gives last move win.
-    When all the pile have 1 stone then xor sum doesn't work.
-    Handle that case manually.
+    When all the pile have 1 stone then xor sum doesn't work (where you need to handle as a special case)
 **/
 
-#define INF 99999999
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define f first
+#define s second
+int main(){
+    ios::sync_with_stdio(0); cin.tie(NULL); cout.tie(0);
 
-int main() {
-    int nCase,n,a;
-    sf("%d", &nCase);
-    for (int cs = 1; cs <= nCase; cs++) {
-        scanf("%d", &n);
-        int xsum = 0,cntOne = 0;
-        for(int i = 0; i < n; i++) {
-            scanf("%lld", &a);
-            if(a == 1) cntOne++;
-            xsum ^= a;
+    int tc; cin >> tc;
+    while(tc--){
+        int n; cin >> n;
+        int xor_sum = 0 , ones = 0;
+        for(int i = 0; i < n; ++i){
+            int x; cin >> x;
+            ones += (x==1);
+            xor_sum ^= x;
         }
-        if(cntOne == n){
-            if(n%2 == 0) printf("Case %d: Alice\n", cs);
-            else printf("Case %d: Bob\n", cs);
-        }else{
-            if(xsum != 0) printf("Case %d: Alice\n", cs);
-            else printf("Case %d: Bob\n", cs);
-        }
+        if(ones == n) cout << (n&1 ? "Second\n" : "First\n");
+        else cout << (xor_sum ? "First\n" : "Second\n"); 
     }
-    return 0;
-}
+}   

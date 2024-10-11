@@ -1,0 +1,21 @@
+/*
+Hash a grid of size X x Y 
+*/
+const ll MOD1 = 1e9+7, MOD2 = 10000019, BASE1 = 999983, BASE2 = 99991;
+int N, M, X, Y;
+char pattern[110][110];
+ll hash_matrix[1010][1010];
+
+ll computePatternHash() {
+    for (int i = 0; i < X; i++) {
+        ll rowHash = 0;
+        for (int j = 0; j < Y; j++) rowHash = (rowHash * BASE1 + pattern[i][j]) % MOD1;
+        hash_matrix[i][0] = rowHash;
+    }
+    for (int j = 0; j < Y; j++) {
+        ll colHash = 0;
+        for (int i = 0; i < X; i++) colHash = (colHash * BASE2 + hash_matrix[i][j]) % MOD2;
+        hash_matrix[0][j] = colHash;
+    }
+    return hash_matrix[0][0];
+}

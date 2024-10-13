@@ -90,4 +90,4 @@ Generalization of nim, given $N$ piles and $K$
 - Expand evey pile size in base $2$
   
 
-Game strategy, piles sum $\equiv 0\mod(k+1)$
+Game strategy, rhe 1-th player loses iff piles sum $\equiv 0\mod(k+1)$

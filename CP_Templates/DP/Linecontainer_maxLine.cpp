@@ -16,7 +16,7 @@ struct Line {
 	bool operator<(ll x) const { return p < x; }
 };
 
-struct LineContainer : multiset<Line, less<>> {
+struct LineContainerMax : multiset<Line, less<>> {
 	// (for doubles, use inf = 1/.0, div(a,b) = a/b)
 	static const ll inf = LLONG_MAX;
 	ll div(ll a, ll b) { // floored division

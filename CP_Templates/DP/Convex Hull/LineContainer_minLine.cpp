@@ -32,7 +32,6 @@ struct LineContainerMin : multiset<Line, less<>> {
     ll query(ll x) {
         assert(!empty());
         auto l = *lower_bound(x);
-        cerr << "X: " << x << " , l: " << l.k << ", m: " << l.m << '\n'; 
         return l.k * x + l.m;
     }
 };

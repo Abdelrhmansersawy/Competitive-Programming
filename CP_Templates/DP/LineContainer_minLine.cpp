@@ -1,5 +1,5 @@
 /*
- * Description: Container where you can add lines of the form kx+m, and query maximum values at points x.
+ * Description: Container where you can add lines of the form kx+m, and query minimum values at points x.
  * Can be applied on:
     - monotonic slopes, monotonic queries
     - monotonic slopes, random queries

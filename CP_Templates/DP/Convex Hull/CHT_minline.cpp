@@ -1,3 +1,11 @@
+/*
+ * Description: Container where you can add lines of the form kx+m, and query minimum values at points x.
+ * Can be applied on:
+    - monotonic slopes, monotonic queries
+    - monotonic slopes, random queries
+
+   Here's monotonic can be (ASCE , DESC)
+ */
 struct rect {
     long long x, y, a;
     bool operator<(rect o) {
@@ -27,7 +35,7 @@ struct mnCHT {  // Renamed to mnCHT for minimum
         return A[l] * x + B[l];
     }
 
-    long long query(long long x) {
+    long long query(long long x) { // random queries
         int lo = 0, hi = (int) A.size() - 2, res = A.size() - 1;
 
         while (lo <= hi) {
@@ -42,7 +50,7 @@ struct mnCHT {  // Renamed to mnCHT for minimum
         return f(x, res);
     }
 
-    long long queryMonotonic(long long x) {
+    long long queryMonotonic(long long x) { // monotonic queries
         while (A.size() > 1 && f(x, 0) > f(x, 1)) {  // Changed to '>' for minimum
             A.pop_front(), B.pop_front();
         }

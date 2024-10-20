@@ -9,7 +9,7 @@
 const ll INF = LLONG_MAX;
 const ll NEG_INF = LLONG_MIN;
 
-struct mnCHT {  // Convex Hull Trick for Maximum
+struct mxCHT {  // Convex Hull Trick for Maximum
     deque<long long> A; // Slopes
     deque<long long> B; // Intercepts
 

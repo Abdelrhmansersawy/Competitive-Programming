@@ -12,7 +12,7 @@ $W[i] = \sum_{j<i}{F[j]\cdot prefG[j-1]}$
 
 The transition will be
 
-$dp[k][r] = prefF[r] \cdot prefG[r] - W[r] + \min_{\leq l < r}{(-prefF[l]\cdot prefG[r] + W[l] + dp[k-1][l])} $
+$dp[k][r] = prefF[r] \cdot prefG[r] - W[r] + \min_{0 \leq l < r}{(-prefF[l]\cdot prefG[r] + W[l] + dp[k-1][l])} $
 
 ## CHT intergration:
 

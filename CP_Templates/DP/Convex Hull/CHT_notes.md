@@ -8,7 +8,7 @@ Where $prefF[i] = \sum_{j<i}{F[j]}, prefG[i] = \sum_{j<i}{G[j]}$
 
 This problem can be solved using $CHT$ but defining
 
-$W[i] = \sum_{j<i}{F[j]\cdot prefG[j-1]}$
+$W[i] = \sum_{j \leq i}{F[j]\cdot prefG[j-1]}$
 
 The transition will be
 

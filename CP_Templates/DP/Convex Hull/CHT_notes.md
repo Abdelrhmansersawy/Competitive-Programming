@@ -4,7 +4,7 @@ If $Cost(l..r)$ --- the cost of region $a[l+1...r]$
 
 $Cost(l..r)= (prefF[r] - F[l]) \cdot (prefG[r] - prefG[l])$
 
-Where $prefF[i] = \sum_{j<i}{F[j]}, prefG[i] = \sum_{j<i}{G[j]}$
+Where $prefF[i] = \sum_{j \leq i}{F[j]}, prefG[i] = \sum_{j \leq i}{G[j]}$
 
 This problem can be solved using $CHT$ but defining
 

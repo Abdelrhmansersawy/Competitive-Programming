@@ -2,7 +2,7 @@
   Convolution two polynomial in O(n log n) instead of O(n^2)
 */
 
-c#define vi vector<int>
+#define vi vector<int>
 #define rep(x,l,r) for(int x = l; x < r; ++x)
 #define sz(x) (size(x))
 const ll mod = (119 << 23) + 1, root = 62; // = 998244353

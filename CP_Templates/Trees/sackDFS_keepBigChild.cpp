@@ -13,16 +13,16 @@ const int N = 1e5; // TODO: change it to maximum possible N
 int dfs_time = 0;
 int st[N] , ft[N] , big[N] , ver[N] , sz[N];
 vector<int> adj[N];
-void preDFS(int v = 0){
-    st[v] = dfs_time++;
-    ver[ st[v] ] = v;
-    sz[v] = 1, big[v] = -1;
-    for(auto u : adj[v]){
-        preDFS(u);
-        sz[v] += sz[u];
-        if(big[v] == -1 || sz[u] > sz[ big[v] ]) big[v] = u;
+void preDFS(int u , int p){
+    st[u] = dfs_time++;
+    ver[ st[u] ] = u;
+    sz[u] = 1, big[u] = -1;
+    for(auto v : adj[u]) if(v != p){
+        preDFS(v,u);
+        sz[u] += sz[v];
+        if(big[u] == -1 || sz[v] > sz[ big[u] ]) big[u] = v;
     }
-    ft[v] = dfs_time;
+    ft[u] = dfs_time;
 }
 void sackDFS(int u, int p, bool keep){
     int bigChild = big[u];

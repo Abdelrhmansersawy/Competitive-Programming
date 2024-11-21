@@ -1,51 +1,36 @@
-//
-//  main.cpp
-//
-#include "bits/stdc++.h"
-using namespace std;
+void KMP(string str, string pat)
+{
+    int n = str.length();
+    int m = pat.length();
+    vector<int> longestPrefix = fail_fun(pat);
 
-struct KMP {
-    vector<int> F;
-    string pat;
-    int patSz;
+    for(int i = 0, k = 0; i < n; i++) {
+        // as long as we can't add one more character in k, get best next prefix
+        while (k > 0 && pat[k] != str[i])
+            k = longestPrefix[k - 1];
 
-    KMP(string &pat) : pat(pat) {
-        patSz = (int)pat.size();
-        F = vector<int>(patSz + 1, 0);
-        build();
-    }
+        // if we match character in the pattern, move in pattern
+        if (pat[k] == str[i])
+            k++;
 
-    int getFulier(int len, char c) {
-        while (len && pat[len] != c) len = F[len - 1];
-        len += (pat[len] == c);
-        return len;
-    }
-
-    void build() {
-        F[0] = 0;
-        for (int i = 1; i < patSz; ++i) {
-            F[i] = getFulier(F[i - 1], pat[i]);
+        // if we matched, print it and let's find one more matching
+        if (k == m) {
+            cout<<i - m + 1<<"\n";
+            k = longestPrefix[k - 1];    // fail to next best suffix
         }
     }
+}
 
-    vector<int> match(string &str) {
-        int len = 0;
-        vector<int> ret;
-
-        for (int i = 0; i < (int)str.size(); ++i) {
-            len = getFulier(len, str[i]);
-
-            if (len == patSz) {
-                ret.push_back(i - len + 1); // Zero-Based
-                len = F[len - 1];
-            }
-        }
-
-        return ret;
+vector<int> fail_fun(string s) {
+    int n = (int)s.length();
+    vector<int> pi(n);
+    for (int i = 1; i < n; i++) {
+        int j = pi[i-1];
+        while (j > 0 && s[i] != s[j])
+            j = pi[j-1];
+        if (s[i] == s[j])
+            j++;
+        pi[i] = j;
     }
-};
-
-
-int main() {
-    return 0;
+    return pi;
 }

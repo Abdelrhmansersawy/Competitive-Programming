@@ -29,3 +29,21 @@ pair<int,int> findPattern(const string &text, const string& pat, vector<int> &sa
     
     return {start, left};
 }
+
+\\-------------------------------------------
+  auto find_string = [&](const string &pat)->pair<int,int> {
+    int st = 0, ed = n;
+    auto cmp = [&](int a, int b) {
+        if (a == -1)
+            return pat[i] < text[b + i];
+        return text[a + i] < pat[i];
+    };
+    for (int i = 0; i < pat.size() && st < ed; i++) {
+        st = lower_bound(p.begin() + st, p.begin() + ed, -1, cmp)
+             - p.begin();
+        ed = upper_bound(p.begin() + st, p.begin() + ed, -1, cmp)
+             - p.begin();
+    }
+    if(st >= ed) return {-1,-1};
+    return {st, ed - 1};
+};

@@ -1,7 +1,10 @@
 /*
 	#Z-algorithm
 	
-	The Z function is an algorithm that takes a string as an input, and return a list of integers of size same as that of the string, such that Z[i] will represent the length of the longest matching prefix of the original string, which matches with the string if it had started at the ith position, and all of it is done in linear time.
+	The Z function is an algorithm that takes a string as an input, and
+        return a list of integers of size same as that of the string, such that 
+        Z[i] will represent the length of the longest matching prefix of the original string,
+        which matches with the string if it had started at the ith position, and all of it is done in linear time.
 	
 	Time Complexity: O(n + m) // n = length of 1st string, m = length of 2nd string.
 	Space Complexity: O(n + m)

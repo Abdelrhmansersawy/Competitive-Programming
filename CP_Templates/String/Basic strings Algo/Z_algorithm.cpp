@@ -10,7 +10,8 @@
 	Space Complexity: O(n + m)
 
 */
-vector<int> zFunction(string s, int n) {
+vector<int> zFunction(string s) {
+    int n = s.size();
     vector<int> z(n);
     int left = 0, right = 0;
     for(int i = 1; i < n; i++) {

@@ -48,6 +48,37 @@ int path(int u , int v){
 
     return ans;
 }
+
+// Applications
+
+// Required: Flatten tree + lca
+vector<pair<int,int>> genPathInterval(int u, int v) {
+    if(u == v) return {{in[u], 1}};
+    
+    int LCA = lca(u, v);
+    vector<pair<int,int>> inter;
+    
+    while(head[u] != head[LCA]) {
+        inter.push_back({seq.size() - in[u], in[u] - in[head[u]] + 1});
+        u = par[head[u]];
+    }
+    inter.push_back({seq.size() - in[u], in[u] - in[LCA] + 1});
+    
+    vector<pair<int,int>> secondPath;
+    while(head[v] != head[LCA]) {
+        secondPath.push_back({in[head[v]], in[v] - in[head[v]] + 1});
+        v = par[head[v]];
+    }
+    if(in[LCA] + 1 <= in[v]) {
+        secondPath.push_back({in[LCA] + 1, in[v] - in[LCA]});
+    }
+    
+    for(int i = secondPath.size() - 1; i >= 0; i--)
+        inter.push_back(secondPath[i]);
+        
+    return inter;
+}
+
 int main(){
     ios::sync_with_stdio(0); cin.tie(NULL); cout.tie(0);
     #ifndef ONLINE_JUDGE

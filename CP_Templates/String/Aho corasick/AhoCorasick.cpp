@@ -1,3 +1,20 @@
+/**
+ * Author: Simon Lindholm
+ * Date: 2015-02-18
+ * License: CC0
+ * Source: marian's (TC) code
+ * Description: Aho-Corasick automaton, used for multiple pattern matching.
+ * Initialize with AhoCorasick ac(patterns); the automaton start node will be at index 0.
+ * find(word) returns for each position the index of the longest word that ends there, or -1 if none.
+ * findAll($-$, word) finds all words (up to $N \sqrt N$ many if no duplicate patterns)
+ * that start at each position (shortest first).
+ * Duplicate patterns are allowed; empty patterns are not.
+ * To find the longest words that start at each position, reverse all input.
+ * For large alphabets, split each symbol into chunks, with sentinel bits for symbol boundaries.
+ * Time: construction takes $O(26N)$, where $N =$ sum of length of patterns.
+ * find(x) is $O(N)$, where N = length of x. findAll is $O(NM)$.
+ * Status: stress-tested
+ */
 struct AhoCorasick{
     enum{ alpha = 26 , first = 'a'}; // change it
     struct Node{

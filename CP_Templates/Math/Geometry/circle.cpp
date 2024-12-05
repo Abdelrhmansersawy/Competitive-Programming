@@ -1,108 +1,66 @@
-// (Don't forget!) to define Point struct
+#include <bits/stdc++.h>
+using namespace std;
+typedef long double ld;
+typedef complex<ld> Point;
+const ld EPS = 1e-9;
 
+// Cross product of OA and OB vectors
+ld cross(const Point& O, const Point& A, const Point& B) { return imag((A - O) * conj(B - O)); }
 
+// Dot product of vectors A and B
+ld dot(const Point& A, const Point& B) { return real(A * conj(B)); }
 
-// create circle
-template<class P>
-vector<P> circleLine(P c, double r, P a, P b) {
-    // the intersection of line and circle
-    P ab = b - a, p = a + ab * (c - a).dot(ab) / ab.dist2();
-    double s = a.cross(b, c), h2 = r * r - s * s / ab.dist2();
-    if (h2 < 0) return {};
-    if (h2 == 0) return {p};
-    P h = ab.unit() * sqrt(h2);
+// Circle-Line Intersection: returns intersection points
+vector<Point> circleLine(const Point& c, ld r, const Point& a, const Point& b){
+    Point ab = b - a; ld ab2 = norm(ab);
+    ld t = dot(ab, c - a) / ab2;
+    Point p = a + ab * t; ld s2 = r*r - norm(c - p);
+    if(s2 < -EPS) return {};
+    if(abs(s2) < EPS) return {p};
+    ld s = sqrt(s2); Point h = ab / abs(ab) * s;
     return {p - h, p + h};
 }
-// length of vector
-double length(const Point<> a){
-    return sqrt(a.x * a.x + a.y * a.y);
-}
-// Cosine Rule
-//get angle opposite to side a
-double cosRule(double a, double b, double c) {
-        // Handle denom = 0
-        double res = (b * b + c * c - a * a) / (2 * b * c);
-        if (res > 1)
-                res = 1;
-        if (res < -1)
-                res = -1;
-        return acos(res);
+
+// Cosine Rule: angle opposite to side a
+ld cosRule(ld a, ld b, ld c){
+    ld res = (b*b + c*c - a*a)/(2*b*c);
+    return acos(max(-1.0L, min(1.0L, res)));
 }
 
-Point<> normalize(const Point<> p){ return ((p) / length(p)); }
-Point<> polar(const Point<> r, double t){
-    return Point{r.x * cos(t)  - r.y * sin(t), r.x * sin(t) + r.y * cos(t)};
-}
-// Circle line Intersection
-int circleLineIntersection(const Point<> &p0, const Point<> &p1, const Point<> &cen, double rad, Point<> &r1, Point<> &r2) {
-        // handle degenerate case if p0 == p1
-        double a, b, c, t1, t2;
-        a = dot(p1 - p0, p1 - p0);
-        b = 2 * dot( p1 - p0, p0 - cen);
-        c = dot(p0 - cen, p0 - cen) - rad * rad;
-        double det = b * b - 4 * a * c;
-        int res;
-        if (fabs(det) < EPS)
-                det = 0, res = 1;
-        else if (det < 0)
-                res = 0;
-        else
-                res = 2;
-        det = sqrt(det);
-        t1 = (-b + det) / (2 * a);
-        t2 = (-b - det) / (2 * a);
-        r1 = p0 + (p1 - p0) * t1;
-        r2 = p0 + (p1 - p0) * t2;
-        return res;
+// Circle-Circle Intersection: returns number of intersections and sets res1, res2
+int circleCircle(const Point& c1, ld r1, const Point& c2, ld r2, Point& res1, Point& res2){
+    Point d = c2 - c1; ld dist = abs(d);
+    if(dist < EPS && abs(r1 - r2) < EPS) return INT32_MAX; // Infinite intersections
+    if(dist > r1 + r2 + EPS || dist < abs(r1 - r2) - EPS) return 0; // No intersection
+    ld a = (r1*r1 - r2*r2 + dist*dist)/(2*dist);
+    ld h2 = r1*r1 - a*a;
+    if(h2 < -EPS) return 0;
+    ld h = h2 < EPS ? 0 : sqrt(h2);
+    Point p = c1 + d * (a / dist);
+    if(h == 0){ res1 = p; return 1; }
+    Point offset = d * (h / dist) * Point(0,1);
+    res1 = p + offset; res2 = p - offset;
+    return 2;
 }
 
-// Circle Circle Intersection
-int circleCircleIntersection(const Point<> &c1, const double &r1, const Point<> &c2, const double &r2, Point<> &res1, Point<> &res2) {
-        if (c1 == c2 && fabs(r1 - r2) < EPS) {
-                res1 = res2 = c1;
-                return fabs(r1) < EPS ? 1 : INT32_MAX;
-        }
-        double len = length(vec(c1,c2));
-        if (fabs(len - (r1 + r2)) < EPS || fabs(fabs(r1 - r2) - len) < EPS) {
-                Point<> d, c;
-                double r;
-                if (r1 > r2)
-                        d = vec(c1,c2), c = c1, r = r1;
-                else
-                        d = vec(c2,c1), c = c2, r = r2;
-                res1 = res2 = normalize(d) * r + c;
-                return 1; // intersect in one point
-        }
-        if (len > r1 + r2 || len < fabs(r1 - r2))
-                return 0; // intersect on two points
-        double a = cosRule(r2, r1, len);
-        Point<> c1c2 = normalize(vec(c1,c2)) * r1;
-        res1 = polar(c1c2,  a) + c1;
-        res2 = polar(c1c2, -a) + c1;
-        return 2; // intersect in one point
-}
-// Circle From 3 Points
-bool circle3(const Point<> &p1, const Point<> &p2, const Point<> &p3, 
-        Point<>& cen, double& r) {
-        Point<> m1 = (p1 + p2) / 2;
-        Point<> m2 = (p2 + p3) / 2;
-        Point<> perp1 = vec(p1, p2);
-        perp1 = perp1.perp();
-        Point<> perp2 = vec(p2, p3);
-        perp2 = perp2.perp();
-        bool res = intersect(m1, m1 + perp1, m2, m2 + perp2, cen);
-        r = length(vec(cen,p1));
-        return res;
+// Circle from Three Points: returns true if successful
+bool circle3(const Point& p1, const Point& p2, const Point& p3, Point& cen, ld& r){
+    ld a = cross(p1, p2, p3);
+    if(abs(a) < EPS) return false; // Collinear points
+    cen = ((norm(p2) - norm(p1)) * Point(0,1) - (norm(p3) - norm(p1)) * Point(1,0)) / (2*a) + p1;
+    r = abs(cen - p1);
+    return true;
 }
 
+// Point Position Relative to Circle: -1 inside, 0 outside, 1 on boundary
+int circlePoint(const Point& cen, ld r, const Point& p){
+    ld dist2 = norm(p - cen), r2 = r*r;
+    if(abs(dist2 - r2) < EPS) return 1;
+    return (dist2 < r2) ? -1 : 0;
+}
 
-
-// check Point according to circle  (in boundary, inside , outside)
-int circlePoint(const Point<>  &cen, const double &r, const Point<>  &p) {
-        double lensqr = lengthSqr(vec(cen,p));
-        if (fabs(lensqr - r * r) < EPS)
-                return 1; // In the Boundary
-        if (lensqr < r * r)
-                return -1; // In the circle
-        return 0; // Out the circle
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    
 }

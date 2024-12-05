@@ -5,15 +5,15 @@ struct Line {
 };
 
 struct LineContainerMin : multiset<Line, less<>> {
-   static const double inf = numeric_limits<double>::infinity();
-   
+   static constexpr  double inf = numeric_limits<double>::infinity();
+   static constexpr double EPS = 1e-9;
    double div(double a, double b) {
        return a / b;
    }
    
    bool isect(iterator x, iterator y) {
        if (y == end()) return x->p = inf, 0;
-       if (abs(x->k - y->k) < 1e-9) x->p = x->m < y->m ? inf : -inf; 
+       if (abs(x->k - y->k) < EPS) x->p = x->m < y->m ? inf : -inf; 
        else x->p = div(y->m - x->m, x->k - y->k);
        return x->p >= y->p; 
    }

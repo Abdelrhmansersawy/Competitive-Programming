@@ -32,10 +32,16 @@ vector<vector<int>> buildRMQSuffixArray(string s) {
        cn[p[0]] = 0;
        classes = 1;
        for(int i = 1; i < n; i++) {
-           pair<int,int> cur = {c[p[i]], c[(p[i] + (1 << h)) % n]};
-           pair<int,int> prev = {c[p[i-1]], c[(p[i-1] + (1 << h)) % n]};
-           if(cur != prev) ++classes;
-           cn[p[i]] = classes - 1;
+            int pos1 = p[i] + (1 << h);
+            int pos2 = p[i-1] + (1 << h);
+            // Replace modulo with comparison and subtraction
+            if(pos1 >= n) pos1 -= n;
+            if(pos2 >= n) pos2 -= n;
+            
+            pair<int,int> cur = {c[p[i]], c[pos1]};
+            pair<int,int> prev = {c[p[i-1]], c[pos2]};
+            if(cur != prev) ++classes;
+            cn[p[i]] = classes - 1;
        }
        c.swap(cn);
        ans.emplace_back(c);

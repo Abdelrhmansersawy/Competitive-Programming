@@ -1,38 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
 
-double cross(const Point<> &a, const Point<> &b){
-    return a.x * b.y - b.x * a.y;
-}
-double triangleAreaBH(double b, double h) {
-        return b * h / 2;
-}
-double triangleArea2sidesAngle(double a, double b, double t) {
-        return fabs(a * b * sin(t) / 2);
-}
+typedef long double ld;
+typedef complex<ld> Point;
 
-double triangleArea2anglesSide(double t1, double t2,
-                double s) {
-        return fabs(s * s * sin(t1) * sin(t2) / (2 * sin(t1 + t2)));
+inline ld cross(const Point& a, const Point& b) { return a.real() * b.imag() - a.imag() * b.real(); }
+inline ld lengthSqr(const Point& p) { return norm(p); }
+inline ld triangleAreaBH(ld base, ld height) { return base * height / 2.0L; }
+inline ld triangleArea2SidesAngle(ld a, ld b, ld angle) { return fabs(a * b * sin(angle)) / 2.0L; }
+inline ld triangleArea2AnglesSide(ld ang1, ld ang2, ld side) {
+    return fabs(side * side * sin(ang1) * sin(ang2) / (2.0L * sin(ang1 + ang2)));
 }
-
-double triangleArea3sides(double a, double b, double c) {
-        double s((a + b + c) / 2);
-        return sqrt(s * (s - a) * (s - b) * (s - c));
+inline ld triangleArea3Sides(ld a, ld b, ld c) {
+    ld s = (a + b + c) / 2.0L;
+    return sqrt(s * (s - a) * (s - b) * (s - c));
 }
-
-double triangleArea3Points(const Point<> &a, const Point<> &b,
-             const Point<> &c) {
-        return fabs(cross(a,b) + cross(b,c) + cross(c,a)) / 2;
+inline ld cosRule(ld a, ld b, ld c) {
+    ld denom = 2.0L * b * c;
+    if (fabs(denom) < 1e-9) return 0.0L;
+    return acos(min(max((b * b + c * c - a * a) / denom, -1.0L), 1.0L));
 }
 
-// Cosine Rule
-//get angle opposite to side a
-double cosRule(double a, double b, double c) {
-        // Handle denom = 0
-        double res = (b * b + c * c - a * a) / (2 * b * c);
-        if (res > 1)
-                res = 1;
-        if (res < -1)
-                res = -1;
-        return acos(res);
-}
-
+int main() { return 0; }

@@ -1,91 +1,80 @@
-#define ld long double
-#define vec(a,b) ((b) - (a))
-const ld EPS = 1e-6;
-template<typename T = double> struct Point {
-    typedef Point P;
-    T x, y;
-    explicit Point(T x=0, T y=0) : x(x), y(y) {}
-    bool operator<(P p) const { return tie(x,y) < tie(p.x,p.y); }
-    bool operator==(P p) const { return tie(x,y)==tie(p.x,p.y); }
-    P operator+(P p) const { return P(x+p.x, y+p.y); }
-    P operator-(P p) const { return P(x-p.x, y-p.y); }
-    P operator*(T d) const { return P(x*d, y*d); }
-    P operator/(T d) const { return P(x/d, y/d); }
-    T dot(P p) const { return x*p.x + y*p.y; }
-    T cross(P p) const { return x*p.y - y*p.x; }
-    T cross(P a, P b) const { return (a-*this).cross(b-*this); }
-    T dist2() const { return x*x + y*y; }
-    double dist() const { return sqrt((double)dist2()); }
-    // angle to x-axis in interval [-pi, pi]
-    double angle() const { return atan2(y, x); }
-    P unit() const { return *this/dist(); } // makes dist()=1
-    P perp() const { return P(-y, x); } // rotates +90 degrees
-    P normal() const { return perp().unit(); }
-    // returns point rotated 'a' radians ccw around the origin
-    P rotate(double a) const {
-        return P(x*cos(a)-y*sin(a),x*sin(a)+y*cos(a)); }
-    friend ostream& operator<<(ostream& os, P p) {
-        return os << "(" << p.x << "," << p.y << ")"; 
-    }
-    friend istream &operator>>(istream &os, P &p) {
-        return os >> p.x >> p.y;
-    }
+#include <bits/stdc++.h>
+using namespace std;
+using ld = long double;
+using ll = long long;
+using pii = pair<int,int>;
+using Point = complex<ld>;
+const ld EPS = 1e-9;
+#define X real()
+#define Y imag()
 
-    // Project point onto line through a and b (assuming a != b).
-    P projectOnLine(const P &a, const P &b) const {
-        P ab = a.getVector(b);
-        P ac = a.getVector(*this);
-        return a + ab * ac.dot(ab) / a.dist2(b);
-    }
- 
-    // Project point c onto line segment through a and b (assuming a != b).
-    P projectOnSegment(const P &a, const P &b) const {
-        P &c = *this;
-        P ab = a.getVector(b);
-        P ac = a.getVector(c);
- 
-        long double r = dot(ac, ab), d = a.dist2(b);
-        if (r < 0) return a;
-        if (r > d) return b;
- 
-        return a + ab * r / d;
-    }
- 
-    P reflectAroundLine(const P &a, const P &b) const {
-        return projectOnLine(a, b) * 2 - (*this);
-    }
+// Core geometry operations
+ld cross(const Point& a, const Point& b) { return imag(conj(a) * b); }
+ld dot(const Point& a, const Point& b) { return real(conj(a) * b); }
+ld dist2(const Point& a, const Point& b) { return norm(a - b); }
+ld dist(const Point& a, const Point& b) { return abs(a - b); }
+ld angle(const Point& a, const Point& b) { return atan2(cross(a,b), dot(a,b)); }
 
-};
-
-// cross product
-double cross(const Point<> &a, const Point<> &b){
-    return a.x * b.y - b.x * a.y;
+// Orientation check
+int ccw(const Point& a, const Point& b, const Point& c) {
+    ld cr = cross(b-a, c-a);
+    if(cr > EPS) return +1;    // CCW
+    if(cr < -EPS) return -1;   // CW
+    if(dot(b-a, c-a) < 0) return +2;  // c--a--b
+    if(norm(b-a) < norm(c-a)) return -2; // a--b--c on line
+    return 0;  // Colinear and overlapping
 }
 
-// dot product
-double dot(const Point<> a, const Point<> b){ return a.x * b.x + a.y * b.y; }
+// Integer slope
+pii slope(const pii& a, const pii& b) {
+    int dy = b.second - a.second, dx = b.first - a.first;
+    if(dx == 0) return {0,0};  // Vertical
+    if(dy == 0) return {0,1};  // Horizontal
+    int g = __gcd(abs(dy), abs(dx));
+    dy /= g; dx /= g;
+    if(dx < 0) dy = -dy, dx = -dx;
+    return {dy,dx};
+}
 
-// Given 3 points, find if they are CW or CCW
-ll norm(Point<> a){ return a.x * a.x + a.y * a.y; }
-int CCW(Point<> a,  Point<> b, Point <> c){
-    b = b -  a;
-    c = c - a;
-    if(cross(b , c) > 0) return +1; // counter clockwise
-    if(cross(b,c) < 0) return -1; // clockwise
-    if(dot(b, c) < 0) return +2; // c--a--b on line
-    if(norm(b) < norm(c)) return -2; //a--b--c on line
+// Point operations
+Point rotate(const Point& p, const Point& c, ld theta) {
+    return (p-c) * polar((ld)1.0, theta) + c;
+}
+
+Point proj(const Point& p, const Point& a, const Point& b) {
+    Point ab = b-a;
+    return a + ab * dot(p-a, ab) / norm(ab);
+}
+
+Point refl(const Point& p, const Point& a, const Point& b) {
+    Point prj = proj(p,a,b);
+    return prj * (ld)2.0 - p;
+}
+
+// Input/Output
+istream& operator>>(istream& is, Point& p) {
+    ld x,y; is >> x >> y; p = Point(x,y);
+    return is;
+}
+
+ostream& operator<<(ostream& os, const Point& p) {
+    return os << p.X << ' ' << p.Y;
+}
+
+void solve() {
+    // Your solution here
+    Point a, b;
+    cin >> a >> b;
+    cout << dist(a,b) << '\n';
+}
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    
+    int t = 1;
+    // cin >> t;  // Uncomment for multiple test cases
+    while(t--) solve();
+    
     return 0;
-}
-
-
-// find the Slope between two points
-pair<int,int> slope(pair<int,int> u, pair<int,int> v)
-{
-   int dy = v.s-u.s;
-   int dx = v.f-u.f;
-   if(dx == 0) return {0,0};
-   if(dy == 0) return{0,1};
-   int sgn = (dy < 0) ^ (dx < 0);
-   if(sgn) sgn = -1; else sgn = 1;
-   return {sgn*abs(dx)/(abs(__gcd(dy,dx))),abs(dy)/(abs(__gcd(dy,dx)))};
 }

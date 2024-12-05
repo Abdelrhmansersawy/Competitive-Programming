@@ -1,84 +1,107 @@
-// (Don't forget!) to define Point struct
+#include <bits/stdc++.h>
+using namespace std;
+typedef long double ld;
+typedef complex<ld> Point;
+const ld EPS = 1e-9;
+#define X real()
+#define Y imag()
 
+// Geometry Helpers
+ld cross(const Point& a, const Point& b) { return imag(conj(a) * b); }
+ld dot(const Point& a, const Point& b) { return real(conj(a) * b); }
+ld length_sq(const Point& a) { return norm(a); }
+ld length_(const Point& a) { return abs(a); }
 
-// length of vector
-double length(const Point<> a){
-    return sqrt(a.x * a.x + a.y * a.y);
-}
-
-// Check if there is intersect two lines or not and return the intersection point
-bool intersect(const Point<> &a, const Point<> &b,
-        const Point<> &p, const Point<> &q,  Point<> &ret) {
-    //handle degenerate cases (2 parallel lines, 2 identical lines,   line is 1 point)
-    double d1 = cross(p - a, b - a);
-    double d2 = cross(q - a, b - a);
-    ret = (q * d1  - p * d2) / (d1 - d2);
-    if(fabs(d1 - d2) > EPS) return 1;
-    return 0;
-}
-
-// Point On Line
-bool pointOnLine(const Point<>& a, const Point<>& b, const Point<>& p) {
-    // determine the point "p" is in the line or not
-    return fabs(cross(vec(a,b),vec(a,p))) < EPS;
+// Point on Line
+bool pointOnLine(const Point& a, const Point& b, const Point& p) {
+    return abs(cross(b - a, p - a)) < EPS;
 }
 
-// Is Point On Ray
-bool pointOnRay(const Point<>& a, const Point<>& b, const Point<>& p) {
-    //IMP NOTE: a,b,p must be collinear
-    return dot(vec(a,p), vec(a,b)) > -EPS;
+// Point on Ray
+bool pointOnRay(const Point& a, const Point& b, const Point& p) {
+    return dot(p - a, b - a) > -EPS;
 }
-// Point On Segment
-bool pointOnSegment(const Point<>& a, const Point<>& b, const Point<>& p) {
-        //el satr da momken y3mel precision error
-    if(!pointOnLine(a,b,p)) return 0;
-    return pointOnRay(a, b, p) && pointOnRay(b, a, p);
+
+// Point on Segment
+bool pointOnSegment(const Point& a, const Point& b, const Point& p) {
+    return pointOnLine(a, b, p) && pointOnRay(a, b, p) && pointOnRay(b, a, p);
 }
-//Point Line Dist
-double pointLineDist(const Point<>& a, const Point<>& b, const Point<>& p) {
-  // shortest distance between line and point
-  return fabs(cross(vec(a,b),vec(a,p)) / length(vec(a,b)));
+
+// Distance from Point to Line
+ld pointLineDist(const Point& a, const Point& b, const Point& p) {
+    return abs(cross(b - a, p - a)) / length_(b - a);
 }
-// Point Segment Dist
-double pointSegmentDist(const Point<> &a, const Point<> &b,const Point<> &p){
-      // shortest distance between segment and point
-        if (dot(vec(a,b),vec(a,p)) < EPS)
-                return length(vec(a,p));
-        if (dot(vec(b,a),vec(b,p)) < EPS)
-                return length(vec(b,p));
-        return pointLineDist(a, b, p);
+
+// Distance from Point to Segment
+ld pointSegmentDist(const Point& a, const Point& b, const Point& p){
+    if(dot(b - a, p - a) < EPS) return length_(p - a);
+    if(dot(a - b, p - b) < EPS) return length_(p - b);
+    return pointLineDist(a, b, p);
 }
-// Count the number of Lattice Point in segment
+
+// Line Intersection
+bool intersectLines(const Point& a, const Point& b, const Point& p, const Point& q, Point& r) {
+    ld d1 = cross(p - a, b - a);
+    ld d2 = cross(q - a, b - a);
+    if(abs(d1 - d2) < EPS) return false;
+    r = (q * d1 - p * d2) / (d1 - d2);
+    return true;
+}
+vector<Point> segInter(const Point& a, const Point& b, const Point& c, const Point& d) {
+    Point r;
+    if(intersectLines(a, b, c, d, r)) {
+        // Check if r is on both segments
+        if(pointOnSegment(a, b, r) && pointOnSegment(c, d, r))
+            return {r};
+    }
+    auto on = [&](const Point& s, const Point& e, const Point& p) -> bool {
+        return pointOnSegment(s, e, p);
+    };
+    vector<Point> res;
+    if(on(a, b, c)) res.emplace_back(c);
+    if(on(a, b, d)) res.emplace_back(d);
+    if(on(c, d, a)) res.emplace_back(a);
+    if(on(c, d, b)) res.emplace_back(b);
+    sort(res.begin(), res.end(), [&](const Point& x, const Point& y) -> bool {
+        return real(x) < real(y) || (abs(real(x) - real(y)) < EPS && imag(x) < imag(y));
+    });
+    res.erase(unique(res.begin(), res.end(), [&](const Point& x, const Point& y) -> bool {
+        return abs(x - y) < EPS;
+    }), res.end());
+    return res;
+}
+
+// Count Lattice Points on Segment
 int segmentLatticePointsCount(int x1, int y1, int x2, int y2) {
-        return abs(__gcd(x1 - x2, y1 - y2)) + 1;
+    return abs(__gcd(x1 - x2, y1 - y2)) + 1;
 }
 
-template<class P> bool onSegment(P s, P e, P p) {
-    // check if point (p) on line (s , e)
-    return p.cross(s, e) == 0 && (s - p).dot(e - p) <= 0;
+// Create Lines (e.g., for cross shapes)
+vector<pair<Point, Point>> createLines(int x, int y, int d){
+    return {
+        {Point(x + d, y), Point(x, y + d)},
+        {Point(x - d, y), Point(x, y + d)},
+        {Point(x - d, y), Point(x, y - d)},
+        {Point(x + d, y), Point(x, y - d)}
+    };
+}
+istream& operator>>(istream& is, Point& p) {
+    ld x,y; is >> x >> y; p = Point(x,y);
+    return is;
 }
 
-template<class P> vector<P> segInter(P a, P b, P c, P d) {
-    // The intersection between two segment, return the index section point
-    auto oa = c.cross(d, a), ob = c.cross(d, b),
-         oc = a.cross(b, c), od = a.cross(b, d);
-    // Checks if intersection is single non-endpoint point.
-    if (sgn(oa) * sgn(ob) < 0 && sgn(oc) * sgn(od) < 0)
-        return {(a * ob - b * oa) / (ob - oa)};
-    set<P> s;
-    if (onSegment(c, d, a)) s.insert(a);
-    if (onSegment(c, d, b)) s.insert(b);
-    if (onSegment(a, b, c)) s.insert(c);
-    if (onSegment(a, b, d)) s.insert(d);
-    return {s.begin(), s.end()};
+ostream& operator<<(ostream& os, const Point& p) {
+    return os << p.X << ' ' << p.Y;
 }
-vector<vector<Point<int>>> createLine(int x, int y, int d){
-    //
-    vector<vector<Point<int>>> ret;
-    ret.push_back({Point<int>(x+d, y), Point<int>(x, y+d)});
-    ret.push_back({Point<int>(x-d, y), Point<int>(x, y+d)});
-    ret.push_back({Point<int>(x-d, y), Point<int>(x, y-d)});
-    ret.push_back({Point<int>(x+d, y), Point<int>(x, y-d)});
-    return ret;
+// Example Usage
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    
+    int n = 4;
+    vector<Point> v(n);
+    for(auto &i : v) cin >> i;
+    Point q;
+    intersectLines(v[0], v[1], v[2], v[3], q);
+    cout << setprecision(6) << fixed << q;
 }
-

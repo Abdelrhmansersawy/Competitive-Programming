@@ -33,4 +33,4 @@ My contributions to the ICPC-MNF community.
 ---
 ## What's next goal ?
 - [ ] Reaching Master on CF ISA
-- [ ] on last try to qualifing for ICPC World Finals ISA
+- [ ] One last try to qualifing for ICPC World Finals ISA

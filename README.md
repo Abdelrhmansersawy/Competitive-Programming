@@ -1,6 +1,6 @@
 ## Hi 👋
 
-I'm **Abdelrhman Sersawy**. I'm passionate about competitive programming. I love diving into advanced data structures and algorithms, and I get great satisfaction from sharing this knowledge with others and teaching them what I've learned.
+I'm **Abdelrhman Sersawy**. A Computer Science student who is passionate about competitive programming. I love diving into advanced data structures and algorithms, and I get great satisfaction from sharing this knowledge with others and teaching them what I've learned.
 <br><br>
 
 

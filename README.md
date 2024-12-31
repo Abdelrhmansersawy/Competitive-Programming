@@ -27,9 +27,6 @@ Templates for algorithms and data structures that I utilize during contests.
 ## [My Stree test Template](stress%20test)
  A stress testing template in the Bash scripting language to uncover counterexamples that may cause my solution to fail when subjected to randomized test cases.
 
-## [My Debugger Template](debugger)
-A quick debugging template that I rarely use during contests.
-
 ## [Community Training](/MenofiaCPC)
 My contributions to the ICPC-MNF community.
 

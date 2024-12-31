@@ -153,8 +153,6 @@ Here's a last updated handbook version [Serso Library](Handbook%20material/Serso
 - [Test Case Template](Snippet/TEST_CASE.sublime-snippet)
 
 ## Handbook material 
-
-The repository includes:
 - [Cheat Sheet](Handbook%20material/Cheat%20Sheet.pdf)
 - [Expectation Laws](Handbook%20material/Expectation%20laws.pdf)
 - [Serso Library](Handbook%20material/Serso%20Library.pdf)

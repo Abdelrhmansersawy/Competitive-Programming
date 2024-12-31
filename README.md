@@ -30,4 +30,7 @@ Templates for algorithms and data structures that I utilize during contests.
 ## [Community Training](/MenofiaCPC)
 My contributions to the ICPC-MNF community.
 
-
+---
+## What's next goal ?
+- [ ] Reaching Master on CF ISA
+- [ ] on last try to qualifing for ICPC World Finals ISA

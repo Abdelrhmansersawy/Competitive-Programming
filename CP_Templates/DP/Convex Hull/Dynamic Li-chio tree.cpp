@@ -12,8 +12,6 @@ struct Node {
     Line line;
     Node(Line line = Line(), Node *left = nullptr, Node *right = nullptr)
         : line(line), left(left), right(right) {}
-    Node *getLeft() { return left; }
-    Node *getRight() { return right; }
 };
  
 Node *insert(Line newLine, Node *root, ll l, ll r) {

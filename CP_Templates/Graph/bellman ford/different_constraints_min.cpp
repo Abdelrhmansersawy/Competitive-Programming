@@ -54,9 +54,7 @@ struct DiffConstraints {
         // Run Bellman-Ford to find minimum values
         for (int i = 0; i < n - 1; ++i) {
             for (int j = 0; j < m; ++j) {
-                int u = constraints[j][0];
-                int v = constraints[j][1];
-                ll C  = constraints[j][2];
+                auto [u,v,C] = constraints[j];
                 
                 // Corrected: For X_u - X_v ≥ C, the constraint is X_v + C ≤ X_u
                 dist[u] = min(dist[u] , dis[v] + C);

@@ -59,9 +59,7 @@ struct DiffConstraints {
                 ll C  = constraints[j][2];
                 
                 // Corrected: For X_u - X_v ≥ C, the constraint is X_v + C ≤ X_u
-                if (dist[v] + C > dist[u]) {
-                    dist[u] = dist[v] + C;
-                }
+                dist[u] = min(dist[u] , dis[v] + C);
             }
         }
         

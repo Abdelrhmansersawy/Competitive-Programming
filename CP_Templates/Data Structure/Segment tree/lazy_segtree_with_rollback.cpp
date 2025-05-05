@@ -40,7 +40,7 @@ private:
     void propagate(int x, int l, int r) {
         if (r - l == 1) return;
         if (lazy[x] == 0) return;
-        
+        add_history(x);
         int mid = (l + r) / 2;
         push_down(2 * x + 1, lazy[x]);
         push_down(2 * x + 2, lazy[x]);
@@ -53,17 +53,13 @@ private:
         propagate(x, l, r);
         if (l >= rx || r <= lx) return;
         if (l >= lx && r <= rx) {
-            add_history(x);
             tree[x].sum += val * (r - l);
             lazy[x] += val;
             return;
         }
-
         int mid = (l + r) / 2;
         upd(lx, rx, val, 2 * x + 1, l, mid);
-        upd(lx, rx, val, 2 * x + 2, mid, r);
-        
-        add_history(x);
+        upd(lx, rx, val, 2 * x + 2, mid, r); 
         tree[x] = tree[2 * x + 1] + tree[2 * x + 2];
     }
 

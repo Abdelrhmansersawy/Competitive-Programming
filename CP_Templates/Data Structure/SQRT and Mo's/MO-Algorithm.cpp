@@ -17,10 +17,10 @@ void Mo(vector<Query> &query){
     sort(all(query));
     int mo_l = 0 , mo_r = -1;
     for(auto &q : query){
-        while(mo_l < q.l) remove(mo_l++);
         while(mo_l > q.l) add(--mo_l);
-        while(mo_r > q.r) remove(mo_r--);
         while(mo_r < q.r) add(++mo_r);
+        while(mo_r > q.r) remove(mo_r--);
+        while(mo_l < q.l) remove(mo_l++);
         // calculate answer of Query
     }
 }

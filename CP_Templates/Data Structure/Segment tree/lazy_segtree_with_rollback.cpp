@@ -105,7 +105,7 @@ public:
         int last_time = upd_times.back();
         upd_times.pop_back();
         
-        while (!history.empty() && history.back().time == last_time) {
+        while (!history.empty() && history.back().time >= last_time) {
             auto &save = history.back();
             tree[save.Node_idx] = save.node_val;
             lazy[save.Node_idx] = save.lazy_val;

@@ -6,8 +6,7 @@
     Time complexity : add , sum >> O(log(n))
 
 */
-template<class T = int>
-struct BIT{
+template<class T = int> struct BIT{
     vector<T> tree;
     int n;
     void init(int n){
@@ -18,12 +17,12 @@ struct BIT{
         for(pos++; pos <= n ; pos += (pos & (-pos)))
             tree[pos - 1] += val;
     }
-    T sum(int pos){
+    T pre(int pos){
         T ret = 0;
         for(pos++; pos ; pos -= (pos & (-pos)))
             ret += tree[pos - 1];
         return ret;
     }
-    T qry(int l , int r){ return sum(r) - sum(l - 1); }
-    T qry(int i){ return sum(i , i); }
+    T sum(int l , int r){ return pre(r) - pre(l - 1); }
+    T sum(int i){ return sum(i , i); }
 };

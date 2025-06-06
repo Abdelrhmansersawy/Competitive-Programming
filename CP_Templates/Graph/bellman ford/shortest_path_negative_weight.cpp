@@ -1,5 +1,6 @@
 /*
 Problem: Single-Source Shortest Paths with Negative Weights and Queries
+Link: https://open.kattis.com/problems/shortestpath3
 Description:
 Given a directed graph with possibly negative edge weights, answer shortest path queries
 from a single source node to several destination nodes. If a destination node is unreachable,

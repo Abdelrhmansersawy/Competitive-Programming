@@ -43,7 +43,7 @@ struct DiffConstraint {
         return true;
     }
 
-    vector<ll> getMinimalSolution() {
+    vector<ll> getSolution() {
         vector<ll> dist(n, 0);
         for (int i = 0; i < n - 1; i++) {
             bool updated = false;
@@ -57,30 +57,6 @@ struct DiffConstraint {
                 }
             }
             if (!updated) break;
-        }
-        return dist;
-    }
-
-    vector<ll> getMaximalSolution() {
-        vector<ll> dist(n, 0);
-        for (int i = 0; i < n - 1; i++) {
-            bool updated = false;
-            for (auto& edge : constraints) {
-                int u = edge[0];
-                int v = edge[1];
-                ll w = edge[2];
-                // Corresponds to solving for x_u - x_v <= -w
-                if (dist[v] > dist[u] - w) {
-                    dist[v] = dist[u] - w;
-                    updated = true;
-                }
-            }
-            if (!updated) break;
-        }
-
-        // Negate the result to get the maximal solution for the original problem.
-        for (int i = 0; i < n; i++) {
-            dist[i] = -dist[i];
         }
         return dist;
     }

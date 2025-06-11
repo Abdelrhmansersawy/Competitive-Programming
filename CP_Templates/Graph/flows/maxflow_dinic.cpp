@@ -3,12 +3,6 @@ using namespace std;
 
 // O(V^2 * E) in general graphs.
 // In unit-capacity graphs, it works in O(E * sqrt(V)) or O(V^(2/3) * E).
-struct FlowEdge {
-    int v, u;
-    long long cap, flow = 0;
-    FlowEdge(int v, int u, long long cap) : v(v), u(u), cap(cap) {}
-};
-
 /**
  * @brief Implements Dinic's algorithm for finding the maximum flow in a flow network.
  * @details Dinic's algorithm is a fast method for computing maximum flow. It works by
@@ -18,6 +12,12 @@ struct FlowEdge {
  * @complexity The general time complexity is O(V^2 * E). It's significantly faster
  * on special graphs, like O(E * sqrt(V)) for unit-capacity networks (e.g., bipartite matching).
  */
+
+struct FlowEdge {
+    int v, u;
+    long long cap, flow = 0;
+    FlowEdge(int v, int u, long long cap) : v(v), u(u), cap(cap) {}
+};
 struct Dinic {
     const long long flow_inf = 1e18;
     vector<FlowEdge> edges;

@@ -111,3 +111,53 @@ vector<pair<int, int>> get_matching() {
     }
     return matching;
 }
+
+
+/**
+ * @brief Computes a minimum vertex cover in a bipartite graph using the residual graph
+ *        after maximum matching (based on König's theorem).
+ *
+ * @param rows Number of nodes in the left part of the bipartite graph
+ * @param cols Number of nodes in the right part of the bipartite graph
+ * @return A list of pairs (side, index), where side = 1 for left, 2 for right,
+ *         and index is the 0-based index of the node in that side.
+ *
+ * Note: This should be called after computing max flow in a bipartite flow setup.
+ */
+vector<pair<int,int>> get_min_vertices_cover(int rows , int cols){
+    // `reach[i]` is true if node i is reachable from the source `s` in the residual graph
+    vector<bool> reach(n);
+    queue<int> q;
+    q.push(s); 
+    reach[s] = true;
+
+    // Standard BFS in the residual graph to mark all reachable nodes from `s`
+    while(!q.empty()){
+        int v = q.front(); q.pop();
+        for(int id : adj[v]){
+            const FlowEdge& e = edges[id];
+            if(e.cap > e.flow && !reach[e.u]){
+                reach[e.u] = true;
+                q.push(e.u);
+            }
+        }
+    }
+
+    vector<pair<int,int>> res;
+
+    // For unmatched (unreachable) nodes in the left set, include them in the vertex cover
+    for(int i = 0; i < rows; ++i){
+        if(!reach[i]){
+            res.emplace_back(1, i);
+        }
+    }
+
+    // For matched (reachable) nodes in the right set, include them in the vertex cover
+    for(int i = 0; i < cols; ++i){
+        if(reach[rows + i]){
+            res.emplace_back(2, i);
+        }
+    }
+
+    return res;
+}

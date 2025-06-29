@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+\title{Möbius Inversion and Summation of $g(x)$}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Möbius Inversion and Summation of \texorpdfstring{$g(x)$}{g(x)}}
+
+Suppose you're given:
+
+\[
+f(x) = \sum_{d \mid x} g(d)
+\]
+
+and you want to recover $g(x)$.  
+Using Möbius inversion:
+
+\[
+\boxed{
+g(x) = \sum_{d \mid x} \mu(d) \cdot f\left( \frac{x}{d} \right)
+}
+\]
+
+Now, to compute the \textbf{sum of $g(x)$ from $x = 1$ to $k$}, apply the Möbius formula over the range:
+
+\[
+\sum_{x = 1}^{k} g(x) = \sum_{x = 1}^{k} \sum_{d \mid x} \mu(d) \cdot f\left( \frac{x}{d} \right)
+\]
+
+We now \textbf{swap the order of summation}.  
+Let \( x = d \cdot j \), so \( j = \frac{x}{d} \), and note that \( x \le k \Rightarrow j \le \left\lfloor \frac{k}{d} \right\rfloor \). This gives:
+
+\[
+\boxed{
+\sum_{x=1}^{k} g(x) = \sum_{d=1}^{k} \mu(d) \cdot \sum_{j=1}^{\left\lfloor \frac{k}{d} \right\rfloor} f(j)
+}
+\]
+
+This form is often more efficient to compute, especially when $f(j)$ is memoized or precomputed.
+
+We can also rewrite it by renaming variables ($d \to x$), which yields:
+
+\[
+\boxed{
+\sum_{x=1}^{k} g(x) = \sum_{x=1}^{k} \sum_{j=1}^{\left\lfloor \frac{k}{x} \right\rfloor} \mu(j) \cdot f(j)
+}
+\]
+
+\section*{Final Summary}
+
+If:
+
+\[
+f(x) = \sum_{d \mid x} g(d)
+\quad \text{then} \quad
+g(x) = \sum_{d \mid x} \mu(d) \cdot f\left(\frac{x}{d}\right)
+\]
+
+Then summing over $x$ gives:
+
+\[
+\sum_{x = 1}^{k} g(x)
+= \sum_{d=1}^{k} \mu(d) \cdot \sum_{j=1}^{\left\lfloor \frac{k}{d} \right\rfloor} f(j)
+= \sum_{x=1}^{k} \sum_{j=1}^{\left\lfloor \frac{k}{x} \right\rfloor} \mu(j) \cdot f(j)
+\]
+
+All expressions above are \textbf{equivalent and valid}.  
+The only incorrect form would be:
+
+\[
+\sum_{x=1}^{k} g(x) = \sum_{d \mid x} \mu(d) \cdot f\left( \frac{x}{d} \right)
+\]
+
+because it references $x$ without a proper summation over $x$ on the right-hand side.
+
+\end{document}

@@ -1,0 +1,162 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\geometry{a4paper, margin=1in}
+\setlength{\parskip}{1em}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Primitive Strings and Möbius Inversion}
+\lhead{Math Notes}
+\rfoot{\thepage}
+
+\title{Primitive Strings and Möbius Inversion}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Dirichlet Convolution Identity}
+
+We start with a well-known identity from number theory:
+
+\[
+\text{If } f(x) = \sum_{d \mid x} g(d),
+\text{ then (by Möbius inversion): }
+g(x) = \sum_{d \mid x} \mu(d) \cdot f\left(\frac{x}{d}\right)
+\]
+
+Here, $\mu(d)$ is the Möbius function.
+
+\section*{Application: Counting Primitive Strings}
+
+Let:
+\begin{itemize}
+  \item $A$ be the size of the alphabet,
+  \item $P(x)$ be the number of primitive strings of length $x$,
+  \item $A^x$ be the total number of strings of length $x$ over the alphabet.
+\end{itemize}
+
+\section*{Inclusion-Exclusion (Recursive Definition)}
+
+We can write:
+
+\[
+P(x) = A^x - \sum_{\substack{d \mid x \\ d < x}} P(d)
+\]
+
+This makes sense because:
+\begin{itemize}
+  \item There are $A^x$ total strings of length $x$,
+  \item Some are periodic: they are repetitions of primitive strings of smaller lengths.
+\end{itemize}
+
+We can rearrange the above equation as:
+
+\[
+A^x = \sum_{d \mid x} P(d) \tag{1}
+\]
+
+This states that every string of length $x$ can be uniquely formed by repeating a primitive string of some length $d \mid x$.
+
+\section*{Deriving $P(x)$ Using Möbius Inversion}
+
+Let:
+\[
+f(x) = A^x, \quad g(d) = P(d)
+\]
+
+Then Equation (1) becomes:
+
+\[
+f(x) = \sum_{d \mid x} g(d)
+\]
+
+Applying Möbius inversion:
+
+\[
+g(x) = \sum_{d \mid x} \mu(d) \cdot f\left( \frac{x}{d} \right)
+\]
+
+Substituting back:
+\[
+P(x) = \sum_{d \mid x} \mu(d) \cdot A^{x/d}
+\]
+
+\[
+\boxed{
+P(x) = \sum_{d \mid x} \mu(d) \cdot A^{x/d}
+}
+\]
+
+\section*{Summing Primitive Strings up to Length $k$}
+
+To compute the total number of primitive strings of length $\le k$:
+
+\[
+\sum_{x=1}^{k} P(x) = \sum_{x=1}^{k} \sum_{d \mid x} \mu(d) \cdot A^{x/d}
+\]
+
+This evaluates each $P(x)$ separately, then adds them up.  
+However, we can rearrange the summation for better efficiency.
+
+\section*{Floor-Based Reordering (Summation Swap)}
+
+Start again from:
+
+\[
+\sum_{x=1}^{k} P(x) = \sum_{x=1}^{k} \sum_{d \mid x} \mu(d) \cdot A^{x/d}
+\]
+
+Now swap the summation order.  
+Instead of fixing $x$ and looping over $d \mid x$, we fix $d$ and sum over all multiples $x = d \cdot j \le k$:
+
+\[
+\sum_{x=1}^{k} P(x) = \sum_{d=1}^{k} \mu(d) \cdot \sum_{j=1}^{\left\lfloor \frac{k}{d} \right\rfloor} A^j
+\]
+
+\subsection*{Optional Variable Renaming}
+
+Renaming $d \rightarrow x$ and keeping $j$ the same:
+
+\[
+\sum_{x=1}^{k} P(x) = \sum_{x=1}^{k} \sum_{j=1}^{\left\lfloor \frac{k}{x} \right\rfloor} \mu(j) \cdot A^j
+\]
+
+\section*{Final Form}
+
+\[
+\boxed{
+\sum_{x=1}^{k} P(x) = \sum_{d=1}^{k} \mu(d) \cdot \sum_{j=1}^{\left\lfloor \frac{k}{d} \right\rfloor} A^j
+}
+\]
+
+This form is especially useful for implementation and number-theoretic optimization.
+
+\section*{Efficient Evaluation in $O(k)$ Time}
+
+Each inner sum is a geometric series:
+
+\[
+\sum_{j=1}^{n} A^j = A \cdot \frac{A^n - 1}{A - 1}
+\]
+
+where $n = \left\lfloor \frac{k}{d} \right\rfloor$.
+
+So the full expression becomes:
+
+\[
+\sum_{x=1}^{k} P(x) = \sum_{d=1}^{k} \mu(d) \cdot \left( A \cdot \frac{A^{\left\lfloor \frac{k}{d} \right\rfloor} - 1}{A - 1} \right)
+\]
+
+Since we compute this in constant time per $d$, the total time complexity is:
+
+\[
+\boxed{O(k)}
+\]
+
+\end{document}

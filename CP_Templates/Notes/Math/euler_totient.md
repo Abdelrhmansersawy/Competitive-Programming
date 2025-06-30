@@ -91,6 +91,13 @@ $$
 
 ---
 
+## 5. Relation between  mobius & euler totient
+
+$$
+\boxed{\sum_{d\mid m}\frac{\mu(d)}{d} \;=\;\frac{\varphi(m)}{m}}.
+
+$$
+---
 ## General Formula Using Prime Factorization
 
 To compute $\phi(n)$ for **any positive integer** $n$, write $n$ as its prime factorization:
@@ -178,4 +185,16 @@ $$
 
 ---
 
-### 3. 
+
+### 3. Count sum of positive integer < m satisfy __gcd(i,m) = 1
+
+The sum  
+$$
+\sum_{\substack{k = 1 \\ \gcd(k, m) = 1}}^{m} k
+$$  
+is known to be  
+$$
+\frac{m \cdot \phi(m)}{2} \quad \text{for } m \geq 2,
+$$  
+and \( 1 \) when \( m = 1 \).
+

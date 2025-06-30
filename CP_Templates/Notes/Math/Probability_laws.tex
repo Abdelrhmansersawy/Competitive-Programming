@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+\title{Expected Value Laws and Generating Functions}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{1. Expected Value via States}
+
+For a process with multiple outcomes or states:
+
+\[
+\mathbb{E}[\text{cur\_state}] = 1 + \sum_i p_i \cdot \mathbb{E}[S_i] = \sum_i p_i \cdot \text{val}_i
+\]
+
+\begin{itemize}
+  \item \( S_i \): the $i$-th resulting state.
+  \item \( p_i \): the probability of moving to state \( S_i \).
+  \item \( \text{val}_i \): known expected value for state \( S_i \), assuming recursive breakdown.
+\end{itemize}
+
+\section*{2. Linearity of Expectation}
+
+\[
+\mathbb{E}[X + Y] = \mathbb{E}[X] + \mathbb{E}[Y]
+\]
+
+\textbf{This holds unconditionally}, even if \( X \) and \( Y \) are dependent.
+
+\section*{3. Expectation of Product of Independent Variables}
+
+\[
+\mathbb{E}[XY] = \mathbb{E}[X] \cdot \mathbb{E}[Y]
+\]
+
+\textbf{This is valid only when} \( X \) and \( Y \) are independent.
+
+\section*{4. Generating Functions}
+
+Generating functions compactly encode a sequence of probabilities:
+
+\[
+G(s) = P_0 + P_1 s + P_2 s^2 + P_3 s^3 + \cdots
+\]
+
+\begin{itemize}
+  \item \( P_i \): probability that a random variable equals \( i \).
+  \item \( G(s) \): probability generating function (PGF).
+\end{itemize}
+
+\section*{5. Expected Value from Generating Function}
+
+Given the generating function \( G(s) \), the expected value is:
+
+\[
+\mathbb{E}[X] = G'(1)
+\quad \text{where} \quad
+G'(s) = \frac{dG(s)}{ds}
+\]
+
+You differentiate \( G(s) \) and evaluate at \( s = 1 \) to get the mean.
+
+\section*{6. Tail Sum Formula for Expected Value}
+
+For a \textbf{non-negative integer-valued} random variable \( X \):
+
+\[
+\mathbb{E}[X] = \sum_{i=1}^{\text{max possible}} \mathbb{P}(X \geq i)
+\]
+
+\textbf{Explanation:}
+\begin{itemize}
+  \item Instead of computing \( i \cdot \mathbb{P}(X = i) \), this sums the \emph{tail probabilities} \( \mathbb{P}(X \ge i) \).
+  \item This is known as the \textbf{tail sum formula}.
+\end{itemize}
+
+\textbf{When to Use:}
+\begin{itemize}
+  \item When \( X \in \mathbb{Z}_{\ge 0} \) (i.e., non-negative integers).
+  \item When tail probabilities \( \mathbb{P}(X \ge i) \) are easy to compute or are directly given.
+\end{itemize}
+
+\textbf{Example (Conceptual):}
+
+If a process continues with probability \( p \) and stops otherwise, the expected number of steps can be computed by summing \( \mathbb{P}(X \ge i) \) over all \( i \ge 1 \).
+
+\end{document}

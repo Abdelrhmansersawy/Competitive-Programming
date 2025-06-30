@@ -1,20 +1,23 @@
 struct Mat {
     ll **mat;
     ll row, col;
- 
+
     Mat(int x, int y) : row(x), col(y) {
         mat = new ll*[row];
         for (ll i = 0; i < row; i++) {
-            mat[i] = new ll[col];
-        }
-        for (ll i = 0; i < row; i++) {
-            for (ll j = 0; j < col; j++) {
-                mat[i][j] = 0;
-            }
+            mat[i] = new ll[col](); // () initializes to zero
         }
     }
- 
- 
+
+    // --- Destructor to free memory ---
+    ~Mat() {
+        for (ll i = 0; i < row; i++) {
+            delete[] mat[i];
+        }
+        delete[] mat;
+    }
+
+
     Mat operator *(const Mat& b) const {
         Mat Product(row, b.col);
         assert(col == b.row);
@@ -22,8 +25,8 @@ struct Mat {
             for(int k = 0; k < col; ++k) {
                 if(mat[i][k] != 0) {
                     for(int j = 0; j < b.col; ++j) {
-                        Product.mat[i][j] += (mat[i][k] * b.mat[k][j]) % mod;
-                        Product.mat[i][j] %= mod; 
+                        Product.mat[i][j] += (mat[i][k] * b.mat[k][j]);
+                        Product.mat[i][j] %= mod;
                     }
                 }
             }

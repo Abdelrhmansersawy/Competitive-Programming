@@ -40,6 +40,8 @@ void init(int n) {
     bridges = 0;
 }
  
+
+// to check (u,v) are in a simple cycle it must be —> find_2ecc(u) = find_2ecc(v)
 int find_2ecc(int v) {
     if (v == -1)
         return -1;

@@ -1,4 +1,5 @@
-// Tree Hashing (Subtree Hashing)
+// Tree Hashing (Subtree Hashing) for a rooted tree
+// In case tree in unrooted, you must use "isophrisim.cpp"
 // Time Complexity: O(n log n)
 // 
 // This function computes a hash for each subtree in a rooted tree.

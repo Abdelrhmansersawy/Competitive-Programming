@@ -1,4 +1,5 @@
 const ll DEFAULT = LLONG_MAX;
+const int N = 1e9+9;
 
 struct Line {
     ll m, c;
@@ -12,7 +13,7 @@ struct Node {
     Node(Line line = Line()) : line(line) {}
 };
 
-void insert(Line newLine, Node*& root, ll l, ll r) {
+void insert(Line newLine, Node*& root, ll l = -N, ll r = N) {
     if (!root) {
         root = new Node(newLine);
         return;
@@ -35,7 +36,7 @@ void insert(Line newLine, Node*& root, ll l, ll r) {
         insert(newLine, root->right, m, r);
 }
 
-ll query(ll x, Node* cur, ll l, ll r) {
+ll query(ll x, Node* cur, ll l = -N, ll r = N) {
     if (!cur)
         return DEFAULT;
     ll m = (l + r) / 2;

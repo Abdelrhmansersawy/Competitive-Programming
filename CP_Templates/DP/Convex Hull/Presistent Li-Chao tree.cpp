@@ -1,6 +1,7 @@
 // LLONG_MAX -> min f(x) , -LLONG_MAX -> max f(x)
 const ll DEFAULT = LLONG_MAX;
- 
+const ll INF = 1e9+9;
+
 struct Line {
     ll m, c;
     Line(ll m = 0, ll c = DEFAULT) : m(m), c(c) {}
@@ -14,7 +15,7 @@ struct Node {
         : line(line), left(left), right(right) {}
 };
  
-Node *insert(Line newLine, Node *root, ll l, ll r) {
+Node *insert(Line newLine, Node *root, ll l = -N, ll r = N) {
     if (root == nullptr) {
         return new Node(newLine, nullptr, nullptr);
     }
@@ -36,7 +37,7 @@ Node *insert(Line newLine, Node *root, ll l, ll r) {
     return cur;
 }
  
-ll query(ll x, Node *cur, ll l, ll r) {
+ll query(ll x, Node *cur, ll l = -N, ll r = N) {
     if (cur == nullptr)
         return DEFAULT;
     ll m = (l + r) / 2;

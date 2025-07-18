@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Optional: Adjust page margins for better layout
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\section*{Contribution of a Single Node}
+
+Given an array of length $n$, where some elements are marked as \textbf{infected}, the problem asks for the following sum:
+\[
+    S = \sum_{\text{all subsegments } x} \frac{\text{number of infected elements in } x}{\text{length of } x}.
+\]
+
+A key insight in combinatorics is to change the order of summation. Instead of summing over subsegments, we can sum over each infected element. The formula can be rewritten as:
+\[
+    S = \sum_{\substack{\text{infected elements } w\\\text{at position } i}}
+         \Biggl(\sum_{\substack{\text{subsegments } x\\\text{that contain position } i}}
+               \frac{1}{\text{length of } x}\Biggr).
+\]
+
+\bigskip\hrule\bigskip
+
+\section*{Computing Each Element’s Contribution in $O(1)$ with Modular Inverses}
+
+For an array of $n$ elements labeled $1$ through $n$, and a fixed infected element $w$ at position $i$, its contribution is:
+\[
+    \mathrm{Contrib}(i)
+    = \sum_{L=1}^{i}\sum_{R=i}^{n}\frac{1}{R-L+1}
+    = \sum_{d=0}^{i-1}\sum_{d'=0}^{n-i}\frac{1}{d+d'+1}.
+\]
+Using precomputed \textbf{modular inverses} instead of floating-point division, we get the same identity:
+\[
+    \sum_{L=1}^{i}\sum_{R=i}^{n}\frac{1}{R-L+1}
+    =
+    SH_{n-1} - SH_{i-1} - SH_{n-i}
+    \pmod{M},
+\]
+where all operations are modulo $M$ (e.g.\ $10^9+7$) and
+\[
+    H_n = \sum_{t=1}^n \tfrac{1}{t} = \sum_{t=1}^n \mathrm{inv}[t],
+    \qquad
+    SH_n = \sum_{t=1}^n H_t,
+\]
+with $\mathrm{inv}[t]$ the modular inverse of $t \bmod M$.
+
+\subsection*{Total}
+\[
+    S = \sum_{\text{infected }w}\mathrm{Contrib}(w) \pmod{M}.
+\]
+This yields an $O(n + I)$ algorithm using purely integer arithmetic and modular inverses, where $I$ is the number of infected elements.
+
+\end{document}

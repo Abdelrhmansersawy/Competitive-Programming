@@ -54,21 +54,9 @@ public:
         add(en + 1, -val, val * en);
     }
 
-    // Add `val` to a single index `i`
-    // Time Complexity: O(log n)
-    void addIndex(int i, long long val) {
-        addRange(i, i, val);
-    }
-
     // Query sum in the range [l, r]
     // Time Complexity: O(log n)
     long long qry(int l, int r) {
         return get(r) - get(l - 1);
-    }
-
-    // Query value at index `i`
-    // Time Complexity: O(log n)
-    long long qry(int i) {
-        return get(i) - get(i - 1);
     }
 };

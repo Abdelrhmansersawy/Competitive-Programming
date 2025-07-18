@@ -18,13 +18,10 @@ $$
 
 ### 2. Computing Each Node’s Contribution in $O(1)$ with Modular Inverses
 
-For a path of $k$ nodes labeled $1$ through $k$, and a fixed node $w$ at position $i$ (so $d_{uw}=i-1$ and $d_{vw}=k-i$):
-
 $$
 \mathrm{Contrib}(i)
 = \sum_{L=1}^{i}\sum_{R=i}^{k}\frac{1}{R-L+1}
-=
-\sum_{d=0}^{i-1}\sum_{d'=0}^{k-i}\frac{1}{d+d'+1}.
+=\sum_{d=0}^{i-1}\sum_{d'=0}^{k-i}\frac{1}{d+d'+1}.
 $$
 
 Using precomputed **modular inverses** instead of floating‐point, the same identity holds:

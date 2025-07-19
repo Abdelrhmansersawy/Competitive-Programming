@@ -7,36 +7,20 @@ const int mod = 1e9 + 7;
 /*
  * ======================== PREFIX MAXIMUM SUM NOTE ========================
  *
- * Goal:
- * Efficiently calculate sum of contributions of subarrays where each
- * value is the maximum in its respective block.
- *
- * Step 1: Precompute the next greater index for each position.
- * - `nxt[i]` = first index > i such that arr[nxt[i]] > arr[i]
- * - If no such index, set `nxt[i] = n`
- *
- * Step 2: Build a DP array where:
- *   dp[i] = (nxt[i] - i) * arr[i] + dp[nxt[i]]  if nxt[i] < n
- *         = (n - i) * arr[i]                   otherwise
- *   - This represents the total contribution of arr[i] being max in
- *     range [i .. nxt[i] - 1]
- *   - Time complexity: O(n)
- *
- * Step 3: sum_mx(l, r, idx)
- * - Calculates the sum of contributions in range [l..r] assuming
- *   arr[idx] is the maximum in [idx..r]
- * - Logic:
- *     ans = dp[l]       // full segment sum from l
- *     ans -= dp[idx]    // remove overcounted part starting from idx
- *     ans += arr[idx] * (r - idx + 1)  // add real max segment
- *     mod adjust all the way
- * - Useful in divide-and-conquer or segment-based problems.
- *
- * All operations are done modulo `mod` to avoid overflow.
+ * S(l, r) is defined as the sum of maximums over all prefixes starting at
+ * index l and ending at r.
+ * S(l, r) = sum from j = l to r of max(arr[l ... j])
  *
  * =========================================================================
  */
 
+/**
+ * Finds the index of the next greater element for each element.
+ * Uses a monotonic stack. If no greater element exists, stores n.
+ * The input `arr` is the array to process.
+ * Returns a vector `nxt` where nxt[i] is the index of the next greater element.
+ * Complexity is O(n).
+ */
 vector<int> next_greater(const vector<int>& arr) {
     int n = arr.size();
     vector<int> nxt(n, n);
@@ -56,27 +40,40 @@ int main() {
     int n = arr.size();
 
     vector<int> nxt = next_greater(arr);
+
+    // dp[i] = S(i, n-1), the prefix maximum sum starting from index i.
     vector<int> dp(n);
 
-    // Build DP array from right to left
+    // Build DP from right to left using the next greater element indices.
+    // The logic is S(i, n-1) = (contribution where arr[i] is max) + S(nxt[i], n-1).
     for (int i = n - 1; i >= 0; --i) {
+        // Contribution from prefixes arr[i...j] where j < nxt[i].
         dp[i] = 1LL * (nxt[i] - i) * arr[i] % mod;
-        if (nxt[i] != n) dp[i] = (dp[i] + dp[nxt[i]]) % mod;
+        // Add contribution from the rest of the array, starting from nxt[i].
+        if (nxt[i] != n) {
+            dp[i] = (dp[i] + dp[nxt[i]]) % mod;
+        }
     }
 
-    // Lambda function to query sum using idx as max
+    /**
+     * Calculates S(l, r) given that arr[idx] is the max in arr[l...r].
+     * It uses the formula: S(l, r) = S(l, idx-1) + (r - idx + 1) * arr[idx].
+     * S(l, idx-1) is computed as dp[l] - dp[idx].
+     */
     auto sum_mx = [&](int l, int r, int idx) {
         if (l > r) return 0LL;
-        ll ans = dp[l];
-        ans = (ans - dp[idx] + mod) % mod;
+        // S(l, idx-1) calculated via dp table
+        ll ans = (dp[l] - (idx < n ? dp[idx] : 0) + mod) % mod;
+        // Add contribution where arr[idx] is the maximum
         ans = (ans + 1LL * arr[idx] * (r - idx + 1) % mod) % mod;
         return ans;
     };
 
-    // Example query: range [1, 3] with arr[3] = 4 as max
+    // Example query: S(1, 3) where arr[3]=4 is max in arr[1...3] = {1, 2, 4}.
+    // Calculation: max(1) + max(1,2) + max(1,2,4) = 1 + 2 + 4 = 7
     int l = 1, r = 3, idx = 3;
     cout << "Sum with max at index " << idx << " in range [" << l << ", " << r << "]: ";
-    cout << sum_mx(l, r, idx) << '\n';
+    cout << sum_mx(l, r, idx) << '\n'; // Expected output: 7
 
     return 0;
 }

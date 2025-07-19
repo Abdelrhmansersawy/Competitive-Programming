@@ -1,3 +1,20 @@
+/*
+Problem:
+You are given N segments of the form y = a_i * x + b_i, defined over x in [l_i, r_i).
+You need to process Q queries of two types:
+
+0 l r a b : Add a segment y = a * x + b, valid over x in [l, r)
+1 p       : Query the minimal y-value at point x = p across all active segments.
+            If no segment covers x = p, print INFINITY.
+
+Constraints:
+- 1 ≤ N, Q ≤ 2e5
+- -1e9 ≤ l_i < r_i ≤ 1e9
+- |a_i|, |p| ≤ 1e9
+- |b_i| ≤ 1e18
+*/
+
+
 #include <iostream>
 #include <vector>
 #include <algorithm>

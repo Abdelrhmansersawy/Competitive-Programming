@@ -9,20 +9,24 @@ ll modexp(ll a, ll e = MOD-2) { ll r = 1; while (e) { if (e & 1) r = mul(r, a); 
 inline ll inv(ll a)          { return modexp(a); }
 
 /**
- * Solves the modular linear system 
+ * Solves the modular linear system:
  *   a[0][0]·x₀ + a[0][1]·x₁ + … + a[0][m-1]·xₘ₋₁ ≡ b₀  (mod MOD)
- *   a[1][0]·x₀ + a[1][1]·x₁ + … + a[1][m-1]·xₘ₋₁ ≡ b₁  (mod MOD)
- *   … 
- *   a[n-1][0]·x₀ + a[n-1][1]·x₁ + … + a[n-1][m-1]·xₘ₋₁ ≡ bₙ₋₁  (mod MOD)
+ *   …
+ *   a[n-1][0]·x₀ + … + a[n-1][m-1]·xₘ₋₁ ≡ bₙ₋₁  (mod MOD)
  *
  * Input:
  *   a — n×(m+1) augmented matrix [A|b], where
- *       a[i][j]   = coefficient for x_j in equation i     (0 ≤ i < n, 0 ≤ j < m)
- *       a[i][m]   = constant term b_i                     (0 ≤ i < n)
+ *       a[i][j]   = coeff for x_j in eq i     (0 ≤ i < n, 0 ≤ j < m)
+ *       a[i][m]   = constant term b_i         (0 ≤ i < n)
  *
- * Output:
- *   A vector x of length m with one solution (free vars set to 0), or
- *   an empty vector if no solution exists.
+ * Returns:
+ *   vector x of length m giving one solution (free vars = 0), or
+ *   empty vector if no solution.
+ *
+ * Time Complexity:
+ *   O(n * m * min(n, m))  
+ * Space Complexity:
+ *   O(n * (m+1)) 
  */
 vector<ll> gauss(vector<vector<ll>>& a) {
     int n = a.size(), m = a[0].size() - 1;

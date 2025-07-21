@@ -64,3 +64,30 @@ vector<ll> gauss(vector<vector<ll>>& a) {
     }
     return x;
 }
+/** Example usage **/
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    // Example: Solve system
+    //  2x + 3y +  z ≡ 1 (mod MOD)
+    //   x + 4y + 5z ≡ 2
+    //  3x +  y + 2z ≡ 3
+
+    int n = 3, m = 3;
+    vector<vector<ll>> a = {
+        {2, 3, 1, 1},
+        {1, 4, 5, 2},
+        {3, 1, 2, 3}
+    };
+
+    auto sol = gauss(a);
+    if (sol.empty()) {
+        cout << "No solution\n";
+    } else {
+        cout << "Solution:\n";
+        for (int i = 0; i < m; i++)
+            cout << "x" << i << " = " << sol[i] << "\n";
+    }
+    return 0;
+}

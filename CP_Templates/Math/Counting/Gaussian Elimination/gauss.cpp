@@ -41,6 +41,7 @@ vector<ll> gauss(vector<vector<ll>>& a) {
         where[col] = row;
         ll inv_piv = inv(a[row][col]);
         for (int i = 0; i < n; i++) if (i != row) {
+            if(a[i][col] == 0) continue;
             ll factor = mul(a[i][col], inv_piv);
             for (int j = col; j <= m; j++)
                 a[i][j] = sub(a[i][j], mul(factor, a[row][j]));

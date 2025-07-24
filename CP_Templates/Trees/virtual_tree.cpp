@@ -78,7 +78,7 @@ bool isAncestor(int u, int v) {
 }
 
 // Build virtual tree on set X; returns list of all nodes used
-vector<int> buildVirtualTree(vector<int>& X) {
+void buildVirtualTree(vector<int>& X) {
     vector<int> V = X;
     sort(V.begin(), V.end(), [&](int a, int b){ return inT[a] < inT[b]; });
     // add sequential LCAs
@@ -94,7 +94,15 @@ vector<int> buildVirtualTree(vector<int>& X) {
         if(!st.empty()) t[st.top()].push_back(u);
         st.push(u);
     }
-    return V;
+
+    // TODO: Solve your problem here
+    
+    // TODO: run your DP or queries on this virtual tree using t[]
+    // e.g. compute sum of distances along its edges, etc.
+
+
+    /// cleanup for next query
+    for(int u : V)  t[u].clear();
 }
 
 int main() {
@@ -115,15 +123,8 @@ int main() {
         vector<int> S(K);
         for(auto &x : S) cin >> x;
 
-        vector<int> V = buildVirtualTree(S);
+        buildVirtualTree(S);
 
-         // TODO: run your DP or queries on this virtual tree using t[]
-        // e.g. compute sum of distances along its edges, etc.
-
-        // cleanup for next query
-        for(int u : V) {
-            t[u].clear();
-        }
     }
     return 0;
 }

@@ -25,17 +25,6 @@
 using namespace std;
 typedef long long ll;
 
-#define rep(i, st, ed) for (int i = st; i < ed; i++)
-#define f first
-#define s second
-#define all(v) v.begin(), v.end()
-
-#ifndef ONLINE_JUDGE 
-#define debug(x) cerr << #x << ": " << x << '\n';
-#else
-#define debug(x)
-#endif
-
 template<class T, int SZ> struct RangeQuery {
 private:
     int n;

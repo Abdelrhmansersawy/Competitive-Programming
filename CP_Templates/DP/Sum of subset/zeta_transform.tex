@@ -1,0 +1,232 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in}
+
+% Define colors for code listing
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Define C++ style for listings
+\lstdefinestyle{cppstyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=C++
+}
+\lstset{style=cppstyle}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\title{\textbf{Complete Notes: Bitwise Convolutions and PIE via SOS DP}}
+\author{Competitive Programming Notes}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+In competitive programming, we often encounter problems that require computing the convolution of two arrays, $A$ and $B$, of size $2^N$. The general form of a bitwise convolution $C = A * B$ is:
+$$ C_k = \sum_{i \oplus j = k} A_i B_j $$
+where $\oplus$ can be OR ($|$), AND ($\&$), or XOR ($\wedge$). The technique to solve this efficiently is called Fast Walsh-Hadamard Transform (FWHT). For OR and AND convolutions, the transform used is the \textbf{Zeta Transform}, which is implemented using Sum over Subsets (SOS) DP.
+
+\section{OR Convolution}
+The OR convolution of two arrays $A$ and $B$ is defined as:
+$$ C_k = (A *_{OR} B)_k = \sum_{i | j = k} A_i B_j $$
+
+\subsection{The Zeta Transform}
+To compute this efficiently, we use the \textbf{Zeta Transform}, also known as the Sum over Subsets (SOS) transform. For an array $A$, its Zeta Transform $\hat{A}$ is defined as:
+$$ \hat{A}_S = \sum_{T \subseteq S} A_T $$
+The key idea is that the Zeta transform converts the complex OR convolution into a simple pointwise product. Let $\hat{A}$ and $\hat{B}$ be the Zeta transforms of $A$ and $B$. Let $\hat{C}$ be their pointwise product: $\hat{C}_S = \hat{A}_S \cdot \hat{B}_S$. Then, $C$ is the OR convolution of $A$ and $B$.
+
+\subsection{Algorithm}
+\begin{enumerate}
+    \item Compute the Zeta transforms: $\hat{A} = \text{Zeta}(A)$ and $\hat{B} = \text{Zeta}(B)$.
+    \item Compute the pointwise product: $\hat{C}_S = \hat{A}_S \cdot \hat{B}_S$ for all $S$.
+    \item Compute the inverse Zeta transform to get the result: $C = \text{InverseZeta}(\hat{C})$.
+\end{enumerate}
+
+\subsection{Implementation}
+\begin{lstlisting}
+#include <bits/stdc++.h>
+using namespace std;
+
+// Computes the OR convolution of two vectors
+vector<long long> or_conv(vector<long long> a, vector<long long> b) {
+    int sz = a.size();
+    int n = __builtin_ctz(sz);
+
+    auto sos_dp = [&](vector<long long>& v) {
+        for (int i = 0; i < n; ++i) {
+            for (int mask = 0; mask < sz; ++mask) {
+                if (mask & (1 << i)) v[mask] += v[mask ^ (1 << i)];
+            }
+        }
+    };
+
+    auto inv_sos_dp = [&](vector<long long>& v) {
+        for (int i = 0; i < n; ++i) {
+            for (int mask = 0; mask < sz; ++mask) {
+                if (mask & (1 << i)) v[mask] -= v[mask ^ (1 << i)];
+            }
+        }
+    };
+
+    sos_dp(a);
+    sos_dp(b);
+
+    vector<long long> c(sz);
+    for (int i = 0; i < sz; ++i) c[i] = a[i] * b[i];
+
+    inv_sos_dp(c);
+    return c;
+}
+\end{lstlisting}
+
+\section{AND Convolution}
+The AND convolution is defined similarly:
+$$ C_k = (A *_{AND} B)_k = \sum_{i \& j = k} A_i B_j $$
+For this, we use the \textbf{Dual Zeta Transform}, or Sum over Supersets transform.
+$$ \hat{A}_S = \sum_{S \subseteq T} A_T $$
+The algorithm remains the same: transform $A$ and $B$, compute the pointwise product, and apply the inverse transform.
+
+\subsection{Implementation}
+\begin{lstlisting}
+#include <bits/stdc++.h>
+using namespace std;
+
+// Computes the AND convolution of two vectors
+vector<long long> and_conv(vector<long long> a, vector<long long> b) {
+    int sz = a.size();
+    int n = __builtin_ctz(sz);
+
+    auto dual_sos_dp = [&](vector<long long>& v) {
+        for (int i = 0; i < n; ++i) {
+            for (int mask = sz - 1; mask >= 0; --mask) {
+                if (mask & (1 << i)) v[mask ^ (1 << i)] += v[mask];
+            }
+        }
+    };
+
+    auto inv_dual_sos_dp = [&](vector<long long>& v) {
+        for (int i = 0; i < n; ++i) {
+            for (int mask = sz - 1; mask >= 0; --mask) {
+                if (mask & (1 << i)) v[mask ^ (1 << i)] -= v[mask];
+            }
+        }
+    };
+
+    dual_sos_dp(a);
+    dual_sos_dp(b);
+
+    vector<long long> c(sz);
+    for (int i = 0; i < sz; ++i) c[i] = a[i] * b[i];
+
+    inv_dual_sos_dp(c);
+    return c;
+}
+\end{lstlisting}
+
+\section{PIE: From Unions to Intersections}
+A powerful application of SOS DP is to compute values related by the Principle of Inclusion-Exclusion. This section covers converting information about the sizes of \textbf{unions} of sets into information about the sizes of their \textbf{intersections}. 
+\begin{itemize}
+    \item \textbf{Input Meaning:} The input array \texttt{U[mask]} is $|\bigcup_{i \in \text{mask}} S_i|$.
+    \item \textbf{Output Meaning:} The function calculates \texttt{I[mask]} = $|\bigcap_{i \in \text{mask}} S_i|$.
+\end{itemize}
+The PIE formula states:
+$$ |\bigcap_{i \in S} A_i| = \sum_{\emptyset \neq T \subseteq S} (-1)^{|T|-1} |\bigcup_{j \in T} A_j| $$
+If we let $I_{mask} = |\bigcap_{i \in \text{mask}} S_i|$ and $U_{mask} = |\bigcup_{i \in \text{mask}} S_i|$, and define an intermediate array $F_{sub} = (-1)^{|sub|-1} U_{sub}$, the formula becomes $I_{mask} = \sum_{sub \subseteq mask} F_{sub}$. This is precisely the Zeta Transform of $F$.
+
+\subsection{Implementation}
+\begin{lstlisting}
+#include <bits/stdc++.h>
+using namespace std;
+
+// Converts union sizes to intersection sizes.
+vector<long long> unions_to_intersections(vector<long long> u) {
+    int sz = u.size();
+    int n = __builtin_ctz(sz);
+    
+    vector<long long> res(sz);
+
+    // Apply PIE coefficients to create an intermediate array.
+    for (int mask = 1; mask < sz; ++mask) {
+        if (__builtin_popcount(mask) % 2 == 1) {
+            res[mask] = u[mask];
+        } else {
+            res[mask] = -u[mask];
+        }
+    }
+
+    // Apply Zeta Transform (Sum over Subsets) to get intersection sizes.
+    for (int i = 0; i < n; ++i) {
+        for (int mask = 0; mask < sz; ++mask) {
+            if (mask & (1 << i)) {
+                res[mask] += res[mask ^ (1 << i)];
+            }
+        }
+    }
+    return res;
+}
+\end{lstlisting}
+
+\section{Trick: Counting Exact Memberships}
+After computing intersection sizes, we can find the number of elements that belong to \textbf{exactly} the sets indexed by a mask. Let $E_{mask}$ be this count (i.e., elements in $S_i$ for all $i \in mask$ and not in $S_j$ for all $j \notin mask$).
+
+An element that belongs to exactly the sets in a superset $T \supseteq S$ is counted in the intersection $I_S$. Therefore, the intersection size is the sum of exact counts of all its supersets:
+$$ I_S = \sum_{T \supseteq S} E_T $$
+This is the definition of the Dual Zeta Transform (Sum over Supersets). To find the exact counts $E$ from the intersection sizes $I$, we simply apply the \textbf{Inverse Dual Zeta Transform} to the array of intersection sizes.
+
+\subsection{Implementation}
+\begin{lstlisting}
+#include <bits/stdc++.h>
+using namespace std;
+
+// Converts intersection sizes to the count of elements in EXACTLY the sets of a mask.
+vector<long long> intersections_to_exact_counts(vector<long long> intersections) {
+    int sz = intersections.size();
+    int n = __builtin_ctz(sz);
+    
+    vector<long long> res = intersections;
+
+    // Apply Inverse Dual Zeta Transform (Inverse Sum over Supersets).
+    for (int i = 0; i < n; ++i) {
+        for (int mask = sz - 1; mask >= 0; --mask) {
+            if (mask & (1 << i)) {
+                res[mask ^ (1 << i)] -= res[mask];
+            }
+        }
+    }
+    return res;
+}
+\end{lstlisting}
+
+\end{document}

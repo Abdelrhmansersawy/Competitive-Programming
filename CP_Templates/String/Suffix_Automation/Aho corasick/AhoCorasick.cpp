@@ -22,7 +22,7 @@ struct AhoCorasick {
     vector<int> backup;       // Stores pattern indices with longest matching suffixes
                              // Returns -1 if no match exists
                              // Note: All patterns must be distinct when using backup
-    vector<bool> exit;
+
     // Inserts a pattern into the automaton
     // Time: O(|s|) where |s| is pattern length
     void insert(string &s, int id) {

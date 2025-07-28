@@ -1,0 +1,104 @@
+% !TeX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={C++ Memory Consumption Guide},
+}
+
+\title{C++ Memory Usage Cheatsheet (CP Focus)}
+\author{Revised by Gemini}
+\date{\today}
+\begin{document}
+\maketitle
+
+Understanding memory usage helps avoid MLEs on platforms like Codeforces (typically 64-bit Linux + GCC).
+
+\section{Primitive Types (64-bit)}
+\begin{table}[htbp]
+    \centering
+    \caption{Size of Core Data Types}
+    \begin{tabular}{lc}
+        \toprule
+        \textbf{Type} & \textbf{Bytes} \\
+        \midrule
+        \texttt{bool}, \texttt{char} & 1 \\
+        \texttt{short} & 2 \\
+        \texttt{int}, \texttt{float} & 4 \\
+        \texttt{long long}, \texttt{double} & 8 \\
+        \texttt{long double} & 16 \\
+        \texttt{T*} (pointer) & 8 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Containers Overview}
+\begin{itemize}
+    \item \texttt{vector<T>}: \SI{24}{bytes} overhead + capacity $\times$ \texttt{sizeof(T)}.
+    \item \texttt{string}: Similar to vector. Uses \SI{32}{bytes}, with SSO for small strings ($\le$15 chars).
+    \item \texttt{bitset<N>}: Exactly $N$ bits ($\approx N/8$ bytes). Very efficient.
+    \item \texttt{vector<bool>}: Packs bits, more efficient than \texttt{bool[]}.
+    \item \texttt{set/map}: RB-trees, ~\SI{40}{bytes} overhead per element.
+    \item \texttt{unordered\_set/map}: Hash tables; node + chaining pointer + bucket array.
+\end{itemize}
+
+\section{Stack Usage}
+Each recursive call = one stack frame.
+\begin{itemize}
+    \item Typical frame: \SIrange{16}{64}{bytes}.
+    \item Depth $10^5$ → \SIrange{1.6}{6.4}{\mega\byte}.
+    \item Stack limit: ~\SI{8}{\mega\byte}. Deep recursion risks overflow.
+\end{itemize}
+
+\section{Memory Cheatsheet}
+($N = 10^6$; 1 MiB = $1024^2$ bytes)
+\begin{table}[htbp]
+    \centering
+    \caption{Approximate Usage}
+    \begin{tabular}{llS[table-format=4.2]}
+        \toprule
+        \textbf{Declaration} & \textbf{Bytes} & \textbf{MiB} \\
+        \midrule
+        \texttt{int[1e6]} & $4 \times 10^6$ & 3.81 \\
+        \texttt{long long[1e6]} & $8 \times 10^6$ & 7.63 \\
+        \texttt{bool[1e6]} & $1 \times 10^6$ & 0.95 \\
+        \texttt{bitset<1e6>} & $1e6/8$ & 0.12 \\
+        \texttt{set<int>} ($10^6$ items) & $\sim 44 \times 10^6$ & 41.96 \\
+        \texttt{int[2k][2k]} & $4 \times 4 \times 10^6$ & 15.26 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Graph Example}
+$N = 10^5$, $M = 10^5$
+\begin{itemize}
+    \item \texttt{vector<vector<int>> adj(N)}: $\approx$ \SI{3.2}{\mega\byte}
+    \item \texttt{vector<bool> visited(N)}: $\approx$ \SI{12.5}{\kilo\byte}
+    \item \texttt{vector<int> dist(N)}: $\approx$ \SI{0.4}{\mega\byte}
+    \item Total: $\approx$ \SI{3.6}{\mega\byte}
+\end{itemize}
+
+\section{Quick Tips}
+\begin{itemize}
+    \item \texttt{vector} and arrays are most memory-efficient.
+    \item Avoid deep recursion or convert to iterative.
+    \item \texttt{bitset} and \texttt{vector<bool>} save space.
+    \item Use the smallest data type possible (\texttt{int}, \texttt{short}).
+    \item \texttt{set/map} are costly — use only if needed.
+\end{itemize}
+
+\end{document}

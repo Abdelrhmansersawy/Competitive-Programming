@@ -16,7 +16,7 @@
  * 
  * Requirements:
  * - Define the associative operation in `comb(a, b)`.
- * - Set the identity element `id`.
+ * - Set the identity element `id` based on that operation.
  * 
  * ============================================================================
  */
@@ -37,9 +37,24 @@ typedef long long ll;
 #endif
 
 template<class T, int SZ> struct RangeQuery {
+private:
     int n;
-    T stor[SZ][32 - __builtin_clz(SZ)], id = 1;  // change id based on operation
+    T stor[SZ][32 - __builtin_clz(SZ)];
     vector<T> a;
+
+    /*
+     * Identity Element `id`:
+     * This is the neutral value for the operation `comb(a, b)`, meaning:
+     *     comb(a, id) = comb(id, a) = a
+     * 
+     * Example identity elements for common operations:
+     * - sum:           comb(a, b) = a + b     → id = 0
+     * - multiplication: comb(a, b) = a * b     → id = 1
+     * - gcd:           comb(a, b) = gcd(a, b) → id = 0
+     * - min:           comb(a, b) = min(a, b) → id = INF
+     * - max:           comb(a, b) = max(a, b) → id = -INF
+     */
+    const T id = 1;  // ← set this according to your operation
 
     // associative operation
     T comb(T a, T b) { 
@@ -57,7 +72,9 @@ template<class T, int SZ> struct RangeQuery {
         fill(m, r, ind - 1);
     }
 
-    void init() {
+public:
+    void init(vector<T> input) {
+        a = input;
         n = 1;
         while ((1 << n) < int(a.size())) ++n;
         a.resize(1 << n, id);  // pad with identity
@@ -83,11 +100,11 @@ int main() {
 
     int n;
     cin >> n;
-    RangeQuery<ll, 1 << 18> rq;
-    rq.a.resize(n);
-    for (int i = 0; i < n; i++) cin >> rq.a[i];
+    vector<ll> input(n);
+    for (int i = 0; i < n; i++) cin >> input[i];
 
-    rq.init();
+    RangeQuery<ll, 1 << 18> rq;
+    rq.init(input);
 
     int q;
     cin >> q;

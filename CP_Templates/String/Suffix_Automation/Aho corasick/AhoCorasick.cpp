@@ -6,11 +6,13 @@ struct AhoCorasick {
     
     struct Node {
         int nxt[alpha];        // Next state transition for each character
-        int suflink;           // Suffix link points to longest proper suffix
+        int suflink = 0;           // Suffix link points to longest proper suffix
         int start = -1;        // Start index of pattern in original array
         int end = -1;          // Index in backup of longest matched suffix pattern
         int nmatches = 0;      // Count of matched strings ending at this node
         
+        int lvl = 0;
+
         Node(int v) { 
             memset(nxt, v, sizeof nxt); 
         }
@@ -20,17 +22,21 @@ struct AhoCorasick {
     vector<int> backup;       // Stores pattern indices with longest matching suffixes
                              // Returns -1 if no match exists
                              // Note: All patterns must be distinct when using backup
-    
+    vector<bool> exit;
     // Inserts a pattern into the automaton
     // Time: O(|s|) where |s| is pattern length
     void insert(string &s, int id) {
         assert(s.size());     // Empty patterns not allowed
         int node = 0;
+        int clvl = 0;
         for(auto &c : s) {
             int &m = v[node].nxt[c - first];
+            
+            ++clvl;
             if(m == -1) { 
                 node = m = v.size(); 
                 v.emplace_back(-1); 
+                v.back().lvl = clvl;
             }
             else node = m;
         }
@@ -50,6 +56,7 @@ struct AhoCorasick {
             insert(pat[i], i);
             
         v[0].suflink = v.size();    // Dummy node as suffix link of root
+       
         v.emplace_back(0);
         
         queue<int> q;
@@ -71,33 +78,6 @@ struct AhoCorasick {
                 }
             }
         }
-    }
-    
-    // Returns index of longest word ending at each position, or -1 if none
-    // Time: O(|word|) where |word| is text length
-    vector<int> find(string &word) {
-        int node = 0;
-        vector<int> res;
-        for(auto &c : word) {
-            node = v[node].nxt[c - first];
-            res.push_back(v[node].end);
-        }
-        return res;
-    }
-    
-    // Finds all patterns starting at each position (shortest first)
-    // Time: O(NM) where N = text length, M = number of matches
-    // Can find up to N√N matches if no duplicate patterns
-    vector<vector<int>> findAll(vector<string> &pat, string word) {
-        vector<int> r = find(word);
-        vector<vector<int>> res(word.size());
-        for(int i = 0; i < word.size(); ++i) {
-            int ind = r[i];
-            while(ind != -1) {
-                res[i - pat[ind].size() + 1].push_back(ind);
-                ind = backup[ind];
-            }
-        }
-        return res;
+
     }
 };

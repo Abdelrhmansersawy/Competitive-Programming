@@ -65,3 +65,21 @@ void propagate() {
         // Example: v[link].value += v[x].value;
     }
 }
+
+// Builds the transition matrix of the automaton
+// m[i][j] = 1 if there's a valid transition from node i to node j 
+// using some character, and node j does NOT lead to any forbidden string
+// (i.e., it does not match or lie on a suffix that matches a restricted pattern)
+vector<vector<int>> getMat() {
+    int N = v.size() - 1; // exclude dummy node
+    vector<vector<int>> m(N, vector<int>(N));
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < alpha; ++j) {
+            int nxt = v[i].nxt[j];
+            if (nxt >= N) continue;            // skip dummy or out-of-bound node
+            if (v[nxt].nmatches) continue;     // skip terminal (forbidden) states
+            m[i][nxt]++;
+        }
+    }
+    return m;
+}

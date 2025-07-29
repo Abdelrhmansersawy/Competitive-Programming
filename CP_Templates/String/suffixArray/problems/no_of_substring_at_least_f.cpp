@@ -1,167 +1,168 @@
 /*
-Given a string S and several frequencies Fi.
-For each Fi output the number of substrings of S (the characters of substring should be contiguous)
-that occur at least Fi times in S. Note, that we consider two substrings distinct
-if they have distinct length, or they have distinct starting indices.
-problem link: https://www.codechef.com/problems/ANUSAR
+================================= ANUSAR - CodeChef ================================
+Problem link: https://www.codechef.com/problems/ANUSAR
 
+Given:
+- A string S of length n.
+- Multiple queries, each with an integer Fi.
 
+Task:
+- For each Fi, output the number of **contiguous substrings** that appear at least Fi times.
+- Substrings are considered distinct if they start at different indices or have different lengths.
+
+Approach:
+- Suffix Array + LCP Array
+- Group LCP values to calculate how many substrings occur exactly f times.
+- Preprocess frequency counts for all f = [1, n]
+====================================================================================
 */
+
 #include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
+typedef long long ll;
 
-vector<int> buildSuffixArray(string s) {
-    const int ALPHA = 256;
-    s += '$';
-    int n = s.size();
-    vector<int> p(n), c(n);
-    {
-        // Optimize first phase with counting sort
-        vector<int> cnt(ALPHA);
-        for(auto ch : s) cnt[ch]++;
-        for(int i = 1; i < ALPHA; i++) cnt[i] += cnt[i-1];
-        for(int i = n-1; i >= 0; i--) p[--cnt[s[i]]] = i;
-        
-        c[p[0]] = 0;
-        int classes = 1;
-        for(int i = 1; i < n; i++) {
-            if(s[p[i]] != s[p[i-1]]) classes++;
-            c[p[i]] = classes - 1;
-        }
+// ===== Build Suffix Array using Doubling Algorithm =====
+vector<int> buildSuffixArray(const string &s) {
+    int n = s.size(), N = max(256, n + 1);
+    vector<int> sa(n), rank(n), tmp(n), cnt(N);
+    iota(sa.begin(), sa.end(), 0);
+    for (int i = 0; i < n; ++i) rank[i] = s[i];
+
+    for (int len = 1;; len <<= 1) {
+        auto cmp = [&](int i, int j) {
+            if (rank[i] != rank[j]) return rank[i] < rank[j];
+            int ri = (i + len < n ? rank[i + len] : -1);
+            int rj = (j + len < n ? rank[j + len] : -1);
+            return ri < rj;
+        };
+
+        sort(sa.begin(), sa.end(), cmp);
+
+        tmp[sa[0]] = 0;
+        for (int i = 1; i < n; ++i)
+            tmp[sa[i]] = tmp[sa[i - 1]] + cmp(sa[i - 1], sa[i]);
+
+        rank = tmp;
+        if (rank[sa[n - 1]] == n - 1) break;
     }
-    
-    vector<int> pn(n), cn(n);
-    for(int h = 0; (1 << h) < n; ++h) {
-        int len = 1 << h;
-        for(int i = 0; i < n; i++) {
-            pn[i] = p[i] - len;
-            if(pn[i] < 0) pn[i] += n;
-        }
-        
-        // Optimize counting sort for each phase
-        vector<int> cnt(n);
-        for(int i = 0; i < n; i++) cnt[c[pn[i]]]++;
-        for(int i = 1; i < n; i++) cnt[i] += cnt[i-1];
-        for(int i = n-1; i >= 0; i--) p[--cnt[c[pn[i]]]] = pn[i];
-        
-        cn[p[0]] = 0;
-        int classes = 1;
-        for(int i = 1; i < n; i++) {
-            pair<int,int> cur = {c[p[i]], c[(p[i] + len) % n]};
-            pair<int,int> prev = {c[p[i-1]], c[(p[i-1] + len) % n]};
-            if(cur != prev) ++classes;
-            cn[p[i]] = classes - 1;
-        }
-        c.swap(cn);
-    }
-    p.erase(p.begin());
-    return p;
+
+    return sa;
 }
 
-vector<int> buildLCP(const string& s, const vector<int>& p) {
+// ===== Build LCP Array (Kasai’s Algorithm) =====
+vector<int> buildLCP(const string &s, const vector<int> &sa) {
     int n = s.size();
-    vector<int> rank(n), lcp(n-1);
-    for(int i = 0; i < n; i++) rank[p[i]] = i;
-    
-    for(int i = 0, k = 0; i < n; i++) {
-        if(rank[i] == n-1) {
-            k = 0;
-            continue;
+    vector<int> lcp(n - 1), rank(n);
+    for (int i = 0; i < n; ++i) rank[sa[i]] = i;
+
+    int h = 0;
+    for (int i = 0; i < n; ++i) {
+        if (rank[i]) {
+            int j = sa[rank[i] - 1];
+            while (i + h < n && j + h < n && s[i + h] == s[j + h]) ++h;
+            lcp[rank[i] - 1] = h;
+            if (h) --h;
         }
-        int j = p[rank[i] + 1];
-        while(i + k < n && j + k < n && s[i+k] == s[j+k]) k++;
-        lcp[rank[i]] = k;
-        if(k) k--;
     }
     return lcp;
 }
 
-// Optimized stack-based nearest smaller element
+// ===== Nearest Smaller to Left and Right using Monotonic Stack =====
 pair<vector<int>, vector<int>> getMinBounds(const vector<int>& arr) {
     int n = arr.size();
-    vector<int> left(n), right(n);
-    vector<int> st;
+    vector<int> left(n), right(n), st;
     st.reserve(n);
-    
-    // Get left bounds
-    for(int i = 0; i < n; i++) {
-        while(!st.empty() && arr[st.back()] > arr[i]) st.pop_back();
+
+    // Left boundaries
+    for (int i = 0; i < n; i++) {
+        while (!st.empty() && arr[st.back()] > arr[i]) st.pop_back();
         left[i] = st.empty() ? -1 : st.back();
         st.push_back(i);
     }
-    
-    // Clear stack for right bounds
+
+    // Right boundaries
     st.clear();
-    
-    // Get right bounds
-    for(int i = n-1; i >= 0; i--) {
-        while(!st.empty() && arr[st.back()] >= arr[i]) st.pop_back();
+    for (int i = n - 1; i >= 0; i--) {
+        while (!st.empty() && arr[st.back()] >= arr[i]) st.pop_back();
         right[i] = st.empty() ? n : st.back();
         st.push_back(i);
     }
-    
+
     return {left, right};
 }
 
+// ===== Solve One Test Case =====
 void solve() {
     string s;
     cin >> s;
     int n = s.size();
-    
+
     auto p = buildSuffixArray(s);
     auto lcp = buildLCP(s, p);
     auto [L, R] = getMinBounds(lcp);
-    
-    // Pre-allocate vectors to avoid resizing
-    vector<ll> frq(n+9);
-    vector<vector<int>> group(n+1);
-    for(int i = 0; i < n+1; i++) group[i].reserve(n/2);
-    
-    // Group LCP values
-    for(int i = 0; i < (int)lcp.size(); ++i) {
+
+    vector<ll> frq(n + 9);
+    vector<vector<int>> group(n + 1);
+    for (int i = 0; i < n + 1; i++) group[i].reserve(n / 2);
+
+    // Group LCP values by height
+    for (int i = 0; i < (int)lcp.size(); ++i) {
         group[lcp[i]].push_back(i);
     }
-    
-    // Calculate frequencies
-    for(int len = n; len > 0; --len) {
-        for(size_t j = 0; j < group[len].size();) {
+
+    /*
+        ====================== LCP Group Contribution ======================
+        - We iterate over all LCP lengths in decreasing order.
+        - For each group of LCP == len, we determine the range [L[x], R[x]] 
+          where all suffixes share a common prefix of length >= len.
+
+        - For each such group:
+            * Let f = r - l → the frequency (how many suffixes in this group)
+            * Compute the minimal extension `minh` we can go beyond len,
+              by checking surrounding LCP values (left and right neighbors).
+            * Add f * minh to frq[f] → meaning f substrings occur with that extension.
+
+        - Skip all processed positions in the group to avoid repetition.
+    */
+    for (int len = n; len > 0; --len) {
+        for (size_t j = 0; j < group[len].size();) {
             int x = group[len][j];
             int l = L[x], r = R[x];
             int f = r - l;
             int minh = len;
-            
-            if(l >= 0) minh = min(minh, len - lcp[l]);
-            if(r < (int)lcp.size()) minh = min(minh, len - lcp[r]);
-            
+
+            if (l >= 0) minh = min(minh, len - lcp[l]);
+            if (r < (int)lcp.size()) minh = min(minh, len - lcp[r]);
+
             frq[f] += 1LL * f * minh;
-            
-            // Skip processed indices
-            while(j < group[len].size() && group[len][j] <= r) ++j;
+
+            // Skip over processed group
+            while (j < group[len].size() && group[len][j] <= r) ++j;
         }
     }
-    
-    // Calculate cumulative frequencies
-    for(int i = n-1; i > 1; --i) frq[i] += frq[i+1];
-    frq[1] = 1LL * n * (n + 1) / 2;
-    
-    // Process queries
+
+    // ===== Build suffix frequency for ≥f queries =====
+    for (int i = n - 1; i > 1; --i) frq[i] += frq[i + 1];
+    frq[1] = 1LL * n * (n + 1) / 2; // Total substrings = n(n+1)/2
+
+    // ===== Answer Queries =====
     int q;
     cin >> q;
-    while(q--) {
+    while (q--) {
         int x;
         cin >> x;
         cout << (x > s.size() ? 0 : frq[x]) << '\n';
     }
 }
 
+// ===== Driver =====
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    
+
     int tc;
     cin >> tc;
-    while(tc--) solve();
-    
+    while (tc--) solve();
+
     return 0;
 }

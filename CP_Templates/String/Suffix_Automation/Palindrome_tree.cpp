@@ -1,34 +1,52 @@
+/*
+ * ======================= Palindromic Tree (Eertree) =======================
+ *
+ * Description:
+ * - Data structure to efficiently find and count all distinct palindromic substrings.
+ * - Supports online construction in O(n) time.
+ * 
+ * Details:
+ * - Each node represents a unique palindromic substring.
+ * - `suffLink` connects to the largest proper palindromic suffix.
+ * - Two imaginary roots: len = -1 (odd root), len = 0 (even root).
+ * 
+ * Usage:
+ * - Call `addChar(c)` for each character in the string.
+ * - After processing, use `countDistinctPalindromes()` or others for stats.
+ *
+ * ========================================================================
+ */
+
 struct Node {
     int len;                              // Length of the palindrome
-    int suffLink;                         // Suffix link to longest proper palindromic suffix
+    int suffLink;                         // Link to longest proper palindromic suffix
     unordered_map<char, int> next;        // Transitions by character
 };
 
 class PalindromicTree {
-    vector<Node> tree;                    // The tree structure
+    vector<Node> tree;                    // Palindromic tree nodes
     string s;                             // Processed string
-    int suff;                             // Index of the node representing the current max suffix palindrome
-    int n;                                // Current length of string `s`
+    int suff;                             // Current max suffix-palindrome node
+    int n;                                // Length of current string
 
 public:
     PalindromicTree() {
-        // Two root nodes:
-        // Node 0: length = -1 (imaginary node), suffix link to itself
-        // Node 1: length = 0 (empty string), suffix link to node 0
+        // Root nodes:
+        // node 0: len = -1 (imaginary odd root)
+        // node 1: len = 0  (even root), both link to node 0
         tree.push_back({-1, 0, {}});
         tree.push_back({0, 0, {}});
         suff = 1;
         n = 0;
     }
 
-    // Adds character `c` and returns true if it created a new palindrome
+    // Insert character c, return true if a new palindrome is created
     bool addChar(char c) {
         s += c;
         n++;
         int cur = suff;
 
-        // Find the largest suffix palindrome of the current string such that
-        // s[n - 2 - len] == c (i.e., the current character can extend the palindrome)
+        // Traverse suffix links to find the largest palindromic suffix that can be extended by c
         while (true) {
             int curlen = tree[cur].len;
             if (n - 2 - curlen >= 0 && s[n - 2 - curlen] == c)
@@ -36,20 +54,20 @@ public:
             cur = tree[cur].suffLink;
         }
 
-        // If the transition already exists, just move the suffix pointer
+        // If such transition already exists → no new palindrome
         if (tree[cur].next.count(c)) {
             suff = tree[cur].next[c];
-            return false; // No new palindrome created
+            return false;
         }
 
-        // Create a new node for the new palindrome
+        // Create new node for the new palindrome
         int newNode = tree.size();
         tree.push_back({tree[cur].len + 2, 0, {}});
         tree[cur].next[c] = newNode;
 
-        // Set suffix link for the new node
+        // Set suffix link for new node
         if (tree[newNode].len == 1) {
-            tree[newNode].suffLink = 1; // Single-letter palindrome links to empty string node
+            tree[newNode].suffLink = 1;
         } else {
             int temp = tree[cur].suffLink;
             while (true) {
@@ -63,10 +81,10 @@ public:
         }
 
         suff = newNode;
-        return true; // New palindrome created
+        return true;
     }
 
-    // Returns the number of odd-length palindromes of length >= 3
+    // Count number of odd-length palindromes of length ≥ 3
     int countOddPalindromesLenAtLeast3() {
         int count = 0;
         for (int i = 2; i < tree.size(); i++) {
@@ -76,7 +94,8 @@ public:
         return count;
     }
 
+    // Count total number of distinct palindromes
     int countDistinctPalindromes() {
-        return tree.size() - 2; // Exclude the two root nodes
+        return tree.size() - 2; // Exclude the two roots
     }
 };

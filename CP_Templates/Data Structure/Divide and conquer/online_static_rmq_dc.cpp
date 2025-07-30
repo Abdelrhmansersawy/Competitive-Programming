@@ -28,7 +28,7 @@ int main(){
     #endif
     cin >> n >> q;
     for(int i = 0; i < n; ++i) cin >> a[i];
-    dc(0 , n , 0);
+    dc(0 , n-1 , 0);
     for(int i = 0; i < q; ++i){
         int l , r; cin >> l >> r;
         --l; --r;

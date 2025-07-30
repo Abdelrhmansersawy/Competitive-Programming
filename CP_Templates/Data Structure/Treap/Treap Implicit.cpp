@@ -1,267 +1,236 @@
-/// Implicit Treap Implementation
-/// Can handle most of the operations we do in segment tree
-/// Ex: Range update, range query
-/// Additionally also handles insert or erase at any position, reverse a range
+/*
+--------------------------------------------------------
+      Implicit Treap with Lazy Propagation & Reversal
+--------------------------------------------------------
+
+Features:
+---------
+This is an Implicit Treap (Indexed Treap) that supports the following in O(log n):
+  - Point Insertion and Deletion
+  - Range Addition (Lazy Propagation)
+  - Range Reversal (Lazy Tag)
+  - Range Rotation (Left or Right)
+  - Range Queries: Size, Sum, Minimum
+
+Node Metadata (Info):
+---------------------
+Each node tracks:
+  - size of subtree
+  - sum of values
+  - minimum value
+  - pending lazy addition
+
+Operations are implemented using:
+  - Treap split/merge techniques
+  - Lazy propagation and reverse flag
+  - Efficient subtree recomputation (pull)
+
+Time Complexity:
+----------------
+Each operation is O(log n) amortized due to randomized treap structure.
+
+--------------------------------------------------------
+
 /// Call clear() to clear the treap, then use each function carefully following the comments
 /// If there is propagation, uncomment propagate() inside the functions
 /// Note 1: All the operations are zero based
 /// Note 2: Remember to propagate if you try to access the treap nodes outside split and merge
+/*
+*/
 
-struct node{
-    int size, prior;
-    int sum, prop, key, mnn;
-    bool rev;
-    struct node *l, *r;
-    node() { }
-    node(int v) {
-        key = v;
-        prior = rand();
-        size = 1;
-        l = r = NULL;
-        sum = prop = 0;
-        mnn = inf;
+#include <bits/stdc++.h>
+using namespace std;
+
+const int INF = numeric_limits<int>::max();
+
+struct Info {
+    int size, sum, mn, lazy;
+    Info() : size(0), sum(0), mn(INF), lazy(0) {}
+    Info(int _size, int _sum, int _mn, int _lazy)
+        : size(_size), sum(_sum), mn(_mn), lazy(_lazy) {}
+
+    Info operator+(const Info &o) const {
+        return Info(
+            size + o.size,
+            sum + o.sum,
+            min(mn, o.mn),
+            0 // lazy is not carried forward in merge
+        );
     }
-    node (int key, int prior) : key(key), prior(prior), l(NULL), r(NULL) { }
 };
 
-typedef node* pnode;
+struct Node {
+    int key, prior;
+    bool rev;
+    Info info;
+    Node *l, *r;
 
-struct Treap{
-    pnode t;
-    Treap(){}
+    Node(int v)
+        : key(v), prior(rand()), rev(false),
+          info(1, v, v, 0), l(nullptr), r(nullptr) {}
+};
 
-    /// Returns size of treap
-    int size(){
-        return sz(t);
-    }
+typedef Node* PNode;
 
-    int sz(pnode t){
-        return t ? t->size:0;
-    }
+struct Treap {
+    PNode root = nullptr;
 
-    int sum(pnode t){
-        return t ? t->sum:0;
-    }
+    int sz(PNode t) { return t ? t->info.size : 0; }
 
-    int mnn(pnode t){
-        return t ? t->mnn:inf;
-    }
+    void push(PNode t) {
+        if (!t) return;
 
-    void upd_node(pnode t){
-        if(t){
-            t->size = sz(t->l) + 1 + sz(t->r);
-            //t->sum = sum(t->l) + t->key + sum(t->r); /// If you need sum
-            t->mnn = min(t->key, min(mnn(t->l), mnn(t->r)));
-        }
-    }
-
-    /// Works like segment tree propagation
-    void propagate(pnode t){
-        if(!t) return;
-        if(t->prop>0){ /// Propagate range addition
-            if(t->l){
-                t->l->key += t->prop;
-                t->l->sum += sz(t->l)*t->prop;
-                t->l->prop += t->prop;
-                t->l->mnn += t->prop;
-            }
-            if(t->r){
-                t->r->key += t->prop;
-                t->r->sum += sz(t->r)*t->prop;
-                t->r->prop += t->prop;
-                t->r->mnn += t->prop;
-            }
-            t->prop = 0;
-        }
-        if(t->rev){ /// Propagate range reverse
+        if (t->rev) {
             swap(t->l, t->r);
-            if(t->l) t->l->rev ^= true;
-            if(t->r) t->r->rev ^= true;
+            if (t->l) t->l->rev ^= 1;
+            if (t->r) t->r->rev ^= 1;
             t->rev = false;
         }
+
+        if (t->info.lazy) {
+            t->key += t->info.lazy;
+            t->info.sum += t->info.lazy * sz(t);
+            t->info.mn += t->info.lazy;
+
+            if (t->l) t->l->info.lazy += t->info.lazy;
+            if (t->r) t->r->info.lazy += t->info.lazy;
+
+            t->info.lazy = 0;
+        }
     }
 
-    /// Split t into l and r such that all elements in l is < key and
-    /// all elements in r is >= than key
-    void split(pnode t, pnode &l, pnode &r, int key, int add = 0){
-        if(!t){
-            l = r = NULL;
-            return;
-        }
-        propagate(t);
-        int cur_key = add + sz(t->l);
-        if(cur_key < key)
-            split(t->r, t->r, r, key, add + 1 + sz(t->l)), l = t;
+    void pull(PNode t) {
+        if (!t) return;
+        t->info = Info(1, t->key, t->key, 0);
+        if (t->l) t->info = t->l->info + t->info;
+        if (t->r) t->info = t->info + t->r->info;
+    }
+
+    void split(PNode t, int k, PNode &l, PNode &r) {
+        if (!t) return void(l = r = nullptr);
+        push(t);
+        if (sz(t->l) < k)
+            split(t->r, k - sz(t->l) - 1, t->r, r), l = t;
         else
-            split(t->l, l, t->l, key, add), r = t;
-        upd_node(t);
+            split(t->l, k, l, t->l), r = t;
+        pull(t);
     }
 
-    /// Merge l and r into t, where all elements in l
-    /// is less than all elements in r
-    void merge(pnode &t, pnode l, pnode r){
-        propagate(l);
-        propagate(r);
-        if(!l || !r) t = l ? l:r;
-        else if(l->prior > r->prior) merge(l->r, l->r, r), t = l;
-        else merge(r->l, l, r->l), t = r;
-        upd_node(t);
+    void merge(PNode &t, PNode l, PNode r) {
+        push(l); push(r);
+        if (!l || !r) t = l ? l : r;
+        else if (l->prior > r->prior)
+            merge(l->r, l->r, r), t = l;
+        else
+            merge(r->l, l, r->l), t = r;
+        pull(t);
     }
 
-    void insert(pnode &t, int pos, pnode it){
-        pnode l, r, tmp;
-        split(t, l, r, pos);
-        merge(tmp, l, it);
-        merge(t, tmp, r);
-        upd_node(t);
+    void insert(int pos, int val) {
+        PNode t1, t2;
+        split(root, pos, t1, t2);
+        merge(t1, t1, new Node(val));
+        merge(root, t1, t2);
     }
 
-    void insertEnd(pnode &t, pnode it){
-        pnode l, r, tmp;
-        merge(t, t, it);
-        upd_node(t);
+    void erase(int pos) {
+        PNode t1, t2, t3;
+        split(root, pos, t1, t2);
+        split(t2, 1, t2, t3);
+        delete t2;
+        merge(root, t1, t3);
     }
 
-    void erase(pnode &t, int key){
-        pnode t1, t2, nt1, nt2;
-        split(t, t1, t2, key+1);
-        split(t1, nt1, nt2, key);
-        merge(t, nt1, t2);
-        upd_node(t);
-        free(nt2);
+    void updateRangeAdd(int l, int r, int v) {
+        PNode t1, t2, t3;
+        split(root, l, t1, t2);
+        split(t2, r - l + 1, t2, t3);
+        if (t2) t2->info.lazy += v;
+        merge(t2, t2, t3);
+        merge(root, t1, t2);
     }
 
-    int get(pnode &t, int key, int add = 0){
-        if(!t) return 0;
-        propagate(t);
-        int cur_key = add + sz(t->l);
-        if(cur_key == key){
-            return t->key;
-        }else{
-            if(cur_key < key) return get(t->r, key, add + 1 + sz(t->l));
-            else return get(t->l, key, add);
-        }
-        upd_node(t);
+    void updateRangeReverse(int l, int r) {
+        PNode t1, t2, t3;
+        split(root, l, t1, t2);
+        split(t2, r - l + 1, t2, t3);
+        if (t2) t2->rev ^= 1;
+        merge(t2, t2, t3);
+        merge(root, t1, t2);
     }
 
-    void print(pnode t){
-        if(!t) return;
-        propagate(t);
-        print(t->l);
-        cerr << t->key << " ";
-        print(t->r);
-    }
-
-    void nullify(pnode t){
-        if(t == NULL) return;
-        nullify(t->l); nullify(t->r);
-        delete t;
-        t->l = NULL; t->r = NULL; t = NULL;
-        free(t);
-    }
-
-    /// Insert val at position p in the treap
-    void insert(int p, int val){
-        pnode it = new node(val);
-        insert(t, p, it);
-    }
-
-    /// Insert val at the end of the treap
-    void insertEnd(int val){
-        pnode it = new node(val);
-        insertEnd(t, it);
-    }
-
-    /// Erase the element at p from the treap
-    void erase(int p){
-        erase(t, p);
-    }
-
-    /// Returns the value at position p
-    int get(int p){
-        return get(t, p);
-    }
-
-    /// Print all the elements in treap in sorted order
-    void print(){
-        cerr<<"\nPRINT TREAP: ";
-        print(t);
-        cerr<<" \n";
-    }
-
-    /// Clear the treap
-    void clear(){
-        nullify(t);
-        t = NULL;
-    }
-
-    /// Get the minimum in range u to v
-    int getRangeMin(int u, int v){
-        pnode tv, tvn, tu, tuv;
-        split(t, tv, tvn, v+1);
-        split(tv, tu, tuv, u);
-
-        int res = min(tuv->key, min(mnn(tuv->l), mnn(tuv->r)));
-        merge(tv, tu, tuv);
-        merge(t, tv, tvn);
-        return res;
-    }
-
-    /// Get the sum of range u to v
-    int getRangeSum(int u, int v){
-        pnode tv, tvn, tu, tuv;
-        split(t, tv, tvn, v+1);
-        split(tv, tu, tuv, u);
-
-        int res = tuv->sum;
-        merge(tv, tu, tuv);
-        merge(t, tv, tvn);
-        return res;
-    }
-
-    /// Rotate(right) the range from u to v k times
-    void updateRangeRotate(int u, int v, int k){
-        pnode tv, tvn, tu, tuv;
-        split(t, tv, tvn, v+1);
-        split(tv, tu, tuv, u);
-
-        int len = v - u + 1;
+    void updateRangeRotateRight(int l, int r, int k) {
+        int len = r - l + 1;
         k %= len;
-
-        pnode tuv1, tuv2;
-        split(tuv, tuv1, tuv2, len-k);
-
-        merge(tuv, tuv2, tuv1);
-        merge(tv, tu, tuv);
-        merge(t, tv, tvn);
+        if (k == 0) return;
+        PNode t1, t2, t3, t4;
+        split(root, l, t1, t2);
+        split(t2, len, t2, t3);
+        split(t2, len - k, t2, t4);
+        merge(t2, t4, t2);
+        merge(t2, t2, t3);
+        merge(root, t1, t2);
     }
 
-    /// Reverse the range from u to v
-    void updateRangeReverse(int u, int v){
-        pnode tv, tvn, tu, tuv;
-        split(t, tv, tvn, v+1);
-        split(tv, tu, tuv, u);
-
-        tuv->rev ^= true;
-
-        merge(tv, tu, tuv);
-        merge(t, tv, tvn);
+    void updateRangeRotateLeft(int l, int r, int k) {
+        int len = r - l + 1;
+        k %= len;
+        if (k == 0) return;
+        updateRangeRotateRight(l, r, len - k);
     }
 
-    /// Add val to each node in range u to v
-    void updateRangeAdd(int u, int v, int val){
-        pnode tv, tvn;
-        split(t, tv, tvn, v+1);
-
-        pnode tu, tuv;
-        split(tv, tu, tuv, u);
-
-        tuv->key += val;
-        tuv->sum += sz(tuv)*val;
-        tuv->prop += val;
-
-        merge(tv, tu, tuv);
-        merge(t, tv, tvn);
+    Info query(int l, int r) {
+        PNode t1, t2, t3;
+        split(root, l, t1, t2);
+        split(t2, r - l + 1, t2, t3);
+        Info res = t2 ? t2->info : Info();
+        merge(t2, t2, t3);
+        merge(root, t1, t2);
+        return res;
     }
 
-}treap;
+    Info getInfo() {
+        if (root) push(root);
+        return root ? root->info : Info();
+    }
+
+    void clear(PNode &t) {
+        if (!t) return;
+        clear(t->l);
+        clear(t->r);
+        delete t;
+        t = nullptr;
+    }
+
+    ~Treap() { clear(root); }
+};
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    srand(time(0)); // Random priority seed
+
+    Treap tr;
+    tr.insert(0, 5);
+    tr.insert(1, 3);
+    tr.insert(2, 9);
+    tr.insert(3, 1);
+    tr.insert(4, 7);
+
+    // Initial: {5, 3, 9, 1, 7}
+
+    tr.updateRangeReverse(1, 3);      // -> {5, 1, 9, 3, 7}
+    tr.updateRangeAdd(2, 4, 2);       // -> {5, 1, 11, 5, 9}
+    tr.updateRangeRotateRight(0, 4, 2); // -> {5, 9, 5, 1, 11}
+    tr.updateRangeRotateLeft(0, 4, 1);  // -> {9, 5, 1, 11, 5}
+
+    Info meta = tr.getInfo();
+    cout << "Final stats: Size=" << meta.size
+         << " Sum=" << meta.sum
+         << " Min=" << meta.mn << '\n';
+
+    Info q = tr.query(1, 3);
+    cout << "Range [1,3] stats: Sum=" << q.sum << " Min=" << q.mn << '\n';
+
+    return 0;
+}

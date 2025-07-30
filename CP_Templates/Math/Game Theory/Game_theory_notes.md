@@ -137,3 +137,47 @@ int move(int x) {
 
 * A pile becomes invalid if its size is `1`, since it can't be halved further.
 * A player **loses** if they cannot make a valid move on any pile.
+
+## 6.7 Misère Nim
+
+**Game Rules:**
+
+* Standard Nim setup: several piles of stones, and on each turn, a player removes any number of stones from a single pile.
+* **Twist:** The player **who removes the last stone *loses***.
+* This version is called **Misère Nim**.
+
+---
+
+### C++ Implementation
+
+```cpp
+/**
+    In misere nim, the player who makes the last move **loses**.
+    Special Case: When all piles have size 1, the XOR rule fails.
+    - If all piles are size 1:
+        - Even number of piles → First player wins
+        - Odd number of piles → Second player wins
+    - Otherwise, play like normal nim.
+**/
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main(){
+    ios::sync_with_stdio(0); cin.tie(NULL); cout.tie(0);
+
+    int tc; cin >> tc;
+    while(tc--){
+        int n; cin >> n;
+        int xor_sum = 0, ones = 0;
+        for(int i = 0; i < n; ++i){
+            int x; cin >> x;
+            ones += (x == 1);
+            xor_sum ^= x;
+        }
+        if(ones == n) cout << (n & 1 ? "Second\n" : "First\n");
+        else cout << (xor_sum ? "First\n" : "Second\n");
+    }
+}
+```

@@ -1,115 +1,108 @@
-struct segtree_with_rollback {
-private:
+/*
+ * Segment Tree with Rollback
+ * --------------------------
+ * Supports range add updates and range sum queries with rollback capability.
+ * You can undo the last update using rollback().
+ * 
+ * Operations:
+ *  - init(n): initialize the tree for `n` elements.
+ *  - build(a): build the tree from vector `a`.
+ *  - upd_rb(l, r, v): add `v` to range [l, r) and save history.
+ *  - qry(l, r): sum on range [l, r).
+ *  - rollback(): undo the last upd_rb() operation.
+ * 
+ * Time complexity:
+ *  - upd/qry: O(log n)
+ *  - rollback: amortized O(log n) per rollback
+ */
+
+struct SegTreeRollback {
+    typedef long long ll;
     struct Node {
-        ll sum;
-        
-        Node() : sum(0) {}
-        Node(ll val) : sum(val) {}
-        
-        Node operator + (const Node &other) const {
-            Node res;
-            res.sum = sum + other.sum;
-            return res;
-        }
+        ll s = 0;
+        Node() {}
+        Node(ll v): s(v) {}
+        Node operator+(Node o) const { return Node(s + o.s); }
     };
 
-    struct seg_save {
-        int time;
-        int Node_idx;
-        Node node_val;
-        ll lazy_val;
-    };
-
-    int n, time = 0;
-    vector<Node> tree;
-    vector<ll> lazy;
-    vector<int> upd_times;
-    vector<seg_save> history;
-    
-    void add_history(int Node_idx) {
-        history.push_back({time, Node_idx, tree[Node_idx], lazy[Node_idx]});
-    }
-    
-    void push_down(int x, ll lazy_val) {
-        if (lazy_val == 0) return;
-        add_history(x);  
-        tree[x].sum += lazy_val * (tree[x].sum == 0 ? 1 : tree[x].sum);   
-        lazy[x] += lazy_val;
-    }
-    
-    void propagate(int x, int l, int r) {
-        if (r - l == 1) return;
-        if (lazy[x] == 0) return;
-        add_history(x);
-        int mid = (l + r) / 2;
-        push_down(2 * x + 1, lazy[x]);
-        push_down(2 * x + 2, lazy[x]);
-        
-        lazy[x] = 0;
-    }
-    
-    void upd(int lx, int rx, ll val, int x = 0, int l = 0, int r = -1) {
-        if (r == -1) r = n;
-        propagate(x, l, r);
-        if (l >= rx || r <= lx) return;
-        if (l >= lx && r <= rx) {
-            tree[x].sum += val * (r - l);
-            lazy[x] += val;
-            return;
-        }
-        int mid = (l + r) / 2;
-        upd(lx, rx, val, 2 * x + 1, l, mid);
-        upd(lx, rx, val, 2 * x + 2, mid, r); 
-        tree[x] = tree[2 * x + 1] + tree[2 * x + 2];
-    }
-
-public:
-    void init(int sz){
-        this->n = sz;
-        tree.resize(4 * n);
-        lazy.resize(4 * n, 0);
+    void init(int sz) {
+        n = sz;
+        tr.assign(4 * n, Node());
+        lz.assign(4 * n, 0);
     }
 
     void build(vector<ll> &a, int x = 0, int l = 0, int r = -1) {
         if (r == -1) r = n;
-        
-        if (r - l == 1) {
-            tree[x] = Node(a[l]);
-            return;
-        }
-        
-        int mid = (l + r) / 2;
-        build(a, 2 * x + 1, l, mid);
-        build(a, 2 * x + 2, mid, r);
-        tree[x] = tree[2 * x + 1] + tree[2 * x + 2];
+        if (r - l == 1) { tr[x] = Node(a[l]); return; }
+        int m = (l + r) / 2;
+        build(a, 2 * x + 1, l, m);
+        build(a, 2 * x + 2, m, r);
+        tr[x] = tr[2 * x + 1] + tr[2 * x + 2];
     }
 
-    void upd_with_rollback(int lx, int rx, ll val) {
-        upd_times.push_back(time);
-        upd(lx, rx, val);
-        time++;
+    void upd_rb(int l, int r, ll v) {
+        times.push_back(t);
+        upd(l, r, v);
+        t++;
     }
-    
-    Node qry(int lx, int rx, int x = 0, int l = 0, int r = -1) {
+
+    Node qry(int ql, int qr, int x = 0, int l = 0, int r = -1) {
         if (r == -1) r = n;
-        propagate(x, l, r);
-        if (l >= rx || r <= lx) return Node();
-        if (l >= lx && r <= rx) return tree[x];
-        int mid = (l + r) / 2;
-        return qry(lx, rx, 2 * x + 1, l, mid) + qry(lx, rx, 2 * x + 2, mid, r);
+        if (qr <= l || r <= ql) return Node();
+        push(x, l, r);
+        if (ql <= l && r <= qr) return tr[x];
+        int m = (l + r) / 2;
+        return qry(ql, qr, 2 * x + 1, l, m) + qry(ql, qr, 2 * x + 2, m, r);
     }
 
-        void rollback() {
-        if (upd_times.empty()) return;
-        
-        int last_time = upd_times.back();
-        upd_times.pop_back();
-        
-        while (!history.empty() && history.back().time >= last_time) {
-            auto &save = history.back();
-            tree[save.Node_idx] = save.node_val;
-            lazy[save.Node_idx] = save.lazy_val;
-            history.pop_back();
+    void rollback() {
+        if (times.empty()) return;
+        int last = times.back(); times.pop_back();
+        while (!hist.empty() && hist.back().t >= last) {
+            auto &s = hist.back();
+            tr[s.i] = s.nd;
+            lz[s.i] = s.lz;
+            hist.pop_back();
         }
+    }
+
+private:
+    struct Save {
+        int t, i;
+        Node nd;
+        ll lz;
+    };
+
+    int n, t = 0;
+    vector<Node> tr;
+    vector<ll> lz;
+    vector<int> times;
+    vector<Save> hist;
+
+    void save(int i) { hist.push_back({t, i, tr[i], lz[i]}); }
+
+    void apply(int x, int l, int r, ll v) {
+        save(x);
+        tr[x].s += v * (r - l);
+        lz[x] += v;
+    }
+
+    void push(int x, int l, int r) {
+        if (!lz[x] || r - l == 1) return;
+        int m = (l + r) / 2;
+        apply(2 * x + 1, l, m, lz[x]);
+        apply(2 * x + 2, m, r, lz[x]);
+        lz[x] = 0;
+    }
+
+    void upd(int ql, int qr, ll v, int x = 0, int l = 0, int r = -1) {
+        if (r == -1) r = n;
+        if (qr <= l || r <= ql) return;
+        if (ql <= l && r <= qr) { apply(x, l, r, v); return; }
+        push(x, l, r);
+        int m = (l + r) / 2;
+        upd(ql, qr, v, 2 * x + 1, l, m);
+        upd(ql, qr, v, 2 * x + 2, m, r);
+        tr[x] = tr[2 * x + 1] + tr[2 * x + 2];
     }
 };

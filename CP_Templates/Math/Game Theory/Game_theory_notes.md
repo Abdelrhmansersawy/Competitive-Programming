@@ -181,3 +181,20 @@ int main(){
     }
 }
 ```
+### 6.8 Matrix Pile Game (Diagonal XOR Variant)
+
+* **Game Rules:**
+  You are given an `r × c` matrix where each cell contains a pile of stones.
+  A move consists of selecting any pile and transferring stones to either the **right** or **downward** adjacent cell.
+  The player who makes the **last move wins**.
+
+* **Grundy Formula:**
+  Only consider cells `(i, j)` such that
+  $(i + j) \bmod 2 \ne (r + c) \bmod 2$
+  Then take the XOR of all such cell values:
+  $\text{Result} = a_{i_1,j_1} \oplus a_{i_2,j_2} \oplus \cdots$
+
+* **Explanation:**
+  The key idea is that due to directional move constraints, only **half the matrix** affects the outcome.
+  This partition is based on parity: reachable positions alternate per turn, and only those with opposite parity to `(r + c)` are considered.
+  The game reduces to computing the XOR over these diagonally offset cells, similar to classical Nim.

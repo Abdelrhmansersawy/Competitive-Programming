@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-const int N = 2e5 + 9 , lg = 18;
+const int N = 5e5 + 9 , lg = 20;
 int n , q , a[N];
-int prec[lg][N] , msk[N];
-int comb(int x , int y){ return x+y; }; // associative operator (eg. sum, prod, xor,or, and)
+ll prec[lg][N] , msk[N];
+ll comb(ll x , ll y){ return x+y; }; // associative operator (eg. sum, prod, xor,or, and)
 void dc(int l, int r, int lvl){
     if(l == r) return; 
     int m = (l + r) / 2;
@@ -15,11 +15,12 @@ void dc(int l, int r, int lvl){
     for(int i = m + 1; i <= r; ++i) msk[i] |= (1 << lvl);
     dc(l , m , lvl + 1); dc(m + 1 , r , lvl + 1);
 };
-int qry(int l , int r){
+ll qry(int l , int r){
     if(l == r) return a[l];
     int k = __builtin_ctz(msk[l] ^ msk[r]);
     return comb(prec[k][l] , prec[k][r]);
 };
+
 int main(){
     ios::sync_with_stdio(0); cin.tie(NULL); cout.tie(0);
 
@@ -28,7 +29,7 @@ int main(){
     dc(0 , n-1 , 0);
     for(int i = 0; i < q; ++i){
         int l , r; cin >> l >> r;
-        --l; --r;
+        --r;
         cout << qry(l , r) << '\n';
     }
 }

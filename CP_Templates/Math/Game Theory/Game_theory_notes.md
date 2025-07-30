@@ -118,3 +118,22 @@ function best_move(n, prev=None):
 ```
 
 * **Idea:** Always leave your opponent with a position whose Zeckendorf sum ends in 1.
+
+## 6.6 Half-Division Game
+
+**Game Rules:**
+
+* Start with **n piles**, each with some number of stones.
+* Players take turns; **Alice starts**.
+* On each turn, the player picks any pile and reduces it using this rule:
+
+```cpp
+int move(int x) {
+    if (x % 2 == 0) return x / 2;
+    while (x % 2 != 0) x /= 2;
+    return x / 2;
+}
+```
+
+* A pile becomes invalid if its size is `1`, since it can't be halved further.
+* A player **loses** if they cannot make a valid move on any pile.

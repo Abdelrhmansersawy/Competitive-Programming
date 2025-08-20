@@ -4,6 +4,7 @@ typedef long long ll;
 #define f first
 const int N = 1e6; 
 using namespace std;
+const int mod = 1e9 + 7;
 ll D[N]
 int main(){
   /*
@@ -20,5 +21,6 @@ int main(){
   D[2] = 1; // Base-case
   for(int i = 3 ; i < N ; i++){
     D[i] = i * D[i - 1] + pow(-1 , i);
+    D[i] = (D[i] % mod + mod) % mod;
   }
 }

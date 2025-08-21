@@ -31,8 +31,9 @@ using namespace std;
   17. Line intersection:            see function inter()
    ------------------------------------------------------------------ */
 
-typedef long double T;
-typedef complex<T> pt;
+using T  = long double;
+using pt = complex<T>;
+
 #define X real()
 #define Y imag()
 const T EPS = 1e-9;
@@ -61,6 +62,15 @@ pt perp(pt p){ return {-p.Y, p.X}; }
 
 // Returns vector rotated by angle theta (radians, CCW if theta > 0)
 pt rotate(pt p, T theta){ return p * polar((T)1.0, theta); }
+
+// Returns point a rotated by angle theta around point p (radians, CCW if theta > 0)
+pt rotate(pt a, pt p, T theta){ return (a - p) * polar((T)1.0, theta) + p; }
+
+// Returns vector rotated 90° counter-clockwise
+pt rotCCW90(pt p){ return pt(-p.Y, p.X); }
+
+// Returns vector rotated 90° clockwise
+pt rotCW90(pt p){ return pt(p.Y, -p.X); }
 
 // Returns unit vector of p
 pt unit(pt p){ return p / abs(p); }

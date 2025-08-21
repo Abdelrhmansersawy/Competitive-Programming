@@ -59,7 +59,7 @@ int sgn(T val){
 // Returns perpendicular vector (90° CCW rotation)
 pt perp(pt p){ return {-p.Y, p.X}; }
 
-// Returns vector rotated by angle theta
+// Returns vector rotated by angle theta (radians, CCW if theta > 0)
 pt rotate(pt p, T theta){ return p * polar((T)1.0, theta); }
 
 // Returns unit vector of p

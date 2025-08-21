@@ -6,14 +6,14 @@ using namespace std;
    ------------------------------------------------------------------
    typedef long double T;
    typedef complex<T> pt;
-   #define x real()
-   #define y imag()
+   #define X real()
+   #define Y imag()
 
    Operations:
    1. Vector addition:              a + b
    2. Scalar multiplication:        r * a
-   3. Dot product:                  (conj(a) * b).x
-   4. Cross product:                (conj(a) * b).y
+   3. Dot product:                  (conj(a) * b).X
+   4. Cross product:                (conj(a) * b).Y
       - conj(a) * b = (ax*bx + ay*by) + i(ax*by - ay*bx)
 
    5. Squared distance:             norm(a - b)
@@ -33,8 +33,8 @@ using namespace std;
 
 typedef long double T;
 typedef complex<T> pt;
-#define x real()
-#define y imag()
+#define X real()
+#define Y imag()
 const T EPS = 1e-9;
 const T PI  = acosl(-1.0L);
 
@@ -44,10 +44,10 @@ const T PI  = acosl(-1.0L);
 T sq(pt p){ return dot(p,p); }
 
 // Returns dot product of two vectors
-T dot(pt a, pt b){ return (conj(a) * b).x; }
+T dot(pt a, pt b){ return (conj(a) * b).X; }
 
 // Returns cross product of two vectors
-T cross(pt a, pt b){ return (conj(a) * b).y; }
+T cross(pt a, pt b){ return (conj(a) * b).Y; }
 
 // Returns sign of a value with EPS tolerance
 int sgn(T val){
@@ -57,7 +57,7 @@ int sgn(T val){
 }
 
 // Returns perpendicular vector (90° CCW rotation)
-pt perp(pt p){ return {-p.y, p.x}; }
+pt perp(pt p){ return {-p.Y, p.X}; }
 
 // Returns vector rotated by angle theta
 pt rotate(pt p, T theta){ return p * polar((T)1.0, theta); }
@@ -171,7 +171,7 @@ vector<pt> inters(pt a, pt b, pt c, pt d) {
     if (onSegment(a,b,c)) s.push_back(c);
     if (onSegment(a,b,d)) s.push_back(d);
     sort(s.begin(), s.end(), [](pt p, pt q){
-        return make_pair(p.x,p.y) < make_pair(q.x,q.y);
+        return make_pair(p.X,p.Y) < make_pair(q.X,q.Y);
     });
     s.erase(unique(s.begin(), s.end()), s.end());
     return s;
@@ -214,8 +214,8 @@ bool inPolygon(vector<pt> &p, pt a, bool strict=true) {
     for(int i=0;i<n;i++){
         pt q=p[(i+1)%n];
         if (onSegment(p[i],q,a)) return !strict;
-        cnt ^= ((p[i].y<=a.y)^(q.y<=a.y)) &&
-               (a.x < (q.x-p[i].x)*(a.y-p[i].y)/(q.y-p[i].y)+p[i].x);
+        cnt ^= ((p[i].Y<=a.Y)^(q.Y<=a.Y)) &&
+               (a.X < (q.X-p[i].X)*(a.Y-p[i].Y)/(q.Y-p[i].Y)+p[i].X);
     }
     return cnt;
 }

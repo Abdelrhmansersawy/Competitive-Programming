@@ -223,3 +223,13 @@ bool inPolygon(vector<pt> &p, pt a, bool strict=true) {
     }
     return cnt;
 }
+
+/* ---------------- Circle ---------------- */
+
+// Returns the power of point p with respect to the circle centered at c with radius r: |p - c|^2 - r^2
+inline T power_of_point(pt c , ll r, pt p){
+    pt v1 = p - c;
+    ll res = sq(v1) - r * r;
+    return res;
+}
+

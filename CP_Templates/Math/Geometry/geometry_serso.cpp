@@ -201,6 +201,24 @@ T segSeg(pt a, pt b, pt c, pt d) {
 
 /* ---------------- Polygons ---------------- */
 
+// Sort points counter-clockwise (works for convex polygon points)
+void sortPointsCCW(vector<pt> &pts) {
+    // Compute centroid
+    T cx = 0, cy = 0;
+    for (auto &p : pts) {
+        cx += p.X;
+        cy += p.Y;
+    }
+    cx /= pts.size();
+    cy /= pts.size();
+    pt c(cx, cy);
+
+    // Sort by angle from centroid
+    sort(pts.begin(), pts.end(), [&](pt a, pt b) {
+        return atan2(a.Y - cy, a.X - cx) < atan2(b.Y - cy, b.X - cx);
+    });
+}
+
 // Returns area of triangle abc
 T areaTriangle(pt a, pt b, pt c){ return abs(cross(b-a, c-a))/2.0; }
 

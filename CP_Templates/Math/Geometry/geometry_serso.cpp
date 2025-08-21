@@ -65,6 +65,22 @@ pt rotate(pt p, T theta){ return p * polar((T)1.0, theta); }
 // Returns unit vector of p
 pt unit(pt p){ return p / abs(p); }
 
+// Returns true if point A has smaller polar angle (atan2(y,x)) than point B,
+// i.e. sorts points counter-clockwise starting from the +x axis.
+bool cmpXaxis(Point A, Point B) {
+    if ((A.y >= 0) ^ (B.y >= 0)) return B.y >= 0;
+    if (!A.y) return A.x >= 0 && (B.y > 0 || B.x < 0);
+    return cross(A, B) > 0;
+}
+
+// Returns true if point A has smaller argument (atan2(x,y)) than point B,
+// i.e. sorts points counter-clockwise starting from the +y axis.
+bool cmpYaxis(Point A, Point B) {
+    if ((A.x >= 0) ^ (B.x >= 0)) return A.x >= 0;
+    if (!A.x) return A.y > 0 && (B.x < 0 || B.y <= 0);
+    return cross({A.y, A.x}, {B.y, B.x}) > 0;
+}
+
 /* ---------------- Angles ---------------- */
 
 // Returns twice the signed area of triangle (a,b,c)

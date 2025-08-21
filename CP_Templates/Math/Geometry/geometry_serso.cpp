@@ -44,10 +44,10 @@ const T PI  = acosl(-1.0L);
 T sq(pt p){ return dot(p,p); }
 
 // Returns dot product of two vectors
-T dot(pt a, pt b){ return (conj(a) * b).X; }
+T dot(pt a, pt b){ return real(conj(a) * b); }
 
 // Returns cross product of two vectors
-T cross(pt a, pt b){ return (conj(a) * b).Y; }
+T cross(pt a, pt b){ return imag(conj(a) * b); }
 
 // Returns sign of a value with EPS tolerance
 int sgn(T val){
@@ -71,7 +71,11 @@ pt unit(pt p){ return p / abs(p); }
 T orient(pt a, pt b, pt c){ return cross(b - a, c - a); }
 
 // Returns angle between vectors (0..π)
-T angle(pt a, pt b){ return acosl(clamp(dot(a,b)/abs(a)/abs(b), (T)-1.0, (T)1.0)); }
+T angle(pt a, pt b){
+    T na = abs(a), nb = abs(b);
+    if (na < EPS || nb < EPS) return 0;
+    return acos(clamp(dot(a,b)/(na*nb), (T)-1.0, (T)1.0));
+}
 
 // Returns oriented angle ∠abc (0..2π)
 T orientedAngle(pt a, pt b, pt c){

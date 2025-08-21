@@ -29,6 +29,14 @@ using namespace std;
   15. Project p onto line (a, b):   a + (b - a) * dot(p - a, b - a) / norm(b - a)
   16. Reflect p across line (a, b): a + conj((p - a) / (b - a)) * (b - a)
   17. Line intersection:            see function inter()
+
+----------
+   round(x)
+   - Returns nearest integer to x
+   - If fractional part >= 0.5 → rounds away from zero
+   - If fractional part < 0.5 → rounds toward zero
+   - round(2.3) -> 2 , round(2,5) -> 2 , round(2.7) -> 3
+   
    ------------------------------------------------------------------ */
 
 using T  = long double;

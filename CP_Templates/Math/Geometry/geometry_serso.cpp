@@ -130,6 +130,16 @@ bool inAngle(pt a, pt b, pt c, pt p) {
     return abp >= 0 && acp <= 0;
 }
 
+pair<int,int> slope(pair<int,int> u, pair<int,int> v){
+   int dy = v.s-u.s;
+   int dx = v.f-u.f;
+   if(dx == 0) return {0,0};
+   if(dy == 0) return{0,1};
+   int sgn = (dy < 0) ^ (dx < 0);
+   if(sgn) sgn = -1; else sgn = 1;
+   return {sgn*abs(dx)/(abs(__gcd(dy,dx))),abs(dy)/(abs(__gcd(dy,dx)))};
+}
+
 /* ---------------- Line struct ---------------- */
 struct line{
     pt v; T c;

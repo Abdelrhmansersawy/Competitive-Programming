@@ -140,6 +140,27 @@ pair<int,int> slope(pair<int,int> u, pair<int,int> v){
    return {sgn*abs(dx)/(abs(__gcd(dy,dx))),abs(dy)/(abs(__gcd(dy,dx)))};
 }
 
+// Returns reduced slope vector (dx, dy) between u and v
+pt slope(pt u, pt v) {
+    T dy = v.Y - u.Y;
+    T dx = v.X - u.X;
+
+    if (dx == 0) return {0, 0};   // vertical
+    if (dy == 0) return {0, 1};   // horizontal
+
+    T g = gcd((long long)dy, (long long)dx);
+    dy /= g;
+    dx /= g;
+
+    // Normalize sign so dx is always positive
+    if (dx < 0) {
+        dx = -dx;
+        dy = -dy;
+    }
+
+    return {dx, dy};
+}
+
 /* ---------------- Line struct ---------------- */
 struct line{
     pt v; T c;

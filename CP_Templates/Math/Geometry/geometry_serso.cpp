@@ -205,6 +205,7 @@ bool inter(line l1, line l2, pt &out) {
 }
 
 // Returns bisector of two lines (interior/exterior)
+// A bisector is a line, ray, or segment that divides a geometric figure into two equal parts
 line bisector(line l1, line l2, bool interior) {
     assert(cross(l1.v,l2.v) != 0);
     T sign = interior ? 1 : -1;

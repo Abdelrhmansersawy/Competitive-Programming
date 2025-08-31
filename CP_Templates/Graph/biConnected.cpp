@@ -1,17 +1,36 @@
+/*
+Find all biconnected components of an undirected graph
+using Tarjan's algorithm.
+
+Definitions:
+    - A biconnected component (block) is a maximal set of edges 
+      such that any two edges are on a common simple cycle.
+    - The algorithm outputs all such components as collections of edges.
+
+Input:
+    - n (number of vertices)
+    - m (number of edges)
+    - m edges (u, v) with 1 ≤ u, v ≤ n
+
+Output:
+    - bi_connected (vector of components)
+    - Each component is a list of (u, v) edges
+    - bi_connected.size() = number of biconnected components
+
+Time complexity:
+    - Tarjan DFS traversal: O(n + m)
+
+Space complexity:
+    - O(n + m) (adjacency list, stacks, dfs arrays)
+
+*/
+
 #include <bits/stdc++.h>
 typedef long long ll;
 #define s second
 #define f first
 #define rep(i , st , ed) for(int i = st ; i < ed ; i++)
 using namespace std;
-void burn(){
-ios::sync_with_stdio(0); cin.tie(NULL); cout.tie(0);
-#ifndef ONLINE_JUDGE
-    freopen("in.txt", "r", stdin);
-    freopen("out.txt", "w", stdout);
-    freopen("error.txt", "w", stderr);
-  #endif
-}
 const int N = 1e5;
 //\\//\\//\\/\\//\\//\\//\\//\\//\\//
 vector<vector<int>> adj;
@@ -46,7 +65,6 @@ void tarjan(int u, int par){
   }
 }
 int main(){
-  //burn();
   int n , m; cin >> n >> m;
   for (int i = 0; i < n; ++i)
     dfn[i] = -1;

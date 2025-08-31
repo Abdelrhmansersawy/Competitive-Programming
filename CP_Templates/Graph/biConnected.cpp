@@ -3,9 +3,9 @@ Find all biconnected components of an undirected graph
 using Tarjan's algorithm.
 
 Definitions:
-    - A biconnected component (block) is a maximal set of edges 
-      such that any two edges are on a common simple cycle.
-    - The algorithm outputs all such components as collections of edges.
+    - A biconnected component (block) is a maximal set of vertices
+      such that the removal of any single vertex does not disconnect the component.
+    - The algorithm outputs all such components as collections of vertices.
 
 Input:
     - n (number of vertices)
@@ -14,7 +14,7 @@ Input:
 
 Output:
     - bi_connected (vector of components)
-    - Each component is a list of (u, v) edges
+    - Each component is a list of vertices
     - bi_connected.size() = number of biconnected components
 
 Time complexity:
@@ -22,60 +22,73 @@ Time complexity:
 
 Space complexity:
     - O(n + m) (adjacency list, stacks, dfs arrays)
-
 */
 
 #include <bits/stdc++.h>
-typedef long long ll;
-#define s second
-#define f first
-#define rep(i , st , ed) for(int i = st ; i < ed ; i++)
 using namespace std;
-const int N = 1e5;
-//\\//\\//\\/\\//\\//\\//\\//\\//\\//
-vector<vector<int>> adj;
-int lowLink[N] , dfn[N];
-stack<pair<int,int>> comps;
-vector<vector<pair<int, int>>>bi_connected;
-int ndfn;
-pair<int,int> edge;
-bool root = false;
-void tarjan(int u, int par){
-  dfn[u] = lowLink[u] = ndfn++;
-  for(auto &v : adj[u]){
-    if (v != par && dfn[v] < dfn[u])
-        comps.push(make_pair(u, v));
 
-    if(dfn[v] == -1){
-      tarjan(v, u);
-      lowLink[u] = min(lowLink[u] , lowLink[v]);
-      if (lowLink[v] >= dfn[u]){
-        bi_connected.emplace_back(vector<pair<int,int>>());
-        do{
-            edge = comps.top();
-            comps.pop();
-            bi_connected.back().emplace_back(edge);
+const int MAXN = 2e5 + 10;
 
-        }while(edge.first != u || edge.second != v);
-        reverse(bi_connected.back().begin(), bi_connected.back().end());
-      }
-    }else if(v != par){
-      lowLink[u] = min(lowLink[u] , dfn[v]);
+vector<int> adj[MAXN];                 // adjacency list
+vector<vector<int>> bi_connected;      // stores components
+
+int dfn[MAXN], low[MAXN], id;
+int s[MAXN], tp;                       // stack for vertices
+int p[MAXN], cnt;                      // component id
+
+void tarjan(int u, int f = -1) {
+    dfn[u] = low[u] = ++id;
+    s[++tp] = u;
+    for (int v : adj[u]) {
+        if (!dfn[v]) {
+            tarjan(v, u);
+            low[u] = min(low[u], low[v]);
+        } else if (v != f) {
+            low[u] = min(low[u], dfn[v]);
+        }
     }
-  }
+    if (dfn[u] == low[u]) {
+        cnt++;
+        bi_connected.push_back({});
+        for (int x = -1; x != u;) {
+            x = s[tp--];
+            p[x] = cnt;
+            bi_connected.back().push_back(x);
+        }
+    }
 }
-int main(){
-  int n , m; cin >> n >> m;
-  for (int i = 0; i < n; ++i)
-    dfn[i] = -1;
-  adj.resize(n);
-  for(int i = 0 ; i < m ; i++){
-    int u , v; cin >> u >> v;
-    --u; --v;
-    adj[u].emplace_back(v);
-    adj[v].emplace_back(u);
-  }
-  tarjan(0, -1);
-  // bi_connected vector stores all the edges in each biconnected component
-  // bi_connected.size() is the number of biconnected componenets
+
+void init_biconnected(int n) {
+    id = cnt = tp = 0;
+    bi_connected.clear();
+    for (int i = 0; i < n; i++) dfn[i] = low[i] = p[i] = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (!dfn[i]) tarjan(i);
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n, m; cin >> n >> m;
+    for (int i = 0; i < n; ++i) adj[i].clear();
+
+    for (int i = 0; i < m; i++) {
+        int u, v; cin >> u >> v;
+        --u; --v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    init_biconnected(n);
+
+    // bi_connected vector stores all the vertices in each biconnected component
+    cout << "Number of components: " << bi_connected.size() << "\n";
+    for (int i = 0; i < (int)bi_connected.size(); i++) {
+        cout << "Component " << i+1 << ": ";
+        for (int v : bi_connected[i]) cout << v+1 << " ";
+        cout << "\n";
+    }
 }

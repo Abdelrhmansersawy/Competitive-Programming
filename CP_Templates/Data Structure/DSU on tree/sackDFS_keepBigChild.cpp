@@ -26,7 +26,16 @@ void preDFS(int u , int p){
 }
 void sackDFS(int u, int p, bool keep){
     int bigChild = big[u];
+
+    // Process all light children
+    for (auto [v, ind] : adj[u]) {
+        if (v != p && v != bigChild) {
+            sackDFS(v , u , false);
+        }
+    }
+
     if(bigChild != -1) sackDFS(bigChild, u, 1);  // bigChild marked as big and not cleared from cnt
+
     for(auto v : adj[u]){
         if(v != p && v != bigChild){
             for(int p = st[v]; p < ft[v]; p++){

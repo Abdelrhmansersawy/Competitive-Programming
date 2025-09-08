@@ -29,3 +29,19 @@ ll solve(int d, int s, int b) {
     }
     return ans;
 }
+
+/**
+ * Counts solutions where the maximum variable equals exactly `b`.
+ *
+ * That is, number of integer tuples (x1,...,xd) satisfying:
+ *    x1 + x2 + ... + xd = s,   and   0 <= xi <= b for all i,
+ * and additionally max_i xi == b.
+ *
+ * This is computed by the difference:
+ *    exactly(d, s, b) = solve(d, s, b) - solve(d, s, b-1)  (mod `mod`)
+ * where `solve(d,s,B)` counts solutions with 0 <= xi <= B.
+ */
+ll exactly(int d, int s, int b) {
+    if (b < 0) return 0;
+    return (solve(d, s, b) - solve(d, s, b - 1) + mod) % mod;
+}

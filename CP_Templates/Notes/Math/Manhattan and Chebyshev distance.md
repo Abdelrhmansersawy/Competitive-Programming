@@ -1,9 +1,3 @@
-
-  $$
-  d_{Chebyshev}(x_1,y_1,x_2,y_2) = \max(|x_1 - x_2|,\; |y_1 - y_2|)
-  $$
-
-
 ## 1. Min/Max Identities
 
 **Min using absolute value**

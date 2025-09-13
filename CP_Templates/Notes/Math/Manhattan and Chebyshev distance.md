@@ -12,7 +12,7 @@
   \min(a,b) = \frac{a+b - |a-b|}{2}
   $$
 
-* **Min using max**
+**Min using max**
 
   $$
   \min(a,b) = a + b - \max(a,b)

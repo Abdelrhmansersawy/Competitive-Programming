@@ -28,36 +28,18 @@
 
 ## 2. Manhattan ↔ Chebyshev Distance
 
-### (a) Manhattan → Chebyshev
+## 45° transform (Manhattan ↔ Chebyshev)
 
-**Definition**:
+Define $p=x+y,\;q=x-y$. Then
 
-  $$
-  d_{Manhattan}(x_1,y_1,x_2,y_2) = |x_1 - x_2| + |y_1 - y_2|
-  $$
+$$
+|x_1-x_2|+|y_1-y_2|=\max(|p_1-p_2|,|q_1-q_2|)
+$$
 
-**Trick**: Rotate 45° using transformations:
+and conversely (up to factor)
 
-  $$
-  p = x+y, \quad q = x-y
-  $$
+$$
+\max(|x_1-x_2|,|y_1-y_2|)=\tfrac12\big(|p_1-p_2|+|q_1-q_2|\big)
+$$
 
-**Result**:
-
-  $$
-  d_{Chebyshev} = \max\big(|p_1 - p_2|,\; |q_1 - q_2|\big)
-  $$
-
----
-
-### (b) Chebyshev → Manhattan
-
-**Definition**:
-
-**Trick**: Rotate 45° as above.
-
- **Result**:
-
-  $$
-  d_{Manhattan} = \tfrac{1}{2}\Big(|p_1 - p_2| + |q_1 - q_2|\Big)
-  $$
+when $p,q$ are the rotated coordinates of the same $(x,y)$.

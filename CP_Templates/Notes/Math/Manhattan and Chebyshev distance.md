@@ -1,75 +1,95 @@
+# Math Identities & Distance Tricks (CP Cheatsheet)
+
+---
+
 ## 1. Min/Max Identities
 
-**Min using absolute value**
+*(use to avoid `if` in DP/expressions)*
+
+* **Min with abs**
 
   $$
-  \min(a,b) = \frac{a+b - |a-b|}{2}
+  \min(a,b) = \tfrac{a+b - |a-b|}{2}
   $$
 
-**Min using max**
+* **Max with abs**
 
   $$
-  \min(a,b) = a + b - \max(a,b)
+  \max(a,b) = \tfrac{a+b + |a-b|}{2}
   $$
 
- **Max using absolute value**
+* **Min via max**
 
   $$
-  \max(a,b) = \frac{a+b + |a-b|}{2}
+  \min(a,b) = a+b-\max(a,b)
   $$
 
 ---
 
-## 2. Manhattan ↔ Chebyshev Distance
+## 2. Manhattan ↔ Chebyshev (2D Rotation)
 
-## 45° transform (Manhattan ↔ Chebyshev)
+*(rotation trick: p=x+y, q=x−y)*
 
-Define $p=x+y,\;q=x-y$. Then
+* **Manhattan**
 
-$$
-|x_1-x_2|+|y_1-y_2|=\max(|p_1-p_2|,|q_1-q_2|)
-$$
+  $$
+  |x_1-x_2|+|y_1-y_2|=\max(|p_1-p_2|,|q_1-q_2|)
+  $$
 
-and conversely (up to factor)
+* **Chebyshev**
 
-$$
-\max(|x_1-x_2|,|y_1-y_2|)=\tfrac12\big(|p_1-p_2|+|q_1-q_2|\big)
-$$
+  $$
+  \max(|x_1-x_2|,|y_1-y_2|)=\tfrac12(|p_1-p_2|+|q_1-q_2|)
+  $$
 
-when $p,q$ are the rotated coordinates of the same $(x,y)$.
+💡 *Hint: Convert Manhattan ↔ Chebyshev by rotating coords.*
 
 ---
 
-### High dimensions — simple
+## 3. Manhattan in Higher Dimensions
 
-**Idea:**
-  Pick a sign pattern $s=(s_1,\dots,s_d)$ with each $s_k\in\{+1,-1\}$.
-  For a point $x=(x_1,\dots,x_d)$ define
+*(farthest pair trick, small d ≤ 10)*
 
-  $$
-  p_s(x)=\sum_{k=1}^d s_k x_k.
-  $$
+For sign pattern $s=(s_1,\dots,s_d)\in\{\pm1\}^d$:
 
-  Then the Manhattan distance between any two points satisfies
+$$
+p_s(x)=\sum_{k=1}^d s_k x_k
+$$
 
-  $$
-  \|x-y\|_1=\max_{s\in\{\pm1\}^d}\,|p_s(x)-p_s(y)|.
-  $$
+Then
 
-**Algorithm (for farthest distance):**
-  For each sign pattern $s$, compute all values $p_s(x_i)$.
-  The largest possible distance is
+$$
+\|x-y\|_1=\max_{s} |p_s(x)-p_s(y)|
+$$
+
+* **Farthest pair:**
 
   $$
-  \text{answer}=\max_{s\in\{\pm1\}^d}\Bigl(\max_i p_s(x_i)-\min_i p_s(x_i)\Bigr).
+  \max_{s}\bigl(\max_i p_s(x_i)-\min_i p_s(x_i)\bigr)
   $$
 
-  (Only need half the patterns: $2^{d-1}$.)
+* Only need $2^{d-1}$ patterns.
 
-**Complexity:**
+* Complexity: $O(N\cdot d\cdot 2^{d-1})$.
+
+💡 *Hint: project points with sign patterns → max−min gives distance.*
+
+---
+
+## 4. Distances on a Line (1D)
+
+* **Farthest two points:**
 
   $$
-  O\bigl(N\cdot d\cdot 2^{d-1}\bigr).
+  \max_{i,j} |x_i-x_j| = \max_i x_i - \min_i x_i
   $$
 
+💡 *Hint: Always max−min, don’t overcomplicate.*
 
+* **Special case (3 points):**
+
+  $$
+  \max_{i,j} |x_i-x_j| = \tfrac12 \sum_{i<j} |x_i-x_j|
+  $$
+
+💡 *Hint: neat identity, rarely needed but elegant.*

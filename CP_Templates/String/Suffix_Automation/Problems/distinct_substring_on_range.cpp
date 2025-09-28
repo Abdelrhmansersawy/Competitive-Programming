@@ -19,6 +19,7 @@ Complexity:
 - Space complexity: O(n) states in SAM + O(n) for segment tree + O(n) for LCT 
   ≈ O(n)
 
+Problems: https://youkn0wwho.academy/topic-list/suffix_automaton_ft_distinct_substring_queries_in_range
 
 Approach:
 ---------

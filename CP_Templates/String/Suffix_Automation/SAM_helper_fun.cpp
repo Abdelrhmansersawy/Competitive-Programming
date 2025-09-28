@@ -1,3 +1,9 @@
+/* 
+ * cnt[u]
+ * - Number of occurrences of the substring(s) represented by state u.
+ * - Set cnt[cur] = 1 in sa_extend() and use propagation() to accumulate counts.
+ */
+
 void propagation() {
     // Order states by length (longest first → shortest)
     vector<int> order(sz);
@@ -14,6 +20,11 @@ void propagation() {
     }
 }
 
+/* 
+ * mark_terminals()
+ * - Marks all states that correspond to suffixes of the original string.
+ * - A terminal node = a state representing a suffix.
+ */
 void mark_terminals() {
     int p = last;
     while (p != -1) {

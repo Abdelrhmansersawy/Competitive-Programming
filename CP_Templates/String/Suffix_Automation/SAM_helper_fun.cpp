@@ -13,3 +13,11 @@ void propagation() {
         }
     }
 }
+
+void mark_terminals() {
+    int p = last;
+    while (p != -1) {
+        is_terminal[p] = true;
+        p = st[p].link;
+    }
+}

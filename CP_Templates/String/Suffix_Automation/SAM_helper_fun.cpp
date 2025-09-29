@@ -20,19 +20,15 @@ void propagation() {
     }
 }
 
-/* 
- * mark_terminals()
- * - Marks all states that correspond to suffixes of the original string.
- * - A terminal node = a state representing a suffix.
- */
-void mark_terminals() {
-    int p = last;
-    while (p != -1) {
-        is_terminal[p] = true;
-        p = st[p].link;
+int get_first_pos(const string &pat){
+    int node = 0;
+    for(auto &ch : pat){
+        int nxt = st[node].nxt[ch-'a'];
+        if(nxt == -1) return -1;
+        node = nxt;
     }
+    return st[node].first_pos - pat.size() + 2; 
 }
-
 
 array<int,4> get_lcs(const string &t){
     int cur_len = 0;

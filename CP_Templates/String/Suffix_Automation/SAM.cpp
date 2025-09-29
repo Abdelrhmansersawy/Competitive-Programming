@@ -22,6 +22,7 @@ void sa_extend(char c, int pos) {
     fill(st[cur].nxt, st[cur].nxt + 26, -1);
 
     // cnt[cur] = 1; 
+    // is_terminal[cur] = 1;
     
     int p = last, letter = c - 'a';
     while (p != -1 && st[p].nxt[letter] == -1) {

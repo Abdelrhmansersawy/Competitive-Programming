@@ -20,6 +20,43 @@ void propagation() {
     }
 }
 
+// Build suffix link tree and prepare binary lifting table
+// - adj: adjacency list of suffix link tree
+// - up[k][i]: the 2^k-th ancestor of state i in the suffix link tree
+// This allows us to jump quickly along suffix links (binary lifting)
+void build_SAM_tree() {
+    up[0][0] = 0; // root has no parent
+    for (int i = 1; i < sz; ++i) {
+        adj[sam[i].link].push_back(i);   // build suffix link tree
+        up[0][i] = sam[i].link;          // direct parent (1-step ancestor)
+    }
+
+    // Precompute ancestors for binary lifting
+    for (int k = 1; k < LOG; ++k) {
+        for (int i = 0; i < sz; ++i) {
+            up[k][i] = up[k - 1][up[k - 1][i]];
+        }
+    }
+}
+
+// Get the state in the suffix automaton that represents substring s[l..r]
+// Idea:
+//   - Start from the state of prefix ending at r
+//   - Climb suffix links (via binary lifting) until state's length >= substring length
+int get_state_substring(int l, int r) {
+    int len = r - l + 1;   // substring length
+    int u = pos_state[r];  // state representing prefix ending at r
+
+    // climb up using binary lifting until we reach the correct state
+    for (int k = LOGN - 1; k >= 0; --k) {
+        if (up[k][u] != 0 && sam[up[k][u]].len >= len) {
+            u = up[k][u];
+        }
+    }
+    return u; // final state corresponds to s[l..r]
+}
+
+
 int get_first_pos(const string &pat){
     int node = 0;
     for(auto &ch : pat){

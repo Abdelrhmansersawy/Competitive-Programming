@@ -28,17 +28,20 @@ void propagation() {
  *   Allows fast traversal up suffix links (jumping in powers of 2).
  *   This is especially useful for substring → state queries.
  * -------------------------------------------------------------------------- */
-void build_SAM_tree() {
-    up[0][0] = 0; // root has no parent
+void build_tree() {
+    for (int i = 0; i < sz; ++i) adj[i].clear();
     for (int i = 1; i < sz; ++i) {
-        adj[st[i].link].push_back(i); // suffix link tree edge
-        up[0][i] = st[i].link;        // direct parent
+        adj[ st[i].link ].push_back(i);
     }
 
-    // Precompute ancestors (binary lifting)
+    up[0][0] = 0;
+    for (int i = 1; i < sz; ++i) {
+        int l = st[i].link;
+        up[i][0] = st[i].link;
+    }
     for (int k = 1; k < LOG; ++k) {
         for (int i = 0; i < sz; ++i) {
-            up[k][i] = up[k - 1][up[k - 1][i]];
+            up[i][k] = up[ up[i][k - 1] ][k - 1];
         }
     }
 }
@@ -55,12 +58,10 @@ void build_SAM_tree() {
  * -------------------------------------------------------------------------- */
 int get_state_substring(int l, int r) {
     int len = r - l + 1;
-    int u = pos_state[r]; // state of prefix ending at r
-
-    for (int k = LOGN - 1; k >= 0; --k) {
-        if (up[k][u] != 0 && st[up[k][u]].len >= len) {
-            u = up[k][u];
-        }
+    int u = pos_state[r];
+    for (int k = LOG - 1; k >= 0; --k) {
+        int anc = up[u][k];
+        if (ST[anc].len >= len) u = anc;
     }
     return u;
 }

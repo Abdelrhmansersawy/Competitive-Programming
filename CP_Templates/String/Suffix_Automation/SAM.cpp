@@ -1,25 +1,22 @@
-// A state in the Suffix Automaton (SAM)
+// ------------------------- Suffix Automaton Template -------------------------
+//
+// A state in the Suffix Automaton (SAM):
 // len        : Length of the longest substring in this equivalence class
-// link       : Suffix link (the "failure link" to the largest proper suffix state)
+// link       : Suffix link (points to the largest proper suffix state)
 // first_pos  : End position of the substring's first appearance in the text
-// nxt[26]    : Transitions for each character (here fixed for lowercase 'a'–'z')
-// ------------------------------------------
-// cnt[cur] = 1; 
-//    → Marks that this state corresponds to 1 occurrence initially.
-//      Later, you can propagate these counts through suffix links
-//      to compute how many times each substring appears in the text.
-
-// is_terminal[cur] = 1;
-//    → Marks this state as "terminal" (i.e., corresponds to some suffix of the text).
-//      Collecting all terminal states lets you check whether a substring
-//      is also a suffix, or solve problems like finding all suffixes.
-
-// pos_state[pos] = cur;
-//    → Maps the text position `pos` to the state representing the whole
-//      prefix ending at that position. Useful when you need to link
-//      specific positions in the string back to SAM states
-//      (e.g., for LCS queries or substring reconstruction).
-
+// nxt[26]    : Transitions for each character (fixed for lowercase 'a'–'z')
+//
+// Optional auxiliary arrays (not included in this template but often useful):
+// cnt[cur]       : Initialize as 1 for each state. After propagating through
+//                  suffix links, it stores the number of occurrences of all
+//                  substrings represented by this state.
+// is_terminal[cur]: Marks this state as terminal (i.e., corresponds to a suffix).
+//                  → A suffix in SAM is a path from the root to a terminal state.
+// pos_state[pos] : Maps text position `pos` to the state representing the
+//                  prefix ending at that position.
+//                  → A prefix in SAM is a path from the root to pos_state[pos].
+//
+// ------------------------------------------------------------------------------
 
 struct state {
     int len, link, first_pos;

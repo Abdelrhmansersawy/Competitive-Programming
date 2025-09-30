@@ -5,6 +5,9 @@
 // link       : Suffix link (points to the largest proper suffix state)
 // first_pos  : End position of the substring's first appearance in the text
 // nxt[26]    : Transitions for each character (fixed for lowercase 'a'–'z')
+// is_clone   : True if this state is a clone (created during split).
+//              → Clone states are technical duplicates; skip them if you only
+//                want distinct end positions.
 //
 // Optional auxiliary arrays (not included in this template but often useful):
 // cnt[cur]       : Initialize as 1 for each state. After propagating through
@@ -20,6 +23,7 @@
 
 struct state {
     int len, link, first_pos;
+    bool is_clone; 
     int nxt[26];
 };
 
@@ -39,6 +43,7 @@ void sa_extend(char c, int pos) {
     int cur = sz++;
     st[cur].len = st[last].len + 1;
     st[cur].first_pos = pos;
+    st[cur].is_clone = false; 
     fill(st[cur].nxt, st[cur].nxt + 26, -1);
 
     // cnt[cur] = 1; 
@@ -63,6 +68,7 @@ void sa_extend(char c, int pos) {
             copy(st[q].nxt, st[q].nxt + 26, st[clone].nxt);
             st[clone].link = st[q].link;
             st[clone].first_pos = st[q].first_pos;
+            st[clone].is_clone = true;
 
             while (p != -1 && st[p].nxt[letter] == q) {
                 st[p].nxt[letter] = clone;

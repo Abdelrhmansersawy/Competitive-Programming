@@ -1,3 +1,26 @@
+// A state in the Suffix Automaton (SAM)
+// len        : Length of the longest substring in this equivalence class
+// link       : Suffix link (the "failure link" to the largest proper suffix state)
+// first_pos  : End position of the substring's first appearance in the text
+// nxt[26]    : Transitions for each character (here fixed for lowercase 'a'–'z')
+// ------------------------------------------
+// cnt[cur] = 1; 
+//    → Marks that this state corresponds to 1 occurrence initially.
+//      Later, you can propagate these counts through suffix links
+//      to compute how many times each substring appears in the text.
+
+// is_terminal[cur] = 1;
+//    → Marks this state as "terminal" (i.e., corresponds to some suffix of the text).
+//      Collecting all terminal states lets you check whether a substring
+//      is also a suffix, or solve problems like finding all suffixes.
+
+// pos_state[pos] = cur;
+//    → Maps the text position `pos` to the state representing the whole
+//      prefix ending at that position. Useful when you need to link
+//      specific positions in the string back to SAM states
+//      (e.g., for LCS queries or substring reconstruction).
+
+
 struct state {
     int len, link, first_pos;
     int nxt[26];
@@ -23,6 +46,7 @@ void sa_extend(char c, int pos) {
 
     // cnt[cur] = 1; 
     // is_terminal[cur] = 1;
+    // pos_state[pos] = cur;
     
     int p = last, letter = c - 'a';
     while (p != -1 && st[p].nxt[letter] == -1) {

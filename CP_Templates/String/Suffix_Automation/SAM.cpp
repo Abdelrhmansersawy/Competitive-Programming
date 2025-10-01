@@ -37,8 +37,8 @@ void sa_init() {
     fill(st[0].nxt, st[0].nxt + 26, -1);
     
     // for(int i = 0; i < sz; ++i){
-    //     cnt[cur] = 0;
-    //     is_terminal[cur] = 0;
+    //     cnt[i] = 0;
+    //     is_terminal[i] = 0;
     // }
     
     sz = 1;

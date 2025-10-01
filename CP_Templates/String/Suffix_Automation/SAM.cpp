@@ -35,6 +35,12 @@ void sa_init() {
     st[0].len = 0;
     st[0].link = -1;
     fill(st[0].nxt, st[0].nxt + 26, -1);
+    
+    // for(int i = 0; i < sz; ++i){
+    //     cnt[cur] = 0;
+    //     is_terminal[cur] = 0;
+    // }
+    
     sz = 1;
     last = 0;
 }

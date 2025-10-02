@@ -160,9 +160,7 @@ ll count_rotations(const string &t) {
         }
 
         if (node == -1) {
-            node = 0;
-            cur_len = 0;
-            continue;
+            break; // no need to continue;
         }
 
         node = st[node].nxt[ch];

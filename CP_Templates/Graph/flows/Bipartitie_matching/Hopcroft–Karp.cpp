@@ -99,6 +99,22 @@ struct HopcroftKarp {
                     ++flow;
         return flow;
     }
+
+    // ------------------- Clear a specific left vertex -------------------
+    // Removes all edges of u and breaks its match (if any)
+    void clear(int u) {
+        // If u was matched, unmatch both sides
+        if (matchL[u] != -1) {
+            int v = matchL[u];
+            matchR[v] = -1;
+            matchL[u] = -1;
+        }
+
+        // Remove adjacency list (edges)
+        g[u].clear();
+
+        // Optional call max_matching()
+    }
 };
 
 // ==========================================================================

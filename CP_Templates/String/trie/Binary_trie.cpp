@@ -61,3 +61,23 @@ int min_xor(int x){
     }
     return ans;
 }
+
+// Count how many values y in trie satisfy: (left XOR y) > x
+ll count_greater(int left , int x){
+    int node = 0;
+    ll tot = 0;
+    for(int i = 30; i >= 0; --i){
+        int bL = (left >> i) & 1;
+        int bX = (x >> i) & 1;
+        if(bX == 0){
+            int other = nxt[node][bL ^ 1];
+            if(other) tot += frq[other];
+            node = nxt[node][bL];
+            if(!node) break;
+        }else{
+            node = nxt[node][bL ^ 1];
+            if(!node) break;
+        }
+    }
+    return tot;
+}

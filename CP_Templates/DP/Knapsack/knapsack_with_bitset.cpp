@@ -8,7 +8,7 @@ template<int len = 1>
 int solve(const vector<int> &v , int all){
     if(v.empty()) return 0;
     if(len < all)
-        return solve<min(2 * len , N)>(v, all);
+        return solve< ( (2 * len <= N) ? 2 * len : N ) >(v, all);
     map<int,int> frq;
     int Max = 0;
     for(auto &i : v) frq[i]++ , Max = max(Max , i);

@@ -7,6 +7,11 @@ using namespace std;
  * Build pat = reverse(s) + '#' + s + s and use KMP prefix function.
  * When full match (pi[i] == |s|) found in s+s → return shift = i - 2*|s|.
  * If none found → return -1.
+ *
+ * Note:
+ *   - For a non-repeating string, there’s only a single valid shift
+ *     (at most one) that can transform the string into its reverse.
+ *
  * Complexity: O(n)
  * ============================================================
  */

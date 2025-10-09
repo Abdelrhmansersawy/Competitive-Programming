@@ -1,8 +1,19 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 /*
  * ===================== MINIMAL PERIOD OF STRING =====================
  * Return the smallest period p of s (smallest p > 0 such that s is composed
  * of repetitions of s[0..p-1]). If no proper period exists, return n.
  * Uses KMP prefix-function. Complexity: O(n).
+ *
+ * NOTE:
+ *  - Once the string is NOT a repetition (i.e. period == n), something nice happens:
+ *      * All N rotations give different strings.
+ *  - However, when solving problems that allow inversion+rotation, you MUST still
+ *    check whether any inversion (reverse) followed by a rotation produces the same string.
+ *    That case is not covered by the period check above and needs a separate test
+ *    (e.g. KMP on reverse(s) over s+s or use getFirstShift).
  * ================================================================
  */
 

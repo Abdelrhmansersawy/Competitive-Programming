@@ -20,6 +20,11 @@ These are the basic laws for how rotations (`R`) and inversions (`I`) combine:
 
 ---
 
+🔹 **Note:**  
+All rotation parameters are taken **mod |t|** —  
+i.e., `R(k)` ≡ `R(k % |t|)` — to keep rotations within valid bounds.
+---
+
 ### Inverses
 
 * The inverse of a rotation `R(t, a)` is `R(t, |t| − a)`

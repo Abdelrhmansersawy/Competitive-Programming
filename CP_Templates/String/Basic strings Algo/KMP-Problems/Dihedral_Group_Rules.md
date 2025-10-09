@@ -15,7 +15,7 @@ These are the basic laws for how rotations (`R`) and inversions (`I`) combine:
 4. `R(x) I = I R(|t| - x)`
    → moving a rotation past an inversion reverses its direction.
 
-5. L(x) = R(|t| - x)
+5. `L(x) = R(|t| - x)`
    → a left rotation by x is equivalent to a right rotation by (|t| - x).
 
 ---

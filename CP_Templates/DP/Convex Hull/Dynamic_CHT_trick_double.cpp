@@ -1,5 +1,7 @@
 struct Line {
    mutable double k, m, p;
+   // p = x-coordinate (or "time") of intersection with the next line
+   // found by solving:  m + k*x = m₂ + k₂*x  →  x = (m₂ - m) / (k - k₂)
    bool operator<(const Line& o) const { return k > o.k; } 
    bool operator<(double x) const { return p < x; }
 };

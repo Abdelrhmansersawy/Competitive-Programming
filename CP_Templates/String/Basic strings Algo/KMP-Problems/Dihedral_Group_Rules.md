@@ -21,5 +21,6 @@ These are the basic laws for how rotations (`R`) and inversions (`I`) combine:
 
 * The inverse of a rotation `R(t, a)` is `R(t, |t| − a)`
 * Any `I R(a)` is its **own inverse** (doing it twice cancels out).
+
 That means:
 If you apply I R(a) twice, you get the original string back.

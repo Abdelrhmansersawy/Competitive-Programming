@@ -71,6 +71,17 @@ int main() {
     ps.insert({5, 1});
     
     cout << "ps.order_of_key({4,0}) = " << ps.order_of_key({4,0}) << "\n";
-    
+
+    /*
+        🔹 Common Competitive Programming Trick:
+        To count how many elements have first >= x in a pair_order_set:
+        
+            return ps.size() - ps.order_of_key({x, -1});
+        
+        Explanation:
+            - order_of_key({x, -1}) → counts how many pairs are < (x, -1)
+            - subtracting from total size gives count of pairs ≥ (x, -1)
+    */
+
     return 0;
 }

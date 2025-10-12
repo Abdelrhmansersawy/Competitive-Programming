@@ -104,22 +104,43 @@ inline T poly_poly_dist(const vector<pt>& A, const vector<pt>& B){
     return d;
 }
  
-T dis(circle a , circle b){
-    T d = abs(a.c-b.c);
-    return max((T)0 , d - (a.r + b.r));
+// circle vs square  (center-to-polygon then minus radius)
+inline T dis(circle a, square b){
+    auto P = square_pts(b);
+    T d = point_poly_dist(P, a.c);
+    return max((T)0, d - a.r);
 }
-T dis(traingle a , circle b){
-    auto P = tri_pts(a);
-    T d = point_poly_dist(P, b.c);
-    return max((T)0, d - b.r);
+
+// circle vs triangle
+inline T dis(circle a, traingle b){
+    auto P = tri_pts(b);
+    T d = point_poly_dist(P, a.c);
+    return max((T)0, d - a.r);
 }
-T dis(square a , circle b){
-    auto P = square_pts(a);
-    T d = point_poly_dist(P, b.c);
-    return max((T)0, d - b.r);
-}
-T dis(square a , traingle b){
-    auto A = square_pts(a);
+
+// triangle vs triangle (polygon vs polygon)
+inline T dis(traingle a, traingle b){
+    auto A = tri_pts(a);
     auto B = tri_pts(b);
     return poly_poly_dist(A, B);
+}
+
+// square vs square
+inline T dis(square a, square b){
+    auto A = square_pts(a);
+    auto B = square_pts(b);
+    return poly_poly_dist(A, B);
+}
+
+// triangle vs square (symmetric to square vs triangle)
+inline T dis(traingle a, square b){
+    auto A = tri_pts(a);
+    auto B = square_pts(b);
+    return poly_poly_dist(A, B);
+}
+
+// circle vs circle (you already had this, kept for completeness — optional duplicate)
+inline T dis(const circle &a, const circle &b){
+    T d = abs(a.c - b.c);
+    return max((T)0, d - (a.r + b.r));
 }

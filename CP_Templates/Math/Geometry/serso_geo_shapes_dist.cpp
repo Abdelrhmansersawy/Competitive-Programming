@@ -139,8 +139,7 @@ inline T dis(traingle a, square b){
     return poly_poly_dist(A, B);
 }
 
-// circle vs circle (you already had this, kept for completeness — optional duplicate)
-inline T dis(const circle &a, const circle &b){
+inline T dis(circle a, circle b){
     T d = abs(a.c - b.c);
     return max((T)0, d - (a.r + b.r));
 }

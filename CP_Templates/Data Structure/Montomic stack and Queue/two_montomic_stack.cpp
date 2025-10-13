@@ -74,3 +74,19 @@ template <typename T> struct MonoQueue {
         return merge(out.get(), in.get()); // preserve queue order
     }
 };
+
+/*
+    // Example: maintain bitwise OR over a sliding window
+    MonoQueue<int> q([](int a, int b) { return a | b; });
+
+    q.push(1);
+    q.push(2);
+    q.push(4);
+    cout << q.get() << "\n"; // (1|2|4) = 7
+
+    q.pop(); // remove front (1)
+    cout << q.get() << "\n"; // (2|4) = 6
+
+    q.push(8);
+    cout << q.get() << "\n"; // (2|4|8) = 14
+*/

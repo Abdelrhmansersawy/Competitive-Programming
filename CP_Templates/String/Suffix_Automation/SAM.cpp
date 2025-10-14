@@ -30,6 +30,7 @@ struct state {
 const int MAXN = 1e5+9;
 state st[2 * MAXN];
 int sz, last;
+// int cnt[2 * MAXN] , is_terminal[2 * MAXN] , pos_state[MAXN];
 
 void sa_init() {
     st[0].len = 0;
@@ -44,6 +45,7 @@ void sa_init() {
     sz = 1;
     last = 0;
 }
+
 
 void sa_extend(char c, int pos) {
     int cur = sz++;

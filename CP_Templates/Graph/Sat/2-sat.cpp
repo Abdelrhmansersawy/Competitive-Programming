@@ -47,12 +47,12 @@ struct SCC_Solver {
 
 // 2-Satisfiability Solver
 struct TwoSAT {
-    int n; vector<bool> ans; SCC_Solver g;
-    TwoSAT(int n) : n(n), ans(n), g(2 * n) {}
+    int n; vector<bool> ans; SCC_Solver s;
+    TwoSAT(int n) : n(n), ans(n), s(2 * n) {}
     // Adds the constraint: (variable i is f) OR (variable j is g)
     void add_or(int i, bool f, int j, bool g) {
-        g.add_edge(2 * i + !f, 2 * j + g);
-        g.add_edge(2 * j + !g, 2 * i + f);
+        s.add_edge(2 * i + !f, 2 * j + g);
+        s.add_edge(2 * j + !g, 2 * i + f);
     }
     // Adds the constraint: (variable i is f) XOR (variable j is g)
     void add_xor(int i, bool f, int j, bool g) { add_or(i, f, j, g); add_or(i, !f, j, !g); }
@@ -68,7 +68,7 @@ struct TwoSAT {
     // Checks if a solution exists. O(N + M) where N is variables, M is clauses.
     // If it exists, it computes a valid assignment.
     bool solve() {
-        auto p = g.scc_ids(); vector<int> id = p.second;
+        auto p = s.scc_ids(); vector<int> id = p.second;
         for (int i = 0; i < n; i++) {
             if (id[2 * i] == id[2 * i + 1]) return false;
             ans[i] = id[2 * i] < id[2 * i + 1];

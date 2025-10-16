@@ -55,13 +55,20 @@ struct TwoSAT {
         s.add_edge(2 * j + !g, 2 * i + f);
     }
     // Adds the constraint: (variable i is f) XOR (variable j is g)
+    // (0,1) , (1,0)   
     void add_xor(int i, bool f, int j, bool g) { add_or(i, f, j, g); add_or(i, !f, j, !g); }
+
     // Adds the constraint: IF (variable i is f) THEN (variable j is g)
+    // (1,1) , (0,1) , (0,0)
     void add_imply(int i, bool f, int j, bool g) { add_or(i, !f, j, g); }
+
     // Adds the constraint: (variable i is f) IFF (variable j is g)
+    // (0,0) , (1,1)
     void add_iff(int i, bool f, int j, bool g) { add_imply(i, f, j, g); add_imply(j, f, i, g); }
+    
     // Forces variable 'i' to be true
     void force_true(int i) { add_or(i, true, i, true); }
+    
     // Forces variable 'i' to be false
     void force_false(int i) { add_or(i, false, i, false); }
 

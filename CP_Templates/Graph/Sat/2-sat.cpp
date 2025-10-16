@@ -78,3 +78,16 @@ struct TwoSAT {
     // Returns one possible solution (a valid assignment) if solve() was true.
     vector<bool> get_ans() { return ans; }
 };
+
+
+
+int main() {
+    TwoSAT sat(2); // x0, x1
+    sat.add_or(0, true, 1, true);   // (x0 OR x1)
+    sat.add_or(0, false, 1, false); // (¬x0 OR ¬x1)
+
+    if (sat.solve()) {
+        for (int i = 0; i < 2; i++)
+            cout << "x" << i << "=" << sat.get_ans()[i] << " ";
+    } else cout << "Unsat";
+}

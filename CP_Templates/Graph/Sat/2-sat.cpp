@@ -34,7 +34,7 @@ struct SCC_Solver {
         assign.assign(vars, 0);
         for (int i = 0; i < vars; ++i) {
             if (comp[2*i] == comp[2*i+1]) return false;
-            assign[i] = comp[2*i] > comp[2*i+1];
+            assign[i] = comp[2*i] < comp[2*i+1];
         }
         return true;
     }

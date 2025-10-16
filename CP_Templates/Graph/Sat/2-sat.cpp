@@ -78,6 +78,10 @@ struct TwoSAT {
     // Forces variable 'i' to be false
     void force_false(int i) { add_or(i, false, i, false); }
 
+    // Adds the constraint: at most one of (i, j) can be true
+    void add_at_most_one(int i, int j) { add_or(i, false, j, false); }
+
+
     // Checks if a solution exists. O(N + M) where N is variables, M is clauses.
     // If it exists, it computes a valid assignment.
     bool solve() {

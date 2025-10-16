@@ -1,58 +1,64 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-// Solves Strongly Connected Components using Tarjan's algorithm
 struct SCC_Solver {
-    int n;
-    vector<vector<int>> g;
-    SCC_Solver(int n) : n(n), g(n) {}
-    void add_edge(int u, int v) { g[u].push_back(v); }
-    pair<int, vector<int>> scc_ids() {
-        vector<int> tin(n, -1), low(n), id(n), stk;
-        int timer = 0, scc_cnt = 0;
-        stk.reserve(n);
-        function<void(int)> dfs = [&](int v) {
-            low[v] = tin[v] = timer++;
-            stk.push_back(v);
-            for (int to : g[v]) {
-                if (tin[to] == -1) {
-                    dfs(to);
-                    low[v] = min(low[v], low[to]);
-                } else if (tin[to] < n) { // Node is on stack
-                    low[v] = min(low[v], tin[to]);
-                }
-            }
-            if (low[v] == tin[v]) {
-                while (true) {
-                    int u = stk.back(); stk.pop_back();
-                    tin[u] = n; // Mark as processed
-                    id[u] = scc_cnt;
-                    if (u == v) break;
-                }
-                scc_cnt++;
-            }
-        };
-        for (int i = 0; i < n; i++) if (tin[i] == -1) dfs(i);
-        for (auto& x : id) x = scc_cnt - 1 - x;
-        return {scc_cnt, id};
+    int n; 
+    vector<vector<int>> g, gr;
+    vector<int> comp, order;
+    vector<char> vis;
+
+    SCC_Solver(int n) : n(n), g(n), gr(n), comp(n, -1), vis(n, 0) {}
+
+    void add_edge(int u, int v) {
+        g[u].push_back(v);
+        gr[v].push_back(u);
     }
-    vector<vector<int>> sccs() {
-        auto p = scc_ids();
-        int scc_cnt = p.first; vector<int> id = p.second;
-        vector<vector<int>> res(scc_cnt);
-        for (int i = 0; i < n; i++) res[id[i]].push_back(i);
-        return res;
+
+    void dfs1(int u) {
+        vis[u] = 1;
+        for (int v : g[u]) if (!vis[v]) dfs1(v);
+        order.push_back(u);
+    }
+
+    void dfs2(int u, int c) {
+        comp[u] = c;
+        for (int v : gr[u]) if (comp[v] == -1) dfs2(v, c);
+    }
+
+    bool solve(int vars, vector<bool>& assign) {
+        order.clear();
+        fill(vis.begin(), vis.end(), 0);
+        fill(comp.begin(), comp.end(), -1);
+
+        for (int i = 0; i < n; ++i) if (!vis[i]) dfs1(i);
+        reverse(order.begin(), order.end());
+        int c = 0;
+        for (int u : order) if (comp[u] == -1) dfs2(u, c++);
+        assign.assign(vars, 0);
+        for (int i = 0; i < vars; ++i) {
+            if (comp[2*i] == comp[2*i+1]) return false;
+            assign[i] = comp[2*i] > comp[2*i+1];
+        }
+        return true;
     }
 };
 
+
 // 2-Satisfiability Solver
 struct TwoSAT {
-    int n; vector<bool> ans; SCC_Solver s;
-    TwoSAT(int n) : n(n), ans(n), s(2 * n) {}
+    int n, vars;
+    vector<bool> ans;
+    vector<pair<int,int>> E; // implication edges (u->v)
+
+    TwoSAT(int n): n(n), vars(n), ans(n) {}
+
+    int add_var(){ return vars++; } // create fresh helper variable
+
+    // internal: add implication by node indices
+    void add_edge_node(int u,int v){ E.emplace_back(u,v); }
+
     // Adds the constraint: (variable i is f) OR (variable j is g)
+    // (0,1) , (1,0) , (1,1)
     void add_or(int i, bool f, int j, bool g) {
-        s.add_edge(2 * i + !f, 2 * j + g);
-        s.add_edge(2 * j + !g, 2 * i + f);
+        add_edge_node(2*i + !f, 2*j + g);
+        add_edge_node(2*j + !g, 2*i + f);
     }
     // Adds the constraint: (variable i is f) XOR (variable j is g)
     // (0,1) , (1,0)   
@@ -60,7 +66,7 @@ struct TwoSAT {
 
     // Adds the constraint: IF (variable i is f) THEN (variable j is g)
     // (1,1) , (0,1) , (0,0)
-    void add_imply(int i, bool f, int j, bool g) { add_or(i, !f, j, g); }
+    void add_imply(int i, bool f, int j, bool g) { add_or(i, !f, j, g); } // kept yours
 
     // Adds the constraint: (variable i is f) IFF (variable j is g)
     // (0,0) , (1,1)
@@ -72,29 +78,40 @@ struct TwoSAT {
     // Forces variable 'i' to be false
     void force_false(int i) { add_or(i, false, i, false); }
 
+    // Forces at most one of the given (variable,state) pairs to be true
+    void at_most_one(const vector<pair<int, int> > &v) {
+        if (v.size() <= 1) return;
+        int last_pref = -1;
+        for (int i = 0; i < (int)v.size(); ++i) {
+            int x = v[i].first, state = v[i].second;
+            int p = add_var();
+            add_imply(p, false, x, state ^ 1);
+            if (last_pref != -1) {
+                add_imply(p, false, last_pref, false);
+                add_imply(x, state, last_pref, false);
+            }
+            last_pref = p;
+        }
+        int last_suf = -1;
+        for (int i = (int)v.size() - 1; i >= 0; --i) {
+            int x = v[i].first, state = v[i].second;
+            int s = add_var();
+            add_imply(s, false, x, state ^ 1);
+            if (last_suf != -1) {
+                add_imply(s, false, last_suf, false);
+                add_imply(x, state, last_suf, false);
+            }
+            last_suf = s;
+        }
+    }
+
     // Checks if a solution exists. O(N + M) where N is variables, M is clauses.
     // If it exists, it computes a valid assignment.
     bool solve() {
-        auto p = s.scc_ids(); vector<int> id = p.second;
-        for (int i = 0; i < n; i++) {
-            if (id[2 * i] == id[2 * i + 1]) return false;
-            ans[i] = id[2 * i] < id[2 * i + 1];
-        }
-        return true;
+        SCC_Solver S(2 * vars);
+        for (auto &e : E) S.add_edge(e.first, e.second);
+        return S.solve(n, ans);
     }
     // Returns one possible solution (a valid assignment) if solve() was true.
     vector<bool> get_ans() { return ans; }
 };
-
-
-
-int main() {
-    TwoSAT sat(2); // x0, x1
-    sat.add_or(0, true, 1, true);   // (x0 OR x1)
-    sat.add_or(0, false, 1, false); // (¬x0 OR ¬x1)
-
-    if (sat.solve()) {
-        for (int i = 0; i < 2; i++)
-            cout << "x" << i << "=" << sat.get_ans()[i] << " ";
-    } else cout << "Unsat";
-}

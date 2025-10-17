@@ -87,7 +87,7 @@ struct TwoSAT {
     bool solve() {
         SCC_Solver S(2 * vars);
         for (auto &e : E) S.add_edge(e.first, e.second);
-        return S.solve(n, ans);
+        return S.solve(vars, ans);
     }
     // Returns one possible solution (a valid assignment) if solve() was true.
     vector<bool> get_ans() { return ans; }

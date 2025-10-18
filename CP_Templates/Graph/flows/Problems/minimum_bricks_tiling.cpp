@@ -1,4 +1,6 @@
 /*
+link: https://codeforces.com/contest/1404/problem/E
+
 Problem:
   Given an n×m grid of '.' and '#' (at least one '#'), place "bricks" so that
   every '#' cell is covered by exactly one brick and '.' cells are not covered.

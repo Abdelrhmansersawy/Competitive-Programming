@@ -11,41 +11,50 @@
 //
 // -------------------------------------------------------------------------------
 
-int st[MAXN], ft[MAXN], ver[MAXN], sz[MAXN], big[MAXN];
+
+int tin[MAXN], tout[MAXN], ver[MAXN], subsz[MAXN], bigChild[MAXN];
 int dfs_timer = 0;
 
 void preDFS(int u, int p) {
-    st[u] = dfs_timer++;
-    ver[st[u]] = u;
-    sz[u] = 1;
-    big[u] = -1;
+    tin[u] = dfs_timer++;
+    ver[tin[u]] = u;
+    subsz[u] = 1;
+    bigChild[u] = -1;
     for (auto v : adj[u]) if (v != p) {
         preDFS(v, u);
-        sz[u] += sz[v];
-        if (big[u] == -1 || sz[v] > sz[ big[u] ]) big[u] = v;
+        subsz[u] += subsz[v];
+        if (bigChild[u] == -1 || subsz[v] > subsz[ bigChild[u] ]) bigChild[u] = v;
     }
-    ft[u] = dfs_timer;
+    tout[u] = dfs_timer;
 }
 
-// user-defined actions (specific to SAM problem)
+void insert(int pos) {
+    // TODO: implement insertion action (e.g., update a freq Fenwick/segment tree)
+    (void)pos;
+}
+void erase_pos(int pos) {
+    // TODO: implement erase action
+    (void)pos;
+}
+
 void add_node(int u) {
     if (!st[u].is_clone) insert(st[u].first_pos);
 }
 void remove_node(int u) {
-    if (!st[u].is_clone) erase(st[u].first_pos);
+    if (!st[u].is_clone) erase_pos(st[u].first_pos);
 }
 
 void dfs_sack(int u, int p, bool keep) {
     // process all light children
-    for (auto v : adj[u]) if (v != p && v != big[u])
+    for (auto v : adj[u]) if (v != p && v != bigChild[u])
         dfs_sack(v, u, 0);
 
     // process big child (kept data)
-    if (big[u] != -1) dfs_sack(big[u], u, 1);
+    if (bigChild[u] != -1) dfs_sack(bigChild[u], u, 1);
 
     // merge small children into big child’s data
-    for (auto v : adj[u]) if (v != p && v != big[u]) {
-        for (int i = st[v]; i < ft[v]; i++) {
+    for (auto v : adj[u]) if (v != p && v != bigChild[u]) {
+        for (int i = tin[v]; i < tout[v]; i++) {
             int node = ver[i];
             add_node(node);
         }
@@ -55,11 +64,11 @@ void dfs_sack(int u, int p, bool keep) {
     add_node(u);
 
     // answer queries attached to u
-    
+    // (user should add code here)
 
     // clear if not keeping
     if (!keep) {
-        for (int i = st[u]; i < ft[u]; i++) {
+        for (int i = tin[u]; i < tout[u]; i++) {
             int node = ver[i];
             remove_node(node);
         }

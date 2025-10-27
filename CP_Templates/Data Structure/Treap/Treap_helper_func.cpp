@@ -21,6 +21,25 @@ PNode kth(PNode t, int k){
     return kth(t->r, k - ls - 1);
 }
 
+// Split treap `t` into `l` (orig <= key) and `r` (orig > key).
+// NOTE: `orig` must be sorted (BST property).
+void split_by_orig(PNode t, int orig, PNode &l, PNode &r){
+    if (!t) { l = r = nullptr; return; }
+    push(t);
+    if (t->orig <= orig){
+        split_by_orig(t->r, orig, t->r, r);
+        set_parent(t->r, t);
+        l = t;
+        set_parent(l, nullptr);
+    } else {
+        split_by_orig(t->l, orig, l, t->l);
+        set_parent(t->l, t);
+        r = t;
+        set_parent(r, nullptr);
+    }
+    pull(t);
+}
+
 
 // rotate left segment [L..R] by k (k can be >= length)
 void rotate_left(PNode &root, int L, int R, long long k){

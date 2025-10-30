@@ -52,25 +52,32 @@ struct CHT {
     void add_line(ftype k, ftype b) {
         if (is_min) k = -k, b = -b;
         point nw = {k, b};
+        // FIX 5: Change > to >= to handle collinear points
         while (hull.size() >= 2 &&
-               cross(hull.back() - hull[hull.size()-2], nw - hull.back()) > 0)
+               cross(hull.back() - hull[hull.size()-2], nw - hull.back()) >= 0)
             hull.pop_back(), vecs.pop_back();
         if (!hull.empty()) vecs.push_back(point(0,1)*(nw - hull.back()));
         hull.push_back(nw);
     }
 
     ftype get(ftype x) {
-        if (hull.empty()) return is_min ? 1e18 : -1e18;
+        if (hull.empty()) return is_min ? (ftype)1e18 : (ftype)-1e18;
         point q = {x,1};
-        auto it = lower_bound(vecs.begin(), vecs.end(), q,
-            [](point a, point b) { return cross(a,b) > 0; });
-        size_t i = it - vecs.begin();
-        ftype res = dot(q, hull[i]);
+        // find index i that maximizes dot(q, hull[i])
+        int lo = 0, hi = (int)hull.size() - 1;
+        while (lo < hi) {
+            int mid = (lo + hi) >> 1;
+            ftype v1 = dot(q, hull[mid]);
+            ftype v2 = dot(q, hull[mid+1]);
+            if (v1 <= v2) lo = mid + 1;
+            else hi = mid;
+        }
+        ftype res = dot(q, hull[lo]);
         return is_min ? -res : res;
     }
 
     ftype get_mono(ftype x) {
-        if (hull.empty()) return is_min ? 1e18 : -1e18;
+       if (hull.empty()) return is_min ? (ftype)1e18 : (ftype)-1e18;
         while (mono_ptr + 1 < hull.size() &&
                dot({x,1}, hull[mono_ptr]) <= dot({x,1}, hull[mono_ptr+1])) mono_ptr++;
         while (mono_ptr > 0 &&

@@ -14,6 +14,9 @@ CHT operator+(const CHT &A, const CHT &B){
 }
 
 // * : Minkowski (convolution)
+// If each CHT represents f(x) = max_i (a_i * x + b_i),
+// and g(x) = max_j (c_j * x + d_j),
+// then (f * g)(x) = max_{i,j}((a_i + c_j) * x + (b_i + d_j)
 CHT operator*(const CHT &A_in, const CHT &B_in){
     if(A_in.hull.empty()||B_in.hull.empty()) return CHT(A_in.is_min);
     auto ha = A_in.hull; auto va = A_in.vecs;

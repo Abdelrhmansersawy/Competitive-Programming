@@ -34,13 +34,16 @@
  * - Monotonic Query (`get_mono`): Amortized O(1)
  */
 
-typedef long long ftype;
+typedef ll ftype;
 typedef complex<ftype> point;
+
+
 #define x real
 #define y imag
 
 ftype dot(point a, point b) { return (conj(a) * b).x(); }
 ftype cross(point a, point b) { return (conj(a) * b).y(); }
+
 
 struct CHT {
     vector<point> hull, vecs;
@@ -52,7 +55,6 @@ struct CHT {
     void add_line(ftype k, ftype b) {
         if (is_min) k = -k, b = -b;
         point nw = {k, b};
-        // FIX 5: Change > to >= to handle collinear points
         while (hull.size() >= 2 &&
                cross(hull.back() - hull[hull.size()-2], nw - hull.back()) >= 0)
             hull.pop_back(), vecs.pop_back();
@@ -63,7 +65,6 @@ struct CHT {
     ftype get(ftype x) {
         if (hull.empty()) return is_min ? (ftype)1e18 : (ftype)-1e18;
         point q = {x,1};
-        // find index i that maximizes dot(q, hull[i])
         int lo = 0, hi = (int)hull.size() - 1;
         while (lo < hi) {
             int mid = (lo + hi) >> 1;

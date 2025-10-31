@@ -1,4 +1,5 @@
 // + : union/merge 
+// Sorting 
 CHT operator+(const CHT &A, const CHT &B){
     assert(A.is_min == B.is_min);
 
@@ -21,6 +22,23 @@ CHT operator+(const CHT &A, const CHT &B){
     return R;
 }
 
+// merge sort
+// + : union/merge 
+CHT operator+(const CHT &A, const CHT &B){
+    assert(A.is_min == B.is_min);
+    CHT R(A.is_min);
+    int n = (int)A.hull.size(), m = (int)B.hull.size(), i = 0, j = 0;
+    bool have = false; ftype lastx = 0;
+    while (i < n || j < m) {
+        ftype curx = (j==m || (i<n && A.hull[i].x() < B.hull[j].x())) ? A.hull[i].x() : B.hull[j].x();
+        ftype y = numeric_limits<ftype>::lowest();
+        while (i < n && A.hull[i].x() == curx) y = max(y, A.hull[i++].y());
+        while (j < m && B.hull[j].x() == curx) y = max(y, B.hull[j++].y());
+        if (!have || curx != lastx) { R.add_line(curx, y); have = true; lastx = curx; }
+    }
+    return R;
+}
+
 
 
 // * : Minkowski (convolution)
@@ -29,20 +47,19 @@ CHT operator+(const CHT &A, const CHT &B){
 // then (f * g)(x) = max_{i,j}((a_i + c_j) * x + (b_i + d_j)
 CHT operator*(const CHT &A_in, const CHT &B_in){
     assert(A_in.is_min == B_in.is_min);
-
     if (A_in.hull.empty()) return B_in;
     if (B_in.hull.empty()) return A_in;
-
+ 
     const auto &ha = A_in.hull;
     const auto &va = A_in.vecs;
     const auto &hb = B_in.hull;
     const auto &vb = B_in.vecs;
-
+ 
     point cur = ha[0] + hb[0];
-
+ 
     vector<point> merged;
     merged.reserve(va.size() + vb.size());
-
+ 
     int ia = 0, ib = 0, na = (int)va.size(), nb = (int)vb.size();
     while (ia < na && ib < nb) {
         ftype c = cross(va[ia], vb[ib]);
@@ -52,18 +69,17 @@ CHT operator*(const CHT &A_in, const CHT &B_in){
     }
     while (ia < na) merged.push_back(va[ia++]);
     while (ib < nb) merged.push_back(vb[ib++]);
-
+ 
     CHT R(A_in.is_min);
     R.hull.reserve(merged.size() + 1);
     R.vecs.reserve(merged.size());
-
+ 
     R.hull.push_back(cur);
     for (auto &v : merged) {
-        // rot_back * v  ==  point(v.y, -v.x)
-        point diff{ v.y, -v.x };
+        // rotate v by -90 degrees: (imag, -real)
+        point diff = point(v.y() , -v.x());
         R.vecs.push_back(v);
         R.hull.push_back(R.hull.back() + diff);
     }
-
     return R;
 }

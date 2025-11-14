@@ -53,8 +53,8 @@ b.to_ullong();     // to unsigned long long       // O(1)
   MANUAL EXTENSIONS NEEDED
 ==========================*/
 
-_Find_prev(i);     // previous 1 before i         // custom
-_Find_last();      // last 1 bit                  // custom
+_Find_prev(i);     // previous 1 before i         // O(N/64)
+_Find_last();      // last 1 bit                  // O(N/64)
 
 template <size_t Nb>
 struct Bitset : bitset<Nb> {

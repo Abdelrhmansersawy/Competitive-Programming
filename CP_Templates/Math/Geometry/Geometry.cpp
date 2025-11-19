@@ -5,121 +5,95 @@ typedef long long ll;
 #define f first
 #define s second
 #define all(v) v.begin() , v.end()
-#ifndef ONLINE_JUDGE 
-#define debug(x) cerr << #x << ": " << x << '\n';
-#else
-#define debug(x)
-#endif
 #define ld long double
-const ld EPS = 1e-6;
 #define vec(a,b) ((b) - (a))
-template<typename T = double> struct Point {
-    typedef Point P;
-    T x, y;
-    explicit Point(T x=0, T y=0) : x(x), y(y) {}
-    bool operator<(P p) const { return tie(x,y) < tie(p.x,p.y); }
-    bool operator==(P p) const { return tie(x,y)==tie(p.x,p.y); }
-    P operator+(P p) const { return P(x+p.x, y+p.y); }
-    P operator-(P p) const { return P(x-p.x, y-p.y); }
-    P operator*(T d) const { return P(x*d, y*d); }
-    P operator/(T d) const { return P(x/d, y/d); }
-    T dot(P p) const { return x*p.x + y*p.y; }
-    T cross(P p) const { return x*p.y - y*p.x; }
-    T cross(P a, P b) const { return (a-*this).cross(b-*this); }
-    T dist2() const { return x*x + y*y; }
-    double dist() const { return sqrt((double)dist2()); }
-    // angle to x-axis in interval [-pi, pi]
-    double angle() const { return atan2(y, x); }
-    P unit() const { return *this/dist(); } // makes dist()=1
-    P perp() const { return P(-y, x); } // rotates +90 degrees
-    P normal() const { return perp().unit(); }
-    // returns point rotated 'a' radians ccw around the origin
-    P rotate(double a) const {
-        return P(x*cos(a)-y*sin(a),x*sin(a)+y*cos(a)); }
-    friend ostream& operator<<(ostream& os, P p) {
-        return os << "(" << p.x << "," << p.y << ")"; 
-    }
-    friend istream &operator>>(istream &os, P &p) {
-        return os >> p.x >> p.y;
-    }
 
-    // Project point onto line through a and b (assuming a != b).
-    P projectOnLine(const P &a, const P &b) const {
-        P ab = a.getVector(b);
-        P ac = a.getVector(*this);
-        return a + ab * ac.dot(ab) / a.dist2(b);
-    }
- 
-    // Project point c onto line segment through a and b (assuming a != b).
-    P projectOnSegment(const P &a, const P &b) const {
-        P &c = *this;
-        P ab = a.getVector(b);
-        P ac = a.getVector(c);
- 
-        long double r = dot(ac, ab), d = a.dist2(b);
-        if (r < 0) return a;
-        if (r > d) return b;
- 
-        return a + ab * r / d;
-    }
- 
-    P reflectAroundLine(const P &a, const P &b) const {
-        return projectOnLine(a, b) * 2 - (*this);
-    }
+using T  = long double;
+using pt = complex<T>;
 
-};
-int dcmp(const ld &a, const ld &b) {
+#define X real()
+#define Y imag()
+const T EPS = 1e-9L;
+const T PI  = acosl(-1.0L);
+
+// Returns squared length of vector p
+T sq(pt p){ return real(conj(p) * p); }
+
+// Returns dot product of two vectors
+T dot(pt a, pt b){ return real(conj(a) * b); }
+
+// Returns cross product of two vectors
+T cross(pt a, pt b){ return imag(conj(a) * b); }
+
+// Returns sign of a value with EPS tolerance
+int sgn(T val){
+    if(val > EPS) return 1;
+    if(val < -EPS) return -1;
+    return 0;
+}
+
+// Returns perpendicular vector (90° CCW rotation)
+pt perp(pt p){ return {-p.Y, p.X}; }
+
+// Returns vector rotated by angle theta (radians, CCW if theta > 0)
+pt rotate(pt p, T theta){ return p * std::polar((T)1.0, theta); }
+
+// Returns point a rotated by angle theta around point p (radians, CCW if theta > 0)
+pt rotate(pt a, pt p, T theta){ return (a - p) * std::polar((T)1.0, theta) + p; }
+
+// Returns vector rotated 90° counter-clockwise
+pt rotCCW90(pt p){ return pt(-p.Y, p.X); }
+
+// Returns vector rotated 90° clockwise
+pt rotCW90(pt p){ return pt(p.Y, -p.X); }
+
+// Returns unit vector of p
+pt unit(pt p){ return p / abs(p); }
+int dcmp(const T &a, const T &b) {
     // Double compare
-    if (fabs(a - b) < EPS)
+    if (fabsl(a - b) < EPS)
         return 0;
  
     return (a > b ? 1 : -1);
 }
 // length of vector
-double length(const Point<> a){
-    return sqrt(a.x * a.x + a.y * a.y);
-}
-// cross product
-double cross(const Point<> &a, const Point<> &b){
-    return a.x * b.y - b.x * a.y;
+T length(pt a){
+    return abs(a);
 }
 // Check if there is intersect two lines or not and return the intersection point
-bool intersect(const Point<> &a, const Point<> &b, 
-        const Point<> &p, const Point<> &q,  Point<> &ret) {
+bool intersect(const pt &a, const pt &b, 
+        const pt &p, const pt &q,  pt &ret) {
     //handle degenerate cases (2 parallel lines, 2 identical lines,   line is 1 point)
-    double d1 = cross(p - a, b - a);
-    double d2 = cross(q - a, b - a);
+    T d1 = cross(p - a, b - a);
+    T d2 = cross(q - a, b - a);
     ret = (q * d1  - p * d2) / (d1 - d2);
-    if(fabs(d1 - d2) > EPS) return 1;
+    if(fabsl(d1 - d2) > EPS) return 1;
     return 0;
 }
 
-// dot product
-double dot(const Point<> a, const Point<> b){ return a.x * b.x + a.y * b.y; }
-
 // Point On Line
-bool pointOnLine(const Point<>& a, const Point<>& b, const Point<>& p) {
+bool pointOnLine(const pt& a, const pt& b, const pt& p) {
     // determine the point "p" is in the line or not
-    return fabs(cross(vec(a,b),vec(a,p))) < EPS;
+    return fabsl(cross(vec(a,b),vec(a,p))) < EPS;
 }
 // Is Point On Ray
-bool pointOnRay(const Point<>& a, const Point<>& b, const Point<>& p) {
+bool pointOnRay(const pt& a, const pt& b, const pt& p) {
     //IMP NOTE: a,b,p must be collinear
     return dot(vec(a,p), vec(a,b)) > -EPS;
 }
 // Point On Segment
-bool pointOnSegment(const Point<>& a, const Point<>& b, const Point<>& p) {
+bool pointOnSegment(const pt& a, const pt& b, const pt& p) {
         //el satr da momken y3mel precision error
     if(!pointOnLine(a,b,p)) return 0;
     return pointOnRay(a, b, p) && pointOnRay(b, a, p);
 }
 //Point Line Dist
-double pointLineDist(const Point<>& a, const Point<>& b, const Point<>& p) {
+T pointLineDist(const pt& a, const pt& b, const pt& p) {
   // shortest distance between line and point
-  return fabs(cross(vec(a,b),vec(a,p)) / length(vec(a,b)));
+  return fabsl(cross(vec(a,b),vec(a,p)) / length(vec(a,b)));
 }
 // Point Segment Dist
-double pointSegmentDist(const Point<> &a, const Point<> &b,const Point<> &p){
+T pointSegmentDist(const pt &a, const pt &b,const pt &p){
       // shortest distance between segment and point
         if (dot(vec(a,b),vec(a,p)) < EPS)
                 return length(vec(a,p));
@@ -132,71 +106,78 @@ int segmentLatticePointsCount(int x1, int y1, int x2, int y2) {
         return abs(__gcd(x1 - x2, y1 - y2)) + 1;
 }
 
-template<class P> bool onSegment(P s, P e, P p) {
-    // check if point (p) on line (s , e)
-    return p.cross(s, e) == 0 && (s - p).dot(e - p) <= 0;
+bool onSegment(pt s, pt e, pt p) {
+    return sgn(cross(s - p, e - p)) == 0 && dot(s - p, e - p) <= EPS;
 }
 
-template<class P> vector<P> segInter(P a, P b, P c, P d) {
-    // The intersection between two segment, return the index section point
-    auto oa = c.cross(d, a), ob = c.cross(d, b),
-         oc = a.cross(b, c), od = a.cross(b, d);
+vector<pt> segInter(pt a, pt b, pt c, pt d) {
+    // The intersection between two segment, return the intersection point(s)
+    T oa = cross(d - c, a - c), ob = cross(d - c, b - c),
+      oc = cross(b - a, c - a), od = cross(b - a, d - a);
     // Checks if intersection is single non-endpoint point.
     if (sgn(oa) * sgn(ob) < 0 && sgn(oc) * sgn(od) < 0)
         return {(a * ob - b * oa) / (ob - oa)};
-    set<P> s;
-    if (onSegment(c, d, a)) s.insert(a);
-    if (onSegment(c, d, b)) s.insert(b);
-    if (onSegment(a, b, c)) s.insert(c);
-    if (onSegment(a, b, d)) s.insert(d);
-    return {s.begin(), s.end()};
+    vector<pt> s;
+    if (onSegment(c, d, a)) s.push_back(a);
+    if (onSegment(c, d, b)) s.push_back(b);
+    if (onSegment(a, b, c)) s.push_back(c);
+    if (onSegment(a, b, d)) s.push_back(d);
+    sort(s.begin(), s.end(), [](const pt &lhs, const pt &rhs){
+        if (fabsl(lhs.X - rhs.X) > EPS) return lhs.X < rhs.X;
+        return lhs.Y < rhs.Y;
+    });
+    s.erase(unique(s.begin(), s.end(), [](const pt &lhs, const pt &rhs){
+        return fabsl(lhs.X - rhs.X) < EPS && fabsl(lhs.Y - rhs.Y) < EPS;
+    }), s.end());
+    return s;
 }
-vector<vector<Point<int>>> createLine(int x, int y, int d){
-    // 
-    vector<vector<Point<int>>> ret;
-    ret.push_back({Point<int>(x+d, y), Point<int>(x, y+d)});
-    ret.push_back({Point<int>(x-d, y), Point<int>(x, y+d)});
-    ret.push_back({Point<int>(x-d, y), Point<int>(x, y-d)});
-    ret.push_back({Point<int>(x+d, y), Point<int>(x, y-d)});
+vector<vector<pt>> createLine(T x, T y, T d){
+    vector<vector<pt>> ret;
+    ret.push_back({pt(x+d, y), pt(x, y+d)});
+    ret.push_back({pt(x-d, y), pt(x, y+d)});
+    ret.push_back({pt(x-d, y), pt(x, y-d)});
+    ret.push_back({pt(x+d, y), pt(x, y-d)});
     return ret;
 }
 
-template<class P>
-vector<P> circleLine(P c, double r, P a, P b) {
-    // the intersection of line and circule
-    P ab = b - a, p = a + ab * (c - a).dot(ab) / ab.dist2();
-    double s = a.cross(b, c), h2 = r * r - s * s / ab.dist2();
-    if (h2 < 0) return {};
-    if (h2 == 0) return {p};
-    P h = ab.unit() * sqrt(h2);
+vector<pt> circleLine(pt c, T r, pt a, pt b) {
+    // the intersection of line and circle
+    pt ab = b - a;
+    pt p = a + ab * dot(c - a, ab) / sq(ab);
+    T s = cross(b - a, c - a);
+    T h2 = r * r - s * s / sq(ab);
+    if (h2 < -EPS) return {};
+    if (fabsl(h2) <= EPS) return {p};
+    pt h = unit(ab) * sqrtl(h2);
     return {p - h, p + h};
 }
 // Cosine Rule
 //get angle opposite to side a
-double cosRule(double a, double b, double c) {
+T cosRule(T a, T b, T c) {
         // Handle denom = 0
-        double res = (b * b + c * c - a * a) / (2 * b * c);
-        if (res > 1)
-                res = 1;
-        if (res < -1)
-                res = -1;
-        return acos(res);
+        T res = (b * b + c * c - a * a) / (2 * b * c);
+        res = clamp(res, (T)-1, (T)1);
+        return acosl(res);
 }
 
-Point<> normalize(const Point<> p){ return ((p) / length(p)); }
-Point<> polar(const Point<> &r, double t){
-    return Point{r.x * cos(t)  - r.y * sin(t), r.x * sin(t) + r.y * cos(t)};
+pt normalize(pt p){
+    T len = length(p);
+    if (len < EPS) return p;
+    return p / len;
+}
+pt polar(const pt &r, T t){
+    return r * std::polar((T)1.0, t);
 }
 // Circle Circle Intersection
-int circleCircleIntersection(const Point<> &c1, const double &r1, const Point<> &c2, const double &r2, Point<> &res1, Point<> &res2) {
-        if (c1 == c2 && fabs(r1 - r2) < EPS) {
+int circleCircleIntersection(const pt &c1, const T &r1, const pt &c2, const T &r2, pt &res1, pt &res2) {
+        if (abs(c1 - c2) < EPS && fabsl(r1 - r2) < EPS) {
                 res1 = res2 = c1;
-                return fabs(r1) < EPS ? 1 : INT32_MAX;
+                return fabsl(r1) < EPS ? 1 : INT32_MAX;
         }
-        double len = length(vec(c1,c2));
-        if (fabs(len - (r1 + r2)) < EPS || fabs(fabs(r1 - r2) - len) < EPS) {
-                Point<> d, c;
-                double r;
+        T len = length(vec(c1,c2));
+        if (fabsl(len - (r1 + r2)) < EPS || fabsl(fabsl(r1 - r2) - len) < EPS) {
+                pt d, c;
+                T r;
                 if (r1 > r2)
                         d = vec(c1,c2), c = c1, r = r1;
                 else
@@ -204,40 +185,38 @@ int circleCircleIntersection(const Point<> &c1, const double &r1, const Point<> 
                 res1 = res2 = normalize(d) * r + c;
                 return 1; // intersect in one point
         }
-        if (len > r1 + r2 || len < fabs(r1 - r2))
+        if (len > r1 + r2 || len < fabsl(r1 - r2))
                 return 0; // intersect on two points
-        double a = cosRule(r2, r1, len);
-        Point<> c1c2 = normalize(vec(c1,c2)) * r1;
+        T a = cosRule(r2, r1, len);
+        pt c1c2 = normalize(vec(c1,c2)) * r1;
         res1 = polar(c1c2,  a) + c1;
         res2 = polar(c1c2, -a) + c1;
         return 2; // intersect in one point
 }
 // Circle From 3 Points
-bool circle3(const Point<> &p1, const Point<> &p2, const Point<> &p3, 
-        Point<>& cen, double& r) {
-        Point<> m1 = (p1 + p2) / 2;
-        Point<> m2 = (p2 + p3) / 2;
-        Point<> perp1 = vec(p1, p2);
-        perp1 = perp1.perp();
-        Point<> perp2 = vec(p2, p3);
-        perp2 = perp2.perp();
+bool circle3(const pt &p1, const pt &p2, const pt &p3, 
+        pt& cen, T& r) {
+        pt m1 = (p1 + p2) / (T)2;
+        pt m2 = (p2 + p3) / (T)2;
+        pt perp1 = perp(vec(p1, p2));
+        pt perp2 = perp(vec(p2, p3));
         bool res = intersect(m1, m1 + perp1, m2, m2 + perp2, cen);
         r = length(vec(cen,p1));
         return res;
 }
-double lengthSqr(const Point<> a){ return a.x * a.x + a.y * a.y; }
+T lengthSqr(pt a){ return sq(a); }
 // check Point according to circle  (in boundary, inside , outside)
-int circlePoint(const Point<>  &cen, const double &r, const Point<>  &p) {
-        double lensqr = lengthSqr(vec(cen,p));
-        if (fabs(lensqr - r * r) < EPS)
+int circlePoint(const pt  &cen, const T &r, const pt  &p) {
+        T lensqr = lengthSqr(vec(cen,p));
+        if (fabsl(lensqr - r * r) < EPS)
                 return 1; // In the Boundary
         if (lensqr < r * r)
                 return -1; // In the circle
         return 0; // Out the circle
 }
 // Maximum  triangle inside a circle
-double maxAreaTriangleInsideCircle(double a){
-    return 3 * sqrt((double) 3) * a * a / 4;
+T maxAreaTriangleInsideCircle(T a){
+    return 3 * sqrtl((T)3) * a * a / 4;
 }
 // find the Slope
 pair<int,int> slope(pair<int,int> u, pair<int,int> v)

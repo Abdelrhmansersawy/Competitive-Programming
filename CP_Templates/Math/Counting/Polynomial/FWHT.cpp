@@ -1,59 +1,48 @@
-/*
- * ============================= Fast Subset Transform (FST) =============================
- *
- * FST performs convolution on bitmasks in O(N log N), where N = 2^k.
- * It supports three common binary operations on subsets: AND, OR, XOR.
- * This template allows toggling the operation by uncommenting the appropriate line.
- * 
- * Operation summary:
- * - AND: f(S) = sum of all f(T) * g(S ^ T) for T ⊆ S
- * - OR : f(S) = sum of all f(T) * g(S ^ T) for T ⊇ S
- * - XOR: f(S) = sum over all T (f(T) * g(S ^ T))  [Requires normalization on inverse]
- *
- * Time: O(N log N)
- */
+int add(int a, int b) {
+    return (a + b);
+}
 
-#include <bits/stdc++.h>
-using namespace std;
-typedef vector<int> vi;
-typedef pair<int, int> pii;
-#define rep(i, st, ed) for (int i = st; i < ed; i++)
-#define sz(v) int(v.size())
+int sub(int a, int b) {
+    return (a - b);
+}
 
-void FST(vi& a, bool inv) {
-    int n = sz(a);
-    for (int step = 1; step < n; step <<= 1) {
-        for (int i = 0; i < n; i += 2 * step) {
-            rep(j, i, i + step) {
-                int &u = a[j], &v = a[j + step];
-                tie(u, v) =
-                    inv ? pii(v - u, u) : pii(v, u + v); // AND
-                    // inv ? pii(v, u - v) : pii(u + v, u); // OR /// include-line
-                    // pii(u + v, u - v);                   // XOR /// include-line
+void fwht(vector<int> &a, int inv, int f) {
+    int sz = a.size();
+    for (int len = 1; 2 * len <= sz; len <<= 1) {
+        for (int i = 0; i < sz; i += 2 * len) {
+            for (int j = 0; j < len; j++) {
+                int x = a[i + j];
+                int y = a[i + j + len];
+
+                if (f == 0) {
+                    if (!inv)  a[i + j] = y, a[i + j + len] = add(x,  y);
+                    else  a[i + j] = sub(y, x), a[i + j + len] = x;
+                }
+                else if (f == 1) {
+                    if (!inv)  a[i + j + len] = add(x, y);
+                    else  a[i + j + len] = sub(y, x);
+                }
+                else {
+                    a[i + j] = add(x, y);
+                    a[i + j + len] = sub(x, y);
+                }
             }
         }
     }
-    // if (inv) for (int &x : a) x /= n; // XOR only /// include-line
 }
-
-// Convolution: C = A * B
-vi conv(vi a, vi b) {
-    FST(a, false); FST(b, false);
-    rep(i, 0, sz(a)) a[i] *= b[i];
-    FST(a, true);
-    return a;
+// for example to get all pairs xor send a and b as the frequency array of values
+vector<int> mul(vector<int> a, vector<int> b, int f) { // 0:AND, 1:OR, 2:XOR
+    int sz = a.size();
+    fwht(a, 0, f);  fwht(b, 0, f);
+    vector<int> c(sz);
+    for (int i = 0; i < sz; ++i) {
+        c[i] = a[i] * b[i];
+    }
+    fwht(c, 1, f);
+    if (f == 2) {
+        for (int i = 0; i < sz; ++i) {
+            c[i] = c[i] / sz;
+        }
+    }
+    return c;
 }
-
-/*
- * ============================= Example Usage =============================
- *
- * int main() {
- *     vi A = {1, 2, 3, 4};
- *     vi B = {4, 3, 2, 1};
- *     vi C = conv(A, B);
- *     for (int x : C) cout << x << " ";
- *     cout << "\n";
- * }
- *
- * Change the size of A/B to be power of 2 (e.g., 2^k) before calling `conv`.
- */

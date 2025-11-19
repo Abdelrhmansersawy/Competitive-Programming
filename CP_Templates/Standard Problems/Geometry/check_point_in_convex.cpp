@@ -6,125 +6,71 @@
 */
 #include <bits/stdc++.h>
 using namespace std;
-#define double long double
-#define int long long
-#define vec(a,b) {b.x-a.x,b.y-a.y}
-long long const N  = 1e5;
-struct Point { int x, y; };
-double const eps = 1e-7;
-int orientation(Point a, Point b, Point c) {
-    double v = a.x*(b.y-c.y)+b.x*(c.y-a.y)+c.x*(a.y-b.y);
-    if (v < 0) return -1; // clockwise
-    if (v > 0) return +1; // counter-clockwise
-    return 0;
+using T = long double;
+using pt = complex<T>;
+#define X real()
+#define Y imag()
+const T EPS = 1e-9;
+
+T dot(pt a, pt b) { return (conj(a)*b).X; }
+T cross(pt a, pt b) { return (conj(a)*b).Y; }
+T cross(pt o, pt a, pt b) { return cross(a-o, b-o); }
+bool cmp(pt a, pt b) { return make_pair(a.X, a.Y) < make_pair(b.X, b.Y); }
+
+vector<pt> hull(vector<pt>& p) {
+    int n = p.size(), k = 0;
+    if (n <= 2) return p;
+    vector<pt> h(2*n);
+    sort(p.begin(), p.end(), cmp);
+    for (int i=0; i<n; ++i) {
+        while (k>=2 && cross(h[k-2], h[k-1], p[i]) <= EPS) k--;
+        h[k++] = p[i];
+    }
+    for (int i=n-2, t=k+1; i>=0; i--) {
+        while (k>=t && cross(h[k-2], h[k-1], p[i]) <= EPS) k--;
+        h[k++] = p[i];
+    }
+    h.resize(k-1);
+    return h;
 }
 
+// 0: outside, 1: inside, 2: touch
+int in_poly(const vector<pt>& h, pt p) {
+    int n = h.size();
+    if (n == 0) return 0;
+    if (n == 1) return abs(h[0]-p) < EPS ? 2 : 0;
+    if (n == 2) return abs(cross(h[0], h[1], p)) < EPS && dot(p-h[0], p-h[1]) <= EPS ? 2 : 0;
+    
+    T c1 = cross(h[0], h[1], p), c2 = cross(h[0], h[n-1], p);
+    if (c1 < -EPS || c2 > EPS) return 0;
+    if (abs(c1) < EPS) return dot(p-h[0], p-h[1]) <= EPS ? 2 : 0;
+    if (abs(c2) < EPS) return dot(p-h[0], p-h[n-1]) <= EPS ? 2 : 0;
+    
+    int l = 1, r = n-2, idx = -1;
+    while (l <= r) {
+        int mid = (l+r)/2;
+        if (cross(h[0], h[mid], p) >= -EPS) idx = mid, l = mid+1;
+        else r = mid-1;
+    }
+    T v = cross(h[idx], h[idx+1], p);
+    return v < -EPS ? 0 : (v < EPS ? 2 : 1);
+}
 
-bool cw(Point a, Point b, Point c, bool include_collinear) {
-    int o = orientation(a, b, c);
-    return o < 0 || (include_collinear && o == 0);
-}
-bool collinear(Point a, Point b, Point c) { return orientation(a, b, c) == 0; }
+void solve() {
+    int n, m;
+    if (!(cin >> n >> m)) return;
+    vector<pt> q(n), p(m);
+    for(int i=0; i<n; ++i) { T x,y; cin>>x>>y; q[i]={x,y}; }
+    for(int i=0; i<m; ++i) { T x,y; cin>>x>>y; p[i]={x,y}; }
+    
+    vector<pt> h = hull(p); 
 
-void convex_hull(vector<Point>& a, bool include_collinear = false) {
-    Point p0 = *min_element(a.begin(), a.end(), [](Point a, Point b) {
-        return make_pair(a.y, a.x) < make_pair(b.y, b.x);
-    });
-    sort(a.begin(), a.end(), [&p0](const Point& a, const Point& b) {
-        int o = orientation(p0, a, b);
-        if (o == 0)
-            return (p0.x-a.x)*(p0.x-a.x) + (p0.y-a.y)*(p0.y-a.y)
-                < (p0.x-b.x)*(p0.x-b.x) + (p0.y-b.y)*(p0.y-b.y);
-        return o < 0;
-    });
-    if (include_collinear) {
-        int i = (int)a.size()-1;
-        while (i >= 0 && collinear(p0, a[i], a.back())) i--;
-        reverse(a.begin()+i+1, a.end());
-    }
-
-    vector<Point> st;
-    for (int i = 0; i < (int)a.size(); i++) {
-        while (st.size() > 1 && !cw(st[st.size()-2], st.back(), a[i], include_collinear))
-            st.pop_back();
-        st.push_back(a[i]);
-    }
-
-    a = st;
-}
-double cross(Point a, Point b){ return a.x*b.y - b.x*a.y; }
-int cross(Point a, Point b, Point c){
-    Point d = vec(b,a), e = vec(c,a);
-    return cross(d,e);
-}
-double dot(Point a, Point b){
-    return a.x*b.x + a.y*b.y;
-}
-bool pointOnLine(Point a, Point b, Point p){
-    return fabs(cross(vec(a,b),vec(a,p))) < eps;
-}
-bool pointOnRay(Point a, Point b, Point p){
-    return dot(vec(a,p),vec(a,b)) > -eps;
-}
-bool pointOnsegment(Point a, Point b, Point p){
-    if(!pointOnLine(a,b,p)) return 0;
-    return pointOnRay(a,b,p) && pointOnRay(b,a,p);
-}
-vector<Point> v(N);
-void prepare(int n) {
-    int pos = 0;
-    for (int i = 0; i < n; i++) {
-        if (make_pair(v[i].x, v[i].y) < make_pair(v[pos].x, v[pos].y))
-            pos = i;
-    }
-    rotate(v.begin(), v.begin() + pos, v.end());
-}
-void print(Point p){
-    cerr << p.x << " " << p.y << "\n";
-}
-bool fun(Point p,int n)
-{
-    int idx = 1;
-    if(pointOnsegment(v[0],v[n-1],p)) return 1;
-    if(cross(v[0],v[n-1],p) < 0) return 0;
-    if(cross(v[0],v[1],p) > 0) return 0;
-    int l = 1, r= n - 2;
-    int ans = -1;
-    while(r >= l)
-    {
-        int mid = l + (r-l)/2;
-        if(cross(v[0],v[mid],p) <= 0) l = mid+1, ans = mid;
-        else r=mid-1;
-    }
-    if(ans == -1) return 0;
-    return (cross(v[ans],v[(ans+1)%n],p) <= 0);
-}
-double area(Point a, Point b, Point c)
-{
-    return 0.5*abs(a.x*(b.y-c.y)+b.x*(c.y-a.y)+c.x*(a.y-b.y));
-}
-void solve()
-{
-    int n,m; cin >> n >> m;
-    vector<Point> vans(n);
-    for(int i=0; i < n; ++i)
-    {
-        cin >> vans[i].x >> vans[i].y;
-    }
-    for(int i=0; i < m; ++i) cin >> v[i].x >> v[i].y;
-    convex_hull(v);
-    prepare(v.size());
-    m = v.size();
     int ans = 0;
-    for(int i=0; i < n; ++i) ans += fun(vans[i],m);
+    for(auto& x : q) if(in_poly(h, x)) ans++;
     cout << ans << "\n";
 }
-int32_t main()
-{
-    int t=1; //cin >> t;
-    while(t--)
-    {
-        solve();
-    }
-}
 
+int32_t main() {
+    ios::sync_with_stdio(0); cin.tie(0);
+    solve();
+}

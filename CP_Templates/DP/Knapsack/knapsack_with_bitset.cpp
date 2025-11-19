@@ -1,4 +1,10 @@
-// set compile-time maximum possible sum (user said <= 1e6)
+/* 
+    optimized Knapsack problem work 
+    if n <= 2e5 
+    a1 + a2 + ... + an <= 1e6 
+    Time complexity: O(n * sqrt(n)) 
+*/
+
 constexpr int N = 1'000'001;
 
 template<int len = 1>

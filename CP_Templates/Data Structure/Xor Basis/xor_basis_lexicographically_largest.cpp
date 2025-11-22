@@ -15,7 +15,7 @@ struct XorBasis {
     bool in_range(int idx, int R){ return idx != -1 && idx <= R; }
 
     // insert element x with index ind
-    bool insert(int x, int ind){
+    bool insert(ll x, int ind){
         ++n;
         for (int i = B - 1; i >= 0; --i) if (x >> i & 1){
             if (lt[i] == -1) { basis[i] = x; lt[i] = ind; ++sz; return true; }
@@ -49,14 +49,14 @@ struct XorBasis {
         if (!check(x, L)) return 0;
         int szL = 0;
         for (int i = 0; i < B; ++i) if (basis[i] && in_range(lt[i], L)) ++szL;
-        return 1LL << (nn - sz);
+        return 1LL << (nn - szL);
     }
 
     // k-th smallest subset XOR (k: 1-based) using elements with lt <= L
     ll kth(int k, int L){
         int szL = 0;
         for (int i = 0; i < B; ++i) if (basis[i] && in_range(lt[i], L)) ++szL;
-        if (k < 1 || k > (1 << szL)) return -1;
+        if (k < 1 || k > (1LL << szL)) return -1;
         ll x = 0;
         ll cnt = 1LL << szL;
         ll K = k;

@@ -1,57 +1,37 @@
 struct XorBasis {
-    static const int LOG = 30;
-    int Basis[LOG], sz = 0, n = 0;
+    static const int B = 30;
+    int basis[B], sz , n;
 
-    XorBasis(){ memset(Basis, 0, sizeof(Basis)); }
+    XorBasis(){ reset(); }
 
-    void insert(int x){ // Insert vector
-        n++;
-        for(int i = LOG - 1; i >= 0; --i){
-            if(!(x >> i & 1)) continue;
-            if(!Basis[i]){ Basis[i] = x; sz++; return; }
-            x ^= Basis[i];
+    void reset(){
+        memset(basis, 0, sizeof basis);
+        sz = 0;
+    }
+
+    bool insert(int x){
+        ++n;
+        for(int i=B-1;i>=0;--i) if(x>>i&1){
+            if(!basis[i]){ basis[i]=x; sz++; return true; }
+            x ^= basis[i];
         }
+        return false;
     }
 
     int max_xor(){ // Max subset XOR
         int x = 0;
-        for(int i = LOG - 1; i >= 0; --i)
-            if(Basis[i] && (x ^ Basis[i]) > x) x ^= Basis[i];
+        for(int i = B - 1; i >= 0; --i)
+            if(basis[i] && (x ^ basis[i]) > x) x ^= basis[i];
         return x;
     }
 
     bool check(int x){ // Check if x is representable
-        for(int i = LOG - 1; i >= 0; --i){
+        for(int i = B - 1; i >= 0; --i){
             if(!(x >> i & 1)) continue;
-            if(!Basis[i]) return false;
-            x ^= Basis[i];
+            if(!basis[i]) return false;
+            x ^= basis[i];
         }
         return true;
-    }
-
-    int k_th(long long k){ // k-th smallest subset XOR
-        long long low = 1LL << sz;
-        int x = 0;
-        for(int i = LOG - 1; i >= 0; --i){
-            if(!Basis[i]) continue;
-            low >>= 1;
-            if((!(x >> i & 1) && low < k) || ((x >> i & 1) && low >= k)) x ^= Basis[i];
-            if(low < k) k -= low;
-        }
-        return x;
-    }
-
-    // k-th minimum value of (mask ^ subset)
-    int kth_min(int mask, long long k) {
-        if (k > (1LL << sz)) return -1;
-        int cnt = sz;
-        for(int i = LOG - 1; i >= 0; --i) {
-            if (!Basis[i]) continue;
-            long long mid = 1LL << (--cnt);
-            if (k <= mid) mask = min(mask, mask ^ Basis[i]);
-            else mask = max(mask, mask ^ Basis[i]), k -= mid;
-        }
-        return mask;
     }
 
     long long count(int x){ // Count ways to form x
@@ -59,24 +39,37 @@ struct XorBasis {
         return 1LL << (n - sz);
     }
 
-    long long rank_xor(int x){ // Count distinct XORs < x
-        if(x < 0) return 0;
-        long long ans = 0, cnt = 1LL << sz;
-        int m = 0;
-        for(int i = LOG-1; i >= 0; --i){
-            if(Basis[i]){
-                if((x>>i)&1){
-                    ans += cnt>>1;
-                    if(!((m>>i)&1)) m ^= Basis[i];
-                } else if((m>>i)&1) m ^= Basis[i];
-                cnt >>= 1;
-            } else if(((x>>i)&1) != ((m>>i)&1)) return ((x>>i)&1 ? ans + cnt : ans);
+
+    // k-th smallest subset XOR (k: 1-based)
+    int kth(int k){
+        if(k < 1 || k > (1 << sz)) return -1;
+        int x = 0, cnt = 1 << sz;
+        for(int i=B-1;i>=0;--i) if(basis[i]){
+            int half = cnt >> 1;
+            bool bit = x >> i & 1;
+            if(k > half){ if(!bit) x ^= basis[i]; k -= half; }
+            else        { if(bit)  x ^= basis[i]; }
+            cnt = half;
         }
-        return ans;
+        return x;
     }
 
-    void merge(const XorBasis &other) { // Merge two bases
-        for (int i = LOG - 1; i >= 0; --i) if (other.Basis[i]) insert(other.Basis[i]);
-        n += other.n;
+    // Count distinct XORs < x
+    int count_le(int x){
+        if(x < 0) return 0;
+        int ret = 0, cnt = 1 << sz, m = 0;
+        for(int i=B-1;i>=0;--i){
+            if(basis[i]){
+                int half = cnt >> 1;
+                if(x>>i&1){ ret += half; if(!(m>>i&1)) m ^= basis[i]; }
+                else      { if( m>>i&1) m ^= basis[i]; }
+                cnt = half;
+            } else {
+                if(((x^m)>>i)&1) return (x>>i&1 ? ret+cnt : ret);
+            }
+        }
+        return ret;
     }
+
+    int count_leq(int X){ return count_le(X+1); }
 };

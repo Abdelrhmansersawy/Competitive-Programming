@@ -56,3 +56,24 @@ int count(int x){
      if(!check(x)) return false;
      return pow(2 , n - sz); // where n is the total size of array and sz is the size of basis
 }
+
+/*
+    Return the number of distinct subsequence xor_sums that are < x.
+*/
+int rank_xor(int x){
+    if(x < 0) return 0;
+    int ans = 0, cnt = 1 << sz, m = 0;
+    for(int i = LOG-1; i >= 0; --i){
+        if(Basis[i]){
+            if((x>>i)&1){
+                ans += cnt>>1;
+                if(!((m>>i)&1)) m ^= Basis[i];
+            } else if((m>>i)&1) m ^= Basis[i];
+            cnt >>= 1;
+        } else {
+            if(((x>>i)&1) != ((m>>i)&1))
+                return ((x>>i)&1 ? ans + cnt : ans);
+        }
+    }
+    return ans;
+}

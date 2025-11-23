@@ -45,3 +45,26 @@ int solve (int n, int r) {
 
     return r - sum;
 }
+
+
+// sum of 1 <= i <= R where gcd(n,i) = 1 
+inline ll F(ll d , ll R){
+    ll n = R/d;
+    return n * (n+1) / 2 * d;
+}
+ll sum_coprime(ll n , ll R){
+    ll ans = 0;
+    for(auto &d : divs[n]){
+        ans += mobius[d] * F(d,R);
+    }
+    return ans;
+}
+
+// number of 1 <= i <= R where gcd(n,i) = 1
+ll cnt_coprime(ll n , ll R){
+    ll ans = 0;
+    for(auto &d : divs[n]){
+        ans += mobius[d] * (R/d);
+    }
+    return ans;
+}

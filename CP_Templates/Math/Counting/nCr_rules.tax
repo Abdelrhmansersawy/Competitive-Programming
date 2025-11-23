@@ -1,0 +1,87 @@
+% Binomial Coefficient Cheat Sheet — Overleaf-ready
+% Paste into Overleaf and compile (formulas only, no proofs)
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{nosep}
+
+\title{Binomial Coefficient Cheat Sheet}
+\author{Competitive Programming Reference}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Notation.} \(\displaystyle \binom{n}{k}\) denotes ``\(n\) choose \(k\)''. 
+We use \(\Sigma\) (rendered in math mode by \verb|\sum|) for summation: 
+\(\Sigma_{i=0}^{n}\) means \(\sum_{i=0}^{n}\).
+
+\bigskip
+
+\section*{Basic identities}
+\begin{align*}
+&\text{(0) Symmetry}\qquad &&\binom{n}{k}=\binom{n}{n-k}.\\
+&\text{(1) Pascal}\qquad &&\binom{n}{k}=\binom{n-1}{k}+\binom{n-1}{k-1}.\\
+&\text{(2) Binomial theorem}\qquad &&\Sigma_{k=0}^{n}\binom{n}{k}x^{k}=(1+x)^{n}.\\
+&\text{(3) Total sum}\qquad &&\Sigma_{k=0}^{n}\binom{n}{k}=2^{n}.\\
+&\text{(4) Alternating sum}\qquad &&\Sigma_{k=0}^{n}\binom{n}{k}(-1)^{k}=0\quad(n\ge1).\\
+&\text{(5) Even/odd split}\qquad &&\Sigma_{k\ \text{even}}\binom{n}{k}=\Sigma_{k\ \text{odd}}\binom{n}{k}=2^{n-1}\quad(n\ge1).\\
+&\text{(6) Hockey-stick}\qquad &&\Sigma_{i=r}^{n}\binom{i}{r}=\binom{n+1}{r+1}.
+\end{align*}
+
+\section*{Moments and polynomial-weighted sums}
+\begin{align*}
+&\Sigma_{i=0}^{n} i\,\binom{n}{i} = n\,2^{n-1}.\\[6pt]
+&\Sigma_{i=0}^{n} i(i-1)\,\binom{n}{i} = n(n-1)\,2^{n-2}.\\[6pt]
+&\Sigma_{i=0}^{n} i^{2}\,\binom{n}{i} = n\,2^{n-1} + n(n-1)\,2^{n-2}.\\[6pt]
+&\Sigma_{i=0}^{n} i(n-i)\,\binom{n}{i} = n(n-1)\,2^{n-2}.\\[6pt]
+&\text{(Scalar factor)}\quad 
+\Sigma_{i=0}^{n} k\cdot i(n-i)\binom{n}{i} = k\,n(n-1)\,2^{n-2}\quad (k\ \text{const}).
+\end{align*}
+
+\section*{Convolutions and double-binomial sums}
+\begin{align*}
+&\text{(Vandermonde)}\qquad 
+&&\Sigma_{k=0}^{r}\binom{n}{k}\binom{m}{r-k}=\binom{n+m}{r}.\\[6pt]
+&\text{(Self-convolution)}\qquad 
+&&\Sigma_{k=0}^{\min(n,m)}\binom{n}{k}\binom{m}{k}=\binom{n+m}{n}.\\[6pt]
+&\text{(Square-sum)}\qquad 
+&&\Sigma_{k=0}^{n}\binom{n}{k}^{2}=\binom{2n}{n}.\\[6pt]
+&\text{(Linear with squares)}\qquad 
+&&\Sigma_{k=0}^{n} k\,\binom{n}{k}^{2} = n\,\binom{2n-1}{\,n-1\,}.\\[6pt]
+&\text{(Shifted convolution)}\qquad 
+&&\Sigma_{k=0}^{\min(n,m-1)} \binom{n}{k}\binom{m}{k+1} 
+= \binom{n+m}{m-1} = \binom{n+m}{n+1}.
+\end{align*}
+
+\section*{Fractional and special sums}
+\begin{align*}
+&\Sigma_{k=0}^{n}\frac{\binom{n}{k}}{k+1} = \frac{2^{n+1}-1}{n+1}.\\[6pt]
+&\Sigma_{k=0}^{n}(-1)^{k}\frac{\binom{n}{k}}{k+1} = \frac{1}{n+1}.\\[6pt]
+&\Sigma_{k=1}^{n} (-1)^{k-1}\frac{\binom{n}{k}}{k} = H_{n}\qquad(H_n=1+\tfrac12+\dots+\tfrac1n).
+\end{align*}
+
+\section*{Index-shift / nested binomial sums}
+\begin{align*}
+&\Sigma_{k=r}^{n} \binom{n}{k}\binom{k}{r} = \binom{n}{r}\,2^{\,n-r}.\\[6pt]
+&\Sigma_{k=0}^{m}\binom{r+k}{k} = \binom{r+m+1}{m}.\\[6pt]
+&\Sigma_{i=0}^{n} i\,\binom{n-i}{k} = \frac{n-k}{k+2}\,\binom{n+1}{k+1}\qquad(0\le k\le n).\\[12pt]
+& k\,\binom{n}{k} = n\,\binom{n-1}{k-1}.\\[6pt]
+& \binom{n}{k} = \frac{n}{k}\,\binom{n-1}{k-1}\quad(k\ge1).\\[6pt]
+& \binom{-n}{k} = (-1)^{k}\binom{n+k-1}{k}.\\[6pt]
+& \Sigma_{k=0}^{n} (-1)^{k}\binom{n}{k}^{2} =
+\begin{cases}
+0, & n\ \text{odd},\\[4pt]
+(-1)^{m}\binom{2m}{m}, & n=2m\ \text{even}.
+\end{cases}
+\end{align*}
+
+\bigskip
+\noindent\textit{End of cheat sheet.} \\
+\noindent (Formulas only; proofs intentionally omitted.)
+
+\end{document}

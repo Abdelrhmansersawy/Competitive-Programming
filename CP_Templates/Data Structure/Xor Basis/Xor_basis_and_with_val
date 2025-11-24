@@ -1,0 +1,20 @@
+// apply a bitwise-AND mask `val` to node x (update lazy and rebuild its XOR-basis)
+void push_down(int x, int val) {
+    // compose the pending mask for this node
+    lazy[x] &= val;
+
+    // temporary basis to rebuild from masked vectors
+    XorBasis tmp;
+
+    // B = number of bits (XorBasis::B)
+    for (int b = 0; b < XorBasis::B; ++b) {
+        // mask each stored basis vector
+        tree[x].basis[b] &= val;
+
+        // only insert non-zero vectors to re-orthogonalize the basis
+        if (tree[x].basis[b]) tmp.insert(tree[x].basis[b]);
+    }
+
+    // replace node's basis with the newly constructed orthogonalized basis
+    tree[x] = tmp;
+}

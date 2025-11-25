@@ -1,31 +1,18 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+
 /**
  * -----------------------------------------------------------------------------
- * DECIMAL REPRESENTATION TRICK: A / B
- * -----------------------------------------------------------------------------
- * PRE-REQ: Simplify the fraction first! -> g = gcd(A, B), A/=g, B/=g.
- * Total Digits = Len_Int + Len_NonRep + Len_Rep
- *
- * 1. INTEGER PART (Magnitude)
- * Formula: floor(log10(A / B)) + 1
- * Note: If A < B, value is 0.xxx, so integer part length is 1 ('0').
- *
- * 2. NON-REPEATING PART (Transient / Pre-Period)
- * Formula: max(v2(B), v5(B))
- * Logic:   Removes factors of 10 (2*5) from denominator.
- * v_p(x) is the exponent of prime p in factorization of x.
- *
- * 3. REPEATING PART (Period / Cycle)
- * Formula: Order_K(10)
- * Let K = B / (2^v2(B) * 5^v5(B))  -> Denom stripped of 2s and 5s.
- * Logic:   Smallest L >= 1 such that 10^L ≡ 1 (mod K).
- * (Discrete Logarithm / Multiplicative Order).
+ * DECIMAL REPRESENTATION: A / B
+ * Total Digits = Int_Len + NonRep_Len + Rep_Len
+ * 1. Int Part: floor(log10(A/B)) + 1
+ * 2. Non-Rep:  max(v2(B), v5(B)) -> Factors of 2 and 5 delay the cycle
+ * 3. Rep Part: Order of 10 mod K    -> K is B stripped of 2 and 5
  * -----------------------------------------------------------------------------
  */
 
-
-using ll = long long;
-
-ll pm(ll b, ll p, ll m) { // Power Mod
+ll pm(ll b, ll p, ll m) { // Power Mod with __int128 safety
     ll r = 1; 
     for (; p; p >>= 1, b = (__int128)b * b % m) 
         if (p & 1) r = (__int128)r * b % m;
@@ -44,32 +31,31 @@ ll get_phi(ll n) {
     return r;
 }
 
-// A/B Digits:
-// 1. Int: to_string(A/B).size()
-// 2. Non-Rep: max(v2(B), v5(B))
-// 3. Rep: Order of 10 mod (B stripped of 2,5)
-// *Simplify gcd(A,B) first!
-ll solve_digits(ll A, ll B) {
-    ll g = std::gcd(A, B); A /= g; B /= g;
+ll solve_general(ll A, ll B) {
+    // 0. Simplify
+    ll g = gcd(A, B); A /= g; B /= g;
     
-    // 1. Integer Part
-    ll ans = to_string(A / B).size();
+    // 1. Integer Part (Handle A < B case implicitly via string)
+    ll ans = (A >= B ? to_string(A / B).size() : 1);
 
-    // 2. Non-Repeating
+    // 2. Non-Repeating: max(v2, v5)
     int v2 = 0, v5 = 0;
     while (B % 2 == 0) B /= 2, v2++;
     while (B % 5 == 0) B /= 5, v5++;
     ans += max(v2, v5);
 
-    // 3. Repeating (B is now K)
+    // 3. Repeating: Multiplicative Order of 10 mod K (B is now K)
     if (B > 1) {
-        ll phi = get_phi(B), L = phi;
-        for (ll i = 1; i * i <= phi; ++i) {
-            if (phi % i == 0) {
-                if (pm(10, i, B) == 1) L = min(L, i);
-                if (pm(10, phi / i, B) == 1) L = min(L, phi / i);
+        ll phi = get_phi(B), L = phi, temp = phi;
+        // Prime Reduction: Factorize phi and greedily reduce L
+        for (ll i = 2; i * i <= temp; ++i) {
+            if (temp % i == 0) {
+                while (temp % i == 0) temp /= i;
+                while (L % i == 0 && pm(10, L / i, B) == 1) L /= i;
             }
         }
+        if (temp > 1) 
+            while (L % temp == 0 && pm(10, L / temp, B) == 1) L /= temp;
         ans += L;
     }
     return ans;

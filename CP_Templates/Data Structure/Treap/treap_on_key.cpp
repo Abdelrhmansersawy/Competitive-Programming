@@ -112,3 +112,29 @@ int get_index_of(int val) {
     }
     return idx;
 }
+
+// Insert val after the element at 0-based index k
+// Note: Use with caution in Explicit Treap as it may break BST property if val is out of order
+void insert_after(PNode &t, int k, int val) {
+    PNode l, r;
+    split_k(t, l, r, k + 1);
+    merge(l, l, new Node(val));
+    merge(t, l, r);
+}
+
+// Erase elements in 0-based index range [l_idx, r_idx]
+void erase_range(PNode &t, int l_idx, int r_idx) {
+    PNode l, m, r;
+    split_k(t, l, r, r_idx + 1);
+    split_k(l, l, m, l_idx);
+    delete_tree(m);
+    merge(t, l, r);
+}
+
+// Prints keys in strictly increasing order
+void print(PNode t) {
+    if (!t) return;
+    print(t->l);
+    cout << t->key << " ";
+    print(t->r);
+}

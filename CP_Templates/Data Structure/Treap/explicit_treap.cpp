@@ -1,3 +1,15 @@
+/*
+ * Explicit Treap with Parent Pointers
+ * -----------------------------------
+ * A randomized Binary Search Tree (Treap) implementation.
+ * Features:
+ * - Standard BST operations (Insert, Erase, Search) in O(log N)
+ * - Order Statistics (K-th element, Rank of value) in O(log N)
+ * - Direct Index Lookup: Find rank of any value in O(log N) using Map + Parent Pointers
+ * - Range Operations: Split/Merge by rank or value
+ * * Note: Uses std::map to maintain value-to-node mapping for O(1) node access.
+ */
+
 static mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 struct Node;

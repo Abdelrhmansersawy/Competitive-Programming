@@ -34,6 +34,23 @@ void split(PNode t, PNode &l, PNode &r, int key) {
     }
 }
 
+// Splits tree t into two trees: l (first k elements) and r (rest)
+void split_k(PNode t, PNode &l, PNode &r, int k) {
+    if (!t) { l = r = NULL; return; }
+    int cur = sz(t->l);
+    if (k <= cur) {
+        split_k(t->l, l, t->l, k);
+        if (t->l) t->l->par = t;
+        r = t; pull(r);
+        if (l) l->par = NULL;
+    } else {
+        split_k(t->r, t->r, r, k - cur - 1);
+        if (t->r) t->r->par = t;
+        l = t; pull(l);
+        if (r) r->par = NULL;
+    }
+}
+
 // Merges two trees l and r into t (all keys in l < all keys in r)
 void merge(PNode &t, PNode l, PNode r) {
     if (!l || !r) t = l ? l : r;

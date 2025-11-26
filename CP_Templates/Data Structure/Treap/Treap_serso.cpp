@@ -25,18 +25,20 @@ void push(PNode t){
 void pull(PNode t){
     if (!t) return;
     t->sz = sz(t->l) + 1 + sz(t->r);
+    // Update parent pointers for children during pull to ensure consistency
+    set_parent(t->l, t);
+    set_parent(t->r, t);
 }
 
 // --- split / merge ---
-// split t into l (first k nodes) and r (rest)
 void split(PNode t, int k, PNode &l, PNode &r){
     if (!t) { l = r = nullptr; return; }
     push(t);
     if (sz(t->l) >= k){
         split(t->l, k, l, t->l);
-        set_parent(t->l, t);
+        set_parent(t->l, t); // Update parent after recursive split returns
         r = t;
-        set_parent(r, nullptr);
+        set_parent(r, nullptr); // Root of this subtree has no parent yet
     } else {
         split(t->r, k - sz(t->l) - 1, t->r, r);
         set_parent(t->r, t);
@@ -46,7 +48,6 @@ void split(PNode t, int k, PNode &l, PNode &r){
     pull(t);
 }
 
-// merge a and b into t (t becomes root)
 void merge(PNode &t, PNode a, PNode b){
     if (!a || !b){
         t = a ? a : b;
@@ -69,7 +70,7 @@ void merge(PNode &t, PNode a, PNode b){
 }
 
 // --- basic operations ---
-PNode kth(PNode t, int k){                 // return pointer to k-th (0-based) or nullptr
+PNode kth(PNode t, int k){
     if (!t || k < 0 || k >= sz(t)) return nullptr;
     push(t);
     int ls = sz(t->l);
@@ -78,8 +79,37 @@ PNode kth(PNode t, int k){                 // return pointer to k-th (0-based) o
     return kth(t->r, k - ls - 1);
 }
 
-int get_val(PNode root, int pos){ PNode n = kth(root, pos); if(!n) throw out_of_range("get_val oob"); return n->key; }
-void set_val(PNode root, int pos, int v){ PNode n = kth(root, pos); if(!n) throw out_of_range("set_val oob"); n->key = v; }
+// --- NEW FUNCTION IMPLEMENTATION ---
+int get_index_of(PNode n) {
+    if (!n) return -1;
+
+    // 1. Trace up to find the path from node to root
+    vector<PNode> path;
+    PNode curr = n;
+    while (curr) {
+        path.push_back(curr);
+        curr = curr->par;
+    }
+
+    // 2. Push lazy flags from Root down to Node
+    // We iterate backwards through the path vector
+    for (int i = (int)path.size() - 1; i >= 0; --i) {
+        push(path[i]);
+    }
+
+    // 3. Calculate index using clean tree structure
+    // Since we pushed, physical l/r matches logical l/r
+    int idx = sz(n->l);
+    while (n->par) {
+        PNode p = n->par;
+        if (p->r == n) {
+            idx += sz(p->l) + 1;
+        }
+        n = p;
+    }
+    return idx;
+}
+// -----------------------------------
 
 void insert_at(PNode &root, int pos, int v){
     PNode a = nullptr, b = nullptr;
@@ -88,34 +118,6 @@ void insert_at(PNode &root, int pos, int v){
     PNode tmp = nullptr;
     merge(tmp, a, n);
     merge(root, tmp, b);
-}
-
-void erase_at(PNode &root, int pos){
-    PNode a=nullptr, b=nullptr, c=nullptr;
-    split(root, pos, a, b);       // a: [0..pos-1], b: [pos..]
-    split(b, 1, b, c);            // b: [pos], c: rest
-    // free b
-    function<void(PNode)> cleanup = [&](PNode x){
-        if (!x) return;
-        cleanup(x->l); cleanup(x->r);
-        delete x;
-    };
-    cleanup(b);
-    merge(root, a, c);
-}
-
-void erase_range(PNode &root, int L, int R){
-    if (L > R) return;
-    PNode a=nullptr, b=nullptr, c=nullptr;
-    split(root, L, a, b);
-    split(b, R - L + 1, b, c);
-    function<void(PNode)> cleanup = [&](PNode x){
-        if (!x) return;
-        cleanup(x->l); cleanup(x->r);
-        delete x;
-    };
-    cleanup(b);
-    merge(root, a, c);
 }
 
 void reverse_range(PNode &root, int L, int R){
@@ -127,62 +129,4 @@ void reverse_range(PNode &root, int L, int R){
     PNode tmp = nullptr;
     merge(tmp, a, b);
     merge(root, tmp, c);
-}
-
-// rotate left segment [L..R] by k (k can be >= length)
-void rotate_left(PNode &root, int L, int R, long long k){
-    if (L > R) return;
-    int len = R - L + 1;
-    if (len <= 1) return;
-    k %= len; if (k < 0) k += len;
-    if (k == 0) return;
-    PNode a=nullptr, b=nullptr, c=nullptr;
-    split(root, L, a, b);         // a | b(=segment+rest)
-    split(b, len, b, c);          // b = segment
-    PNode x=nullptr, y=nullptr;
-    split(b, (int)k, x, y);       // x = first k, y = rest
-    PNode merged = nullptr;
-    merge(merged, y, x);          // rotated segment
-    PNode tmp = nullptr;
-    merge(tmp, a, merged);
-    merge(root, tmp, c);
-}
-
-// rotate right by k => left by len-k
-void rotate_right(PNode &root, int L, int R, long long k){
-    if (L > R) return;
-    int len = R - L + 1;
-    if (len <= 1) return;
-    k %= len; if (k < 0) k += len;
-    if (k == 0) return;
-    rotate_left(root, L, R, len - (k % len));
-}
-
-// build from vector (O(n log n) merges)
-PNode build(const vector<int> &a){
-    PNode root = nullptr;
-    for (int v : a){
-        PNode n = new Node(v);
-        PNode tmp = nullptr;
-        merge(tmp, root, n);
-        root = tmp;
-    }
-    return root;
-}
-
-void to_vector(PNode t, vector<int> &out){
-    if (!t) return;
-    push(t);
-    to_vector(t->l, out);
-    out.push_back(t->key);
-    to_vector(t->r, out);
-}
-
-PNode get_root(PNode x){ while (x && x->par) x = x->par; return x; }
-
-void delete_all(PNode t){
-    if (!t) return;
-    delete_all(t->l);
-    delete_all(t->r);
-    delete t;
 }

@@ -39,3 +39,32 @@ array<PNode, 3> split_range(PNode& root , int l , int r){
     split(b , b , c , r+1);
     return {a,b,c};
 }
+
+// get_kth(t, k): return the k-th smallest key (0-based index)
+// k should be in range [0, sz(t)-1]
+int get_kth(PNode t, int k) {
+    if (!t) return -1; // Error or empty
+    int current_rank = sz(t->l);
+    
+    if (k == current_rank) return t->key;
+    if (k < current_rank) return get_kth(t->l, k);
+    
+    return get_kth(t->r, k - current_rank - 1);
+}
+
+// insert a value
+void insert(PNode &t, int val) {
+    PNode l, r;
+    split(t, l, r, val);
+    merge(l, l, new Node(val));
+    merge(t, l, r);
+}
+
+// erase a value
+void erase(PNode &t, int val) {
+    PNode l, m, r;
+    split(t, l, r, val);
+    split(r, m, r, val + 1);
+    delete m; // Free memory
+    merge(t, l, r);
+}

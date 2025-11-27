@@ -16,6 +16,7 @@
  * the initial values A_0..A_{k-1}.
  *
  * Complexity: O(k^2 log n)
+ * or O(K logK logN)  when you manipulate polynomial with FFT.
  */
 
 

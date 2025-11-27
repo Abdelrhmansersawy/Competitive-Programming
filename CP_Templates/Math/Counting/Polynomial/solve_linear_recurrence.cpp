@@ -51,3 +51,28 @@ long long kitamasa(poly f, poly a, long long n){
     for(int i=0; i<a.size(); i++) ret = (ret + (a[i] * d[i])%mod)%mod;
     return ret;
 }
+int main(){
+    ios::sync_with_stdio(0); cin.tie(NULL); cout.tie(0);
+    // NOTE: write the recurrence with all terms on the LHS.
+    //   A_n = c1*A_{n-1} + ... + ck*A_{n-k}
+    //   -> A_n - c1*A_{n-1} - ... - ck*A_{n-k} = 0
+    // Characteristic: f(x) = x^k - c1*x^(k-1) - ... - ck
+    // poly `f` is in increasing powers: f[0]=const, f[1]=x, ..., f[k]=x^k
+    // Example: Fibonacci A_n = A_{n-1}+A_{n-2} -> f(x)=x^2-x-1 -> f = {mod-1, mod-1, 1}
+        
+    // f_n = f_{n-1} + f_{n-2}
+    // f_n - f_{n-1} - f_{n-2} = 0
+    // {1 , -1 , -1}
+    poly f(3);
+    
+    f[0] = mod-1; // -1
+    f[1] = mod-1; // -2
+    f[2] = 1; // 1
+    
+    poly a(2);
+    a[0] = 0; a[1] = 1;
+
+    ll n; cin >> n;
+    if(n <= 1) cout << a[n];
+    else cout << kitamasa(f , a , n);
+}

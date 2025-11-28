@@ -68,7 +68,7 @@ public:
         
         cnt = n; // Start with N disjoint components
         
-        // [TOD]: Initialize data arrays here
+        // [TODO]: Initialize data arrays here
         // val.resize(n); 
     }
 

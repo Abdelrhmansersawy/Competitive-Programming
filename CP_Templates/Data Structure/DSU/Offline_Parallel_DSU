@@ -1,0 +1,89 @@
+/**
+ * Offline Parallel DSU
+ * Constraints: N, Q <= 1e6
+ * Time: O(N log N) total
+ * Space: O(N log N)
+ */
+struct ParallelDSU {
+private:
+    int n;
+    vector<vector<int>> p;
+
+    int find(int k, int x) {
+        return p[k][x] == x ? x : p[k][x] = find(k, p[k][x]);
+    }
+
+    void unite(int k, int u, int v) {
+        u = find(k, u), v = find(k, v);
+        if (u != v) p[k][u] = v;
+    }
+
+public:
+    vector<long long> val;
+    vector<int> sz;
+    int cnt;
+
+    ParallelDSU(int _n) : n(_n) {
+        int LOG = 32 - __builtin_clz(n);
+        cnt = n; // Start with N disjoint components
+        
+        sz.assign(n, 1);
+        p.assign(LOG, vector<int>(n));
+        for (int k = 0; k < LOG; ++k) iota(p[k].begin(), p[k].end(), 0);
+
+        // [TODO]: Initialize data arrays here
+        // val.resize(n); 
+        // val.assign(n, 0); 
+    }
+
+    // Merge arbitrary ranges [u, u + len) and [v, v + len)
+    void merge(int u, int v, int len) {
+        if (len <= 0) return;
+        int k = 31 - __builtin_clz(len);
+        unite(k, u, v);
+        unite(k, u + len - (1 << k), v + len - (1 << k));
+    }
+
+    void build() {
+        for (int k = p.size() - 1; k > 0; --k) {
+            for (int i = 0; i + (1 << k) <= n; ++i) {
+                int r = find(k, i);
+                if (i != r) {
+                    unite(k - 1, i, r);
+                    unite(k - 1, i + (1 << (k - 1)), r + (1 << (k - 1)));
+                }
+            }
+        }
+        
+        vector<int> fp(n); 
+        iota(fp.begin(), fp.end(), 0);
+
+        auto get = [&](auto&& s, int x) -> int { 
+            return fp[x] == x ? x : fp[x] = s(s, fp[x]); 
+        };
+
+        for (int i = 0; i < n; ++i) {
+            int target = find(0, i); 
+            int u = get(get, i);
+            int v = get(get, target);
+
+            if (u != v) {
+                --cnt;
+                fp[u] = v;
+                sz[v] += sz[u];
+
+                // [TODO]: Aggregate data here (e.g., sum, max, min)
+                // val[u] += val[v]; 
+            }
+        }
+        p[0] = fp;
+    }
+
+    int count() const { return cnt; }
+
+    int find(int x) { 
+        return p[0][x] == x ? x : p[0][x] = find(p[0][x]); 
+    }
+    
+    int size(int u) { return sz[find(u)]; }
+};

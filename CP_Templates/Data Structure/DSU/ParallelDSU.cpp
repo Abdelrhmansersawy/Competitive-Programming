@@ -30,8 +30,6 @@ private:
     vector<DSU> st; 
     int cnt; // Tracks number of connected components
 
-    int find(int x) { return x == p[x] ? x : p[x] = find(p[x]); }
-
     bool unite(int u, int v) {
         u = find(u), v = find(v);
         if (u == v) return 0;
@@ -81,5 +79,7 @@ public:
     }
 
     int count() const { return cnt; }
+
+    int find(int x) { return x == p[x] ? x : p[x] = find(p[x]); }
     int size(int u) { return sz[find(u)]; }
 };

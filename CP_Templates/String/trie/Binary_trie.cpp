@@ -81,3 +81,60 @@ ll count_greater(int left , int x){
     }
     return tot;
 }
+
+// Count how many values y in trie satisfy: (left XOR y) <= x
+ll count_leq(int left, int x) {
+    int node = 0;
+    ll tot = 0;
+    for (int i = 30; i >= 0; --i) {
+        int bL = (left >> i) & 1;
+        int bX = (x >> i) & 1;
+        if (bX) {
+            int other = nxt[node][bL];
+            if (other) tot += frq[other];
+            node = nxt[node][bL ^ 1];
+        } else {
+            node = nxt[node][bL];
+        }
+        if (!node) return tot;
+    }
+    return tot + frq[node];
+}
+
+// Count how many values y in trie satisfy: (left XOR y) < x
+ll count_less_than(int left, int x) {
+    int node = 0;
+    ll tot = 0;
+    for (int i = 30; i >= 0; --i) {
+        int bL = (left >> i) & 1;
+        int bX = (x >> i) & 1;
+        if (bX) {
+            int other = nxt[node][bL];
+            if (other) tot += frq[other];
+            node = nxt[node][bL ^ 1];
+        } else {
+            node = nxt[node][bL];
+        }
+        if (!node) return tot;
+    }
+    return tot;
+}
+
+// Count how many values y in trie satisfy: (left XOR y) >= x
+ll count_greater_or_equal(int left, int x) {
+    int node = 0;
+    ll tot = 0;
+    for (int i = 30; i >= 0; --i) {
+        int bL = (left >> i) & 1;
+        int bX = (x >> i) & 1;
+        if (!bX) {
+            int other = nxt[node][bL ^ 1];
+            if (other) tot += frq[other];
+            node = nxt[node][bL];
+        } else {
+            node = nxt[node][bL ^ 1];
+        }
+        if (!node) return tot;
+    }
+    return tot + frq[node];
+}

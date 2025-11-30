@@ -1,14 +1,17 @@
 /*
-Problem: Given n cities and q portal plans, find min cost from start city s to all cities (-1 if unreachable).
+Problem: Given n cities and q portal plans, compute the minimum cost 
+to reach each city from the start city s using the available plans, or -1 if impossible.
 
 Plan types:
-Type 1: edge v -> u, cost w      // O(1)
-Type 2: edges v -> [l,r], cost w // naive O(r-l+1), optimized O(log n) with segment tree
-Type 3: edges [l,r] -> v, cost w // naive O(r-l+1), optimized O(log n) with segment tree
+Type 1: add directed edge from city v to city u with cost w // O(1) 
+Type 2: add edges from city v to all cities in [l, r] with cost w // O(log n) with segment tree
+Type 3: add edges from all cities in [l, r] to city v with cost w // O(log n) with segment tree
+Type 4: edges [l1,r1] -> [l2,r2], cost w  // O(log n) using a virtual node + two segtree updates
 
 Dijkstra complexity: O((V + E) log V),  
 V = n + segment-tree nodes, E = plan edges + segment-tree edges
 */
+
 // standard problem: https://codeforces.com/contest/786/problem/B
 
 
@@ -64,11 +67,26 @@ void upd(int lx, int rx, int dir, int u, ll w, int node = 1, int l = 0, int r = 
     upd(lx, rx, dir, u, w, 2 * node + 1, mid + 1, r);
 }
 
+// Add edges from every vertex in [l1..r1] to every vertex in [l2..r2] with weight w.
+// Complexity: O(log n) segtree updates (two calls, each O(log n))
+void add_range_to_range(int l1, int r1, int l2, int r2, ll w) {
+    // create virtual node
+    int vid = g.size();
+    g.emplace_back();
+
+    // connect all vertices in [l1..r1] -> vid with weight 0
+    upd(l1, r1, 0, vid, 0);
+
+    // connect vid -> all vertices in [l2..r2] with weight w
+    upd(l2, r2, 1, vid, w);
+}
+
+
 vector< ll>dijkstra(int s) {
     const ll INF = (ll) 1e18;
     minQ <pair<ll,int>> pq;
-    int total = g.size() - 1;
-    vector < ll > dist(total + 1, INF);
+    int total = g.size(); // plz Don't change g.size() with (eg. N) 
+    vector < ll > dist(total, INF);
     vector < char > vis(total + 1, 0);
     dist[s] = 0;
     pq.push({

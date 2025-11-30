@@ -18,6 +18,11 @@ struct DiffConstraint {
         constraints.push_back({u, v, w});
     }
 
+    // enforce x_u - x_v == w
+    void add_equality(int u, int v, ll w) {
+        add_constraint(v, u, w);   // x_u - x_v >= w
+        add_constraint(u, v, -w);  // x_v - x_u >= -w  => x_u - x_v <= w
+    }
  
     bool isSolvable() {
         vector<ll> dist(n, 0);

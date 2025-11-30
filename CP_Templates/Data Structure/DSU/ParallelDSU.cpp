@@ -1,3 +1,10 @@
+// When working with palindromes, it's often easier to append the reverse of the string.
+// Let N = original.length() and S = original + reverse(original) (length = 2*N).
+// A substring original[l..r] (0-based) is a palindrome iff it equals its mirrored substring
+// in the reversed half: S[l..r] == S[2*N - 1 - r .. 2*N - 1 - l].
+// So instead of checking [l..r] directly, compare it to [2*N-1-r .. 2*N-1-l] in S.
+
+
 /**
  * Parallel DSU (Disjoint Set Union on Sparse Table)
  * * Description:

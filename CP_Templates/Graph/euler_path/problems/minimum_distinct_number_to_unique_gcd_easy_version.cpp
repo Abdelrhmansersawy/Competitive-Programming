@@ -1,6 +1,9 @@
 // problem link 
 https://codeforces.com/contest/2158/problem/F1
 
+// Hard Version (N<=700): Construct sequence A of size N with min distinct elements <= 10^18
+// such that all adjacent GCDs are pairwise distinct (gcd(a_i, a_i+1) != gcd(a_j, a_j+1)).
+// Input: T cases, integer N. Output: The sequence elements separated by space.
 
 #include <bits/stdc++.h>
 using namespace std;

@@ -16,7 +16,7 @@ void build(TwoSAT &s, int x, int l, int r){
     s.add_imply(tree[2*x+1] , true , tree[x] , true);
     s.add_imply(tree[2*x+2] , true , tree[x] , true);
 }
-void qry(TwoSAT &s , int ind , int lx , int rx , int x , int l, int r){
+void add_constraint(TwoSAT &s , int ind , int lx , int rx , int x , int l, int r){
     if(l >= lx && r <= rx){
         // TODO: add the actual constraint for this range segment
         // Example: s.add_at_most_one(ind, tree[x]);  // link variable 'ind' with this segment node
@@ -24,7 +24,7 @@ void qry(TwoSAT &s , int ind , int lx , int rx , int x , int l, int r){
         return;
     }
     if(r <= lx || l >= rx) return;
-    int mid = (l+r)/2;
+    add_constraint mid = (l+r)/2;
     qry(TwoSAT s , ind , lx ,rx , 2 * x + 1 , l , mid);
-    qry(TwoSAT s , ind, lx, rx , 2 * x + 2 , mid , r);
+    add_constraint(TwoSAT s , ind, lx, rx , 2 * x + 2 , mid , r);
 }

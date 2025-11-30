@@ -7,6 +7,7 @@ struct XorBasis {
     void reset(){
         memset(basis, 0, sizeof basis);
         sz = 0;
+        n = 0;
     }
 
     bool insert(int x){

@@ -26,6 +26,23 @@ struct XorBasis {
         return x;
     }
 
+    // Returns the minimum non-zero XOR representable by the basis
+    int min_xor() {
+        for (int i = 0; i < B; ++i) {
+            if (basis[i]) return basis[i];
+        }
+        return 0; // Basis is empty
+    }
+
+    // Returns true if 0 can be formed (i.e., non-empty subset XORs to 0)
+    bool is_zero_possible() {
+        return n > sz;
+    }
+    int get_absolute_min() {
+        if (n > sz) return 0; // We can form 0
+        return min_xor();     // We cannot form 0, return min non-zero
+    }
+
     bool check(int x){ // Check if x is representable
         for(int i = B - 1; i >= 0; --i){
             if(!(x >> i & 1)) continue;

@@ -10,10 +10,13 @@ using namespace std;
 typedef long long ll;
 const ll INF = 4e18;
 
+// --- KD-TREE TEMPLATE START ---
+
 struct P {
     ll x, y;
-    int id; // Required for "Closest Pair" to ignore self
+    int id; // Required to distinguish points
     
+    // Manhattan Distance (as required by problem)
     ll dist(P b) { 
         // 1. MANHATTAN (Current)
         return abs(x - b.x) + abs(y - b.y);
@@ -30,6 +33,7 @@ struct Node {
 
     Node(P pt) : p(pt) {}
 
+    // Bounding Box Distance (Manhattan)
     // Pruning: This MUST match the dist() metric exactly!
     ll boxDist(P q) {
         ll X = max(x0, min(x1, q.x));
@@ -49,11 +53,11 @@ bool on_y(P a, P b) { return a.y < b.y; }
 struct KDTree {
     Node* root = 0;
     ll min_d;
-    P best_p;
+    P best_p; 
     int q_id; 
 
     // Complexity: O(N log N)
-    Node* build(vector<P>& pts, int L, int R, bool divX) {
+    Node* build(vector<P> &pts, int L, int R, bool divX) {
         if (L >= R) return 0;
         int mid = (L + R) / 2;
         nth_element(pts.begin() + L, pts.begin() + mid, pts.begin() + R, divX ? on_x : on_y);
@@ -70,12 +74,11 @@ struct KDTree {
 
     // Complexity: Avg O(log N)
     void search(Node* node, P q) {
-        // Pruning: Stop if box is further than current best
         if (!node || node->boxDist(q) >= min_d) return;
 
         ll d = node->p.dist(q);
         
-        // Update if closer AND not the same point
+        // Check condition: strictly better dist AND not the point itself
         if (d < min_d && node->p.id != q_id) {
             min_d = d;
             best_p = node->p;
@@ -84,7 +87,6 @@ struct KDTree {
         ll dL = node->l ? node->l->boxDist(q) : INF;
         ll dR = node->r ? node->r->boxDist(q) : INF;
 
-        // Greedy search: Visit closer child first
         if (dL < dR) { search(node->l, q); search(node->r, q); }
         else         { search(node->r, q); search(node->l, q); }
     }
@@ -95,44 +97,39 @@ struct KDTree {
 
     // Complexity: Avg O(log N)
     // Returns {distance, Point}
-    pair<ll, P> nearest(P q) {
+    // Usage: nearest(q) to find any neighbor. nearest(q, q.id) to find neighbor != q.
+    pair<ll, P> nearest(P q, int ignore_id = -1) {
         min_d = INF;
-        q_id = -1;    // Don't ignore any points
+        q_id = ignore_id; // -1 finds ANY point. Specific ID ignores that point.
         best_p = P(); 
         search(root, q);
         return {min_d, best_p};
     }
-    
-    // Complexity: Avg O(N log N)
-    // Global Minimum Distance between any two points in the tree
-    ll find_closest_pair(const vector<P>& pts) {
-        min_d = INF;
-        for (const auto& p : pts) {
-            q_id = p.id; // Ignore self
-            search(root, p);
-            // Optimization: min_d persists to prune subsequent searches
-        }
-        return min_d;
-    }
 };
+
+// --- KD-TREE TEMPLATE END ---
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0);
-    int n, m; 
-    if (!(cin >> n >> m)) return 0;
+    
+    int n;  cin >> n;
 
-    vector<P> reserved(n);
-    for(int i=0; i<n; ++i) {
-        cin >> reserved[i].x >> reserved[i].y;
-        reserved[i].id = i; 
+    vector<P> original_pts(n);
+    for(int i = 0; i < n; ++i) {
+        cin >> original_pts[i].x >> original_pts[i].y;
+        original_pts[i].id = i; 
     }
 
-    KDTree tree(reserved);
+    // Create a copy for the tree because build() reorders elements
+    vector<P> tree_pts = original_pts;
+    KDTree tree(tree_pts);
 
-    // Solve "Campground" (Free -> Reserved)
-    for(int i = 0; i < m; ++i) {
-        P free_camp; cin >> free_camp.x >> free_camp.y;
-        cout << tree.nearest(free_camp).first << (i == m - 1 ? "" : "\n");
+    // Solve: For each point, find nearest neighbor excluding itself
+    for(int i = 0; i < n; ++i) {
+        // We want to ignore the point itself, so we pass original_pts[i].id
+        // nearest() returns a pair {dist, Point}, we only need .first
+        cout << tree.nearest(original_pts[i], original_pts[i].id).first << "\n";
     }
-    cout << endl;
+
+    return 0;
 }

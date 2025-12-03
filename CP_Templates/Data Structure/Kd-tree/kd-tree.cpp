@@ -14,10 +14,9 @@ const ll INF = 4e18;
 
 struct P {
     ll x, y;
-    int id; // Required to distinguish points
+    int id; 
     
-    // Manhattan Distance (as required by problem)
-    ll dist(P b) { 
+    ll dist(const P& b) const { 
         // 1. MANHATTAN (Current)
         return abs(x - b.x) + abs(y - b.y);
 
@@ -27,18 +26,22 @@ struct P {
 };
 
 struct Node {
-    P p;
-    Node *l = 0, *r = 0;
-    ll x0 = INF, x1 = -INF, y0 = INF, y1 = -INF;
+    P p;          
+    int l = -1;   
+    int r = -1;   
+    
+    ll x0 = INF, x1 = -INF, y0 = INF, y1 = -INF; 
+    
+    Node() {} 
+    Node(P pt) : p(pt) {
+        x0 = x1 = pt.x;
+        y0 = y1 = pt.y;
+    }
 
-    Node(P pt) : p(pt) {}
-
-    // Bounding Box Distance (Manhattan)
-    // Pruning: This MUST match the dist() metric exactly!
-    ll boxDist(P q) {
+    ll boxDist(const P& q) const {
         ll X = max(x0, min(x1, q.x));
         ll Y = max(y0, min(y1, q.y));
-        
+
         // 1. MANHATTAN (Current)
         return abs(q.x - X) + abs(q.y - Y);
 
@@ -47,63 +50,95 @@ struct Node {
     }
 };
 
-bool on_x(P a, P b) { return a.x < b.x; }
-bool on_y(P a, P b) { return a.y < b.y; }
+// Global comparators for nth_element
+bool on_x(const P& a, const P& b) { return a.x < b.x; }
+bool on_y(const P& a, const P& b) { return a.y < b.y; }
 
 struct KDTree {
-    Node* root = 0;
+    vector<Node> pool; 
+    int root = -1;
     ll min_d;
-    P best_p; 
-    int q_id; 
+    P best_p;
+    int q_id;
+    
+    int build(vector<P> &pts, int L, int R) {
+        if (L >= R) return -1;
+        
+        // 1. Calculate Bounding Box of current points to decide split axis
+        ll min_x = INF, max_x = -INF, min_y = INF, max_y = -INF;
+        for(int i=L; i<R; ++i) {
+            if(pts[i].x < min_x) min_x = pts[i].x;
+            if(pts[i].x > max_x) max_x = pts[i].x;
+            if(pts[i].y < min_y) min_y = pts[i].y;
+            if(pts[i].y > max_y) max_y = pts[i].y;
+        }
 
-    // Complexity: O(N log N)
-    Node* build(vector<P> &pts, int L, int R, bool divX) {
-        if (L >= R) return 0;
+        // 2. Adaptive Split: Split on the widest dimension
+        // This creates square-like bounding boxes which are better for pruning
+        bool divX = (ll)(max_x - min_x) >= (ll)(max_y - min_y);
+        
         int mid = (L + R) / 2;
         nth_element(pts.begin() + L, pts.begin() + mid, pts.begin() + R, divX ? on_x : on_y);
 
-        Node* node = new Node(pts[mid]);
-        for (int i = L; i < R; ++i) {
-            node->x0 = min(node->x0, pts[i].x); node->x1 = max(node->x1, pts[i].x);
-            node->y0 = min(node->y0, pts[i].y); node->y1 = max(node->y1, pts[i].y);
-        }
-        node->l = build(pts, L, mid, !divX);
-        node->r = build(pts, mid + 1, R, !divX);
-        return node;
+        int idx = pool.size();
+        pool.push_back(Node(pts[mid]));
+        
+        // Set the bounding box exactly to what we computed
+        pool[idx].x0 = min_x; pool[idx].x1 = max_x;
+        pool[idx].y0 = min_y; pool[idx].y1 = max_y;
+
+        // 3. Recurse
+        pool[idx].l = build(pts, L, mid);
+        pool[idx].r = build(pts, mid + 1, R);
+        
+        return idx;
     }
 
-    // Complexity: Avg O(log N)
-    void search(Node* node, P q) {
-        if (!node || node->boxDist(q) >= min_d) return;
+    void search(int node_idx, const P& q) {
+        if (node_idx == -1 || pool[node_idx].boxDist(q) >= min_d) return;
 
-        ll d = node->p.dist(q);
+        ll d = pool[node_idx].p.dist(q);
         
         // Check condition: strictly better dist AND not the point itself
-        if (d < min_d && node->p.id != q_id) {
+        if (d < min_d && pool[node_idx].p.id != q_id) {
             min_d = d;
-            best_p = node->p;
+            best_p = pool[node_idx].p;
         }
+        
+        if (min_d == 0) return;
 
-        ll dL = node->l ? node->l->boxDist(q) : INF;
-        ll dR = node->r ? node->r->boxDist(q) : INF;
+        int L = pool[node_idx].l;
+        int R = pool[node_idx].r;
 
-        if (dL < dR) { search(node->l, q); search(node->r, q); }
-        else         { search(node->r, q); search(node->l, q); }
+        ll dL = (L != -1) ? pool[L].boxDist(q) : INF;
+        ll dR = (R != -1) ? pool[R].boxDist(q) : INF;
+
+        // Visit closer box first
+        if (dL < dR) { search(L, q); search(R, q); }
+        else         { search(R, q); search(L, q); }
     }
 
     KDTree(vector<P>& pts) {
-        root = build(pts, 0, pts.size(), true);
+        pool.reserve(pts.size()); 
+        root = build(pts, 0, pts.size());
     }
 
-    // Complexity: Avg O(log N)
     // Returns {distance, Point}
-    // Usage: nearest(q) to find any neighbor. nearest(q, q.id) to find neighbor != q.
+    // Usage: nearest(q) -> any neighbor. nearest(q, q.id) -> neighbor != q
     pair<ll, P> nearest(P q, int ignore_id = -1) {
         min_d = INF;
-        q_id = ignore_id; // -1 finds ANY point. Specific ID ignores that point.
-        best_p = P(); 
+        q_id = ignore_id;
+        best_p = P();
         search(root, q);
         return {min_d, best_p};
+    }
+    ll find_closest_pair(const vector<P>& pts) {
+        min_d = INF;
+        for (const auto& p : pts) {
+            q_id = p.id; // Ignore self
+            search(root, p);
+        }
+        return min_d;
     }
 };
 

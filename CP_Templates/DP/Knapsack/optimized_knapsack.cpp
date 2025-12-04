@@ -1,6 +1,9 @@
 /*
   Problem: For every possible sum , find the minimum number of elements that can form this sum.
   Time complexity: O(n sqrt(n))
+
+  * Binary decomposition (splitting count `k` into 1, 2, 4...) works for REACHABILITY (can I make sum X?) 
+  * or MIN/MAX costs, but it fails for COUNTING.
 */
 map<int,int> frq; // store the frq of every element in the array.
 int dp[n + 1];

@@ -84,6 +84,24 @@ vector<vector<int>> getMat() {
     return m;
 }
 
+// Build matrix how count how many occurrence on patterns as subtring
+vector<vector<int>> getMat() {
+    int N = v.size() - 1; 
+    vector<vector<int>> m(N + 1, vector<int>(N + 1));
+    
+    m[N][N] = 26; // Accumulator scaling
+    
+    for (int i = 0; i < N; ++i) {
+        m[i][N] += v[i].nmatches; // Add matches at current node
+        for (int j = 0; j < alpha; ++j) {
+            int nxt = v[i].nxt[j];
+            if (nxt >= N) continue;
+            m[i][nxt]++; // Transition u -> v
+        }
+    }
+    return m;
+}
+
 // debugging
 void debug() {
     auto dfs = [&](auto&& s, int u, char c) -> void {

@@ -83,3 +83,20 @@ vector<vector<int>> getMat() {
     }
     return m;
 }
+
+// debugging
+void debug() {
+    auto dfs = [&](auto&& s, int u, char c) -> void {
+        cout << string(v[u].lvl * 2, ' ');
+        if (!u) cout << "ROOT [0]";
+        else cout << "'" << c << "'->[" << u << "] (suf:" << v[u].suflink << ")";
+        if (v[u].nmatches) cout << " [MATCH:" << v[u].nmatches << "]";
+        cout << '\n';
+        for (int i = 0; i < alpha; ++i) {
+            int nxt = v[u].nxt[i];
+            if (nxt < v.size() - 1 && v[nxt].lvl == v[u].lvl + 1)
+                s(s, nxt, first + i);
+        }
+    };
+    dfs(dfs, 0, 0);
+}

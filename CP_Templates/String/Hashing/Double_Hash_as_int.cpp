@@ -1,94 +1,85 @@
 const int N = 2e5 + 9;
-const int mod[] = { (int)1e9 + 7, 998244353 };
-int o;  // Which mod wher I current use.
-mt19937 random_seed(time(0));
-int rnd(int l , int r){
-    uniform_int_distribution<int> dist(l, r);
-    return dist(random_seed);
-}
-ll bpw(ll a , ll b ){
-    a %= mod[o];
+const int M[2] = { (int)1e9 + 7, 998244353 };
+int B[2]; // Bases
+int pw[2][N], ipw[2][N]; // Powers and Inverse Powers
+
+ll bpw(ll a, ll b, int m) {
     ll res = 1;
-    while(b){
-        if(b % 2) res = (res * a) % mod[o];
-        a = (a * a) % mod[o];
+    a %= m;
+    while (b) {
+        if (b & 1) res = (res * a) % m;
+        a = (a * a) % m;
         b >>= 1;
     }
     return res;
 }
-struct Mint{
-    ll x;
-    Mint(ll x = 0){  this->x = x % mod[o]; }
-    Mint operator +(const Mint &other) const{ return (x + other.x) % mod[o]; }
-    Mint operator -(const Mint &other) const{ return (x - other.x + mod[o]) % mod[o]; }
-    Mint operator *(const Mint &other) const{ return (x * other.x) % mod[o]; }
-    Mint operator /(const Mint &other) const{ return ( x * bpw(other.x , mod[o] - 2) ) % mod[o]; }
-    bool operator ==(const Mint &other) const{ return x == other.x; }
-    bool operator !=(const Mint &other) const{ return x != other.x; }
-};
 
-Mint p[2] , pw[2][N];
-void init(){
-    for(o = 0; o < 2; o++){
-        p[o] = Mint( rnd(31 , 39) );
-        pw[o][0] = Mint(1);
-        for(int i = 1; i < N; ++i){
-            pw[o][i] = pw[o][i - 1] * p[o];
+void init() {
+    mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+    for (int i = 0; i < 2; ++i) {
+        B[i] = uniform_int_distribution<int>(300, M[i] - 2)(rng);
+        pw[i][0] = ipw[i][0] = 1;
+        int inv = bpw(B[i], M[i] - 2, M[i]);
+        for (int j = 1; j < N; ++j) {
+            pw[i][j] = 1LL * pw[i][j - 1] * B[i] % M[i];
+            ipw[i][j] = 1LL * ipw[i][j - 1] * inv % M[i];
         }
     }
 }
-struct Hash{
-    Mint pref[2] , suff[2];
+
+struct Hash {
     int len;
-    Hash(char ch = '?'){
-        if(ch == '?'){
-            pref[0] = pref[1] = suff[0] = suff[1] = Mint(0);
-            len = 0;
-            return;
-        }
-        len = 1;
-        for(o = 0;o < 2; ++o){
-            pref[o] = suff[o] = Mint(ch - 'a' + 1);
+    int pre[2], suf[2]; // pre: prefix hash, suf: suffix hash (for palindrome)
+
+    Hash(char c = '?') {
+        len = (c != '?');
+        for (int i = 0; i < 2; ++i) {
+            pre[i] = suf[i] = (c == '?' ? 0 : c - 'a' + 1);
         }
     }
-    Hash operator +(const Hash &other) const{
+
+    // Concatenate: res = this + other
+    Hash operator+(const Hash& other) const {
         Hash res;
         res.len = len + other.len;
-        for(o = 0;o < 2; ++o){
-            res.pref[o] = pref[o] + other.pref[o] * pw[o][len]; 
-            res.suff[o] = other.suff[o] + suff[o] * pw[o][other.len]; 
+        for (int i = 0; i < 2; ++i) {
+            res.pre[i] = (pre[i] + 1LL * other.pre[i] * pw[i][len]) % M[i];
+            res.suf[i] = (other.suf[i] + 1LL * suf[i] * pw[i][other.len]) % M[i];
         }
         return res;
     }
-    void rev(){
-        for(o = 0; o < 2; ++o) swap(pref[o] , suff[o]);
+    bool is_palindrome() const {
+        return pre[0] == suf[0] && pre[1] == suf[1];
     }
-    bool is_palindrome() const{
-        for(o = 0; o < 2; ++o){
-            if(pref[o] != suff[o]) return false;
-        }
-        return true;
+    ll get() const {
+        return ((ll)pre[0] << 32) | pre[1];
     }
 };
-Hash excludePrefix(Hash s1 , Hash s2){
+
+// Remove s2 from the start of s1 (s1 must start with s2)
+// Logic: (Full - Prefix) * InvPow[PrefixLen]
+Hash excludePrefix(const Hash& s1, const Hash& s2) {
     Hash res;
     res.len = s1.len - s2.len;
-    for(o = 0; o < 2; ++o){
-        res.pref[o] = s1.pref[o] - s2.pref[o];
-        res.pref[o] = res.pref[o] / pw[o][s2.len];
-
-        res.suff[o] = s1.suff[o] - s2.suff[o] * pw[o][s1.len - s2.len];
+    for (int i = 0; i < 2; ++i) {
+        // Forward: Remove prefix, normalize by dividing power
+        res.pre[i] = 1LL * (s1.pre[i] - s2.pre[i] + M[i]) * ipw[i][s2.len] % M[i];
+        // Backward: Standard suffix subtraction
+        res.suf[i] = (s1.suf[i] - 1LL * s2.suf[i] * pw[i][res.len] % M[i] + M[i]) % M[i];
     }
     return res;
 }
-Hash excludeSuffix(Hash s1 , Hash s2){
+
+// Remove s2 from the end of s1 (s1 must end with s2)
+// Logic: (Full - Suffix) * InvPow[SuffixLen] (reversed for backward hash)
+Hash excludeSuffix(const Hash& s1, const Hash& s2) {
     Hash res;
     res.len = s1.len - s2.len;
-    for(o = 0; o < 2; ++o){
-        res.pref[o] = s1.pref[o] - s2.pref[o] * pw[o][s1.len - s2.len];
-
-        res.suff[o] = s1.suff[o] - s2.suff[o];
-        res.suff[o] = res.suff[o] / pw[o][s2.len]; 
+    for (int i = 0; i < 2; ++i) {
+        // Forward: Standard prefix subtraction
+        res.pre[i] = (s1.pre[i] - 1LL * s2.pre[i] * pw[i][res.len] % M[i] + M[i]) % M[i];
+        // Backward: Remove suffix, normalize
+        res.suf[i] = 1LL * (s1.suf[i] - s2.suf[i] + M[i]) * ipw[i][s2.len] % M[i];
     }
     return res;
 }

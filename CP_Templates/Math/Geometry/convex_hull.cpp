@@ -1,48 +1,45 @@
-#define double long double
-struct Point {
-    double x, y;
-};
+#include <bits/stdc++.h>
+using namespace std;
 
-int orientation(Point a, Point b, Point c) {
-    double v = a.x*(b.y-c.y)+b.x*(c.y-a.y)+c.x*(a.y-b.y);
-    if (v < 0) return -1; // clockwise
-    if (v > 0) return +1; // counter-clockwise
-    return 0;
-}
+using ld = long double;
+using point  = complex<ld>;
+constexpr ld eps = 1e-12;
 
-bool cw(Point a, Point b, Point c, bool include_collinear) {
-    int o = orientation(a, b, c);
-    return o < 0 || (include_collinear && o == 0);
-}
-bool collinear(Point a, Point b, Point c) { return orientation(a, b, c) == 0; }
+ld cross(point a, point b) { return imag(conj(a) * b); }
 
-void convex_hull(vector<Point>& a, bool include_collinear = false) {
-    Point p0 = *min_element(a.begin(), a.end(), [](Point a, Point b) {
-        return make_pair(a.y, a.x) < make_pair(b.y, b.x);
-    });
-    sort(a.begin(), a.end(), [&p0](const Point& a, const Point& b) {
-        int o = orientation(p0, a, b);
-        if (o == 0)
-            return (p0.x-a.x)*(p0.x-a.x) + (p0.y-a.y)*(p0.y-a.y)
-                < (p0.x-b.x)*(p0.x-b.x) + (p0.y-b.y)*(p0.y-b.y);
-        return o < 0;
-    });
-    if (include_collinear) {
-        int i = (int)a.size()-1;
-        while (i >= 0 && collinear(p0, a[i], a.back())) i--;
-        reverse(a.begin()+i+1, a.end());
-    }
-
-    vector<Point> st;
-    for (int i = 0; i < (int)a.size(); i++) {
-        while (st.size() > 1 && !cw(st[st.size()-2], st.back(), a[i], include_collinear))
-            st.pop_back();
-        st.push_back(a[i]);
-    }
-
-    a = st;
-}
-double area(Point a, Point b, Point c)
+vector<point> convex_hull(vector<point> p, bool keep_col = false)
 {
-    return 0.5*abs(a.x*(b.y-c.y)+b.x*(c.y-a.y)+c.x*(a.y-b.y));
+    sort(p.begin(), p.end(), [](point a, point b)
+        {
+        return a.real() == b.real() ? a.imag() < b.imag() : a.real() < b.real();
+    });
+    p.erase(unique(p.begin(), p.end(), [](point a, point b) {
+        return fabsl(a.real() - b.real()) < eps && fabsl(a.imag() - b.imag()) < eps;
+    }), p.end());
+    if (p.size() <= 1) return p;
+
+    vector<point> lo, up;
+    for (auto pt : p) {
+        while (lo.size() >= 2) {
+            ld cr = cross(lo.back() - lo[lo.size() - 2], pt - lo.back());
+            if (keep_col ? cr < -eps : cr <= eps) lo.pop_back();
+            else break;
+        }
+        lo.push_back(pt);
+    }
+    for (int i = p.size() - 1; i >= 0; --i)
+    {
+        point pt = p[i];
+        while (up.size() >= 2)
+        {
+            ld cr = cross(up.back() - up[up.size() - 2], pt - up.back());
+            if (keep_col ? cr < -eps : cr <= eps) up.pop_back();
+            else break;
+        }
+        up.push_back(pt);
+    }
+    lo.pop_back();
+    up.pop_back();
+    lo.insert(lo.end(), up.begin(), up.end());
+    return lo;
 }

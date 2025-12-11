@@ -1,9 +1,9 @@
 /*
- * ===================== HISTORICAL DSU (OFFLINE) NOTE =====================
+ * ===================== KRUSKAL RECONSTRUCTION TREE =====================
  *
- * This technique creates a persistent or "historical" DSU structure.
+ * This technique creates a persistent structure over DSU operations.
  * It allows querying the state of components after any number of `unite` operations.
- * This is an offline algorithm, meaning all `unite` operations must be known beforehand.
+ * This is an offline algorithm, essentially building the MST merge tree.
  *
  * The core idea is to model the `unite` operations as a tree, where each
  * merge creates a new internal node. A final DFS traversal then computes
@@ -27,42 +27,38 @@
  *
  * 4. Answer: The elements of that historical component are in the Euler
  * tour range `[inTime[hist_root], outTime[hist_root]]`. Query your
- * data structure over this range to find the count of values `< v`.
+ * data structure over this range to find the count of values < v.
  * =========================================================================
  */
 
-const int MAXN = 100005; // Maximum number of initial elements
-
-int vals[MAXN]; // Initial values for each element
-int parentDSU[2 * MAXN]; // DSU parent pointers (also operation tree parent)
-std::vector<std::vector<int>> children(2 * MAXN); // Operation tree adjacency list
-
-int timer, inTime[2 * MAXN], outTime[2 * MAXN], euler[2 * MAXN]; // Euler tour info
+const int N = 100005; 
+int par[2 * N], tin[2 * N], tout[2 * N], eu[2 * N], T;
+vector<int> adj[2 * N];
 
 // Standard DSU find with path compression
-int findRoot(int x) {
-    return parentDSU[x] == x ? x : parentDSU[x] = findRoot(parentDSU[x]);
-}
+int find(int x) { return par[x] == x ? x : par[x] = find(par[x]); }
 
-// Merges the sets containing x and y by creating a new parent node
-void unite(int x, int y, int &nextNode) {
-    x = findRoot(x);
-    y = findRoot(y);
-    if (x == y) return;
-    parentDSU[x] = parentDSU[y] = nextNode;
-    children[nextNode].push_back(x);
-    children[nextNode].push_back(y);
-    ++nextNode;
+// Merges x and y by creating a new parent node (k)
+void unite(int x, int y, int &k) {
+    if ((x = find(x)) == (y = find(y))) return;
+    par[x] = par[y] = par[k] = k; // New node k becomes parent
+    adj[k].push_back(x); adj[k].push_back(y);
+    k++;
 }
 
 // DFS over the operation tree to build Euler tour
 void dfs(int u) {
-    inTime[u] = ++timer;
-    euler[timer] = u;
-    for (int v : children[u]) {
-        dfs(v);
-    }
-    outTime[u] = timer;
+    tin[u] = ++T; eu[T] = u;
+    for (int v : adj[u]) dfs(v);
+    tout[u] = T;
+}
+
+// Setup and build forest
+void build(int n, vector<pair<int, int>>& ops) {
+    iota(par, par + 2 * N, 0);
+    int k = n; 
+    for (auto [u, v] : ops) unite(u, v, k);
+    for (int i = 0; i < k; ++i) if (par[i] == i) dfs(i);
 }
 
 int main() {

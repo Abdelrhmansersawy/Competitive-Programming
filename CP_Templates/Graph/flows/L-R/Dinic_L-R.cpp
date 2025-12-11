@@ -1,3 +1,34 @@
+/*
+ -------------------------------------------------------------------------------------
+ ALGORITHM: Dinic's Max Flow & LR Flow (Circulation with Demands)
+ -------------------------------------------------------------------------------------
+ 
+ STRUCT 1: Dinic
+ - Purpose: Standard Max Flow algorithm.
+ - Complexity: O(V^2 * E), but often O(E * sqrt(V)) for unit capacity networks.
+ - Usage: 
+    1. Dinic D(nodes);
+    2. D.add_edge(u, v, capacity, [id]); // id is optional tracking
+    3. D.max_flow(source, sink);
+ 
+ STRUCT 2: LR_Flow
+ - Purpose: Max/Min Flow with Edge Lower (L) and Upper (R) bounds.
+ - Technique: Transforms into circulation problem with Super Source/Sink.
+ - Complexity: Runs Dinic internally.
+ - Usage:
+    1. LR_Flow lr(nodes);
+    2. lr.add_edge(u, v, L, R, [id]);
+    3. lr.max_flow(s, t) OR lr.min_flow(s, t);
+    4. Returns -1 if no feasible flow exists.
+ 
+ CONSTRAINTS & LIMITS:
+ - Nodes (N): Up to ~5,000 - 10,000 usually safe (O(V^2 E) worst case).
+ - Edges (M): Up to ~100,000.
+ - Capacity: Use 'long long' for capacities to avoid overflow.
+ - INF: 1LL << 61 (Safe for long long additions).
+ -------------------------------------------------------------------------------------
+*/
+
 const long long inf = 1LL << 61;
 struct Dinic {
   struct edge {

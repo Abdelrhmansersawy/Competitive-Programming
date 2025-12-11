@@ -140,8 +140,8 @@ struct LR_Flow {
     return F.max_flow(_s, _t);
   }
   int min_flow(int _s, int _t) { //-1 means flow is not feasible
-    int mx = 1e9;
-    int ans = -1, l = 0, r = mx;
+   int mx = 2e9; // increase it it you need
+   int ans = -1, l = 0, r = mx;
     while (l <= r) {
       int mid = l + r >> 1;
       if (feasible(_s, _t, 0, mid)) ans = mid, r = mid - 1;
@@ -150,3 +150,56 @@ struct LR_Flow {
     return ans;
   }
 };
+
+int main() {
+    ios::sync_with_stdio(0); cin.tie(0);
+
+    // 1. Initialize LR_Flow with number of nodes
+    int n = 4;
+    int source = 1;
+    int sink = 4;
+    LR_Flow lr(n);
+
+    // 2. Add edges: u, v, l, r, id
+    // We store 'l' (lower bound) separately to calculate total flow later
+    // because the struct only tracks the "extra" flow above L.
+    struct EdgeInfo { int u, v, l, r; };
+    vector<EdgeInfo> original_edges;
+    
+    auto add = [&](int u, int v, int l, int r, int id) {
+        lr.add_edge(u, v, l, r, id);
+        original_edges.push_back({u, v, l, r});
+    };
+
+    // Constructing the graph
+    add(1, 2, 2, 10, 0); // Edge 0
+    add(1, 3, 0, 10, 1); // Edge 1
+    add(2, 3, 1, 5,  2); // Edge 2
+    add(2, 4, 2, 10, 3); // Edge 3
+    add(3, 4, 0, 10, 4); // Edge 4
+
+    // 3. Calculate Max Flow
+    // Returns -1 if no feasible flow exists (i.e., constraints contradict)
+    int total_flow = lr.max_flow(source, sink);
+
+    if (total_flow == -1) {
+        cout << "Impossible to satisfy constraints!" << endl;
+    } else {
+        cout << "Feasible Max Flow: " << total_flow << endl;
+        
+        cout << "Flow on each edge:" << endl;
+        // 4. Retrieve flow for each edge
+        // The struct stores 'flow_through[id]' which is flow ABOVE the lower bound.
+        // Total Flow = LowerBound + flow_through[id]
+        for (int i = 0; i < original_edges.size(); i++) {
+            long long extra_flow = lr.F.flow_through[i];
+            long long actual_flow = original_edges[i].l + extra_flow;
+            
+            cout << "Edge " << original_edges[i].u << " -> " << original_edges[i].v 
+                 << " [" << original_edges[i].l << ", " << original_edges[i].r << "]"
+                 << " | Used: " << actual_flow << endl;
+        }
+    }
+
+    return 0;
+}

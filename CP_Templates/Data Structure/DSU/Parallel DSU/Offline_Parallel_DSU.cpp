@@ -4,67 +4,45 @@
  * Time: O(N log N) total
  * Space: O(N log N)
  */
-const int N = 6e5 + 9; 
-const int LOG = 22;
+const int N = 6e5 + 9, LG = 22;
+int P[LG][N], par[N], sz[N], n;
 
-int p[LOG][N];
-int final_p[N]; 
-int sz[N]; 
-int n_dsu;      
+// Find for sparse layer k
+int get(int k, int x) { return P[k][x] == x ? x : P[k][x] = get(k, P[k][x]); }
 
-int find_k(int k, int x) {
-    return p[k][x] == x ? x : p[k][x] = find_k(k, p[k][x]);
+void join(int k, int u, int v) {
+    if ((u = get(k, u)) != (v = get(k, v))) P[k][u] = v;
 }
 
-void join_layer(int k, int u, int v) {
-    u = find_k(k, u);
-    v = find_k(k, v);
-    if (u != v) p[k][u] = v;
+// Final DSU find
+int find(int x) { return par[x] == x ? x : par[x] = find(par[x]); }
+
+// Initialize internal structures
+void init(int _n) {
+    n = _n;
+    for (int k = 0; k < LG; ++k) iota(P[k], P[k] + n + 1, 0);
+    iota(par, par + n + 1, 0); fill(sz, sz + n + 1, 1);
 }
 
-int leader(int x) {
-    return final_p[x] == x ? x : final_p[x] = leader(final_p[x]);
-}
-
-void init_dsu(int n) {
-    n_dsu = n;
-    for (int k = 0; k < LOG; ++k) {
-        for (int i = 0; i <= n + 1; ++i) {
-            p[k][i] = i;
-        }
-    }
-    iota(final_p, final_p + n + 1, 0);
-    fill(sz, sz + n + 1, 1); 
-}
-
-void add_range(int u, int v, int len) {
+// Connect range [u, u+len) with [v, v+len)
+void add(int u, int v, int len) {
     if (len <= 0) return;
-    int k = 31 - __builtin_clz(len); 
-    join_layer(k, u, v);
-    join_layer(k, u + len - (1 << k), v + len - (1 << k));
+    int k = 31 - __builtin_clz(len);
+    join(k, u, v); join(k, u + len - (1 << k), v + len - (1 << k));
 }
 
+// Push down relations to layer 0 and merge final components
 void build() {
-    for (int k = LOG - 1; k > 0; --k) {
-        for (int i = 0; i + (1 << k) <= n_dsu; ++i) {
-            int root = find_k(k, i);
-            if (i != root) {
-                join_layer(k - 1, i, root);
-                join_layer(k - 1, i + (1 << (k - 1)), root + (1 << (k - 1)));
+    for (int k = LG - 1; k; --k)
+        for (int i = 0; i + (1 << k) <= n; ++i) {
+            int r = get(k, i);
+            if (i != r) {
+                join(k - 1, i, r);
+                join(k - 1, i + (1 << (k - 1)), r + (1 << (k - 1)));
             }
         }
-    }
-
-    for (int i = 0; i < n_dsu; ++i) {
-        int root = find_k(0, i);
-        if (i != root) {
-            int u = leader(i);
-            int v = leader(root);
-            if (u != v) {
-                final_p[u] = v;
-                // [TODO]: Aggregate data here (e.g., sum, max, min)
-                sz[v] += sz[u];
-            }
-        }
+    for (int i = 0; i < n; ++i) {
+        int u = find(i), v = find(get(0, i));
+        if (u != v) par[u] = v, sz[v] += sz[u]; // TODO: Aggregate data
     }
 }

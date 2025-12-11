@@ -1,62 +1,50 @@
- 
+#define all(x) x.begin(),x.end()
+
 // O(N(logN)^2)
-template<class T = int>
-struct Bit2D {
-    vector<T> ord;
-    vector<vector<T>> fw, coord;
- 
+template<class T = int> struct Bit2D {
+    vector<T> X; vector<vector<T>> Y, B;
+
+    int idx(const vector<T>& v, T x) { return upper_bound(all(v), x) - v.begin(); }
+
     // pts needs all points that will be used in the upd
     // if range upds remember to build with {x1, y1}, {x1, y2 + 1}, {x2 + 1, y1}, {x2 + 1, y2 + 1}
     Bit2D(vector<pair<T, T>> pts) {
-        sort(pts.begin(), pts.end());
+        sort(all(pts));
+        for (auto a : pts) if (X.empty() || a.first != X.back()) X.push_back(a.first);
+        Y.resize(X.size() + 1); B.resize(Y.size());
+
+        sort(all(pts), [](auto l, auto r){ return l.second < r.second; });
         for (auto a : pts)
-            if (ord.empty() || a.first != ord.back())
-                ord.push_back(a.first);
-        fw.resize(ord.size() + 1);
-        coord.resize(fw.size());
- 
-        for (auto& a : pts)
-            swap(a.first, a.second);
-        sort(pts.begin(), pts.end());
-        for (auto& a : pts) {
-            swap(a.first, a.second);
-            for (int on = std::upper_bound(ord.begin(), ord.end(), a.first) - ord.begin(); on < fw.size(); on += on & -on)
-                if (coord[on].empty() || coord[on].back() != a.second)
-                    coord[on].push_back(a.second);
-        }
- 
-        for (int i = 0; i < fw.size(); i++)
-            fw[i].assign(coord[i].size() + 1, 0);
+            for (int i = idx(X, a.first); i < Y.size(); i += i & -i)
+                if (Y[i].empty() || Y[i].back() != a.second) Y[i].push_back(a.second);
+
+        for (int i = 0; i < Y.size(); i++) B[i].assign(Y[i].size() + 1, 0);
     }
-    T merge(T a , T b){
-        return a + b; 
-    }
+
     // point upd
     void upd(T x, T y, T v) {
-        for (int xx = upper_bound(ord.begin(), ord.end(), x) - ord.begin(); xx < fw.size(); xx += xx & -xx)
-            for (int yy = upper_bound(coord[xx].begin(), coord[xx].end(), y) - coord[xx].begin(); yy < fw[xx].size(); yy += yy & -yy)
-                fw[xx][yy] = merge(fw[xx][yy], v);
+        for (int i = idx(X, x); i < Y.size(); i += i & -i)
+            for (int j = idx(Y[i], y); j < B[i].size(); j += j & -j)
+                B[i][j] += v;
     }
- 
+
     // point qry
     T qry(T x, T y) {
         T ans = 0;
-        for (int xx = upper_bound(ord.begin(), ord.end(), x) - ord.begin(); xx > 0; xx -= xx & -xx)
-            for (int yy = upper_bound(coord[xx].begin(), coord[xx].end(), y) - coord[xx].begin(); yy > 0; yy -= yy & -yy)
-                ans = merge(ans, fw[xx][yy]);
+        for (int i = idx(X, x); i > 0; i -= i & -i)
+            for (int j = idx(Y[i], y); j > 0; j -= j & -j)
+                ans += B[i][j];
         return ans;
     }
- 
+
     // range qry
     T qry(T x1, T y1, T x2, T y2) {
         return qry(x2, y2) - qry(x2, y1 - 1) - qry(x1 - 1, y2) + qry(x1 - 1, y1 - 1);
     }
- 
+
     // range upd
     void upd(T x1, T y1, T x2, T y2, T v) {
-        upd(x1, y1, v);
-        upd(x1, y2 + 1, -v);
-        upd(x2 + 1, y1, -v);
-        upd(x2 + 1, y2 + 1, v);
+        upd(x1, y1, v); upd(x1, y2 + 1, -v);
+        upd(x2 + 1, y1, -v); upd(x2 + 1, y2 + 1, v);
     }
 };

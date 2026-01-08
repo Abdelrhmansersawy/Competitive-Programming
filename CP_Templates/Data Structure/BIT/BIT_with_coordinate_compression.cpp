@@ -14,7 +14,7 @@ struct BIT{
         for(pos++; pos <= n ; pos += (pos & (-pos)))
             tree[pos - 1] += val;
     }
-    T sum(int pos){
+    T sum(T pos){
         pos = lower_bound(v.begin(), v.end() , pos) - v.begin();
         T ret = 0;
         for(pos++; pos ; pos -= (pos & (-pos)))

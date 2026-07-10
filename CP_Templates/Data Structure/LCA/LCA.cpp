@@ -47,7 +47,7 @@ struct LCA {
                 v = parent[v][x];
             }
         }
-
+        assert(parent[u][0] == parent[v][0]);
         return parent[u][0];
     }
 };

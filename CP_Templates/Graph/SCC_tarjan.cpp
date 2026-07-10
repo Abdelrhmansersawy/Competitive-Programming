@@ -1,148 +1,155 @@
-/**
- * ============================================================================
- * Algorithm: Tarjan's Algorithm for Strongly Connected Components (SCC)
- * Description: Finds all SCCs in a directed graph using a single DFS pass.
- * It also constructs a Condensed Directed Acyclic Graph (DAG) where each 
- * node represents an SCC, and computes the in-degree of each DAG node.
- * ============================================================================
- */
-
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-#define s second
-#define f first
-#define rep(i, st, ed) for(int i = st; i < ed; i++)
-
-const int N = 1e5 + 9;
-
-// Graph variables
-vector<vector<int>> adj, dag, comps;
-
-// Tarjan's state variables
-int comp[N];      // Maps an original node to its SCC ID
-int inStack[N];   // Tracks if a node is currently in the recursion stack
-int lowLink[N];   // Lowest discovery time reachable from the node
-int dfn[N];       // Discovery time of the node
-int deg[N];       // In-degree of the condensed DAG nodes
-
-stack<int> st;
-int ndfn;
-
-// Fast I/O and file routing
-void burn() {
-    ios::sync_with_stdio(0); cin.tie(NULL); cout.tie(0);
-    #ifndef ONLINE_JUDGE
-    freopen("in.txt", "r", stdin);
-    freopen("out.txt", "w", stdout);
-    freopen("error.txt", "w", stderr);
-    #endif
-}
 
 /**
- * Core Tarjan's DFS algorithm.
- * Identifies SCCs by keeping track of discovery times and back-edges.
+ * Tarjan SCC
+ * Finds strongly connected components in a directed graph and builds
+ * the condensation DAG.
+ *
+ * API:
+ * SCC scc(n);
+ * scc.addEdge(u, v);
+ * scc.build();
+ * scc.buildDAG();
+ *
+ * scc.comp[u]       : component ID of node u
+ * scc.nodes[id]     : nodes inside component id
+ * scc.DAG_adj[id]   : outgoing edges from component id
+ * scc.indegree[id]  : in-degree of component id
+ * scc.outdegree[id] : out-degree of component id
+ * scc.count()       : number of components
+ *
+ * Complexity:
+ * build()    : O(n + m)
+ * buildDAG() : O(m log m)
  */
-void tarjan(int u) {
-    dfn[u] = lowLink[u] = ndfn++;
-    inStack[u] = true;
-    st.push(u);
-    
-    for (auto &v : adj[u]) {
-        if (dfn[v] == -1) {
-            // Node not visited yet, recurse and update lowLink
-            tarjan(v);
-            lowLink[u] = min(lowLink[u], lowLink[v]);
-        } else if (inStack[v]) {
-            // Node is visited and in the current DFS path (back-edge found)
-            lowLink[u] = min(lowLink[u], dfn[v]);
-        }
-    }
-    
-    // If the lowest reachable node is the node itself, it is the head of an SCC
-    if (dfn[u] == lowLink[u]) {
-        int x = -1;
-        comps.emplace_back(vector<int>()); // Start a new component
-        
-        while (x != u) {
-            x = st.top(); 
-            st.pop(); 
-            inStack[x] = 0;
-            
-            comps.back().emplace_back(x);
-            comp[x] = comps.size() - 1;  // Tag node with its SCC ID
-        }
-    }
-}
 
-/**
- * Builds the condensed DAG by connecting the identified SCCs.
- * It also removes parallel edges and correctly calculates in-degrees.
- */
-void genDag() {
-    dag.clear();
-    dag.resize(comps.size());
-    
-    // Step 1: Map original edges to the condensed DAG
-    for (int u = 0; u < adj.size(); u++) {
-        for (auto &v : adj[u]) {
-            if (comp[u] != comp[v]) {
-                dag[comp[u]].emplace_back(comp[v]);
+struct SCC {
+    int n, timer = 0;
+    vector<vector<int>> adj, nodes, DAG_adj;
+    vector<int> comp, dfn, low, inStack, indegree, outdegree, st;
+
+    SCC(int n)
+        : n(n), adj(n), comp(n), dfn(n, -1),
+          low(n), inStack(n) {}
+
+    void addEdge(int u, int v) {
+        adj[u].push_back(v);
+    }
+
+    void dfs(int u) {
+        dfn[u] = low[u] = timer++;
+        st.push_back(u);
+        inStack[u] = 1;
+
+        for (int v : adj[u]) {
+            if (dfn[v] == -1)
+                dfs(v), low[u] = min(low[u], low[v]);
+            else if (inStack[v])
+                low[u] = min(low[u], dfn[v]);
+        }
+
+        if (dfn[u] != low[u]) return;
+
+        int id = nodes.size();
+        nodes.emplace_back();
+
+        while (true) {
+            int v = st.back();
+            st.pop_back();
+
+            inStack[v] = 0;
+            comp[v] = id;
+            nodes[id].push_back(v);
+
+            if (v == u) break;
+        }
+    }
+
+    void build() {
+        for (int u = 0; u < n; u++)
+            if (dfn[u] == -1)
+                dfs(u);
+    }
+
+    void buildDAG() {
+        DAG_adj.assign(count(), {});
+        indegree.assign(count(), 0);
+        outdegree.assign(count(), 0);
+
+        for (int u = 0; u < n; u++) {
+            for (int v : adj[u]) {
+                if (comp[u] != comp[v])
+                    DAG_adj[comp[u]].push_back(comp[v]);
             }
         }
-    }
-    
-    // Step 2: Remove duplicate edges and compute accurate in-degrees
-    for (int i = 0; i < comps.size(); i++) {
-        // Sort and unique to strip out parallel edges
-        sort(dag[i].begin(), dag[i].end());
-        dag[i].erase(unique(dag[i].begin(), dag[i].end()), dag[i].end());
-        
-        // Calculate the true in-degree for the DAG nodes
-        for (int v : dag[i]) {
-            deg[v]++;
+
+        for (int u = 0; u < count(); u++) {
+            auto &edges = DAG_adj[u];
+
+            sort(edges.begin(), edges.end());
+            edges.erase(unique(edges.begin(), edges.end()), edges.end());
+
+            outdegree[u] = edges.size();
+
+            for (int v : edges)
+                indegree[v]++;
         }
     }
-}
 
-/**
- * Initializes state and executes Tarjan's algorithm.
- * @param n Number of nodes in the graph.
- */
-void SCC(int n) {
-    ndfn = 0;
-    comps.clear();
-    
-    // Reset state arrays
-    rep(i, 0, n) {
-        dfn[i] = -1;
-        lowLink[i] = inStack[i] = deg[i] = 0;
+    int count() const {
+        return nodes.size();
     }
-    
-    // Run Tarjan's for all unvisited nodes
-    for (int i = 0; i < n; i++) {
-        if (dfn[i] == -1) tarjan(i);
-    }
-        
-    // Build the final Condensation Graph (DAG)
-    genDag();
-}
+};
 
 int main() {
-    burn();
-    
-    int n, m; 
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n, m;
     cin >> n >> m;
-    
-    adj.resize(n); 
-    for (int i = 0; i < m; i++) {
-        int u, v; 
+
+    SCC scc(n);
+
+    while (m--) {
+        int u, v;
         cin >> u >> v;
-        --u; --v; // Convert to 0-indexed nodes
-        adj[u].emplace_back(v);
+        --u, --v;
+
+        scc.addEdge(u, v);
     }
-    
-    SCC(n);
-    
+
+    scc.build();
+    scc.buildDAG();
+
+    cout << "SCC count: " << scc.count() << '\n';
+
+    cout << "Component of each node:\n";
+    for (int u = 0; u < n; u++)
+        cout << scc.comp[u] << " \n"[u == n - 1];
+
+    cout << "Components:\n";
+    for (int id = 0; id < scc.count(); id++) {
+        cout << id << ": ";
+
+        for (int u : scc.nodes[id])
+            cout << u + 1 << ' ';
+
+        cout << '\n';
+    }
+
+    cout << "Condensation DAG:\n";
+    for (int id = 0; id < scc.count(); id++) {
+        cout << id
+             << " | indegree: " << scc.indegree[id]
+             << " | outdegree: " << scc.outdegree[id]
+             << " | edges: ";
+
+        for (int to : scc.DAG_adj[id])
+            cout << to << ' ';
+
+        cout << '\n';
+    }
+
     return 0;
 }

@@ -62,6 +62,24 @@ int querySubtree(int u) {
     return 0;  // replace with actual query
 }
 
+void reset(int new_n) {
+    int limit = max(n, new_n);
+
+    for(int i = 0; i < limit; i++) {
+        adj[i].clear();
+        heavy[i] = -1;
+        head[i] = -1;
+        par[i] = -1;
+        pos[i] = -1;
+        dep[i] = 0;
+        sz[i] = 0;
+    }
+
+    n = new_n;
+    cur_pos = 0;
+    values.assign(n, 0);
+}
+
 int main() {
     ios::sync_with_stdio(0); cin.tie(0);
     int m, q; cin >> n >> m >> q;

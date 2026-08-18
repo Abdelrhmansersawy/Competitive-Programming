@@ -144,6 +144,50 @@ int count_strings_with_substring(const string &t) {
     return st[v].cnt;
 }
 
+/* 
+   Returns the length of the longest common substring of ALL inserted strings.
+   This corresponds to max(longest(v)) for states reachable by all strings.
+*/
+int get_lcs_length() {
+    int max_len = 0;
+    for (int i = 1; i < sz; ++i) {
+        // If the state is present in all inserted strings
+        if (st[i].cnt == stringCount) {
+            max_len = max(max_len, st[i].len);
+        }
+    }
+    return max_len;
+}
+
+/* 
+   Reconstructs and returns the actual longest common substring string.
+*/
+string get_lcs_string() {
+    int max_len = get_lcs_length();
+    if (max_len == 0) return "";
+
+    string res = "";
+    
+    // Lambda for DFS traversal to find a valid path of length max_len
+    auto dfs = [&](auto& self, int u, int depth) -> bool {
+        if (depth == max_len) return true;
+        
+        for (int i = 0; i < 26; ++i) {
+            int v = st[u].nxt[i];
+            // Only traverse states that belong to ALL strings
+            if (v != -1 && st[v].cnt == stringCount) {
+                res.push_back((char)('a' + i));
+                if (self(self, v, depth + 1)) return true;
+                res.pop_back(); // backtrack if it's a dead end
+            }
+        }
+        return false;
+    };
+
+    dfs(dfs, 0, 0);
+    return res;
+}
+
 } // namespace multi_SAM
 
 // ---------------------- Example usage --------------------------------------
